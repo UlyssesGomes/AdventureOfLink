@@ -13,6 +13,24 @@ MonoBehaviour:
   m_Name: Npc_1
   m_EditorClassIdentifier: 
   actor: {fileID: 623252068081302420, guid: d071b3d3f10c3f94fa900fb5b5810d8f, type: 3}
-  speakerSprite: {fileID: 21300000, guid: fb157d6cddce8b840a3a0bca5c7e6ef2, type: 3}
-  sentence: Seja bem vindo ao Null Kingdom
-  dialogues: []
+  speakerSprite: {fileID: 0}
+  sentence: 
+  dialogues:
+  - actorName: Npc_1_Name
+    profile: {fileID: 21300000, guid: fb157d6cddce8b840a3a0bca5c7e6ef2, type: 3}
+    senteces:
+      portuguese: Seja bem vindo ao Null Kingdom
+      english: 
+      spanish: 
+  - actorName: Player
+    profile: {fileID: 0}
+    senteces:
+      portuguese: "Mas que reino \xE9 esse?"
+      english: 
+      spanish: 
+  - actorName: Npc_1_Name
+    profile: {fileID: 0}
+    senteces:
+      portuguese: "\xC9 o novo reino em constru\xE7\xE3o"
+      english: 
+      spanish: 
