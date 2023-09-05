@@ -21,7 +21,7 @@ public class Npc_Dialogue : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadEnter) && isDialoguing)
+        if (Input.GetKeyDown(KeyCode.Return) && isDialoguing)
         {
             DialogueControl.instance.Speech(sentences.ToArray());
         }
