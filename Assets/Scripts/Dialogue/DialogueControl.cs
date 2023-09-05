@@ -18,11 +18,22 @@ public class DialogueControl : MonoBehaviour
 
     private bool isShowing;         // window visibility flag
     private int index;              // dialogue array index
-    private string [] sentences;     //
+    private string [] sentences;    // 
+
+    public static DialogueControl instance;
+
+    /*
+     * Awake is called before every Start() in scripts hyerarchy execution.
+     * This method is responsible to make this class Singleton.
+     */
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
-        
+        isShowing = false;
     }
 
     void Update()
