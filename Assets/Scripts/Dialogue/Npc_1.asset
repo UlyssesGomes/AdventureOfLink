@@ -20,17 +20,17 @@ MonoBehaviour:
     profile: {fileID: 21300000, guid: fb157d6cddce8b840a3a0bca5c7e6ef2, type: 3}
     senteces:
       portuguese: Seja bem vindo ao Null Kingdom
-      english: 
-      spanish: 
+      english: Welcome to Null Kingdom
+      spanish: Bien venido a Null Kingdom
   - actorName: Player
     profile: {fileID: 0}
     senteces:
       portuguese: "Mas que reino \xE9 esse?"
-      english: 
-      spanish: 
+      english: But what kingdom is this?
+      spanish: "Pero \xBFqu\xE9 reino es \xE9ste?"
   - actorName: Npc_1_Name
     profile: {fileID: 0}
     senteces:
       portuguese: "\xC9 o novo reino em constru\xE7\xE3o"
-      english: 
-      spanish: 
+      english: It's the new kingdom under construction
+      spanish: "Es el nuevo reino en construcci\xF3n  "

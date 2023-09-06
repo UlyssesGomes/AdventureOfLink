@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class DialogueControl : MonoBehaviour
 {
+    [System.Serializable]           // used to show in inspector
+    public enum Idiom               // enum with 3 possible idiom 
+    {
+        PT, 
+        EN,
+        SP
+    }
+    public Idiom language;          // current selected language
+
     // Create a header with name "Componentes" in Unity Inspect Editor
     [Header("Componentes")]
     public GameObject dialogueObj;  // window dialogue
@@ -53,7 +62,23 @@ public class DialogueControl : MonoBehaviour
     // Skip to npc next sentence.
     public void NextSentence()
     {
-
+        if(speechText.text == sentences[index])
+        {
+            if(index < sentences.Length - 1)
+            {
+                index++;
+                speechText.text = "";
+                StartCoroutine(TypeSentence());
+            }
+            else  // when finished texts
+            {
+                index = 0;
+                speechText.text = "";
+                dialogueObj.SetActive(false);
+                sentences = null;
+                isShowing = false;
+            }
+        }
     }
 
     // Call npc dialogue

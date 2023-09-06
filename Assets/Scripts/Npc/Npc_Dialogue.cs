@@ -37,7 +37,21 @@ public class Npc_Dialogue : MonoBehaviour
     {
         for(int u = 0; u < dialogue.dialogues.Count; u++)
         {
-            sentences.Add(dialogue.dialogues[u].senteces.portuguese);
+            switch (DialogueControl.instance.language)
+            {
+                case DialogueControl.Idiom.PT:
+                    sentences.Add(dialogue.dialogues[u].senteces.portuguese);
+                    break;
+                case DialogueControl.Idiom.EN:
+                    sentences.Add(dialogue.dialogues[u].senteces.english);
+                    break;
+                case DialogueControl.Idiom.SP:
+                    sentences.Add(dialogue.dialogues[u].senteces.spanish);
+                    break;
+                default:
+                    sentences.Add(dialogue.dialogues[u].senteces.portuguese);
+                    break;
+            }
         }
     }
 
@@ -55,7 +69,8 @@ public class Npc_Dialogue : MonoBehaviour
         else
         {
             isDialoguing = false;
-            DialogueControl.instance.dialogueObj.SetActive(false);
+            // verificar se o DialogueControl vai encerrar as falas.
+            //DialogueControl.instance.dialogueObj.SetActive(false);
         }
     }
 
