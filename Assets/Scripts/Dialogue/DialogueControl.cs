@@ -26,10 +26,14 @@ public class DialogueControl : MonoBehaviour
     public float typingSpeed;       // speed dialogue text that will be shown
 
     private bool isShowing;         // window visibility flag
-    private int index;              // dialogue array index
-    private string [] sentences;    // 
+    private int index;              // current dialogue array index
+    private string [] sentences;    // dialogues array
 
     public static DialogueControl instance;
+
+    #region
+    public bool IsShowing { get => isShowing; set => isShowing = value; }
+    #endregion
 
     /*
      * Awake is called before every Start() in scripts hyerarchy execution.
