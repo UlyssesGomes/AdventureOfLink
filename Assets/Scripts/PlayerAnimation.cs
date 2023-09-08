@@ -39,17 +39,20 @@ public class PlayerAnimation : MonoBehaviour
     {
         switch (player.playerState)
         {
-            case PlayerStatesEnum.IDDLE:
+            case (int) PlayerStatesEnum.IDDLE:
                 animator.SetInteger("transition", 0);
                 break;
-            case PlayerStatesEnum.WALKING:
+            case (int) PlayerStatesEnum.WALKING:
                 animator.SetInteger("transition", 1);
                 break;
-            case PlayerStatesEnum.RUNNING:
+            case (int) PlayerStatesEnum.RUNNING:
                 animator.SetInteger("transition", 2);
                 break;
-            case PlayerStatesEnum.ROLLING:
+            case (int) PlayerStatesEnum.ROLLING:
                 animator.SetInteger("transition", 3);
+                break;
+            case (int)PlayerStatesEnum.CUTTING:
+                animator.SetInteger("transition", 4);
                 break;
             default:
                 animator.SetInteger("transition", 0);
