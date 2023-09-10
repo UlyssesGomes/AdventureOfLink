@@ -17,6 +17,8 @@ public abstract class MasterState : UnitState
             addInstance((int)PlayerStatesEnum.RUNNING, new PlayerRunning());
             addInstance((int)PlayerStatesEnum.ROLLING, new PlayerRolling());
             addInstance((int)PlayerStatesEnum.CUTTING, new PlayerCutting());
+            addInstance((int)PlayerStatesEnum.DIGGING, new PlayerDigging());
+            addInstance((int)PlayerStatesEnum.WATERING, new PlayerWatering());
         }
     }
     protected override UnitState Next()
@@ -24,7 +26,7 @@ public abstract class MasterState : UnitState
         UnitState next = getInstance(nextState);
         if(next == null)
         {
-            throw new System.NotImplementedException("Unit State if id " + nextState +" not added yet");
+            throw new System.NotImplementedException("Unit State with id " + nextState +" not added yet");
         }
         return getInstance(nextState);
     }

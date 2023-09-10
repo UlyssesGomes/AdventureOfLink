@@ -6,7 +6,7 @@ public class PlayerRunning : MasterState
 {
     private const int runningSpeed = 3;
 
-    public override void derivatedUnitStateStart()
+    public override void startState()
     {
         player.currentSpeed = player.baseSpeed + runningSpeed;
     }

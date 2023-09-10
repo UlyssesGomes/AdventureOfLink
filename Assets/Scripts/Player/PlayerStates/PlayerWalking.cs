@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWalking : MasterState
 {
-    public override void derivatedUnitStateStart()
+    public override void startState()
     {
         player.currentSpeed = player.baseSpeed;
     }

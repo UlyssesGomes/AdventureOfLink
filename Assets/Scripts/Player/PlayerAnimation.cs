@@ -54,6 +54,12 @@ public class PlayerAnimation : MonoBehaviour
             case (int)PlayerStatesEnum.CUTTING:
                 animator.SetInteger("transition", 4);
                 break;
+            case (int)PlayerStatesEnum.DIGGING:
+                animator.SetInteger("transition", 5);
+                break;            
+            case (int)PlayerStatesEnum.WATERING:
+                animator.SetInteger("transition", 6);
+                break;
             default:
                 animator.SetInteger("transition", 0);
                 break;

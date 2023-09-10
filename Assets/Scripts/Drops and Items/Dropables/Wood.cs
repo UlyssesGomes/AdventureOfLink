@@ -15,7 +15,7 @@ public class Wood : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        woodItem.id = (int)DropablesEnum.WOOD;
+        woodItem.id = (int)ItemsEnum.WOOD;
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class Wood : MonoBehaviour
 
             PlayerInventory  inventory = collision.GetComponent<Player>().GetComponent("PlayerInventory") as PlayerInventory;
             woodItem.amount = 1;
-            inventory.addItem(woodItem);
+            inventory.addStoreItem(woodItem);
             Destroy(gameObject);
         }
     }

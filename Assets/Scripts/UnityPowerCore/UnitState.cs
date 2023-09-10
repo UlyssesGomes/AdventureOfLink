@@ -21,7 +21,7 @@ public abstract class UnitState
             instanceStates.Add(getUnitCurrentState(), this);
         }
 
-        derivatedUnitStateStart();
+        startState();
     }
 
     // Update is called once per frame
@@ -78,5 +78,5 @@ public abstract class UnitState
     /*
      * Called in Start() method. Derivated classes must implement this method instead Start()
      */
-    public abstract void derivatedUnitStateStart();
+    public abstract void startState();
 }

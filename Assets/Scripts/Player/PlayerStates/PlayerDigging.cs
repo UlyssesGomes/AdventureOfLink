@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCutting : MasterState
+public class PlayerDigging : MasterState
 {
     public override void startState()
     {
@@ -11,7 +11,7 @@ public class PlayerCutting : MasterState
 
     public override int getUnitCurrentState()
     {
-        return (int)PlayerStatesEnum.CUTTING;
+        return (int)PlayerStatesEnum.DIGGING;
     }
 
     protected override void UpdateUnitState()

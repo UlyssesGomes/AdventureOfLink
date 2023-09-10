@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerIdle : MasterState
 {
-    private UnitState playerMoving;
-
     protected override void UpdateUnitState()
     {
         player.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -19,7 +17,18 @@ public class PlayerIdle : MasterState
         if (player.direction.sqrMagnitude == 0 && Input.GetKeyDown(KeyCode.LeftControl))
         {
             isRunning = false;
-            nextState = (int)PlayerStatesEnum.CUTTING;
+            PlayerInventory inventory = player.GetComponent("PlayerInventory") as PlayerInventory;
+            if (inventory.getSetItem(0).id == (int)ItemsEnum.SIMPLE_AXE)
+            {
+                nextState = (int)PlayerStatesEnum.CUTTING;
+            }
+            else if (inventory.getSetItem(0).id == (int)ItemsEnum.SIMPLE_SHOVEL)
+            {
+                nextState = (int)PlayerStatesEnum.DIGGING;
+            } else if (inventory.getSetItem(0).id == (int)ItemsEnum.WATERING_CAN)
+            {
+                nextState = (int)PlayerStatesEnum.WATERING;
+            }
         }
     }
 
@@ -28,7 +37,7 @@ public class PlayerIdle : MasterState
         return (int)PlayerStatesEnum.IDDLE;
     }
 
-    public override void derivatedUnitStateStart()
+    public override void startState()
     {
         player.currentSpeed = 0;
     }
