@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wood : MonoBehaviour
+public class Wood : DrawableItem
 {
     [SerializeField]
     private float speed;
@@ -11,11 +11,14 @@ public class Wood : MonoBehaviour
 
     private float timeCount;
 
-    public DrawableItem woodItem;
     // Start is called before the first frame update
     void Start()
     {
-        woodItem.id = (int)ItemsEnum.WOOD;
+        id = (int)ItemsEnum.WOOD;
+        isStackable = true;
+        sprite = GetComponent("WoodSprite") as SpriteRenderer;
+
+        TODO - parai no video 7.4 no minuto 10;
     }
 
     // Update is called once per frame
@@ -36,8 +39,8 @@ public class Wood : MonoBehaviour
             // TODO - add 1 wood to player.
 
             PlayerInventory  inventory = collision.GetComponent<Player>().GetComponent("PlayerInventory") as PlayerInventory;
-            woodItem.amount = 1;
-            inventory.addStoreItem(woodItem);
+            amount = 1;
+            inventory.addStoreItem(this);
             Destroy(gameObject);
         }
     }

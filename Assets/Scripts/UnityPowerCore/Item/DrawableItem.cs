@@ -5,9 +5,4 @@ using UnityEngine;
 public class DrawableItem : GameItem
 {
     public SpriteRenderer sprite;
-
-    private void Start()
-    {
-        sprite = GetComponent("WoodSprite") as SpriteRenderer;
-    }
 }

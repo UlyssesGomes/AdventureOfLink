@@ -10,7 +10,7 @@ public class Water : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Parei no Minuto 10:07 da aula 7. Plantar
+        //Parei no Minuto 10:07 da aula 7. Plantar
     }
 
     // Update is called once per frame

@@ -16,7 +16,7 @@ public class SlotFarm : MonoBehaviour
     private int maxDigAmount;                   // amount of hit the slot farm have when it is full
 
     private float currentRespownTime;           // if slotfarm have no digAmount, start timer by add elapsedTime each frame
-    private const float RESPOWN_TIME = 30.0f;   // when currentRespownTime reach this amount, the hole must be close
+    private const float RESPOWN_TIME = 10.0f;   // when currentRespownTime reach this amount, the hole must be close
 
     // Start is called before the first frame update
     void Start()

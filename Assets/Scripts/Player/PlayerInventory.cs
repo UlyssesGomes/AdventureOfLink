@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField]
-    private IDictionary<int, GameItem> storedItems;
+    private IDictionary<int, GameItem> storedItems;     // items stored in backpack
 
     [SerializeField]
-    private List<GameItem> playerSet;
+    private List<GameItem> playerListItem;              // switable action items, items that is ready to go to hand by press key 1~5
 
     [SerializeField]
     private GameItem prefabGameItem;
@@ -16,13 +16,13 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         storedItems = new Dictionary<int, GameItem>();
-        playerSet = new List<GameItem>(7);
+        playerListItem = new List<GameItem>();
 
         GameItem item = Instantiate(prefabGameItem);
         item.itemName = "Watering can";
-        item.id = (int)ItemsEnum.WATERING_CAN;
+        item.id = (int)ItemsEnum.SIMPLE_AXE;
 
-        playerSet.Add(item);
+        playerListItem.Add(item);
     }
 
     /*
@@ -69,10 +69,31 @@ public class PlayerInventory : MonoBehaviour
     }
 
     /*
-     * Get item in player set by index.
+     * Get item in player list by index.
      */
+    public GameItem getListItem(int index)
+    {
+        return playerListItem[index];
+    }
+
+    /*
+    * Get item in player set by index.
+    */
     public GameItem getSetItem(int index)
     {
-        return playerSet[index];
+        if(storedItems.ContainsKey(index))
+        {
+            if(storedItems[index] == null)
+            {
+                //Debug.Log("Vai retornar null");
+            }
+            return storedItems[index];
+        }
+        return null;
+    }
+
+    public int size()
+    {
+        return storedItems.Count;
     }
 }

@@ -18,14 +18,14 @@ public class PlayerIdle : MasterState
         {
             isRunning = false;
             PlayerInventory inventory = player.GetComponent("PlayerInventory") as PlayerInventory;
-            if (inventory.getSetItem(0).id == (int)ItemsEnum.SIMPLE_AXE)
+            if (inventory.getListItem(0).id == (int)ItemsEnum.SIMPLE_AXE)
             {
                 nextState = (int)PlayerStatesEnum.CUTTING;
             }
-            else if (inventory.getSetItem(0).id == (int)ItemsEnum.SIMPLE_SHOVEL)
+            else if (inventory.getListItem(0).id == (int)ItemsEnum.SIMPLE_SHOVEL)
             {
                 nextState = (int)PlayerStatesEnum.DIGGING;
-            } else if (inventory.getSetItem(0).id == (int)ItemsEnum.WATERING_CAN)
+            } else if (inventory.getListItem(0).id == (int)ItemsEnum.WATERING_CAN)
             {
                 nextState = (int)PlayerStatesEnum.WATERING;
             }

@@ -7,6 +7,8 @@ public class Tree : MonoBehaviour
     [SerializeField]
     private float treeHealth;
     [SerializeField]
+    private float treeMaxHealth;
+    [SerializeField]
     private Animator animator;
 
     [SerializeField]
@@ -16,7 +18,7 @@ public class Tree : MonoBehaviour
     private ParticleSystem leafs;
 
     private float currentRespownTime;
-    private const float RESPOWN_TIME = 15.0f;
+    private const float RESPOWN_TIME = 2.0f;
 
     Vector2 normalVector = new Vector2(0, 0);
     Vector2 mirrorVector = new Vector2(0, 180);
@@ -35,7 +37,7 @@ public class Tree : MonoBehaviour
             currentRespownTime += Time.deltaTime;
             if(currentRespownTime >= RESPOWN_TIME)
             {
-                treeHealth = 10;
+                treeHealth = treeMaxHealth;
                 animator.SetTrigger("restore");
             }
         }
