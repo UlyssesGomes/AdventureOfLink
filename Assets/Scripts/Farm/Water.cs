@@ -7,6 +7,8 @@ public class Water : MonoBehaviour
 {
     [SerializeField]
     private bool detectingPlayer;
+
+    private Player player;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,15 @@ public class Water : MonoBehaviour
     {
         if(detectingPlayer && Input.GetKeyDown(KeyCode.E))
         {
+            PlayerInventory inventory = player.GetComponent<PlayerInventory>() as PlayerInventory;
+            GameItem item = inventory.getListItem(0);
+            if (!(item is null) && inventory.getListItem(0).id == (int)ItemsEnum.WATERING_CAN)
+            {
+                WateringCan wateringCan = item as WateringCan;
+                wateringCan.waterCapacity++;
 
+                TODO - parei na aula 7.4 em 8:32.
+            }
         }
     }
 
@@ -27,6 +37,7 @@ public class Water : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             detectingPlayer = true;
+            player = collision.GetComponent<Player>() as Player;
         }
     }
 

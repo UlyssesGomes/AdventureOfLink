@@ -19,7 +19,7 @@ public class PlayerInventory : MonoBehaviour
         playerListItem = new List<GameItem>();
 
         GameItem item = Instantiate(prefabGameItem);
-        item.itemName = "Watering can";
+        item.itemName = "Axe";
         item.id = (int)ItemsEnum.SIMPLE_AXE;
 
         playerListItem.Add(item);

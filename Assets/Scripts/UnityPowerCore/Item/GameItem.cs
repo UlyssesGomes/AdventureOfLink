@@ -7,6 +7,7 @@ public class GameItem : MonoBehaviour
     public int id;                  // unique id
     public string itemName;         // name of the item
     public bool isStackable;        // if true, this object can have amount > 1
+    public bool isOnFloor;          // 
     private int _amount;            // amount of the same item
 
     public int amount {
@@ -29,5 +30,41 @@ public class GameItem : MonoBehaviour
                 _amount = 0;
             }
         }
+    }
+
+    /*
+     * Turn object visible in world
+     */
+    public void putOnFloor()
+    {
+        gameObject.SetActive(true);
+        isOnFloor = true;
+    }
+
+    /*
+     * Turn object invisible on the floor and dont make collision.
+     */
+    public void putIntoStore()
+    {
+        gameObject.SetActive(false);
+        isOnFloor = false;
+    }
+
+    /*
+     * Make object agroupable with other amount of the same ID
+     */
+    public void makeStackable()
+    {
+        isStackable = true;
+        amount = 1;
+    }
+
+    /*
+     * Make object non agroupable, only one item is allowed per slot.
+     */
+    public void makeMonoItem()
+    {
+        isStackable = false;
+        amount = 1;
     }
 }
