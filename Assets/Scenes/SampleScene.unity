@@ -95534,10 +95534,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WateringCan
       objectReference: {fileID: 0}
-    - target: {fileID: 2279569459669907934, guid: ebe0c673ab92f134f8dfab9ce2b0f2fe, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebe0c673ab92f134f8dfab9ce2b0f2fe, type: 3}
 --- !u!1001 &7219056824204276431

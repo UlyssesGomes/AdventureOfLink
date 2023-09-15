@@ -24,10 +24,12 @@ public class Water : MonoBehaviour
             GameItem item = inventory.getListItem(0);
             if (!(item is null) && inventory.getListItem(0).id == (int)ItemsEnum.WATERING_CAN)
             {
-                WateringCan wateringCan = item as WateringCan;
-                wateringCan.waterCapacity++;
-
-                TODO - parei na aula 7.4 em 8:32.
+                if (Input.GetKey(KeyCode.E))
+                {
+                    WateringCan wateringCan = item as WateringCan;
+                    wateringCan.waterCapacity++;
+                    Debug.Log("Water filled: " + wateringCan.waterCapacity);
+                }
             }
         }
     }

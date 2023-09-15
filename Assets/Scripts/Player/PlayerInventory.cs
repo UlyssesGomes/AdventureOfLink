@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
+
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField]
@@ -12,17 +14,17 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField]
     private GameItem prefabGameItem;
+    private GameObject prefabGameObject;
+
     // Start is called before the first frame update
     void Start()
     {
         storedItems = new Dictionary<int, GameItem>();
         playerListItem = new List<GameItem>();
 
-        GameItem item = Instantiate(prefabGameItem);
-        item.itemName = "Axe";
-        item.id = (int)ItemsEnum.SIMPLE_AXE;
-
-        playerListItem.Add(item);
+#if DEBUG
+        playerListItem.Add(loadItem(ItemsEnum.WATERING_CAN));
+#endif
     }
 
     /*
@@ -96,4 +98,46 @@ public class PlayerInventory : MonoBehaviour
     {
         return storedItems.Count;
     }
+
+#if DEBUG
+    /*
+     * Method used to load initial weapons for test in develop mode.
+     */
+    private GameItem loadItem(ItemsEnum item)
+    {
+        GameItem gameitem = null;
+        UnityEngine.Object loadedResource;
+
+        string pathPrefix = "Prefabs/Items/";
+        
+        switch (item)
+        {
+            case ItemsEnum.WATERING_CAN:
+                loadedResource = Resources.Load(pathPrefix + "WateringCan");
+                if (loadedResource == null)
+                {
+                    throw new Exception("...no file found - please check the configuration");
+                }
+                prefabGameObject = (GameObject)Instantiate(loadedResource);
+                gameitem = prefabGameObject.GetComponent<WateringCan>();
+                gameitem.itemName = "WateringCan";
+                gameitem.id = (int)ItemsEnum.WATERING_CAN;
+                break;
+
+            case ItemsEnum.SIMPLE_AXE:
+                loadedResource = Resources.Load(pathPrefix + "Axe");
+                if (loadedResource == null)
+                {
+                    throw new Exception("...no file found - please check the configuration");
+                }
+                prefabGameObject = (GameObject)Instantiate(loadedResource);
+                gameitem = prefabGameObject.GetComponent<Axe>();
+                gameitem.itemName = "Axe";
+                gameitem.id = (int)ItemsEnum.SIMPLE_AXE;
+                break;
+        }
+
+        return gameitem;
+    }
+#endif
 }

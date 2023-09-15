@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2279569459669907932
 Transform:
   m_ObjectHideFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   isStackable: 0
   isOnFloor: 0
   sprite: {fileID: 2279569461298326777}
-  waterCapacity: 0
+  waterMaxCapacity: 10
 --- !u!1 &2279569461298326776
 GameObject:
   m_ObjectHideFlags: 0
