@@ -32,8 +32,7 @@ public class PlayerWatering : MasterState
         }
         else
         {
-                wateringCan.waterCapacity -= 1 * Time.deltaTime; 
+            wateringCan.toWater();
         }
-        TODO - Parei no vídeo 7.4 no minuto 15.3
     }
 }

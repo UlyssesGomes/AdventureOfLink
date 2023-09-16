@@ -7,6 +7,8 @@ public class WateringCan : DrawableItem
     private float _waterCapacity = -1;             // amount of water this object can keep
     public float waterMaxCapacity;                 // max amount of water in watering can
 
+    public float waterOutterFlow;                  // how much water flow from water can when it's in use
+
     public float waterCapacity
     {
         get { return _waterCapacity; }
@@ -39,5 +41,11 @@ public class WateringCan : DrawableItem
         makeMonoItem();
         id = (int)ItemsEnum.WATERING_CAN;
         name = "Watering Can";
+        waterOutterFlow = 1.5f;
+    }
+
+    public void toWater()
+    {
+        waterCapacity -= 1.5f * Time.deltaTime;
     }
 }

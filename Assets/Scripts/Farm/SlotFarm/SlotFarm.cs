@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SlotFarm : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField]
     private SpriteRenderer spriteRenderer;      // sprite to show current slote state
     [SerializeField]
@@ -11,9 +12,11 @@ public class SlotFarm : MonoBehaviour
     [SerializeField]            
     private Sprite carrot;                      // carrot sprite 
 
+    [Header("Components")]
     private int digAmount;                      // amount of hits a players need to dig util the hole appears
     [SerializeField]
     private int maxDigAmount;                   // amount of hit the slot farm have when it is full
+    public bool detectWater;
 
     private float currentRespownTime;           // if slotfarm have no digAmount, start timer by add elapsedTime each frame
     private const float RESPOWN_TIME = 10.0f;   // when currentRespownTime reach this amount, the hole must be close
@@ -70,5 +73,16 @@ public class SlotFarm : MonoBehaviour
         {
             onHit();
         }
+
+        if (collision.CompareTag("WaterCan"))
+        {
+            detectWater = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+            detectWater = false;
+        
     }
 }
