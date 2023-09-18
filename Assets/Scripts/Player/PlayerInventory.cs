@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
     private IDictionary<int, GameItem> storedItems;     // items stored in backpack
 
     [SerializeField]
-    private List<GameItem> playerListItem;              // switable action items, items that is ready to go to hand by press key 1~5
+    private List<GameItem> playerListItem;              // switable action items, items that is ready to use by press key 1~5
 
     [SerializeField]
     private GameItem prefabGameItem;
@@ -23,7 +23,7 @@ public class PlayerInventory : MonoBehaviour
         playerListItem = new List<GameItem>();
 
 #if DEBUG
-        playerListItem.Add(loadItem(ItemsEnum.WATERING_CAN));
+        playerListItem.Add(loadItem(ItemsEnum.SIMPLE_AXE));
 #endif
     }
 
@@ -33,13 +33,13 @@ public class PlayerInventory : MonoBehaviour
      */
     public void addStoreItem(GameItem item)
     {
-        if (!storedItems.ContainsKey(item.id))
+        if (!storedItems.ContainsKey(item.type))
         {
-            storedItems.Add(item.id, item);
+            storedItems.Add(item.type, item);
         }
         else
         {
-            storedItems[item.id].amount += item.amount;
+            storedItems[item.type].addAmountToStackableItems(item.amount);
         }
     }
 
@@ -49,15 +49,15 @@ public class PlayerInventory : MonoBehaviour
      */
     public bool removeStoreItem(GameItem item)
     {
-        if (storedItems.ContainsKey(item.id))
+        if (storedItems.ContainsKey(item.type))
         {
-            if(storedItems[item.id].amount >= item.amount)
+            if(storedItems[item.type].amount >= item.amount)
             {
-                storedItems[item.id].amount -= item.amount;
+                storedItems[item.type].amount -= item.amount;
 
-                if(storedItems[item.id].amount == 0)
+                if(storedItems[item.type].amount == 0)
                 {
-                    storedItems.Remove(item.id);
+                    storedItems.Remove(item.type);
                 }
                 return true;
             }
@@ -68,6 +68,14 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return false;
+    }
+
+    /*
+     * Get storeItems reference to iterate.
+     */
+    public IDictionary<int, GameItem> getStoreItems()
+    {
+        return storedItems;
     }
 
     /*
@@ -121,7 +129,7 @@ public class PlayerInventory : MonoBehaviour
                 prefabGameObject = (GameObject)Instantiate(loadedResource);
                 gameitem = prefabGameObject.GetComponent<WateringCan>();
                 gameitem.itemName = "WateringCan";
-                gameitem.id = (int)ItemsEnum.WATERING_CAN;
+                gameitem.type = (int)ItemsEnum.WATERING_CAN;
                 break;
 
             case ItemsEnum.SIMPLE_AXE:
@@ -133,7 +141,7 @@ public class PlayerInventory : MonoBehaviour
                 prefabGameObject = (GameObject)Instantiate(loadedResource);
                 gameitem = prefabGameObject.GetComponent<Axe>();
                 gameitem.itemName = "Axe";
-                gameitem.id = (int)ItemsEnum.SIMPLE_AXE;
+                gameitem.type = (int)ItemsEnum.SIMPLE_AXE;
                 break;
         }
 

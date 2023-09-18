@@ -20,7 +20,7 @@ public class PlayerWatering : MasterState
     protected override void UpdateUnitState()
     {
         WateringCan wateringCan = (WateringCan)inventory.getListItem(0);
-        if (Input.GetKeyUp(KeyCode.LeftControl) || inventory.getListItem(0).id != (int)ItemsEnum.WATERING_CAN)
+        if (Input.GetKeyUp(KeyCode.LeftControl) || inventory.getListItem(0).type != (int)ItemsEnum.WATERING_CAN)
         {
             isRunning = false;
             nextState = (int)PlayerStatesEnum.IDDLE;

@@ -5,10 +5,14 @@ using UnityEngine;
 public class GameItem : MonoBehaviour
 {
     public int id;                  // unique id
+    public int type;                // item type
     public string itemName;         // name of the item
     public bool isStackable;        // if true, this object can have amount > 1
-    public bool isOnFloor;          // 
+    public bool isOnFloor;          // if true, this item will be redered in the world map
     private int _amount;            // amount of the same item
+    public int total;               // total of this item in the same slot
+
+    private static int nextId;      // stores the next unique and valid id for the next object
 
     public int amount {
         get { return _amount; }
@@ -66,5 +70,38 @@ public class GameItem : MonoBehaviour
     {
         isStackable = false;
         amount = 1;
+        total = 1;
+    }
+
+    /*
+     * Returns the total percentage of how much of this item is in the slot. 
+     * With 0 being none and 1 being the maximum quantity.
+     */
+    public virtual float getTotalPercent()
+    {
+        return (float) _amount / total;
+    }
+
+    /*
+     * Return the next unique and valid for new objects.
+     */
+    public int getNextUniqueId()
+    {
+        return nextId++;
+    }
+
+    /*
+     * Add amount to stackable items respecting total amount.
+     */
+    public void addAmountToStackableItems(int amount)
+    {
+        if(this.amount + amount <= total)
+        {
+            this.amount += amount;
+        }
+        else
+        {
+            // TODO - make a "tandan" sound;
+        }
     }
 }
