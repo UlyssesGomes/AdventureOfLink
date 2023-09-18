@@ -8,13 +8,13 @@ public class Axe : DrawableItem
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void Start()
     {
+        id = getNextUniqueId();
         name = "Axe";
-        id = (int)ItemsEnum.SIMPLE_AXE;
+        type = (int)ItemsEnum.SIMPLE_AXE;
         putIntoStore();
         makeMonoItem();
     }

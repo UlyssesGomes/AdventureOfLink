@@ -39,7 +39,8 @@ public class WateringCan : DrawableItem
     {
         putIntoStore();
         makeMonoItem();
-        id = (int)ItemsEnum.WATERING_CAN;
+        id = getNextUniqueId();
+        type = (int)ItemsEnum.WATERING_CAN;
         name = "Watering Can";
         waterOutterFlow = 1.5f;
     }
@@ -47,5 +48,10 @@ public class WateringCan : DrawableItem
     public void toWater()
     {
         waterCapacity -= 1.5f * Time.deltaTime;
+    }
+
+    public override float getTotalPercent()
+    {
+        return _waterCapacity / waterMaxCapacity;
     }
 }

@@ -14,11 +14,11 @@ public class Wood : DrawableItem
     // Start is called before the first frame update
     void Start()
     {
-        id = (int)ItemsEnum.WOOD;
+        id = getNextUniqueId();
+        type = (int)ItemsEnum.WOOD;
         isStackable = true;
         sprite = GetComponent("WoodSprite") as SpriteRenderer;
-
-        //TODO - parai no video 7.4 no minuto 10;
+        total = 10;
     }
 
     // Update is called once per frame
