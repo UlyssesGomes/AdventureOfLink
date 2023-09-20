@@ -33,6 +33,7 @@ public class PlayerInventory : MonoBehaviour
      */
     public void addStoreItem(GameItem item)
     {
+        Debug.Log("quantidade: " + item.amount);
         if (!storedItems.ContainsKey(item.type))
         {
             storedItems.Add(item.type, item);

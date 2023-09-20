@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wood : DrawableItem
+public class Wood : MonoBehaviour
 {
     [SerializeField]
     private float speed;
@@ -11,14 +11,24 @@ public class Wood : DrawableItem
 
     private float timeCount;
 
+    [SerializeField]
+    private GameObject woodItemPrefab;
+
+
+    bool isFirst;
+
     // Start is called before the first frame update
     void Start()
     {
-        id = getNextUniqueId();
-        type = (int)ItemsEnum.WOOD;
-        isStackable = true;
-        sprite = GetComponent("WoodSprite") as SpriteRenderer;
-        total = 10;
+        //putOnFloor();
+        //makeStackable();
+        //id = getNextUniqueId();
+        // name = "Wood";
+        //type = (int)ItemsEnum.WOOD;
+        //sprite = GetComponent("SpriteRenderer") as SpriteRenderer;
+        //total = 10;
+
+        isFirst = true;
     }
 
     // Update is called once per frame
@@ -34,12 +44,18 @@ public class Wood : DrawableItem
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && isFirst)
         {
+            // cria aqui o obj
+            GameObject obj = Instantiate(woodItemPrefab);
+            WoodItem woodItem = obj.GetComponent<WoodItem>();
+            //woodItem.amount = 1;
+            Debug.Log("Amount setado: " + woodItem.itemName);
             PlayerInventory  inventory = collision.GetComponent<Player>().GetComponent("PlayerInventory") as PlayerInventory;
-            amount = 1;
-            inventory.addStoreItem(this);
-            Destroy(gameObject);
+            inventory.addStoreItem(woodItem);
+            //Destroy(obj);
+            //Destroy(gameObject);
+            isFirst = false;
         }
     }
 

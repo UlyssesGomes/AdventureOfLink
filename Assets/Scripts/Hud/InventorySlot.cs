@@ -6,16 +6,19 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     [SerializeField]
-    private Image itemImage;
+    private GameObject gameImage;
     private GameItem gameItem;
 
     [SerializeField]
     private GameObject amountBar;
     private Image filledBar;
 
+    private Image itemImage;
+
     private void Awake()
     {
         filledBar = amountBar.transform.GetChild(0).gameObject.GetComponent<Image>();
+        itemImage = gameImage.GetComponent<Image>();
     }
     // Start is called before the first frame update
     void Start()
@@ -34,9 +37,6 @@ public class InventorySlot : MonoBehaviour
         if (!(gameItem is null) && gameItem.isStackable)
         {
             amountBar.SetActive(true);
-            Debug.Log("amount: " + gameItem.amount);
-            Debug.Log("total: " + gameItem.total);
-            Debug.Log("percent: " + gameItem.getTotalPercent());
             filledBar.fillAmount = gameItem.getTotalPercent();
         }
     }
@@ -44,5 +44,15 @@ public class InventorySlot : MonoBehaviour
     public void setItem(GameItem item)
     {
         gameItem = item;
+        if(item is DrawableItem)
+        {
+            DrawableItem i = item as DrawableItem;
+            //Debug.Log(itemImage.sprite.name); //= i.sprite.sprite;
+            itemImage.sprite = i.sprite;
+        }
+        else
+        {
+            // TODO - make the same comparison to AnimatedItem;
+        }
     }
 }

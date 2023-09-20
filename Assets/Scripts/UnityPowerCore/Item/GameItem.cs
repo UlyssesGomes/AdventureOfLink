@@ -19,6 +19,7 @@ public class GameItem : MonoBehaviour
         set {
             if (isStackable)
             {
+                Debug.Log("Setando value: " + value);
                 _amount = value;
             }
             else if(_amount == 0 && value < 1 && value >= 0)

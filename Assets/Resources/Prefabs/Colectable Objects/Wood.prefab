@@ -114,4 +114,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   timeMove: 0.3
-  woodItem: {fileID: 8383362374075506393, guid: 3eca26630c13e6242aaf6c58471bd205, type: 3}
+  woodItemPrefab: {fileID: 1502492902883114785, guid: 68084b72153a8ef40b3abe1d7dbc5a0e, type: 3}

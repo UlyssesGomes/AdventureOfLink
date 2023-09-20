@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class DrawableItem : GameItem
 {
-    public SpriteRenderer sprite;
+    public Sprite sprite;
 }
