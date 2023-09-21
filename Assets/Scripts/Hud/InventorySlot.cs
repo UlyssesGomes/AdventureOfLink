@@ -15,6 +15,8 @@ public class InventorySlot : MonoBehaviour
 
     private Image itemImage;
 
+    private Vector3 pictureScale;
+
     private void Awake()
     {
         filledBar = amountBar.transform.GetChild(0).gameObject.GetComponent<Image>();
@@ -32,6 +34,7 @@ public class InventorySlot : MonoBehaviour
         if ((!(gameItem is null) && !gameItem.isStackable) || gameItem is null)
         {
             amountBar.SetActive(false);
+            gameImage.SetActive(false);
         }
 
         if (!(gameItem is null) && gameItem.isStackable)
@@ -49,6 +52,8 @@ public class InventorySlot : MonoBehaviour
             DrawableItem i = item as DrawableItem;
             //Debug.Log(itemImage.sprite.name); //= i.sprite.sprite;
             itemImage.sprite = i.sprite;
+            //transform.localScale += pictureScale;
+            gameImage.SetActive(true);
         }
         else
         {

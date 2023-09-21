@@ -16,6 +16,15 @@ public class PlayerInventory : MonoBehaviour
     private GameItem prefabGameItem;
     private GameObject prefabGameObject;
 
+    private List<Observer<InventorySubjectEnum>> storeItemsObservers;         // List of observers of sotredItems events
+    private List<Observer<InventorySubjectEnum>> playerSetItemObservers;      // List of observers of playerSetItems events
+
+    private void Awake()
+    {
+        storeItemsObservers = new List<Observer<InventorySubjectEnum>>();
+        playerSetItemObservers = new List<Observer<InventorySubjectEnum>>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +42,6 @@ public class PlayerInventory : MonoBehaviour
      */
     public void addStoreItem(GameItem item)
     {
-        Debug.Log("quantidade: " + item.amount);
         if (!storedItems.ContainsKey(item.type))
         {
             storedItems.Add(item.type, item);
@@ -42,6 +50,8 @@ public class PlayerInventory : MonoBehaviour
         {
             storedItems[item.type].addAmountToStackableItems(item.amount);
         }
+
+        notifyStoredItemsObservers(InventorySubjectEnum.ADD_STORE_ITEMS_EVENT);
     }
 
     /*
@@ -60,14 +70,17 @@ public class PlayerInventory : MonoBehaviour
                 {
                     storedItems.Remove(item.type);
                 }
+                notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
                 return true;
             }
             else
             {
+                notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
                 return false;
             }
         }
 
+        notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
         return false;
     }
 
@@ -106,6 +119,32 @@ public class PlayerInventory : MonoBehaviour
     public int size()
     {
         return storedItems.Count;
+    }
+
+    public void addStoredItemsObservers(Observer<InventorySubjectEnum> observer)
+    {
+        storeItemsObservers.Add(observer);
+    }
+
+    private void notifyStoredItemsObservers(InventorySubjectEnum subjectEvent)
+    {
+        foreach(Observer<InventorySubjectEnum> o in storeItemsObservers)
+        {
+            o.update(subjectEvent);
+        }
+    }
+
+    public void addPlayerSetItemsObservers(Observer<InventorySubjectEnum> observer)
+    {
+        playerSetItemObservers.Add(observer);
+    }
+
+    private void noitfyPlayerSetItemsObservers(InventorySubjectEnum subjectEvent)
+    {
+        foreach(Observer<InventorySubjectEnum> o in playerSetItemObservers)
+        {
+            o.update(subjectEvent);
+        }
     }
 
 #if DEBUG

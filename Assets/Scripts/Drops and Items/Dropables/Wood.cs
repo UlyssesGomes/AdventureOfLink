@@ -14,21 +14,9 @@ public class Wood : MonoBehaviour
     [SerializeField]
     private GameObject woodItemPrefab;
 
-
-    bool isFirst;
-
     // Start is called before the first frame update
     void Start()
     {
-        //putOnFloor();
-        //makeStackable();
-        //id = getNextUniqueId();
-        // name = "Wood";
-        //type = (int)ItemsEnum.WOOD;
-        //sprite = GetComponent("SpriteRenderer") as SpriteRenderer;
-        //total = 10;
-
-        isFirst = true;
     }
 
     // Update is called once per frame
@@ -44,18 +32,15 @@ public class Wood : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && isFirst)
+        if (collision.CompareTag("Player"))
         {
             // cria aqui o obj
             GameObject obj = Instantiate(woodItemPrefab);
             WoodItem woodItem = obj.GetComponent<WoodItem>();
-            //woodItem.amount = 1;
-            Debug.Log("Amount setado: " + woodItem.itemName);
             PlayerInventory  inventory = collision.GetComponent<Player>().GetComponent("PlayerInventory") as PlayerInventory;
             inventory.addStoreItem(woodItem);
-            //Destroy(obj);
-            //Destroy(gameObject);
-            isFirst = false;
+            Destroy(obj);
+            Destroy(gameObject);
         }
     }
 

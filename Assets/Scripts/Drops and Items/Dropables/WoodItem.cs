@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class WoodItem : DrawableItem
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         makeStackable();
         putIntoStore();
         id = getNextUniqueId();
-        name = "Wood";
+        itemName = "Wood";
         type = (int)ItemsEnum.WOOD;
         total = 10;
     }
