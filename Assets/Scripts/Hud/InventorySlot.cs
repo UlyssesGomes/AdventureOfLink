@@ -50,9 +50,7 @@ public class InventorySlot : MonoBehaviour
         if(item is DrawableItem)
         {
             DrawableItem i = item as DrawableItem;
-            //Debug.Log(itemImage.sprite.name); //= i.sprite.sprite;
             itemImage.sprite = i.sprite;
-            //transform.localScale += pictureScale;
             gameImage.SetActive(true);
         }
         else

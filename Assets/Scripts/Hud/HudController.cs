@@ -30,7 +30,6 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         InventorySlot slot1 = inventoryBag.transform.Find("Slot" + (1)).gameObject.GetComponent<InventorySlot>();
         slots[0] = slot1;
         RectTransform rt = slot1.GetComponent<RectTransform>();
-        Debug.Log("slot0 " + rt.anchoredPosition);
         for (int u = 1; u < 10; u++)
         {
             GameObject gameObject = createSlots(u, rt);
@@ -61,16 +60,11 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
      */
     private void updateSlots()
     {
-        int u = 0;
-        for (u = 0; u < 10; u++)
-        {
-            slots[u].setItem(null);
-        }
 
-        u = 0;
-        foreach (KeyValuePair<int, GameItem> entry in playerInventory.getStoreItems())
+        GameItem[] items = playerInventory.getStoreItems();
+        for(int u = 0; u < items.Length; u++)
         {
-            slots[u++].setItem(entry.Value);
+            slots[u].setItem(items[u]);
         }
     }
 
@@ -83,12 +77,7 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         position.x += 60f * (float)u;
         GameObject gameObject = Instantiate(inventorySlotPrefab, inventoryBag.transform);
         gameObject.name = "Slot" + (u+1);
-        Debug.Log("slot" + u + " " + gameObject.transform.position);
         gameObject.GetComponent<RectTransform>().anchoredPosition = position;
-
-        //RectTransform rt = gameObject.GetComponent<RectTransform>();
-        //rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0, rt.rect.width);
-        //rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0, rt.rect.height);
 
         return gameObject;
     }

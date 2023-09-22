@@ -7,7 +7,7 @@ using System;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField]
-    private IDictionary<int, GameItem> storedItems;     // items stored in backpack
+    private GameItem [] storedItems;                    // items stored in backpack
 
     [SerializeField]
     private List<GameItem> playerListItem;              // switable action items, items that is ready to use by press key 1~5
@@ -28,7 +28,7 @@ public class PlayerInventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        storedItems = new Dictionary<int, GameItem>();
+        storedItems = new GameItem[10];
         playerListItem = new List<GameItem>();
 
 #if DEBUG
@@ -37,57 +37,119 @@ public class PlayerInventory : MonoBehaviour
     }
 
     /*
-     * Add a GameItem to storedItems, if already have an item of that type
-     * add amount of that item.
+     * Add a GameItem to storedItems array, if already have an item of that type
+     * add amount of that item and return how many was added. If thereIf there is no slot 
+     * available dont store and return 0.
      */
-    public void addStoreItem(GameItem item)
+    public int addStoreItem(GameItem item)
     {
-        if (!storedItems.ContainsKey(item.type))
+        int amountLeft = item.amount;
+        int index;
+
+        do
         {
-            storedItems.Add(item.type, item);
-        }
-        else
+            index = getStoredItemIndexWithCapacity(item);
+            if (index >= 0)
+            {
+                int freeCapacity = storedItems[index].total - storedItems[index].amount;
+
+                if (freeCapacity >= amountLeft)
+                {
+                    storedItems[index].amount += item.amount;
+                    amountLeft -= 0;
+                }
+                else
+                {
+                    storedItems[index].amount = storedItems[index].total;
+                    amountLeft -= freeCapacity;
+                }
+            }
+
+            index = getFreeSlotIndex();
+
+            if(index >= 0)
+            {
+                storedItems[index] = item;
+                return item.amount;
+            }        
+        } while (index >= 0 && amountLeft > 0);
+
+        if(amountLeft == 0 || (item.amount - amountLeft) < item.amount)
         {
-            storedItems[item.type].addAmountToStackableItems(item.amount);
+            notifyStoredItemsObservers(InventorySubjectEnum.ADD_STORE_ITEMS_EVENT);
+            return item.amount - amountLeft;
         }
 
-        notifyStoredItemsObservers(InventorySubjectEnum.ADD_STORE_ITEMS_EVENT);
+        Testear cenário em que se tem 1 item com capacidade 1 de um total de 2, e esteja adicionando uma quantidade de 2.
+
+        return 0;
     }
 
     /*
-     * Remove item.amount units from storeItems. If the correct
-     * amount is removed, then return true, otherwise return false.
+     * Remove item.amount units from storeItems and then return how many in amount
+     * was removed. If amount become to zero. Remove item from array too. If there is 
+     * no amount to be removed, return 0.
      */
-    public bool removeStoreItem(GameItem item)
+    public int removeStoreItemAmount(GameItem item, int amount)
     {
-        if (storedItems.ContainsKey(item.type))
+        int amountLeft = amount;
+        int index;
+        do
         {
-            if(storedItems[item.type].amount >= item.amount)
+            index = getFirstStoredItemIndex(item);
+            if (index >= 0)
             {
-                storedItems[item.type].amount -= item.amount;
-
-                if(storedItems[item.type].amount == 0)
+                if (storedItems[index].amount > amountLeft)
                 {
-                    storedItems.Remove(item.type);
+                    storedItems[index].amount = -amountLeft;
+                    notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
+                    return amount;
                 }
-                notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
-                return true;
+                else if (storedItems[index].amount == amountLeft)
+                {
+                    storedItems[index].amount = 0;
+                    removeStoredItemById(storedItems[index].id);
+                    notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
+                    return amount;
+                }
+                else
+                {
+                    amountLeft -= storedItems[index].amount;
+                    storedItems[index].amount = 0;
+                    removeStoredItemById(storedItems[index].id);
+                    break;
+                }
             }
-            else
+        } while (index > -1 && amountLeft > 1);
+
+        if(amountLeft < amount)
+        {
+            notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
+            return amount - amountLeft;
+        }
+
+        return 0;
+    }
+
+    public GameItem removeStoredItemById(int id)
+    {
+        for(int u = 0; u < storedItems.Length; u++)
+        {
+            if(storedItems[u].id == id)
             {
-                notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
-                return false;
+                GameItem gi = storedItems[u];
+                storedItems[u] = null;
+                return gi;
             }
         }
 
-        notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
-        return false;
+        return null;
     }
 
     /*
      * Get storeItems reference to iterate.
      */
-    public IDictionary<int, GameItem> getStoreItems()
+    public GameItem [] getStoreItems()
     {
         return storedItems;
     }
@@ -100,25 +162,9 @@ public class PlayerInventory : MonoBehaviour
         return playerListItem[index];
     }
 
-    /*
-    * Get item in player set by index.
-    */
-    public GameItem getSetItem(int index)
-    {
-        if(storedItems.ContainsKey(index))
-        {
-            if(storedItems[index] == null)
-            {
-                //Debug.Log("Vai retornar null");
-            }
-            return storedItems[index];
-        }
-        return null;
-    }
-
     public int size()
     {
-        return storedItems.Count;
+        return storedItems.Length;
     }
 
     public void addStoredItemsObservers(Observer<InventorySubjectEnum> observer)
@@ -145,6 +191,55 @@ public class PlayerInventory : MonoBehaviour
         {
             o.update(subjectEvent);
         }
+    }
+
+    /*
+     *  Get an index for an item with same type and amount free capacity.
+     *  If there is no item with same type or free amount, return -1. 
+     */
+    private int getStoredItemIndexWithCapacity(GameItem item)
+    {
+        for (int u = 0; u < storedItems.Length; u++)
+        {
+
+            if (!(storedItems[u] is null) && storedItems[u].type == item.type && storedItems[u].amount < storedItems[u].total)
+            {
+                return u;
+            }
+        }
+
+        return -1;
+    }
+
+    /*
+     * Return the first occurent of that item with same type. Return -1 otherwise.
+     */
+    private int getFirstStoredItemIndex(GameItem item)
+    {
+        for(int u = 0; u < storedItems.Length; u++)
+        {
+            if(item.type == storedItems[u].type)
+            {
+                return u;
+            }
+        }
+        return -1;
+    }
+
+    /*
+     * Return the index of the first empty slot. Return -1 otherwise.
+     */
+    private int getFreeSlotIndex()
+    {
+        for(int u = 0; u < storedItems.Length; u++)
+        {
+            if(storedItems[u] is null)
+            {
+                return u;
+            }
+        }
+
+        return -1;
     }
 
 #if DEBUG

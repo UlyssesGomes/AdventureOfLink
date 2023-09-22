@@ -37,10 +37,19 @@ public class Wood : MonoBehaviour
             // cria aqui o obj
             GameObject obj = Instantiate(woodItemPrefab);
             WoodItem woodItem = obj.GetComponent<WoodItem>();
+            woodItem.amount = 2;
             PlayerInventory  inventory = collision.GetComponent<Player>().GetComponent("PlayerInventory") as PlayerInventory;
-            inventory.addStoreItem(woodItem);
-            Destroy(obj);
-            Destroy(gameObject);
+            int amountAdded = inventory.addStoreItem(woodItem);
+            Debug.Log("amount added: " + amountAdded);
+            if(amountAdded == woodItem.amount)
+            {
+                Destroy(obj);
+                Destroy(gameObject);
+            }
+            else
+            {
+                woodItem.amount -= amountAdded;
+            }
         }
     }
 
