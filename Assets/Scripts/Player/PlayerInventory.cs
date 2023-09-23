@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
     private GameItem [] storedItems;                    // items stored in backpack
 
     [SerializeField]
-    private List<GameItem> playerListItem;              // switable action items, items that is ready to use by press key 1~5
+    private List<GameItem> playerSwitableListItem;      // switable action items, items that is ready to use by press key 1~5
 
     [SerializeField]
     private GameItem prefabGameItem;
@@ -29,10 +29,12 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         storedItems = new GameItem[10];
-        playerListItem = new List<GameItem>();
+        playerSwitableListItem = new List<GameItem>();
 
 #if DEBUG
-        playerListItem.Add(loadItem(ItemsEnum.SIMPLE_AXE));
+        GameItem gi = loadItem(ItemsEnum.SIMPLE_AXE);
+        playerSwitableListItem.Add(gi);
+        addStoreItem(gi);
 #endif
     }
 
@@ -44,43 +46,44 @@ public class PlayerInventory : MonoBehaviour
     public int addStoreItem(GameItem item)
     {
         int amountLeft = item.amount;
+        int startAmount = item.amount;
         int index;
 
-        do
+        index = getStoredItemIndexWithCapacity(item);
+        if (index >= 0)
         {
-            index = getStoredItemIndexWithCapacity(item);
-            if (index >= 0)
-            {
-                int freeCapacity = storedItems[index].total - storedItems[index].amount;
+            int freeCapacity = storedItems[index].total - storedItems[index].amount;
 
-                if (freeCapacity >= amountLeft)
-                {
-                    storedItems[index].amount += item.amount;
-                    amountLeft -= 0;
-                }
-                else
-                {
-                    storedItems[index].amount = storedItems[index].total;
-                    amountLeft -= freeCapacity;
-                }
+            if (freeCapacity >= amountLeft)
+            {
+                storedItems[index].amount += item.amount;
+                amountLeft = 0;
             }
-
-            index = getFreeSlotIndex();
-
-            if(index >= 0)
+            else
             {
-                storedItems[index] = item;
-                return item.amount;
-            }        
-        } while (index >= 0 && amountLeft > 0);
-
-        if(amountLeft == 0 || (item.amount - amountLeft) < item.amount)
-        {
-            notifyStoredItemsObservers(InventorySubjectEnum.ADD_STORE_ITEMS_EVENT);
-            return item.amount - amountLeft;
+                storedItems[index].amount = storedItems[index].total;
+                amountLeft -= freeCapacity;
+            }
+            Debug.Log("Entrou aqui");
         }
 
-        Testear cenário em que se tem 1 item com capacidade 1 de um total de 2, e esteja adicionando uma quantidade de 2.
+        index = getFreeSlotIndex();
+            Debug.Log("Index: " +  index + " amount left: " + amountLeft);
+
+        if(index >= 0 && amountLeft > 0)
+        {
+            storedItems[index] = item;
+            item.amount = amountLeft;
+            amountLeft = 0;
+            Debug.Log("Adicionou");
+        }        
+       
+
+        if(amountLeft == 0 || (item.amount - amountLeft) < startAmount)
+        {
+            notifyStoredItemsObservers(InventorySubjectEnum.ADD_STORE_ITEMS_EVENT);
+            return startAmount - amountLeft;
+        }
 
         return 0;
     }
@@ -159,7 +162,7 @@ public class PlayerInventory : MonoBehaviour
      */
     public GameItem getListItem(int index)
     {
-        return playerListItem[index];
+        return playerSwitableListItem[index];
     }
 
     public int size()
@@ -274,7 +277,7 @@ public class PlayerInventory : MonoBehaviour
                     throw new Exception("...no file found - please check the configuration");
                 }
                 prefabGameObject = (GameObject)Instantiate(loadedResource);
-                gameitem = prefabGameObject.GetComponent<Axe>();
+                gameitem = prefabGameObject.GetComponent<AxeItem>();
                 gameitem.itemName = "Axe";
                 gameitem.type = (int)ItemsEnum.SIMPLE_AXE;
                 break;

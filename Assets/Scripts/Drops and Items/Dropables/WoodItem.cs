@@ -11,7 +11,7 @@ public class WoodItem : DrawableItem
         id = getNextUniqueId();
         itemName = "Wood";
         type = (int)ItemsEnum.WOOD;
-        total = 1;
+        total = 2;
     }
 
     // Update is called once per frame

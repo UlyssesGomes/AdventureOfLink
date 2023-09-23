@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
+
 public class GameItem : MonoBehaviour
 {
     public int id;                  // unique id
@@ -17,21 +19,21 @@ public class GameItem : MonoBehaviour
     public int amount {
         get { return _amount; }
         set {
-            if (isStackable)
+            if(total > 0)
             {
-                _amount = value;
+                if(_amount + value <= total)
+                {
+                    _amount += value;
+                }
+                else
+                {
+                    _amount = total;
+                }
+                Debug.Log("_amount: " + _amount);
             }
-            else if(_amount == 0 && value < 1 && value >= 0)
+            else
             {
-                _amount = 1;
-            } 
-            else if(value > 1)
-            {
-                _amount = 1;
-            }
-            else if(value < 0)
-            {
-                _amount = 0;
+                throw new Exception("Item '" + itemName + "' has no 'total' defined.");
             }
         }
     }
@@ -69,8 +71,8 @@ public class GameItem : MonoBehaviour
     public void makeMonoItem()
     {
         isStackable = false;
-        amount = 1;
         total = 1;
+        amount = 1;
     }
 
     /*
