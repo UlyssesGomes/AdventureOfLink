@@ -15,21 +15,19 @@ public class GameItem : MonoBehaviour
     public int total;               // total of this item in the same slot
 
     private static int nextId;      // stores the next unique and valid id for the next object
-
     public int amount {
         get { return _amount; }
         set {
             if(total > 0)
             {
-                if(_amount + value <= total)
+                if(value <= total)
                 {
-                    _amount += value;
+                    _amount = value;
                 }
                 else
                 {
                     _amount = total;
                 }
-                Debug.Log("_amount: " + _amount);
             }
             else
             {
@@ -73,6 +71,15 @@ public class GameItem : MonoBehaviour
         isStackable = false;
         total = 1;
         amount = 1;
+    }
+
+    /*
+     * If true, then a amount bar must be displayed in 
+     * inventary slot.
+     */
+    public virtual bool isAmountVisisble()
+    {
+        return isStackable;
     }
 
     /*

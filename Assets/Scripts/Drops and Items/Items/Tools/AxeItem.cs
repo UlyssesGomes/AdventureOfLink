@@ -10,15 +10,12 @@ public class AxeItem : DrawableItem
     {
     }
 
-    void Start()
+    void Awake()
     {
         id = getNextUniqueId();
         name = "Axe";
         type = (int)ItemsEnum.SIMPLE_AXE;
         putIntoStore();
         makeMonoItem();
-        Debug.Log("estou cançado");
-        Debug.Log("estou cançado: " + amount);
-        Debug.Log("estou cançado: " + total);
     }
 }

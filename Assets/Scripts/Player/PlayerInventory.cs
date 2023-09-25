@@ -32,9 +32,9 @@ public class PlayerInventory : MonoBehaviour
         playerSwitableListItem = new List<GameItem>();
 
 #if DEBUG
-        GameItem gi = loadItem(ItemsEnum.SIMPLE_AXE);
-        playerSwitableListItem.Add(gi);
-        addStoreItem(gi);
+        //GameItem gi = loadItem(ItemsEnum.SIMPLE_AXE);
+        //playerSwitableListItem.Add(gi);
+        //addStoreItem(gi);
 #endif
     }
 
@@ -64,22 +64,19 @@ public class PlayerInventory : MonoBehaviour
                 storedItems[index].amount = storedItems[index].total;
                 amountLeft -= freeCapacity;
             }
-            Debug.Log("Entrou aqui");
         }
 
         index = getFreeSlotIndex();
-            Debug.Log("Index: " +  index + " amount left: " + amountLeft);
 
         if(index >= 0 && amountLeft > 0)
         {
             storedItems[index] = item;
             item.amount = amountLeft;
             amountLeft = 0;
-            Debug.Log("Adicionou");
         }        
        
 
-        if(amountLeft == 0 || (item.amount - amountLeft) < startAmount)
+        if(amountLeft == 0 || (startAmount - amountLeft) < startAmount)
         {
             notifyStoredItemsObservers(InventorySubjectEnum.ADD_STORE_ITEMS_EVENT);
             return startAmount - amountLeft;
@@ -251,10 +248,10 @@ public class PlayerInventory : MonoBehaviour
      */
     private GameItem loadItem(ItemsEnum item)
     {
-        GameItem gameitem = null;
         UnityEngine.Object loadedResource;
 
         string pathPrefix = "Prefabs/Items/";
+        GameItem gameItem = null;
         
         switch (item)
         {
@@ -265,25 +262,27 @@ public class PlayerInventory : MonoBehaviour
                     throw new Exception("...no file found - please check the configuration");
                 }
                 prefabGameObject = (GameObject)Instantiate(loadedResource);
-                gameitem = prefabGameObject.GetComponent<WateringCan>();
-                gameitem.itemName = "WateringCan";
-                gameitem.type = (int)ItemsEnum.WATERING_CAN;
+                WateringCanItem wateringCan = prefabGameObject.GetComponent<WateringCanItem>();
+                wateringCan.itemName = "WateringCan";
+                wateringCan.type = (int)ItemsEnum.WATERING_CAN;
+                gameItem = wateringCan;
                 break;
 
             case ItemsEnum.SIMPLE_AXE:
-                loadedResource = Resources.Load(pathPrefix + "Axe");
+                loadedResource = Resources.Load(pathPrefix + "AxeItem");
                 if (loadedResource == null)
                 {
                     throw new Exception("...no file found - please check the configuration");
                 }
                 prefabGameObject = (GameObject)Instantiate(loadedResource);
-                gameitem = prefabGameObject.GetComponent<AxeItem>();
-                gameitem.itemName = "Axe";
-                gameitem.type = (int)ItemsEnum.SIMPLE_AXE;
+                AxeItem axe = prefabGameObject.GetComponent<AxeItem>();
+                axe.itemName = "Axe";
+                axe.type = (int)ItemsEnum.SIMPLE_AXE;
+                gameItem = axe;
                 break;
         }
 
-        return gameitem;
+        return gameItem;
     }
 #endif
 }

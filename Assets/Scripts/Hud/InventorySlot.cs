@@ -31,16 +31,20 @@ public class InventorySlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((!(gameItem is null) && !gameItem.isStackable) || gameItem is null)
+        if (gameItem is null)
         {
             amountBar.SetActive(false);
             gameImage.SetActive(false);
         }
-
-        if (!(gameItem is null) && gameItem.isStackable)
+        else if (gameItem.isAmountVisisble())
         {
             amountBar.SetActive(true);
             filledBar.fillAmount = gameItem.getTotalPercent();
+        }
+        else if (!gameItem.isAmountVisisble())
+        {
+            amountBar.SetActive(false);
+            gameImage.SetActive(true);
         }
     }
 

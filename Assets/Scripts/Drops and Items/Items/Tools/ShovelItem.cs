@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WoodItem : DrawableItem
+public class ShovelItem : DrawableItem
 {
     private void Awake()
     {
-        total = 2;
-        makeStackable();
+        makeMonoItem();
         putIntoStore();
         id = getNextUniqueId();
-        itemName = "Wood";
-        type = (int)ItemsEnum.WOOD;
+        itemName = "Shovel";
+        type = (int)ItemsEnum.SIMPLE_SHOVEL;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

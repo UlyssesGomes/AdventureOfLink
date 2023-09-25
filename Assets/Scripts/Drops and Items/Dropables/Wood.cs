@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wood : MonoBehaviour
+public class Wood : SceneryItem<WoodItem>
 {
     [SerializeField]
     private float speed;
@@ -10,9 +10,6 @@ public class Wood : MonoBehaviour
     private float timeMove;
 
     private float timeCount;
-
-    [SerializeField]
-    private GameObject woodItemPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -27,29 +24,6 @@ public class Wood : MonoBehaviour
         if(timeCount < timeMove)
         {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            // cria aqui o obj
-            GameObject obj = Instantiate(woodItemPrefab);
-            WoodItem woodItem = obj.GetComponent<WoodItem>();
-            int amountGenerated = 1;
-            woodItem.amount = amountGenerated;
-            PlayerInventory  inventory = collision.GetComponent<Player>().GetComponent("PlayerInventory") as PlayerInventory;
-            int amountAdded = inventory.addStoreItem(woodItem);
-            if(amountAdded == amountGenerated)
-            {
-                Destroy(obj);
-                Destroy(gameObject);
-            }
-            else
-            {
-                woodItem.amount = amountGenerated - amountAdded;
-            }
         }
     }
 

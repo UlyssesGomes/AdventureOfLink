@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WateringCan : SceneryItem<WateringCanItem>
+public class Shovel : SceneryItem<ShovelItem>
 {
 }

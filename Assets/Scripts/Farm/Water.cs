@@ -25,7 +25,7 @@ public class Water : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.E))
                 {
-                    WateringCan wateringCan = item as WateringCan;
+                    WateringCanItem wateringCan = item as WateringCanItem;
                     wateringCan.waterCapacity++;
                 }
             }
