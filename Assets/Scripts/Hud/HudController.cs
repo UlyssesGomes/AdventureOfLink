@@ -20,28 +20,72 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
     [SerializeField]
     private GameObject inventorySlotPrefab;
 
+    private int slotSelectedIndex;
+
+    private List<Observer<int>> slotListObservers;
+
+    private bool isInSelection;
+
     // Start is called before the first frame update
     void Start()
     {
+        slotListObservers = new List<Observer<int>>();
+        slotSelectedIndex = 0;
         slots = new InventorySlot[10];
         playerInventory = player.GetComponent<PlayerInventory>();
         playerInventory.addStoredItemsObservers(this);
 
         InventorySlot slot1 = inventoryBag.transform.Find("Slot" + (1)).gameObject.GetComponent<InventorySlot>();
         slots[0] = slot1;
+        slotListObservers.Add(slots[0]);
         RectTransform rt = slot1.GetComponent<RectTransform>();
         for (int u = 1; u < 10; u++)
         {
             GameObject gameObject = createSlots(u, rt);
             gameObject.transform.SetParent(inventoryBag.transform);
             slots[u] = gameObject.GetComponent<InventorySlot>();
+            slotListObservers.Add(slots[u]);
         }
+
+        isInSelection = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            if(isInSelection)
+            {
+                notifyIndex(-1);
+                isInSelection = !isInSelection;
+            }
+            else
+            {
+                notifyIndex(slotSelectedIndex);
+                isInSelection = !isInSelection;
+            }
+        }
 
+        if(isInSelection)
+        {
+            if(Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                if(slotSelectedIndex < slots.Length - 1)
+                {
+                    slotSelectedIndex++;
+                    notifyIndex(slotSelectedIndex);
+                }
+            }
+            else if(Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                if(slotSelectedIndex > 0)
+                {
+                    slotSelectedIndex--;
+                    notifyIndex(slotSelectedIndex);
+                }
+            }
+        }
     }
 
     /*
@@ -80,5 +124,13 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         gameObject.GetComponent<RectTransform>().anchoredPosition = position;
 
         return gameObject;
+    }
+
+    private void notifyIndex(int index)
+    {
+        foreach(InventorySlot i in slotListObservers)
+        {
+            i.update(index);
+        }
     }
 }

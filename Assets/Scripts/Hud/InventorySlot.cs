@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, Observer<int>
 {
     [SerializeField]
     private GameObject gameImage;
@@ -15,12 +15,21 @@ public class InventorySlot : MonoBehaviour
 
     private Image itemImage;
 
-    private Vector3 pictureScale;
+    [SerializeField]
+    private GameObject selectionObject;
+
+    [SerializeField]
+    private static int currentIndex = 0;
+    [SerializeField]
+    private int slotIndex;
 
     private void Awake()
     {
         filledBar = amountBar.transform.GetChild(0).gameObject.GetComponent<Image>();
         itemImage = gameImage.GetComponent<Image>();
+        slotIndex = currentIndex++;
+
+        update(-1);
     }
     // Start is called before the first frame update
     void Start()
@@ -60,6 +69,22 @@ public class InventorySlot : MonoBehaviour
         else
         {
             // TODO - make the same comparison to AnimatedItem;
+        }
+    }
+
+    /*
+     * Receive subject index selected and show up selection
+     * if is the same index that this slot.
+     */
+    public void update(int subjectEvent)
+    {
+        if(slotIndex == subjectEvent)
+        {
+            selectionObject.SetActive(true);
+        }
+        else
+        {
+            selectionObject.SetActive(false);
         }
     }
 }

@@ -97826,22 +97826,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slot1
       objectReference: {fileID: 0}
-    - target: {fileID: 4647033427347866744, guid: 2374c0ce33181c94598383648831aa87, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4647033427347866744, guid: 2374c0ce33181c94598383648831aa87, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4647033427347866744, guid: 2374c0ce33181c94598383648831aa87, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4647033427347866744, guid: 2374c0ce33181c94598383648831aa87, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2374c0ce33181c94598383648831aa87, type: 3}
 --- !u!1001 &5105557859531074336
