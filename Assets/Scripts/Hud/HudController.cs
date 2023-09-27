@@ -88,6 +88,11 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         }
     }
 
+    private void loadplayerToolsInventory()
+    {
+
+    }
+
     /*
      * Update observer with subject event.
      */
@@ -126,6 +131,9 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         return gameObject;
     }
 
+    /*
+     * Send updated index to each InventorySlot make selection.
+     */
     private void notifyIndex(int index)
     {
         foreach(InventorySlot i in slotListObservers)
