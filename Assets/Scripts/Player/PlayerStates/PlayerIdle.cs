@@ -18,17 +18,27 @@ public class PlayerIdle : MasterState
         {
             isRunning = false;
             PlayerInventory inventory = player.GetComponent("PlayerInventory") as PlayerInventory;
-            if (inventory.getListItem(0).type == (int)ItemsEnum.SIMPLE_AXE)
+            if(inventory.getCurrentSwitableItem() != null)
             {
-                nextState = (int)PlayerStatesEnum.CUTTING;
+                if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.SIMPLE_AXE)
+                {
+                    Debug.Log("Indo para cutting...");
+                    nextState = (int)PlayerStatesEnum.CUTTING;
+                }
+                else if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.SIMPLE_SHOVEL)
+                {
+                    nextState = (int)PlayerStatesEnum.DIGGING;
+                } 
+                else if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.WATERING_CAN)
+                {
+                    nextState = (int)PlayerStatesEnum.WATERING;
+                }
             }
-            else if (inventory.getListItem(0).type == (int)ItemsEnum.SIMPLE_SHOVEL)
-            {
-                nextState = (int)PlayerStatesEnum.DIGGING;
-            } else if (inventory.getListItem(0).type == (int)ItemsEnum.WATERING_CAN)
-            {
-                nextState = (int)PlayerStatesEnum.WATERING;
-            }
+                else if (inventory.getCurrentSwitableItem() == null)
+                {
+                    Debug.Log("o objeto foi destruido.");
+
+                }
         }
     }
 

@@ -19,20 +19,34 @@ public class PlayerWatering : MasterState
 
     protected override void UpdateUnitState()
     {
-        WateringCanItem wateringCan = (WateringCanItem)inventory.getListItem(0);
-        if (Input.GetKeyUp(KeyCode.LeftControl) || inventory.getListItem(0).type != (int)ItemsEnum.WATERING_CAN)
+        GameItem gameItem = inventory.getCurrentSwitableItem();
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.IDDLE;
+            exitState();
         }
-        else if (wateringCan.waterCapacity <= 0.0000f)
+        else if (gameItem != null && gameItem.type == (int)ItemsEnum.WATERING_CAN)
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.IDDLE;
+            WateringCanItem wateringCan = (WateringCanItem)gameItem;
+            if (wateringCan.waterCapacity <= 0.0000f)
+            {
+                isRunning = false;
+                nextState = (int)PlayerStatesEnum.IDDLE;
+            }
+            else
+            {
+                wateringCan.toWater();
+            }
         }
         else
         {
-            wateringCan.toWater();
+            exitState();
         }
+    }
+
+    private void exitState()
+    {
+        isRunning = false;
+        nextState = (int)PlayerStatesEnum.IDDLE;
     }
 }

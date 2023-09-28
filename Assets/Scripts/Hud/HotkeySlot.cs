@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class HotkeySlot : MonoBehaviour
 {
     [SerializeField]
-    private GameObject gameImage;
-    private Image itemImage;
+    private GameObject gameImage;           // GameObject with an Image component in slot
+    private Image itemImage;                // Image from gameImage
 
-    private GameItem gameItem;
+    private GameItem gameItem;              // Instance of an item of GameItem
+
+    public int itemStoredIndex;             // Index that this hotkey referer to in storedItems in playerInventory
 
     // Start is called before the first frame update
     void Awake()
@@ -29,6 +31,11 @@ public class HotkeySlot : MonoBehaviour
     public void setItem(GameItem item)
     {
         gameItem = item;
+        if(item is null)
+        {
+            gameItem = null;
+            gameImage.SetActive(false);
+        }
         if (item is DrawableItem)
         {
             DrawableItem i = item as DrawableItem;

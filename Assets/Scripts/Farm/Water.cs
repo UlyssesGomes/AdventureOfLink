@@ -20,8 +20,8 @@ public class Water : MonoBehaviour
         if(detectingPlayer && Input.GetKeyDown(KeyCode.E))
         {
             PlayerInventory inventory = player.GetComponent<PlayerInventory>() as PlayerInventory;
-            GameItem item = inventory.getListItem(0);
-            if (!(item is null) && inventory.getListItem(0).type == (int)ItemsEnum.WATERING_CAN)
+            GameItem item = inventory.getCurrentSwitableItem();
+            if (!(item is null) && item.type == (int)ItemsEnum.WATERING_CAN)
             {
                 if (Input.GetKey(KeyCode.E))
                 {

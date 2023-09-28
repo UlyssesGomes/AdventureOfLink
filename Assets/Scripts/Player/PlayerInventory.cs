@@ -9,8 +9,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField]
     private GameItem [] storedItems;                    // items stored in backpack
 
-    [SerializeField]
-    private List<GameItem> playerSwitableListItem;      // switable action items, items that is ready to use by press key 1~5
+    public int switableItemIndex;                       // item index selected by hotkey
 
     [SerializeField]
     private GameItem prefabGameItem;
@@ -29,7 +28,6 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         storedItems = new GameItem[10];
-        playerSwitableListItem = new List<GameItem>();
 
 #if DEBUG
         //GameItem gi = loadItem(ItemsEnum.SIMPLE_AXE);
@@ -154,13 +152,6 @@ public class PlayerInventory : MonoBehaviour
         return storedItems;
     }
 
-    /*
-     * Get item in player list by index.
-     */
-    public GameItem getListItem(int index)
-    {
-        return playerSwitableListItem[index];
-    }
 
     public int size()
     {
@@ -240,6 +231,16 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return -1;
+    }
+
+    public GameItem getCurrentSwitableItem()
+    {
+        if(switableItemIndex >= 0)
+        {
+            return storedItems[switableItemIndex];
+        }
+
+        return null;
     }
 
 #if DEBUG

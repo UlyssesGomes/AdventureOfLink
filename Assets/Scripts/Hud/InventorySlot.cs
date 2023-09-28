@@ -6,22 +6,22 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour, Observer<int>
 {
     [SerializeField]
-    private GameObject gameImage;
-    private GameItem gameItem;
+    private GameObject gameImage;               // GameObject that has Image component
+    private GameItem gameItem;                  // GameItem instance
 
     [SerializeField]
-    private GameObject amountBar;
-    private Image filledBar;
+    private GameObject amountBar;               // GameObject of bar to show item amount
+    private Image filledBar;                    // Image component of amountBar
 
-    private Image itemImage;
-
-    [SerializeField]
-    private GameObject selectionObject;
+    private Image itemImage;                    // Item Image to be shown in inventory
 
     [SerializeField]
-    private static int currentIndex = 0;
+    private GameObject selectionObject;         // Selection to showing currently selected item
+
     [SerializeField]
-    private int slotIndex;
+    private static int currentIndex = 0;        // Unique index for created instance of InventorySlot
+    [SerializeField]
+    private int slotIndex;                      // Index for this InventorySlot instance
 
     private void Awake()
     {
@@ -57,6 +57,9 @@ public class InventorySlot : MonoBehaviour, Observer<int>
         }
     }
 
+    /*
+     * Set current GameItem in this slot
+     */
     public void setItem(GameItem item)
     {
         gameItem = item;
@@ -70,6 +73,14 @@ public class InventorySlot : MonoBehaviour, Observer<int>
         {
             // TODO - make the same comparison to AnimatedItem;
         }
+    }
+
+    /*
+     * Get this gameItem instance.
+     */
+    public GameItem getItem()
+    {
+        return gameItem;
     }
 
     /*
