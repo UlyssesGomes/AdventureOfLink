@@ -28,6 +28,7 @@ public class PlayerInventory : MonoBehaviour
     void Start()
     {
         storedItems = new GameItem[10];
+        switableItemIndex = -1;
 
 #if DEBUG
         //GameItem gi = loadItem(ItemsEnum.SIMPLE_AXE);

@@ -99,6 +99,25 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
                 hotkeySlots[3].itemStoredIndex = slotSelectedIndex;
             }
         }
+        else
+        {
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                playerInventory.switableItemIndex = hotkeySlots[0].itemStoredIndex;
+            }
+            else if (Input.GetKey(KeyCode.Alpha2))
+            {
+                playerInventory.switableItemIndex = hotkeySlots[1].itemStoredIndex;
+            }
+            else if (Input.GetKey(KeyCode.Alpha3))
+            {
+                playerInventory.switableItemIndex = hotkeySlots[2].itemStoredIndex;
+            }
+            else if (Input.GetKey(KeyCode.Alpha4))
+            {
+                playerInventory.switableItemIndex = hotkeySlots[3].itemStoredIndex;
+            }
+        }
     }
 
     /*

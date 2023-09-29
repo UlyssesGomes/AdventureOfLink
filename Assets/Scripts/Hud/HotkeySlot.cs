@@ -19,6 +19,11 @@ public class HotkeySlot : MonoBehaviour
         itemImage = gameImage.GetComponent<Image>();
     }
 
+    private void Start()
+    {
+        itemStoredIndex = -1;
+    }
+
     // Update is called once per frame
     void Update()
     {

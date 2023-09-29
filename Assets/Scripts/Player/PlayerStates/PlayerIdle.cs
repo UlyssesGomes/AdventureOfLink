@@ -22,7 +22,6 @@ public class PlayerIdle : MasterState
             {
                 if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.SIMPLE_AXE)
                 {
-                    Debug.Log("Indo para cutting...");
                     nextState = (int)PlayerStatesEnum.CUTTING;
                 }
                 else if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.SIMPLE_SHOVEL)
@@ -34,11 +33,6 @@ public class PlayerIdle : MasterState
                     nextState = (int)PlayerStatesEnum.WATERING;
                 }
             }
-                else if (inventory.getCurrentSwitableItem() == null)
-                {
-                    Debug.Log("o objeto foi destruido.");
-
-                }
         }
     }
 

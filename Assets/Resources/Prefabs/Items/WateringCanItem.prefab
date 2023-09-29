@@ -50,5 +50,5 @@ MonoBehaviour:
   isOnFloor: 0
   total: 0
   sprite: {fileID: 5285340805781455672, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
-  waterMaxCapacity: 0
+  waterMaxCapacity: 10
   waterOutterFlow: 0
