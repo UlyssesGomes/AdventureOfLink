@@ -4,23 +4,31 @@ using UnityEngine;
 
 using System;
 
-public class GameItem : MonoBehaviour
+public class GameItem : ScriptableObject
 {
+    [HideInInspector]
     public int id;                  // unique id
-    public int type;                // item type
+    public int itemId;              // id that identifies that type of item
     public string itemName;         // name of the item
     public bool isStackable;        // if true, this object can have amount > 1
-    public bool isOnFloor;          // if true, this item will be redered in the world map
     private int _amount;            // amount of the same item
     public int total;               // total of this item in the same slot
 
     private static int nextId;      // stores the next unique and valid id for the next object
-    public int amount {
+
+    private void Awake()
+    {
+        id = getNextUniqueId();
+    }
+
+    public int amount
+    {
         get { return _amount; }
-        set {
-            if(total > 0)
+        set
+        {
+            if (total > 0)
             {
-                if(value <= total)
+                if (value <= total)
                 {
                     _amount = value;
                 }
@@ -34,24 +42,6 @@ public class GameItem : MonoBehaviour
                 throw new Exception("Item '" + itemName + "' has no 'total' defined.");
             }
         }
-    }
-
-    /*
-     * Turn object visible in world
-     */
-    public void putOnFloor()
-    {
-        gameObject.SetActive(true);
-        isOnFloor = true;
-    }
-
-    /*
-     * Turn object invisible on the floor and dont make collision.
-     */
-    public void putIntoStore()
-    {
-        gameObject.SetActive(false);
-        isOnFloor = false;
     }
 
     /*
@@ -88,7 +78,7 @@ public class GameItem : MonoBehaviour
      */
     public virtual float getTotalPercent()
     {
-        return (float) _amount / total;
+        return (float)_amount / total;
     }
 
     /*
@@ -104,7 +94,7 @@ public class GameItem : MonoBehaviour
      */
     public void addAmountToStackableItems(int amount)
     {
-        if(this.amount + amount <= total)
+        if (this.amount + amount <= total)
         {
             this.amount += amount;
         }
