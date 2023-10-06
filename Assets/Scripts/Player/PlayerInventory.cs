@@ -194,10 +194,11 @@ public class PlayerInventory : MonoBehaviour
         for (int u = 0; u < storedItems.Length; u++)
         {
 
-            if (!(storedItems[u] is null) && storedItems[u].type == item.type && storedItems[u].amount < storedItems[u].total)
-            {
-                return u;
-            }
+            // TODO NOW - tirar esse comentário.
+            //if (!(storedItems[u] is null) && storedItems[u].type == item.type && storedItems[u].amount < storedItems[u].total)
+            //{
+            //    return u;
+            //}
         }
 
         return -1;
@@ -210,10 +211,11 @@ public class PlayerInventory : MonoBehaviour
     {
         for(int u = 0; u < storedItems.Length; u++)
         {
-            if(item.type == storedItems[u].type)
-            {
-                return u;
-            }
+            // TODO NOW - tirar esse comentário.
+            //if(item.type == storedItems[u].type)
+            //{
+            //    return u;
+            //}
         }
         return -1;
     }
@@ -258,29 +260,31 @@ public class PlayerInventory : MonoBehaviour
         switch (item)
         {
             case ItemsEnum.WATERING_CAN:
-                loadedResource = Resources.Load(pathPrefix + "WateringCan");
-                if (loadedResource == null)
-                {
-                    throw new Exception("...no file found - please check the configuration");
-                }
-                prefabGameObject = (GameObject)Instantiate(loadedResource);
-                WateringCanItem wateringCan = prefabGameObject.GetComponent<WateringCanItem>();
-                wateringCan.itemName = "WateringCan";
-                wateringCan.type = (int)ItemsEnum.WATERING_CAN;
-                gameItem = wateringCan;
+                // TODO NOW - tirar esse comentário.
+                //loadedResource = Resources.Load(pathPrefix + "WateringCan");
+                //if (loadedResource == null)
+                //{
+                //    throw new Exception("...no file found - please check the configuration");
+                //}
+                //prefabGameObject = (GameObject)Instantiate(loadedResource);
+                //WateringCanItem wateringCan = prefabGameObject.GetComponent<WateringCanItem>();
+                //wateringCan.itemName = "WateringCan";
+                //wateringCan.type = (int)ItemsEnum.WATERING_CAN;
+                //gameItem = wateringCan;
                 break;
 
             case ItemsEnum.SIMPLE_AXE:
-                loadedResource = Resources.Load(pathPrefix + "AxeItem");
-                if (loadedResource == null)
-                {
-                    throw new Exception("...no file found - please check the configuration");
-                }
-                prefabGameObject = (GameObject)Instantiate(loadedResource);
-                AxeItem axe = prefabGameObject.GetComponent<AxeItem>();
-                axe.itemName = "Axe";
-                axe.type = (int)ItemsEnum.SIMPLE_AXE;
-                gameItem = axe;
+                // TODO NOW - tirar esse comentário.
+                //loadedResource = Resources.Load(pathPrefix + "AxeItem");
+                //if (loadedResource == null)
+                //{
+                //    throw new Exception("...no file found - please check the configuration");
+                //}
+                //prefabGameObject = (GameObject)Instantiate(loadedResource);
+                //AxeItem axe = prefabGameObject.GetComponent<AxeItem>();
+                //axe.itemName = "Axe";
+                //axe.type = (int)ItemsEnum.SIMPLE_AXE;
+                //gameItem = axe;
                 break;
         }
 
