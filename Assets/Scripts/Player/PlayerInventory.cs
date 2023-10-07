@@ -193,12 +193,10 @@ public class PlayerInventory : MonoBehaviour
     {
         for (int u = 0; u < storedItems.Length; u++)
         {
-
-            // TODO NOW - tirar esse comentário.
-            //if (!(storedItems[u] is null) && storedItems[u].type == item.type && storedItems[u].amount < storedItems[u].total)
-            //{
-            //    return u;
-            //}
+            if (!(storedItems[u] is null) && storedItems[u].itemId == item.itemId && storedItems[u].amount < storedItems[u].total)
+            {
+                return u;
+            }
         }
 
         return -1;
@@ -211,11 +209,10 @@ public class PlayerInventory : MonoBehaviour
     {
         for(int u = 0; u < storedItems.Length; u++)
         {
-            // TODO NOW - tirar esse comentário.
-            //if(item.type == storedItems[u].type)
-            //{
-            //    return u;
-            //}
+            if(item.itemId == storedItems[u].itemId)
+            {
+                return u;
+            }
         }
         return -1;
     }
@@ -250,7 +247,7 @@ public class PlayerInventory : MonoBehaviour
     /*
      * Method used to load initial weapons for test in develop mode.
      */
-    private GameItem loadItem(ItemsEnum item)
+    private GameItem loadItem(ItemIdEnum item)
     {
         UnityEngine.Object loadedResource;
 
@@ -259,12 +256,12 @@ public class PlayerInventory : MonoBehaviour
         
         switch (item)
         {
-            case ItemsEnum.WATERING_CAN:
+            case ItemIdEnum.WATERING_CAN:
                 // TODO NOW - tirar esse comentário.
                 //loadedResource = Resources.Load(pathPrefix + "WateringCan");
                 //if (loadedResource == null)
                 //{
-                //    throw new Exception("...no file found - please check the configuration");
+                    //throw new Exception("...no file found - please check the configuration");
                 //}
                 //prefabGameObject = (GameObject)Instantiate(loadedResource);
                 //WateringCanItem wateringCan = prefabGameObject.GetComponent<WateringCanItem>();
@@ -273,7 +270,7 @@ public class PlayerInventory : MonoBehaviour
                 //gameItem = wateringCan;
                 break;
 
-            case ItemsEnum.SIMPLE_AXE:
+            case ItemIdEnum.SIMPLE_AXE:
                 // TODO NOW - tirar esse comentário.
                 //loadedResource = Resources.Load(pathPrefix + "AxeItem");
                 //if (loadedResource == null)

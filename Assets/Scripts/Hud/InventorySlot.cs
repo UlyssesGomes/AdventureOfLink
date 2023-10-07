@@ -65,10 +65,9 @@ public class InventorySlot : MonoBehaviour, Observer<int>
         gameItem = item;
         if(item is DrawableItem)
         {
-            // TODO NOW - tirar esse comentário.
-            //DrawableItem i = item as DrawableItem;
-            //itemImage.sprite = i.sprite;
-            //gameImage.SetActive(true);
+            DrawableItem i = item as DrawableItem;
+            itemImage.sprite = i.sprite;
+            gameImage.SetActive(true);
         }
         else
         {

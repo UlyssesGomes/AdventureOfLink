@@ -21,28 +21,27 @@ public class PlayerWatering : MasterState
     {
         GameItem gameItem = inventory.getCurrentSwitableItem();
 
-        // TODO NOW - tirar esse comentário.
-        //if (Input.GetKeyUp(KeyCode.LeftControl))
-        //{
-        //    exitState();
-        //}
-        //else if (gameItem != null && gameItem.type == (int)ItemsEnum.WATERING_CAN)
-        //{
-        //    WateringCanItem wateringCan = (WateringCanItem)gameItem;
-        //    if (wateringCan.waterCapacity <= 0.0000f)
-        //    {
-        //        isRunning = false;
-        //        nextState = (int)PlayerStatesEnum.IDDLE;
-        //    }
-        //    else
-        //    {
-        //        wateringCan.toWater();
-        //    }
-        //}
-        //else
-        //{
-        //    exitState();
-        //}
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            exitState();
+        }
+        else if (gameItem != null && gameItem.type == (int)ItemTypeEnum.WATERING)
+        {
+            WateringCanItem wateringCan = (WateringCanItem)gameItem;
+            if (wateringCan.waterCapacity <= 0.0000f)
+            {
+                isRunning = false;
+                nextState = (int)PlayerStatesEnum.IDDLE;
+            }
+            else
+            {
+                wateringCan.toWater();
+            }
+        }
+        else
+        {
+            exitState();
+        }
     }
 
     private void exitState()

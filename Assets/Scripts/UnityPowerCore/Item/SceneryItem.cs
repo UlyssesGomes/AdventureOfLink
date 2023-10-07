@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class SceneryItem<T> : MonoBehaviour
 {
     [SerializeField]
-    protected GameObject itemPrefab;
+    protected T itemAsset;
 
     /*
      * Check if this item is in collision with the player. If true, call 
@@ -26,16 +26,13 @@ public abstract class SceneryItem<T> : MonoBehaviour
      */
     protected virtual void createItem(Collider2D collision)
     {
-        GameObject obj = Instantiate(itemPrefab);
-        T genericItem = obj.GetComponent<T>();
-        PlayerInventory inventory = collision.GetComponent<Player>().GetComponent("PlayerInventory") as PlayerInventory;
-        GameItem gameItem = genericItem as GameItem;
-        int startAmount = gameItem.amount;
+        PlayerInventory inventory = collision.transform.GetComponent("PlayerInventory") as PlayerInventory;
+        GameItem gameItem = itemAsset as GameItem;
+        int startAmount = gameItem.amount = 1;
         int addedAmount = inventory.addStoreItem(gameItem);
 
         if(startAmount - addedAmount == 0)
         {
-            Destroy(obj);
             Destroy(gameObject);
         }
         else

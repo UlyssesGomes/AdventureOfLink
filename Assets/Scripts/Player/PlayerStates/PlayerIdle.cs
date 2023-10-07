@@ -20,24 +20,18 @@ public class PlayerIdle : MasterState
             PlayerInventory inventory = player.GetComponent("PlayerInventory") as PlayerInventory;
             if(inventory.getCurrentSwitableItem() != null)
             {
-                // TODO NOW - tirar esse comentário.
-                //if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.SIMPLE_AXE)
-                //{
-                //    nextState = (int)PlayerStatesEnum.CUTTING;
-                //}
-                //else if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.SIMPLE_SHOVEL)
-                //{
-                //    nextState = (int)PlayerStatesEnum.DIGGING;
-                //} 
-                //else if (inventory.getCurrentSwitableItem().type == (int)ItemsEnum.WATERING_CAN)
-                //{
-                //    nextState = (int)PlayerStatesEnum.WATERING;
-                //}
-            }
-            else if (inventory.getCurrentSwitableItem() == null)
-            {
-                // TODO NOW - tirar esse comentário.
-                //Debug.Log("Item type: " + inventory.getCurrentSwitableItem().type);
+                if (inventory.getCurrentSwitableItem().type == (int)ItemTypeEnum.WOOD_CUTTER)
+                {
+                    nextState = (int)PlayerStatesEnum.CUTTING;
+                }
+                else if (inventory.getCurrentSwitableItem().type == (int)ItemTypeEnum.DIGGING)
+                {
+                    nextState = (int)PlayerStatesEnum.DIGGING;
+                } 
+                else if (inventory.getCurrentSwitableItem().type == (int)ItemTypeEnum.WATERING)
+                {
+                    nextState = (int)PlayerStatesEnum.WATERING;
+                }
             }
         }
     }
