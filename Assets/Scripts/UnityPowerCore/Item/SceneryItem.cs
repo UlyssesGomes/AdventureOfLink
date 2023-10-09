@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SceneryItem<T> : MonoBehaviour
+using System.Diagnostics;
+
+public abstract class SceneryItem<T> : MonoBehaviour where T : GameItem
 {
     [SerializeField]
-    protected T itemAsset;
+    protected T itemAsset;              // item that this class intance will generate after collistion
+        
+    protected int createAmount = 1;     // amount of the itemAsset
 
     /*
      * Check if this item is in collision with the player. If true, call 
@@ -27,16 +31,9 @@ public abstract class SceneryItem<T> : MonoBehaviour
     protected virtual void createItem(Collider2D collision)
     {
         PlayerInventory inventory = collision.transform.GetComponent("PlayerInventory") as PlayerInventory;
-        GameItem gameItem = itemAsset as GameItem;
-        if (inventory.getStoreItems()[0] != null)
-        {
-            Debug.Log("Before: " + inventory.getStoreItems()[0].amount);
-        }
-        int startAmount = gameItem.amount = 2;
-        if (inventory.getStoreItems()[0] != null)
-        {
-            Debug.Log("After: " + inventory.getStoreItems()[0].amount);
-        }
+        
+        GameItem gameItem = Instantiate(itemAsset);
+        int startAmount = gameItem.amount = createAmount;
         int addedAmount = inventory.addStoreItem(gameItem);
 
         if(startAmount - addedAmount == 0)
