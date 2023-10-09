@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DrawableItem : GameItem
+[CreateAssetMenu(fileName ="DrawableItem", menuName ="LocalGame/Items/new DrawableItem")]
+public class DrawableItem : GameItem
 {
     public Sprite sprite;
 }

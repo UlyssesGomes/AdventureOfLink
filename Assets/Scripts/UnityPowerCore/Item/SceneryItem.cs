@@ -28,7 +28,15 @@ public abstract class SceneryItem<T> : MonoBehaviour
     {
         PlayerInventory inventory = collision.transform.GetComponent("PlayerInventory") as PlayerInventory;
         GameItem gameItem = itemAsset as GameItem;
-        int startAmount = gameItem.amount = 1;
+        if (inventory.getStoreItems()[0] != null)
+        {
+            Debug.Log("Before: " + inventory.getStoreItems()[0].amount);
+        }
+        int startAmount = gameItem.amount = 2;
+        if (inventory.getStoreItems()[0] != null)
+        {
+            Debug.Log("After: " + inventory.getStoreItems()[0].amount);
+        }
         int addedAmount = inventory.addStoreItem(gameItem);
 
         if(startAmount - addedAmount == 0)

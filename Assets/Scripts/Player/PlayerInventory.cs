@@ -47,7 +47,10 @@ public class PlayerInventory : MonoBehaviour
         int amountLeft = item.amount;
         int startAmount = item.amount;
         int index;
-
+        if(storedItems[0] != null)
+        {
+            Debug.Log("Quantidade inicial: " + storedItems[0].amount);
+        }
         index = getStoredItemIndexWithCapacity(item);
         if (index >= 0)
         {

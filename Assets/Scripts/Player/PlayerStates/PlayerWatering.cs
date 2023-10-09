@@ -25,7 +25,7 @@ public class PlayerWatering : MasterState
         {
             exitState();
         }
-        else if (gameItem != null && gameItem.type == (int)ItemTypeEnum.WATERING)
+        else if (gameItem != null && gameItem.type == ItemTypeEnum.WATERING)
         {
             WateringCanItem wateringCan = (WateringCanItem)gameItem;
             if (wateringCan.waterCapacity <= 0.0000f)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CreateAssetMenu(fileName = "New Dialogue", menuName = "New Dialogue/Dialogue")]
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "LocalGame/Dialogue/new Dialogue")]
 public class DialogueSettings : ScriptableObject
 {
     [Header("Settings")]

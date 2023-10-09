@@ -9,15 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7162cbe906cdab54ebf9d7a7747092a7, type: 3}
-  m_Name: WateringCanItem
+  m_Script: {fileID: 11500000, guid: 3eee5897a4b08f34b954c1a1ffc1ac9a, type: 3}
+  m_Name: ShovelItem
   m_EditorClassIdentifier: 
   id: 0
-  itemId: 4
-  type: 1
-  itemName: Watering Can
+  itemId: 3
+  type: 3
+  itemName: Shovel
   isStackable: 0
   total: 1
-  sprite: {fileID: 5285340805781455672, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
-  waterMaxCapacity: 4
-  waterOutterFlow: 1.5
+  sprite: {fileID: -5464394882497330903, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}

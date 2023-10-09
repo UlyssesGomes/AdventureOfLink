@@ -21,7 +21,7 @@ public class Water : MonoBehaviour
         {
             PlayerInventory inventory = player.GetComponent<PlayerInventory>() as PlayerInventory;
             GameItem item = inventory.getCurrentSwitableItem();
-            if (!(item is null) && item.type == (int)ItemTypeEnum.WATERING)
+            if (!(item is null) && item.type == ItemTypeEnum.WATERING)
             {
                 if (Input.GetKey(KeyCode.E))
                 {

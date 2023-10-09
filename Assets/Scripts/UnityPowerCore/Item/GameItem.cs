@@ -4,14 +4,12 @@ using UnityEngine;
 
 using System;
 
-public abstract class GameItem : ScriptableObject
+public class GameItem : ScriptableObject
 {
     [HideInInspector]
     public int id;                  // unique id
-    [HideInInspector]
-    public int itemId;              // id that identifies that type of item
-    [HideInInspector]
-    public int type;                // item type, must be cutting, watering, battle...
+    public ItemIdEnum itemId;       // id that identifies that type of item
+    public ItemTypeEnum type;       // item type, must be cutting, watering, battle...
     public string itemName;         // name of the item
     public bool isStackable;        // if true, this object can have amount > 1
     private int _amount;            // amount of the same item
@@ -19,12 +17,9 @@ public abstract class GameItem : ScriptableObject
 
     private static int nextId;      // stores the next unique and valid id for the next object
 
-
-
     private void Awake()
     {
         id = getNextUniqueId();
-        defineItem();
     }
 
     public int amount
@@ -51,7 +46,7 @@ public abstract class GameItem : ScriptableObject
     }
 
     /*
-     * Make object agroupable with other amount of the same ID
+     * Make object agroupable with other amount of the same ID.
      */
     public void makeStackable()
     {
@@ -109,9 +104,4 @@ public abstract class GameItem : ScriptableObject
             // TODO - make a "tandan" sound;
         }
     }
-
-    /*
-     * Method called to make Awake initialization in derivated classes.
-     */
-    protected abstract void defineItem();
 }

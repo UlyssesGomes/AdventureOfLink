@@ -20,15 +20,15 @@ public class PlayerIdle : MasterState
             PlayerInventory inventory = player.GetComponent("PlayerInventory") as PlayerInventory;
             if(inventory.getCurrentSwitableItem() != null)
             {
-                if (inventory.getCurrentSwitableItem().type == (int)ItemTypeEnum.WOOD_CUTTER)
+                if (inventory.getCurrentSwitableItem().type == ItemTypeEnum.WOOD_CUTTER)
                 {
                     nextState = (int)PlayerStatesEnum.CUTTING;
                 }
-                else if (inventory.getCurrentSwitableItem().type == (int)ItemTypeEnum.DIGGING)
+                else if (inventory.getCurrentSwitableItem().type == ItemTypeEnum.DIGGING)
                 {
                     nextState = (int)PlayerStatesEnum.DIGGING;
                 } 
-                else if (inventory.getCurrentSwitableItem().type == (int)ItemTypeEnum.WATERING)
+                else if (inventory.getCurrentSwitableItem().type == ItemTypeEnum.WATERING)
                 {
                     nextState = (int)PlayerStatesEnum.WATERING;
                 }

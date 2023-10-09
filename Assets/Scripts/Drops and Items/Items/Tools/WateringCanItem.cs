@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="WateringCanItem", menuName ="Items/new WateringCan")]
+[CreateAssetMenu(fileName ="WateringCanItem", menuName ="LocalGame/Items/new WateringCan")]
 public class WateringCanItem : DrawableItem
 {
     private float _waterCapacity = -1;             // amount of water this object can keep
@@ -28,12 +28,6 @@ public class WateringCanItem : DrawableItem
                 _waterCapacity = value;
             }
         }
-    }
-
-    protected override void defineItem()
-    {
-        itemId = (int) ItemIdEnum.WATERING_CAN;
-        type = (int) ItemTypeEnum.WATERING;
     }
 
     public void toWater()

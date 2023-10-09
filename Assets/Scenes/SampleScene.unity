@@ -3033,11 +3033,11 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2130a3d682cff7e4b9aa17d446975115, type: 2}
     - target: {fileID: 4323955364614169201, guid: ebe0c673ab92f134f8dfab9ce2b0f2fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.93
+      value: 7.59
       objectReference: {fileID: 0}
     - target: {fileID: 4323955364614169201, guid: ebe0c673ab92f134f8dfab9ce2b0f2fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.48
+      value: 13.66
       objectReference: {fileID: 0}
     - target: {fileID: 4323955364614169201, guid: ebe0c673ab92f134f8dfab9ce2b0f2fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19937,14 +19937,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wood
       objectReference: {fileID: 0}
-    - target: {fileID: 7285737533623629127, guid: ec9e835f46d680541a56b45e7cf0ec74, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7285737533623629146, guid: ec9e835f46d680541a56b45e7cf0ec74, type: 3}
-      propertyPath: itemPrefab
-      value: 
-      objectReference: {fileID: 1502492902883114785, guid: 68084b72153a8ef40b3abe1d7dbc5a0e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec9e835f46d680541a56b45e7cf0ec74, type: 3}
 --- !u!1 &1517085475
@@ -98213,8 +98205,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5105557860598945053, guid: b2eab82756c925e4e8335a2c80773eac, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5105557860598945054, guid: b2eab82756c925e4e8335a2c80773eac, type: 3}
+      propertyPath: itemAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 799579949af63ed498649166b36c810e, type: 2}
     - target: {fileID: 5105557860598945121, guid: b2eab82756c925e4e8335a2c80773eac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -32
@@ -98274,7 +98270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5115446465009063073, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5115446465009063076, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -98320,5 +98316,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5115446465009063078, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
+      propertyPath: itemAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: c2953d503cf9d964895d999292078541, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
