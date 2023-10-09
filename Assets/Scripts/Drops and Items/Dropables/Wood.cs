@@ -14,7 +14,7 @@ public class Wood : SceneryItem<GameItem>
     // Start is called before the first frame update
     void Start()
     {
-        createAmount = 2;
+        createAmount = 1;
     }
 
     // Update is called once per frame
