@@ -7,20 +7,14 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
     [SerializeField]
     private Player player;
 
-    [SerializeField]
-    private GameObject hotkeySlotObject;
-
-    [SerializeField]
-    private GameObject inventoryBag;
-
     private PlayerInventory playerInventory;
 
-    private InventorySlot [] inventorySlots;
-
-    private HotkeySlot [] hotkeySlots;
-
     [SerializeField]
-    private GameObject inventorySlotPrefab;
+    private BackpackInventory backpackInventory;
+
+    //private InventorySlot [] inventorySlots;
+
+    //private HotkeySlot [] hotkeySlots;
 
     private int slotSelectedIndex;
 
@@ -33,7 +27,7 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
     {
         slotListObservers = new List<Observer<int>>();
         slotSelectedIndex = 0;
-        inventorySlots = new InventorySlot[10];
+        //inventorySlots = new InventorySlot[10];
         playerInventory = player.GetComponent<PlayerInventory>();
         playerInventory.addStoredItemsObservers(this);
 
@@ -48,7 +42,8 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
     {
         if (Input.GetKeyUp(KeyCode.B))
         {
-            if(isInSelection)
+            backpackInventory.changeVisibility();
+            if (isInSelection)
             {
                 notifyIndex(-1);
                 isInSelection = !isInSelection;
@@ -64,11 +59,11 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         {
             if(Input.GetKeyUp(KeyCode.RightArrow))
             {
-                if(slotSelectedIndex < inventorySlots.Length - 1)
-                {
-                    slotSelectedIndex++;
-                    notifyIndex(slotSelectedIndex);
-                }
+                //if(slotSelectedIndex < inventorySlots.Length - 1)
+                //{
+                //    slotSelectedIndex++;
+                //    notifyIndex(slotSelectedIndex);
+                //}
             }
             else if(Input.GetKeyUp(KeyCode.LeftArrow))
             {
@@ -80,42 +75,42 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
             }
             else if (Input.GetKey(KeyCode.Alpha1))
             {
-                hotkeySlots[0].setItem(inventorySlots[slotSelectedIndex].getItem());
-                hotkeySlots[0].itemStoredIndex = slotSelectedIndex;
+                //hotkeySlots[0].setItem(inventorySlots[slotSelectedIndex].getItem());
+                //hotkeySlots[0].itemStoredIndex = slotSelectedIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {
-                hotkeySlots[1].setItem(inventorySlots[slotSelectedIndex].getItem());
-                hotkeySlots[1].itemStoredIndex = slotSelectedIndex;
+                //hotkeySlots[1].setItem(inventorySlots[slotSelectedIndex].getItem());
+                //hotkeySlots[1].itemStoredIndex = slotSelectedIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha3))
             {
-                hotkeySlots[2].setItem(inventorySlots[slotSelectedIndex].getItem());
-                hotkeySlots[2].itemStoredIndex = slotSelectedIndex;
+                //hotkeySlots[2].setItem(inventorySlots[slotSelectedIndex].getItem());
+                //hotkeySlots[2].itemStoredIndex = slotSelectedIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha4))
             {
-                hotkeySlots[3].setItem(inventorySlots[slotSelectedIndex].getItem());
-                hotkeySlots[3].itemStoredIndex = slotSelectedIndex;
+                //hotkeySlots[3].setItem(inventorySlots[slotSelectedIndex].getItem());
+                //hotkeySlots[3].itemStoredIndex = slotSelectedIndex;
             }
         }
         else
         {
             if (Input.GetKey(KeyCode.Alpha1))
             {
-                playerInventory.switableItemIndex = hotkeySlots[0].itemStoredIndex;
+                //playerInventory.switableItemIndex = hotkeySlots[0].itemStoredIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {
-                playerInventory.switableItemIndex = hotkeySlots[1].itemStoredIndex;
+                //playerInventory.switableItemIndex = hotkeySlots[1].itemStoredIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha3))
             {
-                playerInventory.switableItemIndex = hotkeySlots[2].itemStoredIndex;
+                //playerInventory.switableItemIndex = hotkeySlots[2].itemStoredIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha4))
             {
-                playerInventory.switableItemIndex = hotkeySlots[3].itemStoredIndex;
+                //playerInventory.switableItemIndex = hotkeySlots[3].itemStoredIndex;
             }
         }
     }
@@ -140,7 +135,7 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         GameItem[] items = playerInventory.getStoreItems();
         for(int u = 0; u < items.Length; u++)
         {
-            inventorySlots[u].setItem(items[u]);
+            //inventorySlots[u].setItem(items[u]);
         }
     }
 
@@ -151,7 +146,7 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
     {
         Vector2 position = new Vector2(rt.anchoredPosition.x, rt.anchoredPosition.y);
         position.x += 60f * (float)u;
-        GameObject gameObject = Instantiate(inventorySlotPrefab, inventoryBag.transform);
+        //GameObject gameObject = Instantiate(inventorySlotPrefab, inventoryBag.transform);
         gameObject.name = "Slot" + (u+1);
         gameObject.GetComponent<RectTransform>().anchoredPosition = position;
 
@@ -163,10 +158,10 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
      */
     private void notifyIndex(int index)
     {
-        foreach(InventorySlot i in slotListObservers)
-        {
-            i.update(index);
-        }
+        //foreach(InventorySlot i in slotListObservers)
+        //{
+        //    i.update(index);
+        //}
     }
 
     /*
@@ -174,16 +169,16 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
      */
     private void loadInventoySlotsArray()
     {
-        InventorySlot slot1 = inventoryBag.transform.Find("Slot" + (1)).gameObject.GetComponent<InventorySlot>();
-        inventorySlots[0] = slot1;
-        slotListObservers.Add(inventorySlots[0]);
-        RectTransform rt = slot1.GetComponent<RectTransform>();
+        //InventorySlot slot1 = inventoryBag.transform.Find("Slot" + (1)).gameObject.GetComponent<InventorySlot>();
+        //inventorySlots[0] = slot1;
+        //slotListObservers.Add(inventorySlots[0]);
+        //RectTransform rt = slot1.GetComponent<RectTransform>();
         for (int u = 1; u < 10; u++)
         {
-            GameObject gameObject = createSlots(u, rt);
-            gameObject.transform.SetParent(inventoryBag.transform);
-            inventorySlots[u] = gameObject.GetComponent<InventorySlot>();
-            slotListObservers.Add(inventorySlots[u]);
+            //GameObject gameObject = createSlots(u, rt);
+            //gameObject.transform.SetParent(inventoryBag.transform);
+            //inventorySlots[u] = gameObject.GetComponent<InventorySlot>();
+            //slotListObservers.Add(inventorySlots[u]);
         }
     }
 
@@ -193,11 +188,11 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
      */
     private void loadHotkeySlots()
     {
-        hotkeySlots = new HotkeySlot[4];
+        //hotkeySlots = new HotkeySlot[4];
 
-        for(int u = 0; u < hotkeySlots.Length; u++)
-        {
-            hotkeySlots[u] = hotkeySlotObject.transform.Find("Slot" + (u+1)).gameObject.GetComponent<HotkeySlot>();
-        }
+        //for(int u = 0; u < hotkeySlots.Length; u++)
+        //{
+        //    hotkeySlots[u] = hotkeySlotObject.transform.Find("Slot" + (u+1)).gameObject.GetComponent<HotkeySlot>();
+        //}
     }
 }
