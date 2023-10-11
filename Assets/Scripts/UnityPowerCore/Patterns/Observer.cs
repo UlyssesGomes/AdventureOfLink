@@ -5,4 +5,6 @@ using UnityEngine;
 public interface Observer<T>
 {
    void update(T subjectEvent);
+
+   void setObservable(Observable<T> observable);
 }

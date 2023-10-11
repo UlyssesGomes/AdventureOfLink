@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
+public class HudController : MonoBehaviour//, Observer<InventorySubjectEnum>
 {
     [SerializeField]
     private Player player;
@@ -29,7 +29,7 @@ public class HudController : MonoBehaviour, Observer<InventorySubjectEnum>
         slotSelectedIndex = 0;
         //inventorySlots = new InventorySlot[10];
         playerInventory = player.GetComponent<PlayerInventory>();
-        playerInventory.addStoredItemsObservers(this);
+        //playerInventory.addStoredItemsObservers(this);
 
         loadInventoySlotsArray();
         loadHotkeySlots();
