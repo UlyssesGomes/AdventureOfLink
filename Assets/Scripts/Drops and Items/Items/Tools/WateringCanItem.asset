@@ -18,6 +18,7 @@ MonoBehaviour:
   itemName: Watering Can
   isStackable: 0
   total: 1
+  animType: 1
   sprite: {fileID: 5285340805781455672, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
   waterMaxCapacity: 4
   waterOutterFlow: 1.5

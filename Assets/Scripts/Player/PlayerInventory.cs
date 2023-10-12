@@ -14,13 +14,16 @@ public class PlayerInventory : MonoBehaviour
 
     private GenericSubject<int, GameItem[]> subjectEvent;
 
-    private const int inventoryCurrentSize = 15;                                // current size of inventory
+    public readonly int hotkeyInventorySize = 5;                                // total slot size to hotkey inventory (hotkey slot is the first five slots of storedItems
+    public int inventoryCurrentSize = 15;                                       // current available inventory size to store itens.
+    public readonly int TOTAL_INVENTORY_SIZE = 15;// next value must be 25 when backpack system is ready to use  
+    // total amount available to slots interface including hotkeysSlots
 
     private void Awake()
     {
         storedItemsObservable = new Observable<GenericSubject<int, GameItem[]>>();
         subjectEvent = new GenericSubject<int, GameItem[]>();
-        storedItems = new GameItem[inventoryCurrentSize];
+        storedItems = new GameItem[TOTAL_INVENTORY_SIZE];
     }
 
     // Start is called before the first frame update
@@ -64,6 +67,7 @@ public class PlayerInventory : MonoBehaviour
                 storedItems[index].amount = storedItems[index].total;
                 amountLeft -= freeCapacity;
             }
+            notifyStoredItemsObservers(index);
         }
 
         index = getFreeSlotIndex();
@@ -73,12 +77,12 @@ public class PlayerInventory : MonoBehaviour
             storedItems[index] = item;
             item.amount = amountLeft;
             amountLeft = 0;
+            notifyStoredItemsObservers(index);
         }        
        
 
         if(amountLeft == 0 || (startAmount - amountLeft) < startAmount)
         {
-            notifyStoredItemsObservers(index);
             return startAmount - amountLeft;
         }
 
