@@ -7,13 +7,14 @@ using System;
 public class GameItem : ScriptableObject
 {
     [HideInInspector]
-    public int id;                  // unique id
+    public int id;                  // unique id that identifies this instance
     public ItemIdEnum itemId;       // id that identifies that type of item
     public ItemTypeEnum type;       // item type, must be cutting, watering, battle...
     public string itemName;         // name of the item
     public bool isStackable;        // if true, this object can have amount > 1
     private int _amount;            // amount of the same item
     public int total;               // total of this item in the same slot
+    public AnimTypeEnum animType;   // presentation type of this object, it can be sprite or animation
 
     private static int nextId;      // stores the next unique and valid id for the next object
 

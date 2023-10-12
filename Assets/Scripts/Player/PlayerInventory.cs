@@ -7,27 +7,26 @@ using System;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField]
-    private GameItem [] storedItems;                    // items stored in backpack
+    private GameItem [] storedItems;                                            // items stored in backpack
+    public int switableItemIndex;                                               // item index selected by hotkey
 
-    public int switableItemIndex;                       // item index selected by hotkey
+    public Observable<GenericSubject<int, GameItem[]>> storedItemsObservable;   // store items observable to notify changes in storedItems array.
 
-    [SerializeField]
-    private GameItem prefabGameItem;
-    private GameObject prefabGameObject;
+    private GenericSubject<int, GameItem[]> subjectEvent;
 
-    private List<Observer<InventorySubjectEnum>> storeItemsObservers;         // List of observers of sotredItems events
-    private List<Observer<InventorySubjectEnum>> playerSetItemObservers;      // List of observers of playerSetItems events
+    private const int inventoryCurrentSize = 15;                                // current size of inventory
 
     private void Awake()
     {
-        storeItemsObservers = new List<Observer<InventorySubjectEnum>>();
-        playerSetItemObservers = new List<Observer<InventorySubjectEnum>>();
+        storedItemsObservable = new Observable<GenericSubject<int, GameItem[]>>();
+        subjectEvent = new GenericSubject<int, GameItem[]>();
+        storedItems = new GameItem[inventoryCurrentSize];
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        storedItems = new GameItem[10];
+        subjectEvent.subject = storedItems;
         switableItemIndex = -1;
 
 #if DEBUG
@@ -37,11 +36,13 @@ public class PlayerInventory : MonoBehaviour
 #endif
     }
 
-    /*
-     * Add a GameItem to storedItems array, if already have an item of that type
-     * add amount of that item and return how many was added. If thereIf there is no slot 
-     * available dont store and return 0.
-     */
+    /// <summary>
+    /// Add a GameItem to storedItems array, if already have an item of that type
+    /// add amount of that item and return how many was added.If thereIf there is no slot 
+    /// available dont store and return 0.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns>How amount of that item was added</returns>
     public int addStoreItem(GameItem item)
     {
         int amountLeft = item.amount;
@@ -77,18 +78,21 @@ public class PlayerInventory : MonoBehaviour
 
         if(amountLeft == 0 || (startAmount - amountLeft) < startAmount)
         {
-            notifyStoredItemsObservers(InventorySubjectEnum.ADD_STORE_ITEMS_EVENT);
+            notifyStoredItemsObservers(index);
             return startAmount - amountLeft;
         }
 
         return 0;
     }
 
-    /*
-     * Remove item.amount units from storeItems and then return how many in amount
-     * was removed. If amount become to zero. Remove item from array too. If there is 
-     * no amount to be removed, return 0.
-     */
+    /// <summary>
+    /// Remove item.amount units from storeItems and then return how many in amount
+    /// was removed. If amount become to zero. Remove item from array too. If there is
+    /// no amount to be removed, return 0.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="amount"></param>
+    /// <returns></returns>
     public int removeStoreItemAmount(GameItem item, int amount)
     {
         int amountLeft = amount;
@@ -101,14 +105,14 @@ public class PlayerInventory : MonoBehaviour
                 if (storedItems[index].amount > amountLeft)
                 {
                     storedItems[index].amount = -amountLeft;
-                    notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
+                    notifyStoredItemsObservers(index);
                     return amount;
                 }
                 else if (storedItems[index].amount == amountLeft)
                 {
                     storedItems[index].amount = 0;
                     removeStoredItemById(storedItems[index].id);
-                    notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
+                    
                     return amount;
                 }
                 else
@@ -123,13 +127,17 @@ public class PlayerInventory : MonoBehaviour
 
         if(amountLeft < amount)
         {
-            notifyStoredItemsObservers(InventorySubjectEnum.REMOVE_STORE_ITEMS_EVENT);
             return amount - amountLeft;
         }
 
         return 0;
     }
 
+    /// <summary>
+    /// Remove gameItem by id from storedItems array.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public GameItem removeStoredItemById(int id)
     {
         for(int u = 0; u < storedItems.Length; u++)
@@ -138,6 +146,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 GameItem gi = storedItems[u];
                 storedItems[u] = null;
+                notifyStoredItemsObservers(u);
                 return gi;
             }
         }
@@ -145,50 +154,49 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
-    /*
-     * Get storeItems reference to iterate.
-     */
+    /// <summary>
+    /// Get storeItems reference to iterate.
+    /// </summary>
+    /// <returns></returns>
     public GameItem [] getStoreItems()
     {
         return storedItems;
     }
 
-
+    /// <summary>
+    /// Get current storedItems array size.
+    /// </summary>
+    /// <returns></returns>
     public int size()
     {
         return storedItems.Length;
     }
 
-    public void addStoredItemsObservers(Observer<InventorySubjectEnum> observer)
+    /// <summary>
+    /// Add observer to observe changes in storedItems array.
+    /// </summary>
+    /// <param name="observer"></param>
+    public void addStoredItemsObservers(Observer<GenericSubject<int, GameItem[]>> observer)
     {
-        storeItemsObservers.Add(observer);
+        storedItemsObservable.addObservers(observer);
     }
 
-    private void notifyStoredItemsObservers(InventorySubjectEnum subjectEvent)
+    /// <summary>
+    /// Notify all observers that item with index "index" has changed.
+    /// </summary>
+    /// <param name="index"></param>
+    private void notifyStoredItemsObservers(int index)
     {
-        foreach(Observer<InventorySubjectEnum> o in storeItemsObservers)
-        {
-            o.update(subjectEvent);
-        }
+        subjectEvent.type = index;
+        storedItemsObservable.notify(subjectEvent);
     }
 
-    public void addPlayerSetItemsObservers(Observer<InventorySubjectEnum> observer)
-    {
-        playerSetItemObservers.Add(observer);
-    }
-
-    private void noitfyPlayerSetItemsObservers(InventorySubjectEnum subjectEvent)
-    {
-        foreach(Observer<InventorySubjectEnum> o in playerSetItemObservers)
-        {
-            o.update(subjectEvent);
-        }
-    }
-
-    /*
-     *  Get an index for an item with same type and amount free capacity.
-     *  If there is no item with same type or free amount, return -1. 
-     */
+    /// <summary>
+    /// Get an index for an item with same type and amount free capacity.
+    /// If there is no item with same type or free amount, return -1. 
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     private int getStoredItemIndexWithCapacity(GameItem item)
     {
         for (int u = 0; u < storedItems.Length; u++)
@@ -202,9 +210,11 @@ public class PlayerInventory : MonoBehaviour
         return -1;
     }
 
-    /*
-     * Return the first occurent of that item with same type. Return -1 otherwise.
-     */
+    /// <summary>
+    /// Return the first occurent of that item with same type. Return -1 otherwise.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns></returns>
     private int getFirstStoredItemIndex(GameItem item)
     {
         for(int u = 0; u < storedItems.Length; u++)
@@ -217,9 +227,10 @@ public class PlayerInventory : MonoBehaviour
         return -1;
     }
 
-    /*
-     * Return the index of the first empty slot. Return -1 otherwise.
-     */
+    /// <summary>
+    /// Return the index of the first empty slot. Return -1 otherwise.
+    /// </summary>
+    /// <returns></returns>
     private int getFreeSlotIndex()
     {
         for(int u = 0; u < storedItems.Length; u++)
@@ -233,6 +244,10 @@ public class PlayerInventory : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// Get current item in hand ready to use.
+    /// </summary>
+    /// <returns>GameItem</returns>
     public GameItem getCurrentSwitableItem()
     {
         if(switableItemIndex >= 0)

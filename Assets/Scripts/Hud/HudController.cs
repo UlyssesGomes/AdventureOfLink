@@ -10,7 +10,7 @@ public class HudController : MonoBehaviour//, Observer<InventorySubjectEnum>
     private PlayerInventory playerInventory;
 
     [SerializeField]
-    private BackpackInventory backpackInventory;
+    private BackpackInventoryGroup backpackInventory;
 
     //private InventorySlot [] inventorySlots;
 

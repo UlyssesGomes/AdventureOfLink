@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine.UI;
-
-public class InventorySlot : MonoBehaviour
+public class InventotySystem : MonoBehaviour
 {
-    [SerializeField]
-    private Image itemImage;
+    public PlayerInventory playerInventory;
 
-    public GameItem gameItem;
+    public BackpackInventoryGroup backpackInventoryGroup;
+    public HotkeyInventorySlot [] hotkeysList;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        hotkeysList = new HotkeyInventorySlot[5];
     }
 
     // Update is called once per frame
