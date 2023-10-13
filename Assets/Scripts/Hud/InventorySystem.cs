@@ -25,6 +25,8 @@ public class InventorySystem : MonoBehaviour
         backpackSlotList = backpackInventoryGroup.inventorySlotList;
         backpackInventoryGroup.setAmountSlotsVisible(playerInventory.inventoryCurrentSize - playerInventory.hotkeyInventorySize);
 
+        playerInventory.addStoredItemsObservers(handleSlot);
+
         for(int u = 0; u < hotkeysSlotList.Length; u++)
         {
             hotkeysSlotList[u].indexId = u;
@@ -47,7 +49,7 @@ public class InventorySystem : MonoBehaviour
 
     public void setSwitablePlayerItem(int index)
     {
-        if (hotkeysSlotList[index])
+        if (hotkeysSlotList[index].gameItem)
         {
             handleSlot.indexId = index;
             playerInventory.switableItemIndex = index;

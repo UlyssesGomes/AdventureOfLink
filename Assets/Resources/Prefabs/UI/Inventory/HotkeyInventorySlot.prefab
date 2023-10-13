@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indexId: 0
   itemImage: {fileID: 6872050123606271917}
+  filledImage: {fileID: 1381646107372780196}
   quantityLabel: {fileID: 2814759527410167496}
   gameItem: {fileID: 0}
   buttonLabel: {fileID: 1076438329}
@@ -275,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6852226145171139420, guid: 6219e26eeedce7b4cb85a212579ee365, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7443430158969277144, guid: 6219e26eeedce7b4cb85a212579ee365, type: 3}
       propertyPath: m_IsActive
@@ -296,6 +297,17 @@ RectTransform:
 --- !u!114 &6872050123606271917 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8411106409515662806, guid: 6219e26eeedce7b4cb85a212579ee365, type: 3}
+  m_PrefabInstance: {fileID: 3162702980638710395}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1381646107372780196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4091725091951042783, guid: 6219e26eeedce7b4cb85a212579ee365, type: 3}
   m_PrefabInstance: {fileID: 3162702980638710395}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

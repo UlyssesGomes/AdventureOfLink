@@ -26,6 +26,7 @@ public class Water : MonoBehaviour
                 if (Input.GetKey(KeyCode.E))
                 {
                     WateringCanItem wateringCan = item as WateringCanItem;
+                    inventory.notifyStoredItemsObservers(inventory.switableItemIndex);
                     wateringCan.waterCapacity++;
                 }
             }

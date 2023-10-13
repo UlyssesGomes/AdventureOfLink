@@ -189,7 +189,7 @@ public class PlayerInventory : MonoBehaviour
     /// Notify all observers that item with index "index" has changed.
     /// </summary>
     /// <param name="index"></param>
-    private void notifyStoredItemsObservers(int index)
+    public void notifyStoredItemsObservers(int index)
     {
         subjectEvent.type = index;
         storedItemsObservable.notify(subjectEvent);

@@ -39,9 +39,4 @@ public class WateringCanItem : DrawableItem
     {
         return _waterCapacity / waterMaxCapacity;
     }
-
-    public override bool isAmountVisisble()
-    {
-        return true;
-    }
 }

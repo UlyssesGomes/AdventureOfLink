@@ -11,11 +11,18 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
     [SerializeField]
     protected Image itemImage;                  // image of the item
     [SerializeField]
+    protected Image filledImage;                // image to show item charge amount
+    [SerializeField]
     protected Text quantityLabel;               // label to show amount of item per slot
     [HideInInspector]
     public GameItem gameItem;                   // instance with all atributes of the item.
 
     public Observable<GenericSubject<int, GameItem[]>> observableParent;
+
+    private void Awake()
+    {
+        indexId = -1;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,14 +46,14 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
             {
                 DrawableItem i = gameItem as DrawableItem;
                 itemImage.sprite = i.sprite;
-                changeQuantityLabelVisibility();
                 itemImage.gameObject.SetActive(true);
             }
             else
             {
-                changeQuantityLabelVisibility();
                 itemImage.gameObject.SetActive(false);
             }
+            changeQuantityLabelVisibility();
+            changeFilledBarAmount();
         }
     }
 
@@ -61,6 +68,20 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
         {
             quantityLabel.text = "0";
             quantityLabel.gameObject.SetActive(false);
+        }
+    }
+
+    public void changeFilledBarAmount()
+    {
+        if (gameItem.isViewPercent)
+        {
+            filledImage.fillAmount = gameItem.getTotalPercent();
+            filledImage.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            filledImage.fillAmount = 0;
+            filledImage.transform.parent.gameObject.SetActive(false);
         }
     }
 

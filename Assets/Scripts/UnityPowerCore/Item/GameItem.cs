@@ -12,6 +12,7 @@ public class GameItem : ScriptableObject
     public ItemTypeEnum type;       // item type, must be cutting, watering, battle...
     public string itemName;         // name of the item
     public bool isStackable;        // if true, this object can have amount > 1
+    public bool isViewPercent;      // if true, this item can present a percent bar
     private int _amount;            // amount of the same item
     public int total;               // total of this item in the same slot
     public AnimTypeEnum animType;   // presentation type of this object, it can be sprite or animation
@@ -47,31 +48,12 @@ public class GameItem : ScriptableObject
     }
 
     /*
-     * Make object agroupable with other amount of the same ID.
-     */
-    public void makeStackable()
-    {
-        isStackable = true;
-        amount = 1;
-    }
-
-    /*
-     * Make object non agroupable, only one item is allowed per slot.
-     */
-    public void makeMonoItem()
-    {
-        isStackable = false;
-        total = 1;
-        amount = 1;
-    }
-
-    /*
      * If true, then a amount bar must be displayed in 
      * inventary slot.
      */
     public virtual bool isAmountVisisble()
     {
-        return isStackable;
+        return isViewPercent;
     }
 
     /*
