@@ -1,0 +1,7 @@
+﻿public enum InventorySubjectEnum : int
+{
+    ADD_STORE_ITEMS_EVENT = 0,
+    REMOVE_STORE_ITEMS_EVENT = 1,
+    ADD_PLAYER_SET_ITEMS_EVENT = 2,
+    REMOVE_PLAYER_SET_ITEMS_EVENT = 3,
+};
