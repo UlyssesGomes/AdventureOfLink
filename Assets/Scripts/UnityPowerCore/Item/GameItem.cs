@@ -47,35 +47,39 @@ public class GameItem : ScriptableObject
         }
     }
 
-    /*
-     * If true, then a amount bar must be displayed in 
-     * inventary slot.
-     */
+
+    /// <summary>
+    /// If true, then a amount bar must be displayed in inventary slot.
+    /// </summary>
+    /// <returns>Bool flag that indicates if amount is visible</returns>
     public virtual bool isAmountVisisble()
     {
         return isViewPercent;
     }
 
-    /*
-     * Returns the total percentage of how much of this item is in the slot. 
-     * With 0 being none and 1 being the maximum quantity.
-     */
+    /// <summary>
+    /// Returns the total percentage of how much of this item is in the slot.
+    /// With 0 being none and 1 being the maximum quantity.
+    /// </summary>
+    /// <returns>Percent (float between 0 and 1)</returns>
     public virtual float getTotalPercent()
     {
         return (float)_amount / total;
     }
 
-    /*
-     * Return the next unique and valid for new objects.
-     */
+    /// <summary>
+    /// Generate unique item id.
+    /// </summary>
+    /// <returns>Unique int id</returns>
     public int getNextUniqueId()
     {
         return nextId++;
     }
 
-    /*
-     * Add amount to stackable items respecting total amount.
-     */
+    /// <summary>
+    /// Add amount to stackable items respecting total amount.
+    /// </summary>
+    /// <param name="amount"></param>
     public void addAmountToStackableItems(int amount)
     {
         if (this.amount + amount <= total)

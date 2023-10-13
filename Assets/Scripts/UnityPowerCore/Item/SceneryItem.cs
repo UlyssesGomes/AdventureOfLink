@@ -11,10 +11,11 @@ public abstract class SceneryItem<T> : MonoBehaviour where T : GameItem
         
     protected int createAmount = 1;     // amount of the itemAsset
 
-    /*
-     * Check if this item is in collision with the player. If true, call 
-     * createItem() method.
-     */
+    /// <summary>
+    /// Check if this item is in collision with the player. If true, call
+    /// createItem() method.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -23,11 +24,12 @@ public abstract class SceneryItem<T> : MonoBehaviour where T : GameItem
         }
     }
 
-    /*
-     * Try to add this item to storedItem in PlayerInventory. If all items
-     * are added, then remove them from the scenery, otherwise, only decrease 
-     * amount.
-     */
+    /// <summary>
+    /// Try to add this item to storedItem in PlayerInventory. If all items
+    /// are added, then remove them from the scenery, otherwise, only decrease
+    /// amount.
+    /// </summary>
+    /// <param name="collision"></param>
     protected virtual void createItem(Collider2D collision)
     {
         PlayerInventory inventory = collision.transform.GetComponent("PlayerInventory") as PlayerInventory;

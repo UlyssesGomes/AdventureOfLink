@@ -18,18 +18,28 @@ public class Player : PlayerObject
     protected override void PlayerUpdate()
     { }
 
+    /// <summary>
+    /// Call OnMove to calculate player moviment.
+    /// </summary>
     private void FixedUpdate()
     {
         OnMove();
     }
 
     #region Moviment
+    /// <summary>
+    /// Calculate player moviment.
+    /// </summary>
     void OnMove()
     {
         rigid.MovePosition(rigid.position + direction * currentSpeed * Time.fixedDeltaTime);
     }
 
     #endregion
+    /// <summary>
+    /// Get initial player state. By default player init idle.
+    /// </summary>
+    /// <returns></returns>
     protected override UnitState getFirstState()
     {
         return new PlayerIdle();

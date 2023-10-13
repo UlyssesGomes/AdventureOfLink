@@ -9,6 +9,9 @@ public class HotkeyInventorySlot : InventorySlot
     [SerializeField]
     private Text buttonLabel;
 
+    /// <summary>
+    /// Set hotkey inventory button label value.
+    /// </summary>
     public void setLabel()
     {
         buttonLabel.text = $"{indexId + 1}";

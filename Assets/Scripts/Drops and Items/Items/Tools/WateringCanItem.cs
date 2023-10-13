@@ -30,11 +30,18 @@ public class WateringCanItem : DrawableItem
         }
     }
 
+    /// <summary>
+    /// Called to drease water amount in watering can when the player is watering.
+    /// </summary>
     public void toWater()
     {
         waterCapacity -= waterOutterFlow * Time.deltaTime;
     }
 
+    /// <summary>
+    /// Calculate percente of water in watering can.
+    /// </summary>
+    /// <returns>Percent of water.</returns>
     public override float getTotalPercent()
     {
         return _waterCapacity / waterMaxCapacity;

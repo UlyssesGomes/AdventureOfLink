@@ -36,6 +36,10 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
         
     }
 
+    /// <summary>
+    /// Update observer with new value of a subject that this observer subscribe.
+    /// </summary>
+    /// <param name="subjectEvent"></param>
     public void update(GenericSubject<int, GameItem[]> subjectEvent)
     {
         if (subjectEvent.type == indexId || (gameItem != null && gameItem.id == subjectEvent.id))
@@ -57,6 +61,9 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
         }
     }
 
+    /// <summary>
+    /// Show amount visibility for stackable items.
+    /// </summary>
     public void changeQuantityLabelVisibility()
     {
         if(gameItem.total > 1)
@@ -71,6 +78,9 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
         }
     }
 
+    /// <summary>
+    /// Show amount bar for items that need to represent percent amount.
+    /// </summary>
     public void changeFilledBarAmount()
     {
         if (gameItem.isViewPercent)
@@ -85,6 +95,10 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
         }
     }
 
+    /// <summary>
+    /// Set Observable of this observer.
+    /// </summary>
+    /// <param name="observable"></param>
     public void setObservable(Observable<GenericSubject<int, GameItem[]>> observable)
     {
         observableParent = observable;

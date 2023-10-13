@@ -6,9 +6,9 @@ using UnityEngine;
 public class Water : MonoBehaviour
 {
     [SerializeField]
-    private bool detectingPlayer;
+    private bool detectingPlayer;           // if true, the player is in collision with a lake or reservoir border 
 
-    private Player player;
+    private Player player;                  // player instance
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +33,10 @@ public class Water : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When in collision with a player, get its intance to do water refilling.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -42,6 +46,10 @@ public class Water : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When its no more in collision, stop refilling item with water.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

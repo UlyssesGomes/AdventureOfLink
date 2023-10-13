@@ -28,6 +28,10 @@ public class Wood : SceneryItem<GameItem>
         }
     }
 
+    /// <summary>
+    /// Set direction of wood rolling after its respawn.
+    /// </summary>
+    /// <param name="value"></param>
     public void dropDirection(int value)
     {
         speed *= value;

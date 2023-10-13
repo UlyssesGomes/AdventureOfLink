@@ -5,20 +5,20 @@ using UnityEngine;
 public class Tree : MonoBehaviour
 {
     [SerializeField]
-    private float treeHealth;
+    private float treeHealth;                       // tree hit points
     [SerializeField]
-    private float treeMaxHealth;
+    private float treeMaxHealth;                    // tree max hit points
     [SerializeField]
-    private Animator animator;
+    private Animator animator;                      // animation to show tree on hit and cutted
 
     [SerializeField]
-    private GameObject woodPrefab;
+    private GameObject woodPrefab;                  // scenety item wood droped 
 
     [SerializeField]
-    private ParticleSystem leafs;
+    private ParticleSystem leafs;                   // particle of leaves falling when tree get a hit
 
-    private float currentRespownTime;
-    private const float RESPOWN_TIME = 2.0f;
+    private float currentRespownTime;               // respawn time left to this tree grow again
+    private const float RESPOWN_TIME = 2.0f;        // total respawn time
 
     Vector2 normalVector = new Vector2(0, 0);
     Vector2 mirrorVector = new Vector2(0, 180);
@@ -43,6 +43,11 @@ public class Tree : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method called after tree get hitted. If the tree still have health, then its 
+    /// can be hitted.
+    /// </summary>
+    /// <param name="collision"></param>
     public void onHit(Collider2D collision)
     {
         if(treeHealth > 0)
@@ -63,6 +68,10 @@ public class Tree : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If in collidin with an axe, then call "onHit" an its health will be decreased.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Axe"))
@@ -80,6 +89,11 @@ public class Tree : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When the tree is hit by an axe, the tree shakes to the opposite side of the axe.
+    /// </summary>
+    /// <param name="collision"></param>
+    /// <returns></returns>
     private int getMovimentDirection(Collider2D collision)
     {
         int directionValue = 1;

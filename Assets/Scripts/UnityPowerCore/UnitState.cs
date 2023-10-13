@@ -30,9 +30,10 @@ public abstract class UnitState
         UpdateUnitState();
     }
 
-    /*
-     * Change to next state
-     */
+    /// <summary>
+    /// Change to next state
+    /// </summary>
+    /// <returns>Next State</returns>
     public UnitState NextUnitState()
     {
         UnitState next = Next();
@@ -42,6 +43,11 @@ public abstract class UnitState
         return next;
     }
 
+    /// <summary>
+    /// Get instance of a state by its key.
+    /// </summary>
+    /// <param name="key">key that identifies a instance state</param>
+    /// <returns>UnitState instance</returns>
     public static UnitState getInstance(int key)
     {
         if (instanceStates.ContainsKey(key))
@@ -52,6 +58,11 @@ public abstract class UnitState
         return null;
     }
 
+    /// <summary>
+    /// Adds a new state instance if it has not already been added
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="state"></param>
     public void addInstance(int key, UnitState state)
     {
         if (!instanceStates.ContainsKey(key))
@@ -60,23 +71,25 @@ public abstract class UnitState
         }
     }
 
-    /*
-     * Implements logic to change the current state returning to new state.
-     */
+    /// <summary>
+    /// Implements logic to change the current state returning to new state.
+    /// </summary>
+    /// <returns></returns>
     protected abstract UnitState Next();
 
-    /*
-     * Implement state update and veiry
-     */
+    /// <summary>
+    /// Implement state update
+    /// </summary>
     protected abstract void UpdateUnitState();
 
-    /*
-     * Return player current state
-     */
+    /// <summary>
+    /// Return current state id
+    /// </summary>
+    /// <returns></returns>
     public abstract int getUnitCurrentState();
 
-    /*
-     * Called in Start() method. Derivated classes must implement this method instead Start()
-     */
+    /// <summary>
+    /// Called in Start() method. Derivated classes must implement this method instead Start()
+    /// </summary>
     public abstract void startState();
 }

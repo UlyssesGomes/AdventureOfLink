@@ -7,6 +7,9 @@ public abstract class MasterState : UnitState
     protected int nextState;
     private static bool isFirtsCall = true;
 
+    /// <summary>
+    /// Start all player states intances.
+    /// </summary>
     public MasterState()
     {
         if(isFirtsCall)
@@ -21,6 +24,11 @@ public abstract class MasterState : UnitState
             addInstance((int)PlayerStatesEnum.WATERING, new PlayerWatering());
         }
     }
+
+    /// <summary>
+    /// Try call next state. If current state doesnt implement next state, then a error will be throw.
+    /// </summary>
+    /// <returns>Return next state.</returns>
     protected override UnitState Next()
     {
         UnitState next = getInstance(nextState);
