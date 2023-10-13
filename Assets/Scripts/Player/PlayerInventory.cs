@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 using System;
+
+enum InventoryNotifyAction { ALL = int.MaxValue, }
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -192,6 +192,17 @@ public class PlayerInventory : MonoBehaviour
     public void notifyStoredItemsObservers(int index)
     {
         subjectEvent.type = index;
+        storedItemsObservable.notify(subjectEvent);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="index"></param>
+    public void notifyStoredItemsObserversById(int id)
+    {
+        subjectEvent.id = id;
+        subjectEvent.type = -1;
         storedItemsObservable.notify(subjectEvent);
     }
 

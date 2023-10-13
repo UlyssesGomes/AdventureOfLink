@@ -47,6 +47,10 @@ public class InventorySystem : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Swap the item in switableItem for the item in the "index" parameter in storedItems.
+    /// </summary>
+    /// <param name="index"></param>
     public void setSwitablePlayerItem(int index)
     {
         if (hotkeysSlotList[index].gameItem)
@@ -59,6 +63,9 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Open and close backpack visibility.
+    /// </summary>
     public void backpackChangeVisibility()
     {
         backpackInventoryGroup.changeVisibility();

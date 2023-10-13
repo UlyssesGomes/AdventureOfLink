@@ -38,7 +38,7 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
 
     public void update(GenericSubject<int, GameItem[]> subjectEvent)
     {
-        if(subjectEvent.type == indexId)
+        if (subjectEvent.type == indexId || (gameItem != null && gameItem.id == subjectEvent.id))
         {
             gameItem = subjectEvent.subject[indexId];
 

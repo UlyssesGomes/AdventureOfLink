@@ -36,6 +36,7 @@ public class PlayerWatering : MasterState
             else
             {
                 wateringCan.toWater();
+                inventory.notifyStoredItemsObserversById(wateringCan.id);
             }
         }
         else
