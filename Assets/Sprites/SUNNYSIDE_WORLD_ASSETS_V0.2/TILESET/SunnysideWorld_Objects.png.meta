@@ -1490,6 +1490,21 @@ TextureImporter:
   - first:
       213: -4089712868714207275
     second: SunnysideWorld_Objects_76
+  - first:
+      213: -5949844016029110231
+    second: SunnysideWorld_Objects_77
+  - first:
+      213: 1174642154157460677
+    second: SunnysideWorld_Objects_78
+  - first:
+      213: 671349599899461471
+    second: SunnysideWorld_Objects_79
+  - first:
+      213: -3855206691043694305
+    second: SunnysideWorld_Objects_80
+  - first:
+      213: -2286810141140795038
+    second: SunnysideWorld_Objects_81
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -3181,7 +3196,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3189,6 +3204,111 @@ TextureImporter:
       bones: []
       spriteID: 5d722fa60db6e37c0800000000000000
       internalID: -4089712868714207275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SunnysideWorld_Objects_77
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 579
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 920f99b1468ed6da0800000000000000
+      internalID: -5949844016029110231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SunnysideWorld_Objects_78
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 558
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cc41c0d0da2d4010800000000000000
+      internalID: 1174642154157460677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SunnysideWorld_Objects_79
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 557
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f57ab1677ec115900800000000000000
+      internalID: 671349599899461471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SunnysideWorld_Objects_80
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 514
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f19a1a4b0fd8f7ac0800000000000000
+      internalID: -3855206691043694305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SunnysideWorld_Objects_81
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 261ca8cea4e9340e0800000000000000
+      internalID: -2286810141140795038
       vertices: []
       indices: 
       edges: []

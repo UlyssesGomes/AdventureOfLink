@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class PlayerObject : MovingObject
+﻿public abstract class PlayerObject : MovingObject
 {
     protected UnitState currentUnitState;           // current unit state in execution
 
