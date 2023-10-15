@@ -42,6 +42,6 @@ public class PlayerRolling : MasterState
         isRolling = true;
         rollingTime = 0.0f;
 
-        player.currentSpeed = player.baseSpeed + rollSpeed;
+        stateMachineObject.movingObject.currentSpeed = stateMachineObject.movingObject.baseSpeed + rollSpeed;
     }
 }

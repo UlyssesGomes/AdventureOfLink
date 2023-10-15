@@ -6,18 +6,18 @@ public class PlayerIdle : MasterState
 {
     protected override void UpdateUnitState()
     {
-        player.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        stateMachineObject.movingObject.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if(player.direction.sqrMagnitude != 0)
+        if(stateMachineObject.movingObject.direction.sqrMagnitude != 0)
         {
             isRunning = false;
             nextState = (int)PlayerStatesEnum.WALKING;
         }
 
-        if (player.direction.sqrMagnitude == 0 && Input.GetKeyDown(KeyCode.LeftControl))
+        if (stateMachineObject.movingObject.direction.sqrMagnitude == 0 && Input.GetKeyDown(KeyCode.LeftControl))
         {
             isRunning = false;
-            PlayerInventory inventory = player.GetComponent("PlayerInventory") as PlayerInventory;
+            PlayerInventory inventory = stateMachineObject.playerInventory;
             if(inventory.getCurrentSwitableItem() != null)
             {
                 if (inventory.getCurrentSwitableItem().type == ItemTypeEnum.WOOD_CUTTER)
@@ -43,6 +43,6 @@ public class PlayerIdle : MasterState
 
     public override void startState()
     {
-        player.currentSpeed = 0;
+        stateMachineObject.movingObject.currentSpeed = 0;
     }
 }

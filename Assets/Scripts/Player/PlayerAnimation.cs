@@ -25,11 +25,11 @@ public class PlayerAnimation : MonoBehaviour
     #region Moviment
     void OnMove()
     {
-        if (player.direction.x > 0)
+        if (player.movingObject.direction.x > 0)
         {
             transform.eulerAngles = new Vector2(0, 0);
         }
-        else if (player.direction.x < 0)
+        else if (player.movingObject.direction.x < 0)
         {
             transform.eulerAngles = new Vector2(0, 180);
         }
@@ -37,7 +37,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void GetPlayerState()
     {
-        switch (player.playerState)
+        switch (player.objectState)
         {
             case (int) PlayerStatesEnum.IDDLE:
                 animator.SetInteger("transition", 0);

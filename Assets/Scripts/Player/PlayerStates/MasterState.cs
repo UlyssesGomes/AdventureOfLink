@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MasterState : UnitState
+public abstract class MasterState : UnitState<Player>
 {
     protected int nextState;
     private static bool isFirtsCall = true;
@@ -29,9 +29,9 @@ public abstract class MasterState : UnitState
     /// Try call next state. If current state doesnt implement next state, then a error will be throw.
     /// </summary>
     /// <returns>Return next state.</returns>
-    protected override UnitState Next()
+    protected override UnitState<Player> Next()
     {
-        UnitState next = getInstance(nextState);
+        UnitState<Player> next = getInstance(nextState);
         if(next == null)
         {
             throw new System.NotImplementedException("Unit State with id " + nextState +" not added yet");

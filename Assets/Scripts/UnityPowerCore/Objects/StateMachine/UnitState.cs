@@ -2,25 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UnitState
+public abstract class UnitState<T>
 {
-    public bool isRunning;                              // state of UnitState, when false, call NextUnitState()
+    public bool isRunning;                         // state of UnitState, when false, call NextUnitState()
 
-    public PlayerObject player;                         // instance of the player to be controlled
+    public T stateMachineObject;                   // instance of the object to be controlled
 
-    protected static IDictionary<int, UnitState> instanceStates = new Dictionary<int, UnitState>();   
+    protected static IDictionary<int, UnitState<T>> instanceStates = new Dictionary<int, UnitState<T>>();   
 
     // Start is called before the first frame update
     public void Start()
     {
         isRunning = true;
-        player.playerState = getUnitCurrentState();
 
-        if(!instanceStates.ContainsKey(getUnitCurrentState()))
+        if(!instanceStates.ContainsKey(getUnitCurrentState()) )
         {
             instanceStates.Add(getUnitCurrentState(), this);
         }
-
         startState();
     }
 
@@ -34,10 +32,10 @@ public abstract class UnitState
     /// Change to next state
     /// </summary>
     /// <returns>Next State</returns>
-    public UnitState NextUnitState()
+    public UnitState<T> NextUnitState()
     {
-        UnitState next = Next();
-        next.player = player;
+        UnitState<T> next = Next();
+        next.stateMachineObject = stateMachineObject;
         next.Start();
 
         return next;
@@ -48,7 +46,7 @@ public abstract class UnitState
     /// </summary>
     /// <param name="key">key that identifies a instance state</param>
     /// <returns>UnitState instance</returns>
-    public static UnitState getInstance(int key)
+    public static UnitState<T> getInstance(int key)
     {
         if (instanceStates.ContainsKey(key))
         {
@@ -63,7 +61,7 @@ public abstract class UnitState
     /// </summary>
     /// <param name="key"></param>
     /// <param name="state"></param>
-    public void addInstance(int key, UnitState state)
+    public void addInstance(int key, UnitState<T> state)
     {
         if (!instanceStates.ContainsKey(key))
         {
@@ -75,7 +73,7 @@ public abstract class UnitState
     /// Implements logic to change the current state returning to new state.
     /// </summary>
     /// <returns></returns>
-    protected abstract UnitState Next();
+    protected abstract UnitState<T> Next();
 
     /// <summary>
     /// Implement state update
@@ -89,7 +87,8 @@ public abstract class UnitState
     public abstract int getUnitCurrentState();
 
     /// <summary>
-    /// Called in Start() method. Derivated classes must implement this method instead Start()
+    /// Called in Start() method. Derivated (last child instance of UnitState)
+    /// classes must implement this method instead Start()
     /// </summary>
     public abstract void startState();
 }

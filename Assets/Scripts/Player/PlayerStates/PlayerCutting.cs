@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerCutting : MasterState
 {
     public override void startState()
     {
-        player.currentSpeed = 0;
+        stateMachineObject.movingObject.currentSpeed = 0;
     }
 
     public override int getUnitCurrentState()

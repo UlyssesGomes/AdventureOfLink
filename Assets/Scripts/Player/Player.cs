@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : PlayerObject
+public class Player : StateMachineObject
 {
+    public MovingObject movingObject;       // moving objects commom attributes
 
-    private Rigidbody2D rigid;    
+    public Rigidbody2D rigid;
+
+    public PlayerInventory playerInventory;
 
     // Start is called before the first frame update
-    protected override void PlayerStart()
+    public void objectStart()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        baseSpeed = 4;
+        movingObject = new MovingObject();
+        movingObject.baseSpeed = 4;
     }
 
-    // Update is called once per frame
-    protected override void PlayerUpdate()
+    public void objectUpdate()
     { }
 
     /// <summary>
     /// Call OnMove to calculate player moviment.
     /// </summary>
-    private void FixedUpdate()
+    public void objectFixedUpdate()
     {
         OnMove();
     }
@@ -32,16 +34,8 @@ public class Player : PlayerObject
     /// </summary>
     void OnMove()
     {
-        rigid.MovePosition(rigid.position + direction * currentSpeed * Time.fixedDeltaTime);
+        rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
     }
 
     #endregion
-    /// <summary>
-    /// Get initial player state. By default player init idle.
-    /// </summary>
-    /// <returns></returns>
-    protected override UnitState getFirstState()
-    {
-        return new PlayerIdle();
-    }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerRunning : MasterState
 {
@@ -8,7 +6,7 @@ public class PlayerRunning : MasterState
 
     public override void startState()
     {
-        player.currentSpeed = player.baseSpeed + runningSpeed;
+        stateMachineObject.movingObject.currentSpeed = stateMachineObject.movingObject.baseSpeed + runningSpeed;
     }
 
     public override int getUnitCurrentState()
@@ -18,9 +16,9 @@ public class PlayerRunning : MasterState
 
     protected override void UpdateUnitState()
     {
-        player.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        stateMachineObject.movingObject.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if (Input.GetKeyUp(KeyCode.LeftShift) || player.direction.sqrMagnitude == 0)
+        if (Input.GetKeyUp(KeyCode.LeftShift) || stateMachineObject.movingObject.direction.sqrMagnitude == 0)
         {
             isRunning = false;
             nextState = (int)PlayerStatesEnum.WALKING;

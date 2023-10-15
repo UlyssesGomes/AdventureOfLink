@@ -8,8 +8,8 @@ public class PlayerWatering : MasterState
 
     public override void startState()
     {
-        player.currentSpeed = 0;
-        inventory = player.GetComponent<PlayerInventory>();
+        stateMachineObject.movingObject.currentSpeed = 0;
+        inventory = stateMachineObject.playerInventory;
     }
 
     public override int getUnitCurrentState()
