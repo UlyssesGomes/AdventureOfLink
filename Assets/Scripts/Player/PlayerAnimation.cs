@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-
-    Player player;
+    [SerializeField]
+    private Player player;
     Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<Player>();
         animator = GetComponent<Animator>();
     }
 
@@ -37,7 +36,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void GetPlayerState()
     {
-        switch (player.objectState)
+        switch (player.objectStateId)
         {
             case (int) PlayerStatesEnum.IDDLE:
                 animator.SetInteger("transition", 0);
