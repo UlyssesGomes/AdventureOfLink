@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : StateMachineController<Player>
 {
-    public MovingObject movingObject;       // moving objects commom attributes
+    public MovingObject movingObject;               // moving objects commom attributes
 
     public Rigidbody2D rigid;
 
@@ -18,6 +18,7 @@ public class Player : StateMachineController<Player>
         rigid = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent("PlayerInventory") as PlayerInventory;
         movingObject = new MovingObject();
+        movingObject.baseSpeed = 4;
     }
 
     protected override void stateMachineUpdate()
