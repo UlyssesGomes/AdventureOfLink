@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public abstract class StateMachine<T> : MonoBehaviour where T : StateMachineObject
+public abstract class StateMachineController<T> : MonoBehaviour
 {
-    protected UnitState<T> currentUnitState;            // current unit state in execution
+    protected UnitState<T> currentUnitState;           // current unit state in execution
 
-    protected int _objectStateId;                         // States that object can assume like idle, walking, attack ...
-
-    public T stateMachineObject;
+    protected int _objectStateId;                   // States that object can assume like idle, walking, attack ...
 
     public int objectStateId
     {
@@ -14,6 +14,12 @@ public abstract class StateMachine<T> : MonoBehaviour where T : StateMachineObje
         set { _objectStateId = value; }
     }
 
+    private void Awake()
+    {
+        stateMachineAwake();
+    }
+
+    // Start is called before the first frame update
     void Start()
     {
         stateMachineStart();
@@ -21,15 +27,12 @@ public abstract class StateMachine<T> : MonoBehaviour where T : StateMachineObje
         objectStateId = currentUnitState.getUnitCurrentState();
         currentUnitState.stateMachineObject = getStateMachineObject();
         currentUnitState.Start();
-        stateMachineObject.objectStart();
     }
-
 
     // Update is called once per frame
     void Update()
     {
         stateMachineUpdate();
-        stateMachineObject.objectUpdate();
         currentUnitState.Update();
 
         if (!currentUnitState.isRunning)
@@ -43,8 +46,12 @@ public abstract class StateMachine<T> : MonoBehaviour where T : StateMachineObje
     private void FixedUpdate()
     {
         stateMachineFixedUpdate();
-        stateMachineObject.objectFixedUpdate();
     }
+
+    /// <summary>
+    /// Object must implement stateMachineAwake() instead Awake()
+    /// </summary>
+    protected abstract void stateMachineAwake();
 
     /// <summary>
     /// Object must implement stateMachineStart() instead Start()
@@ -68,7 +75,7 @@ public abstract class StateMachine<T> : MonoBehaviour where T : StateMachineObje
     protected abstract UnitState<T> getFirstState();
 
     /// <summary>
-    /// Implement method that return StateMachineObject instance.
+    /// Implement method that return StateMachineController derivated object instance.
     /// </summary>
     /// <returns>StateMachineObject intance of type T</returns>
     protected abstract T getStateMachineObject();

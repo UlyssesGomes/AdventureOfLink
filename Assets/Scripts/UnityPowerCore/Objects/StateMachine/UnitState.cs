@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class UnitState<T>
 {
-    public bool isRunning;                         // state of UnitState, when false, call NextUnitState()
+    public bool isRunning;                          // state of UnitState, when false, call NextUnitState()
 
-    public T stateMachineObject;                   // instance of the object to be controlled
+    public T stateMachineObject;    // instance of the object to be controlled
 
     protected static IDictionary<int, UnitState<T>> instanceStates = new Dictionary<int, UnitState<T>>();   
 

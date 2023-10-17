@@ -42,8 +42,7 @@ public class Water : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             detectingPlayer = true;
-            PlayerStateMachine playerStateMachine = collision.GetComponent<PlayerStateMachine>();
-            player = playerStateMachine.stateMachineObject;
+            player = collision.GetComponent<Player>();
         }
     }
 

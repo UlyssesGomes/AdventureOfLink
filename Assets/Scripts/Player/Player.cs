@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : StateMachineObject
+public class Player : StateMachineController<Player>
 {
     public MovingObject movingObject;       // moving objects commom attributes
 
@@ -10,22 +10,33 @@ public class Player : StateMachineObject
 
     public PlayerInventory playerInventory;
 
-    // Start is called before the first frame update
-    public void objectStart()
-    {
-        movingObject = new MovingObject();
-        movingObject.baseSpeed = 4;
-    }
-
-    public void objectUpdate()
+    protected override void stateMachineAwake()
     { }
 
-    /// <summary>
-    /// Call OnMove to calculate player moviment.
-    /// </summary>
-    public void objectFixedUpdate()
+    protected override void stateMachineStart()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        playerInventory = GetComponent("PlayerInventory") as PlayerInventory;
+        movingObject = new MovingObject();
+    }
+
+    protected override void stateMachineUpdate()
+    { }
+
+    protected override void stateMachineFixedUpdate()
     {
         OnMove();
+    }
+
+    protected override UnitState<Player> getFirstState()
+    {
+        return new PlayerIdle();
+    }
+
+
+    protected override Player getStateMachineObject()
+    {
+        return this;
     }
 
     #region Moviment
@@ -34,8 +45,14 @@ public class Player : StateMachineObject
     /// </summary>
     void OnMove()
     {
-        rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
+        if (rigid != null)
+        {
+            rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            Debug.Log("Plyaer -> rigid null");
+        }
     }
-
     #endregion
 }
