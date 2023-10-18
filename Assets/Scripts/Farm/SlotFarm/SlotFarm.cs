@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotFarm : MonoBehaviour
+public class SlotFarm : StateMachineController<SlotFarm>
 {
     [Header("Components")]
     [SerializeField]
@@ -20,26 +20,6 @@ public class SlotFarm : MonoBehaviour
 
     private float currentRespownTime;           // if slotfarm have no digAmount, start timer by add elapsedTime each frame
     private const float RESPOWN_TIME = 10.0f;   // when currentRespownTime reach this amount, the hole must be close
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        digAmount = maxDigAmount;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (digAmount <= 0)
-        {
-            currentRespownTime += Time.deltaTime;
-            if (currentRespownTime >= RESPOWN_TIME)
-            {
-                digAmount = maxDigAmount;
-                spriteRenderer.sprite = null;
-            }
-        }
-    }
 
     public void onHit()
     {
@@ -81,5 +61,39 @@ public class SlotFarm : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
             detectWater = false;
+    }
+
+    protected override void stateMachineAwake()
+    { }
+
+    protected override void stateMachineStart()
+    {
+        digAmount = maxDigAmount;
+    }
+
+    protected override void stateMachineUpdate()
+    {
+        if (digAmount <= 0)
+        {
+            currentRespownTime += Time.deltaTime;
+            if (currentRespownTime >= RESPOWN_TIME)
+            {
+                digAmount = maxDigAmount;
+                spriteRenderer.sprite = null;
+            }
+        }
+    }
+
+    protected override void stateMachineFixedUpdate()
+    { }
+
+    protected override UnitState<SlotFarm> getFirstState()
+    {
+        return new SlotFarmStartState();
+    }
+
+    protected override SlotFarm getStateMachineObject()
+    {
+        return this;
     }
 }

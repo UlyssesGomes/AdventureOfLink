@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotFarmHoleState : MonoBehaviour
+public class SlotFarmHoleState : UnitState<SlotFarm>
 {
-    // Start is called before the first frame update
-    void Start()
+    public override int getUnitCurrentState()
     {
-        
+        return (int)SlotFarmEnum.SLOT_FARM_HOLE_STATE;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void startState()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    protected override UnitState<SlotFarm> Next()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void UpdateUnitState()
+    {
+        throw new System.NotImplementedException();
     }
 }
