@@ -6,20 +6,17 @@ public class SlotFarm : StateMachineController<SlotFarm>
 {
     [Header("Components")]
     [SerializeField]
-    private SpriteRenderer spriteRenderer;      // sprite to show current slote state
-    [SerializeField]
-    private Sprite hole;                        // hole sprite
-    [SerializeField]            
-    private Sprite carrot;                      // carrot sprite 
+    private Animator animator;
+
 
     [Header("Components")]
-    private int digAmount;                      // amount of hits a players need to dig util the hole appears
+    public int digAmount;                           // amount of hits a players need to dig util the hole appears
     [SerializeField]
-    private int maxDigAmount;                   // amount of hit the slot farm have when it is full
-    public bool detectWater;                    // when true, player is watering this hole.
+    public int maxDigAmount;                        // amount of hit the slot farm have when it is full
+    public bool detectWater;                        // when true, player is watering this hole.
 
-    private float currentRespownTime;           // if slotfarm have no digAmount, start timer by add elapsedTime each frame
-    private const float RESPOWN_TIME = 10.0f;   // when currentRespownTime reach this amount, the hole must be close
+    public float currentRespownTime;                // if slotfarm have no digAmount, start timer by add elapsedTime each frame
+    public readonly float RESPOWN_TIME = 10.0f;     // when currentRespownTime reach this amount, the hole must be close
 
     public void onHit()
     {
@@ -29,7 +26,7 @@ public class SlotFarm : StateMachineController<SlotFarm>
 
             if(digAmount <= 0)
             {
-                spriteRenderer.sprite = hole;
+                //spriteRenderer.sprite = hole;
                 currentRespownTime = 0.0f;
             }
             // TODO - implement grow system to harvest fuits and vegetables.
@@ -79,7 +76,7 @@ public class SlotFarm : StateMachineController<SlotFarm>
             if (currentRespownTime >= RESPOWN_TIME)
             {
                 digAmount = maxDigAmount;
-                spriteRenderer.sprite = null;
+                //spriteRenderer.sprite = null;
             }
         }
     }
@@ -95,5 +92,10 @@ public class SlotFarm : StateMachineController<SlotFarm>
     protected override SlotFarm getStateMachineObject()
     {
         return this;
+    }
+
+    protected override void instantiateAllUnitStates()
+    {
+        throw new System.NotImplementedException();
     }
 }

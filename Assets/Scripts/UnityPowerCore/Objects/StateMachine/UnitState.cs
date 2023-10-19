@@ -5,20 +5,15 @@ using UnityEngine;
 public abstract class UnitState<T>
 {
     public bool isRunning;                          // state of UnitState, when false, call NextUnitState()
+    public int nextStateKey;                        // key of the nextState
 
-    public T stateMachineObject;    // instance of the object to be controlled
+    public T stateMachineObject;                    // instance of the object to be controlled
 
-    protected static IDictionary<int, UnitState<T>> instanceStates = new Dictionary<int, UnitState<T>>();   
-
+    
     // Start is called before the first frame update
     public void Start()
     {
         isRunning = true;
-
-        if(!instanceStates.ContainsKey(getUnitCurrentState()) )
-        {
-            instanceStates.Add(getUnitCurrentState(), this);
-        }
         startState();
     }
 
@@ -29,51 +24,19 @@ public abstract class UnitState<T>
     }
 
     /// <summary>
-    /// Change to next state
+    /// Stop running this state and call next state.
     /// </summary>
-    /// <returns>Next State</returns>
-    public UnitState<T> NextUnitState()
+    protected void callNextState(int keyState)
     {
-        UnitState<T> next = Next();
-        next.stateMachineObject = stateMachineObject;
-        next.Start();
-
-        return next;
+        isRunning = false;
+        nextStateKey = keyState;
     }
 
     /// <summary>
-    /// Get instance of a state by its key.
+    /// Called in Start() method. Derivated (last child instance of UnitState)
+    /// classes must implement this method instead Start()
     /// </summary>
-    /// <param name="key">key that identifies a instance state</param>
-    /// <returns>UnitState instance</returns>
-    public static UnitState<T> getInstance(int key)
-    {
-        if (instanceStates.ContainsKey(key))
-        {
-            return instanceStates[key];
-        }
-
-        return null;
-    }
-
-    /// <summary>
-    /// Adds a new state instance if it has not already been added
-    /// </summary>
-    /// <param name="key"></param>
-    /// <param name="state"></param>
-    public void addInstance(int key, UnitState<T> state)
-    {
-        if (!instanceStates.ContainsKey(key))
-        {
-            instanceStates.Add(key, state);
-        }
-    }
-
-    /// <summary>
-    /// Implements logic to change the current state returning to new state.
-    /// </summary>
-    /// <returns></returns>
-    protected abstract UnitState<T> Next();
+    public abstract void startState();
 
     /// <summary>
     /// Implement state update
@@ -84,11 +47,5 @@ public abstract class UnitState<T>
     /// Return current state id
     /// </summary>
     /// <returns></returns>
-    public abstract int getUnitCurrentState();
-
-    /// <summary>
-    /// Called in Start() method. Derivated (last child instance of UnitState)
-    /// classes must implement this method instead Start()
-    /// </summary>
-    public abstract void startState();
+    public abstract int getUnitCurrentStateKey();
 }

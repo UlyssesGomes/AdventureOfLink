@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlotFarmPlantedState : UnitState<SlotFarm>
 {
-    public override int getUnitCurrentState()
+    public override int getUnitCurrentStateKey()
     {
         return (int)SlotFarmEnum.SLOT_FARM_PLANTED_STATE;
     }
@@ -12,6 +12,11 @@ public class SlotFarmPlantedState : UnitState<SlotFarm>
     public override void startState()
     {
         throw new System.NotImplementedException();
+    }
+
+    protected override UnitState<SlotFarm> newInstance()
+    {
+        return new SlotFarmPlantedState();
     }
 
     protected override UnitState<SlotFarm> Next()

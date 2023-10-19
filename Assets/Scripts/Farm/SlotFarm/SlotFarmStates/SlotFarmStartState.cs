@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class SlotFarmStartState : UnitState<SlotFarm>
 {
-    public override int getUnitCurrentState()
-    {
-        return (int) SlotFarmEnum.SLOT_FARM_START_STATE;
-    }
-
     public override void startState()
     {
         
@@ -21,6 +16,24 @@ public class SlotFarmStartState : UnitState<SlotFarm>
 
     protected override void UpdateUnitState()
     {
-        
+        if (stateMachineObject.digAmount <= 0)
+        {
+            stateMachineObject.currentRespownTime += Time.deltaTime;
+            if (stateMachineObject.currentRespownTime >= stateMachineObject.RESPOWN_TIME)
+            {
+                stateMachineObject.digAmount = stateMachineObject.maxDigAmount;
+                
+            }
+        }
+    }
+
+    public override int getUnitCurrentStateKey()
+    {
+        return (int)SlotFarmEnum.SLOT_FARM_START_STATE;
+    }
+
+    protected override UnitState<SlotFarm> newInstance()
+    {
+        return new SlotFarmStartState();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerRunning : MasterState
+public class PlayerRunning : UnitState<Player>
 {
     private const int runningSpeed = 3;
 
@@ -9,7 +9,7 @@ public class PlayerRunning : MasterState
         stateMachineObject.movingObject.currentSpeed = stateMachineObject.movingObject.baseSpeed + runningSpeed;
     }
 
-    public override int getUnitCurrentState()
+    public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.RUNNING;
     }
@@ -20,14 +20,17 @@ public class PlayerRunning : MasterState
 
         if (Input.GetKeyUp(KeyCode.LeftShift) || stateMachineObject.movingObject.direction.sqrMagnitude == 0)
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.WALKING;
+            callNextState((int)PlayerStatesEnum.WALKING);
         }
 
         if (Input.GetKeyDown(KeyCode.Backslash))
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.ROLLING;
+            callNextState((int)PlayerStatesEnum.ROLLING);
         }
+    }
+
+    protected override UnitState<Player> newInstance()
+    {
+        return this;
     }
 }

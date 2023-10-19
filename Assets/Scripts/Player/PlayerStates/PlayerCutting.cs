@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-public class PlayerCutting : MasterState
+public class PlayerCutting : UnitState<Player>
 {
     public override void startState()
     {
         stateMachineObject.movingObject.currentSpeed = 0;
     }
 
-    public override int getUnitCurrentState()
+    public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.CUTTING;
     }
@@ -16,8 +16,12 @@ public class PlayerCutting : MasterState
     {
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.IDDLE;
+            callNextState((int)PlayerStatesEnum.IDDLE);
         }
+    }
+
+    protected override UnitState<Player> newInstance()
+    {
+        return this;
     }
 }

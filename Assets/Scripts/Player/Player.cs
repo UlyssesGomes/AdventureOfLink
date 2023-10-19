@@ -40,6 +40,11 @@ public class Player : StateMachineController<Player>
         return this;
     }
 
+    protected override void instantiateAllUnitStates()
+    {
+        throw new System.NotImplementedException();
+    }
+
     #region Moviment
     /// <summary>
     /// Calculate player moviment.

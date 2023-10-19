@@ -4,18 +4,21 @@ using UnityEngine;
 
 public abstract class StateMachineController<T> : MonoBehaviour
 {
-    protected UnitState<T> currentUnitState;           // current unit state in execution
+    protected UnitState<T> currentUnitState;                        // current unit state in execution
 
-    protected int _objectStateId;                   // States that object can assume like idle, walking, attack ...
+    //protected int _objectStateId;                                   // States that object can assume like idle, walking, attack ...
 
-    public int objectStateId
-    {
-        get { return _objectStateId; }
-        set { _objectStateId = value; }
-    }
+    private IDictionary<int, UnitState<T>> instanceStates;          // UnitStates intances
+
+    //public int objectStateId
+    //{
+    //    get { return _objectStateId; }
+    //    set { _objectStateId = value; }
+    //}
 
     private void Awake()
     {
+        instanceStates = new Dictionary<int, UnitState<T>>();
         stateMachineAwake();
     }
 
@@ -24,7 +27,7 @@ public abstract class StateMachineController<T> : MonoBehaviour
     {
         stateMachineStart();
         currentUnitState = getFirstState();
-        objectStateId = currentUnitState.getUnitCurrentState();
+        //objectStateId = currentUnitState.getUnitCurrentStateKey();
         currentUnitState.stateMachineObject = getStateMachineObject();
         currentUnitState.Start();
     }
@@ -37,15 +40,63 @@ public abstract class StateMachineController<T> : MonoBehaviour
 
         if (!currentUnitState.isRunning)
         {
-            UnitState<T> nextState = currentUnitState.NextUnitState();
+            UnitState<T> nextState = getNextState(currentUnitState.nextStateKey);
             currentUnitState = nextState;
-            objectStateId = currentUnitState.getUnitCurrentState();
+            if(currentUnitState.stateMachineObject == null)
+            {
+                currentUnitState.stateMachineObject = getStateMachineObject();
+            }
+            currentUnitState.Start();
+            //objectStateId = currentUnitState.getUnitCurrentStateKey();
         }
     }
 
     private void FixedUpdate()
     {
         stateMachineFixedUpdate();
+    }
+
+    /// <summary>
+    /// Add a new UnitState instance if it isnt already added.
+    /// </summary>
+    /// <param name="unitState"></param>
+    protected void addUnitStateInstance(UnitState<T> unitState)
+    {
+        if(!instanceStates.ContainsKey(unitState.getUnitCurrentStateKey()))
+        {
+            instanceStates.Add(unitState.getUnitCurrentStateKey(), unitState);
+        }
+    }
+
+    /// <summary>
+    /// Try get next instance UnitState.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns>Next instance UnitState</returns>
+    private UnitState<T> getNextState(int key) 
+    {
+        UnitState<T> next = getInstanceByKey(key);
+        if (next == null)
+        {
+            throw new System.NotImplementedException("Unit State with key " + key + 
+                " has not been instantiated yet. Add this UnitState in instantiateAllUnitStates() method.");
+        }
+        return next;
+    }
+
+    /// <summary>
+    /// Get instance of a state by its key.
+    /// </summary>
+    /// <param name="key">key that identifies a instance state</param>
+    /// <returns>UnitState instance</returns>
+    private UnitState<T> getInstanceByKey(int key)
+    {
+        if (instanceStates.ContainsKey(key))
+        {
+            return instanceStates[key];
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -79,4 +130,10 @@ public abstract class StateMachineController<T> : MonoBehaviour
     /// </summary>
     /// <returns>StateMachineObject intance of type T</returns>
     protected abstract T getStateMachineObject();
+
+    /// <summary>
+    /// On derivated StateMachineController Instantiate all UnitStates once to avoid 
+    /// make new instances during game execution, because UnitStates are switched frequently. 
+    /// </summary>
+    protected abstract void instantiateAllUnitStates();
 }
