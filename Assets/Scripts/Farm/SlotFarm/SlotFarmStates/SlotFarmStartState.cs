@@ -9,11 +9,6 @@ public class SlotFarmStartState : UnitState<SlotFarm>
         
     }
 
-    protected override UnitState<SlotFarm> Next()
-    {
-        return new SlotFarmHoleState();
-    }
-
     protected override void UpdateUnitState()
     {
         if (stateMachineObject.digAmount <= 0)
@@ -29,11 +24,6 @@ public class SlotFarmStartState : UnitState<SlotFarm>
 
     public override int getUnitCurrentStateKey()
     {
-        return (int)SlotFarmEnum.SLOT_FARM_START_STATE;
-    }
-
-    protected override UnitState<SlotFarm> newInstance()
-    {
-        return new SlotFarmStartState();
+        return (int)SlotFarmEnum.START;
     }
 }

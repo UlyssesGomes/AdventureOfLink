@@ -31,7 +31,7 @@ public class Player : StateMachineController<Player>
 
     protected override UnitState<Player> getFirstState()
     {
-        return new PlayerIdle();
+        return getNextState((int)PlayerStatesEnum.IDDLE);
     }
 
 
@@ -42,7 +42,13 @@ public class Player : StateMachineController<Player>
 
     protected override void instantiateAllUnitStates()
     {
-        throw new System.NotImplementedException();
+        addUnitStateInstance(new PlayerIdle());
+        addUnitStateInstance(new PlayerCutting());
+        addUnitStateInstance(new PlayerDigging());
+        addUnitStateInstance(new PlayerRolling());
+        addUnitStateInstance(new PlayerRunning());
+        addUnitStateInstance(new PlayerWalking());
+        addUnitStateInstance(new PlayerWatering());
     }
 
     #region Moviment

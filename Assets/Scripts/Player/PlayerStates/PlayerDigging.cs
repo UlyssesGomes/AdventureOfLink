@@ -19,9 +19,4 @@ public class PlayerDigging : UnitState<Player>
             callNextState((int)PlayerStatesEnum.IDDLE);
         }
     }
-
-    protected override UnitState<Player> newInstance()
-    {
-        return this;
-    }
 }

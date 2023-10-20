@@ -6,15 +6,14 @@ public abstract class StateMachineController<T> : MonoBehaviour
 {
     protected UnitState<T> currentUnitState;                        // current unit state in execution
 
-    //protected int _objectStateId;                                   // States that object can assume like idle, walking, attack ...
+    protected int _objectUnitStateId;                                   // States that object can assume like idle, walking, attack ...
 
     private IDictionary<int, UnitState<T>> instanceStates;          // UnitStates intances
 
-    //public int objectStateId
-    //{
-    //    get { return _objectStateId; }
-    //    set { _objectStateId = value; }
-    //}
+    public int objectUnitStateId
+    {
+        get { return _objectUnitStateId; }
+    }
 
     private void Awake()
     {
@@ -25,9 +24,10 @@ public abstract class StateMachineController<T> : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instantiateAllUnitStates();
         stateMachineStart();
         currentUnitState = getFirstState();
-        //objectStateId = currentUnitState.getUnitCurrentStateKey();
+        _objectUnitStateId = currentUnitState.getUnitCurrentStateKey();
         currentUnitState.stateMachineObject = getStateMachineObject();
         currentUnitState.Start();
     }
@@ -46,8 +46,8 @@ public abstract class StateMachineController<T> : MonoBehaviour
             {
                 currentUnitState.stateMachineObject = getStateMachineObject();
             }
+            _objectUnitStateId = currentUnitState.getUnitCurrentStateKey();
             currentUnitState.Start();
-            //objectStateId = currentUnitState.getUnitCurrentStateKey();
         }
     }
 
@@ -73,7 +73,7 @@ public abstract class StateMachineController<T> : MonoBehaviour
     /// </summary>
     /// <param name="key"></param>
     /// <returns>Next instance UnitState</returns>
-    private UnitState<T> getNextState(int key) 
+    protected UnitState<T> getNextState(int key) 
     {
         UnitState<T> next = getInstanceByKey(key);
         if (next == null)

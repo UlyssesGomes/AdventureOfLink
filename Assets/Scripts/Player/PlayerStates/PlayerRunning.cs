@@ -28,9 +28,4 @@ public class PlayerRunning : UnitState<Player>
             callNextState((int)PlayerStatesEnum.ROLLING);
         }
     }
-
-    protected override UnitState<Player> newInstance()
-    {
-        return this;
-    }
 }

@@ -36,7 +36,7 @@ public class PlayerAnimation : MonoBehaviour
 
     void GetPlayerState()
     {
-        switch (player.objectStateId)
+        switch (player.objectUnitStateId)
         {
             case (int) PlayerStatesEnum.IDDLE:
                 animator.SetInteger("transition", 0);

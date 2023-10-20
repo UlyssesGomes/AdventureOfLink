@@ -6,20 +6,10 @@ public class SlotFarmPlantedState : UnitState<SlotFarm>
 {
     public override int getUnitCurrentStateKey()
     {
-        return (int)SlotFarmEnum.SLOT_FARM_PLANTED_STATE;
+        return (int)SlotFarmEnum.PLANTED;
     }
 
     public override void startState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override UnitState<SlotFarm> newInstance()
-    {
-        return new SlotFarmPlantedState();
-    }
-
-    protected override UnitState<SlotFarm> Next()
     {
         throw new System.NotImplementedException();
     }

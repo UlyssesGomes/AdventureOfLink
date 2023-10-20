@@ -86,7 +86,7 @@ public class SlotFarm : StateMachineController<SlotFarm>
 
     protected override UnitState<SlotFarm> getFirstState()
     {
-        return new SlotFarmStartState();
+        return getNextState((int)SlotFarmEnum.START);
     }
 
     protected override SlotFarm getStateMachineObject()
@@ -96,6 +96,8 @@ public class SlotFarm : StateMachineController<SlotFarm>
 
     protected override void instantiateAllUnitStates()
     {
-        throw new System.NotImplementedException();
+        addUnitStateInstance(new SlotFarmStartState());
+        addUnitStateInstance(new SlotFarmHoleState());
+        addUnitStateInstance(new SlotFarmPlantedState());
     }
 }

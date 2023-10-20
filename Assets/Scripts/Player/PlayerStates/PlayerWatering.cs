@@ -50,9 +50,4 @@ public class PlayerWatering : UnitState<Player>
         isRunning = false;
         nextStateKey = (int)PlayerStatesEnum.IDDLE;
     }
-
-    protected override UnitState<Player> newInstance()
-    {
-        return this;
-    }
 }

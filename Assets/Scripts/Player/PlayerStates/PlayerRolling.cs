@@ -43,9 +43,4 @@ public class PlayerRolling : UnitState<Player>
 
         stateMachineObject.movingObject.currentSpeed = stateMachineObject.movingObject.baseSpeed + rollSpeed;
     }
-
-    protected override UnitState<Player> newInstance()
-    {
-        return this;
-    }
 }
