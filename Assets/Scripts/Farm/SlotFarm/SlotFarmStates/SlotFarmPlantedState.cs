@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SlotFarmPlantedState : UnitState<SlotFarm>
 {
+    private readonly float growingTime = 25.0f;
+
     public override int getUnitCurrentStateKey()
     {
         return (int)SlotFarmEnum.PLANTED;
@@ -11,11 +13,15 @@ public class SlotFarmPlantedState : UnitState<SlotFarm>
 
     public override void startState()
     {
-        throw new System.NotImplementedException();
+        stateMachineObject.currentRespownTime = 0;
     }
 
     protected override void UpdateUnitState()
     {
-        throw new System.NotImplementedException();
+        stateMachineObject.currentRespownTime += Time.deltaTime;
+        if(stateMachineObject.currentRespownTime > growingTime)
+        {
+            callNextState((int)SlotFarmEnum.START);
+        }
     }
 }

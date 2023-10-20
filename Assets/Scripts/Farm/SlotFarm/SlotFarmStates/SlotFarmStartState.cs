@@ -6,19 +6,14 @@ public class SlotFarmStartState : UnitState<SlotFarm>
 {
     public override void startState()
     {
-        
+        stateMachineObject.digAmount = stateMachineObject.maxDigAmount;
     }
 
     protected override void UpdateUnitState()
     {
         if (stateMachineObject.digAmount <= 0)
         {
-            stateMachineObject.currentRespownTime += Time.deltaTime;
-            if (stateMachineObject.currentRespownTime >= stateMachineObject.RESPOWN_TIME)
-            {
-                stateMachineObject.digAmount = stateMachineObject.maxDigAmount;
-                
-            }
+            callNextState((int)SlotFarmEnum.HOLE);
         }
     }
 

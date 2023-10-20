@@ -11,11 +11,28 @@ public class SlotFarmHoleState : UnitState<SlotFarm>
 
     public override void startState()
     {
-        throw new System.NotImplementedException();
+        stateMachineObject.currentRespownTime = 0;
+        stateMachineObject.waterAmount = 0;
     }
 
     protected override void UpdateUnitState()
     {
-        throw new System.NotImplementedException();
+        stateMachineObject.currentRespownTime += Time.deltaTime;
+        if (stateMachineObject.currentRespownTime >= stateMachineObject.RESPOWN_TIME)
+        {
+            callNextState((int)SlotFarmEnum.START);
+        }
+
+        if(stateMachineObject.detectWater)
+        {
+            if(stateMachineObject.waterAmount <= stateMachineObject.maxWaterAmount)
+            {
+                stateMachineObject.waterAmount += Time.deltaTime;
+            }
+            else
+            {
+                callNextState((int)SlotFarmEnum.PLANTED);
+            }
+        }
     }
 }

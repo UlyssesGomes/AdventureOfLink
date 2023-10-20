@@ -18,6 +18,9 @@ public class SlotFarm : StateMachineController<SlotFarm>
     public float currentRespownTime;                // if slotfarm have no digAmount, start timer by add elapsedTime each frame
     public readonly float RESPOWN_TIME = 10.0f;     // when currentRespownTime reach this amount, the hole must be close
 
+    public float waterAmount;                       // amount of water in hole
+    public float maxWaterAmount;                    // max amount of water in hole, when is max, the hole is watered
+
     public void onHit()
     {
         if(digAmount > 0)
@@ -69,17 +72,7 @@ public class SlotFarm : StateMachineController<SlotFarm>
     }
 
     protected override void stateMachineUpdate()
-    {
-        if (digAmount <= 0)
-        {
-            currentRespownTime += Time.deltaTime;
-            if (currentRespownTime >= RESPOWN_TIME)
-            {
-                digAmount = maxDigAmount;
-                //spriteRenderer.sprite = null;
-            }
-        }
-    }
+    { }
 
     protected override void stateMachineFixedUpdate()
     { }

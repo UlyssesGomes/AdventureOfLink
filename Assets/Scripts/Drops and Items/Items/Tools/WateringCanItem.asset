@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7162cbe906cdab54ebf9d7a7747092a7, type: 3}
   m_Name: WateringCanItem
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   itemId: 4
   type: 1
   itemName: Watering Can
@@ -21,5 +21,6 @@ MonoBehaviour:
   total: 1
   animType: 1
   sprite: {fileID: 5285340805781455672, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
-  waterMaxCapacity: 4
-  waterOutterFlow: 1.5
+  _waterCapacity: 10
+  waterMaxCapacity: 10
+  waterOutterFlow: 1
