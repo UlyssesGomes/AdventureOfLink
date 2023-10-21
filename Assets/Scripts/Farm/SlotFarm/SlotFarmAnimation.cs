@@ -7,11 +7,13 @@ public class SlotFarmAnimation : MonoBehaviour
     [SerializeField]
     private SlotFarm slotFarm;
     Animator animator;
+    private int currentAnim;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        currentAnim = -1;
     }
 
     // Update is called once per frame
@@ -20,22 +22,31 @@ public class SlotFarmAnimation : MonoBehaviour
         GetSlotFarmState();
     }
 
+    private void setAnimator(int nextAnim)
+    {
+        if(nextAnim != currentAnim)
+        {
+            currentAnim = nextAnim;
+            animator.SetInteger("transition", currentAnim);
+        }
+    }
+
     #region Moviment
     void GetSlotFarmState()
     {
         switch (slotFarm.objectUnitStateId)
         {
             case (int)SlotFarmEnum.START:
-                animator.SetInteger("transition", 0);
+                setAnimator(0);
                 break;
             case (int)SlotFarmEnum.HOLE:
-                animator.SetInteger("transition", 1);
+                setAnimator(1);
                 break;
             case (int)SlotFarmEnum.PLANTED:
-                animator.SetInteger("transition", 2);
+                setAnimator(2);
                 break;
             default:
-                animator.SetInteger("transition", 0);
+                setAnimator(0);
                 break;
         }
     }

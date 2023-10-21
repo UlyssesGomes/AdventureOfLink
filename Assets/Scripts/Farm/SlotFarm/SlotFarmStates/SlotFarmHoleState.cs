@@ -13,6 +13,7 @@ public class SlotFarmHoleState : UnitState<SlotFarm>
     {
         stateMachineObject.currentRespownTime = 0;
         stateMachineObject.waterAmount = 0;
+        Debug.Log("Iniciando estado: " + getUnitCurrentStateKey());
     }
 
     protected override void UpdateUnitState()

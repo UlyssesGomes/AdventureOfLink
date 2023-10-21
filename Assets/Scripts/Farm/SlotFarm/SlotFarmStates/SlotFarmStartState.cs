@@ -7,6 +7,7 @@ public class SlotFarmStartState : UnitState<SlotFarm>
     public override void startState()
     {
         stateMachineObject.digAmount = stateMachineObject.maxDigAmount;
+        Debug.Log("Iniciando estado: " + getUnitCurrentStateKey());
     }
 
     protected override void UpdateUnitState()

@@ -14,6 +14,7 @@ public class SlotFarmPlantedState : UnitState<SlotFarm>
     public override void startState()
     {
         stateMachineObject.currentRespownTime = 0;
+        Debug.Log("Iniciando estado: " + getUnitCurrentStateKey());
     }
 
     protected override void UpdateUnitState()
