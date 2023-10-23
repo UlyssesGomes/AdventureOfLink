@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SlotFarmStartState : UnitState<SlotFarm>
 {
     public override void startState()
     {
+        stateMachineObject.isReadyToHarvest = false;
         stateMachineObject.digAmount = stateMachineObject.maxDigAmount;
-        Debug.Log("Iniciando estado: " + getUnitCurrentStateKey());
     }
 
     protected override void UpdateUnitState()

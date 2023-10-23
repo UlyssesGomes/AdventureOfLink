@@ -2,5 +2,6 @@
     WOOD = 1, 
     SIMPLE_AXE, 
     SIMPLE_SHOVEL,
-    WATERING_CAN
+    WATERING_CAN,
+    CARROT
 };

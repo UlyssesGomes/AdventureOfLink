@@ -7,9 +7,8 @@ public class SlotFarm : StateMachineController<SlotFarm>
     [Header("Components")]
     [SerializeField]
     private Animator animator;
-
-
-    [Header("Components")]
+    [SerializeField]
+    public bool isReadyToHarvest;                   // when the plant is ready to harvest, this attribute must be set to true
     public int digAmount;                           // amount of hits a players need to dig util the hole appears
     [SerializeField]
     public int maxDigAmount;                        // amount of hit the slot farm have when it is full
@@ -20,6 +19,9 @@ public class SlotFarm : StateMachineController<SlotFarm>
 
     public float waterAmount;                       // amount of water in hole
     public float maxWaterAmount;                    // max amount of water in hole, when is max, the hole is watered
+
+    [SerializeField]
+    private GameObject carrotPrefab;                // scenety item carrot droped
 
     public void onHit()
     {
@@ -33,6 +35,18 @@ public class SlotFarm : StateMachineController<SlotFarm>
                 currentRespownTime = 0.0f;
             }
             // TODO - implement grow system to harvest fuits and vegetables.
+        }
+    }
+
+    /// <summary>
+    /// call harvest to create a new havest item.
+    /// </summary>
+    public void doHarvest()
+    {
+        if (isReadyToHarvest)
+        {
+            isReadyToHarvest = false;
+            Instantiate(carrotPrefab, transform.position, transform.rotation);
         }
     }
 

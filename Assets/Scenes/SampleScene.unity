@@ -9244,6 +9244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 987364262}
+  isReadyToHarvest: 0
   digAmount: 0
   maxDigAmount: 3
   detectWater: 0

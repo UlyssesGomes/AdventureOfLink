@@ -6,9 +6,9 @@ public class Player : StateMachineController<Player>
 {
     public MovingObject movingObject;               // moving objects commom attributes
 
-    public Rigidbody2D rigid;
+    public Rigidbody2D rigid;                       // collision component
 
-    public PlayerInventory playerInventory;
+    public PlayerInventory playerInventory;         // inventory script
 
     protected override void stateMachineAwake()
     { }
@@ -49,6 +49,14 @@ public class Player : StateMachineController<Player>
         addUnitStateInstance(new PlayerRunning());
         addUnitStateInstance(new PlayerWalking());
         addUnitStateInstance(new PlayerWatering());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("SlotFarm"))
+        {
+            collision.transform.GetComponent<SlotFarm>().doHarvest();
+        }
     }
 
     #region Moviment

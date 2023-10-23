@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SlotFarmHoleState : UnitState<SlotFarm>
 {
@@ -13,7 +11,6 @@ public class SlotFarmHoleState : UnitState<SlotFarm>
     {
         stateMachineObject.currentRespownTime = 0;
         stateMachineObject.waterAmount = 0;
-        Debug.Log("Iniciando estado: " + getUnitCurrentStateKey());
     }
 
     protected override void UpdateUnitState()

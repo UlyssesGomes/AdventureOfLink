@@ -1,42 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+public class PlayerAnimation : StateMachineAnimation<Player>
 {
-    [SerializeField]
-    private Player player;
-    Animator animator;
+    protected override void startAnimation()
+    { }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
+    protected override void updateAnimation()
     {
         OnMove();
-        GetPlayerState();
     }
 
     #region Moviment
     void OnMove()
     {
-        if (player.movingObject.direction.x > 0)
+        if (controller.movingObject.direction.x > 0)
         {
             transform.eulerAngles = new Vector2(0, 0);
         }
-        else if (player.movingObject.direction.x < 0)
+        else if (controller.movingObject.direction.x < 0)
         {
             transform.eulerAngles = new Vector2(0, 180);
         }
     }
+    #endregion
 
-    void GetPlayerState()
+    protected override void setAnimationTransition()
     {
-        switch (player.objectUnitStateId)
+        switch (controller.objectUnitStateId)
         {
             case (int) PlayerStatesEnum.IDDLE:
                 animator.SetInteger("transition", 0);
@@ -64,5 +54,4 @@ public class PlayerAnimation : MonoBehaviour
                 break;
         }
     }
-    #endregion
 }

@@ -1,40 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SlotFarmAnimation : MonoBehaviour
+public class SlotFarmAnimation : StateMachineAnimation<SlotFarm>
 {
-    [SerializeField]
-    private SlotFarm slotFarm;
-    Animator animator;
-    private int currentAnim;
-
     // Start is called before the first frame update
-    void Start()
+    protected override void startAnimation()
     {
-        animator = GetComponent<Animator>();
         currentAnim = -1;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        GetSlotFarmState();
-    }
-
-    private void setAnimator(int nextAnim)
-    {
-        if(nextAnim != currentAnim)
-        {
-            currentAnim = nextAnim;
-            animator.SetInteger("transition", currentAnim);
-        }
-    }
+    protected override void updateAnimation()
+    { }
 
     #region Moviment
-    void GetSlotFarmState()
+    protected override void setAnimationTransition()
     {
-        switch (slotFarm.objectUnitStateId)
+        switch (controller.objectUnitStateId)
         {
             case (int)SlotFarmEnum.START:
                 setAnimator(0);
