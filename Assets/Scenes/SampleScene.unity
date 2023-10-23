@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 19368889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.01}
   m_Children: []
   m_Father: {fileID: 987364260}
   m_RootOrder: 1
@@ -3851,7 +3851,7 @@ Transform:
   m_GameObject: {fileID: 866473523}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1.02}
   m_Children: []
   m_Father: {fileID: 987364260}
   m_RootOrder: 2
@@ -9183,7 +9183,7 @@ GameObject:
   - component: {fileID: 987364263}
   m_Layer: 0
   m_Name: SlotFarm
-  m_TagString: Untagged
+  m_TagString: SlotFarm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9251,6 +9251,7 @@ MonoBehaviour:
   currentRespownTime: 0
   waterAmount: 0
   maxWaterAmount: 2
+  carrotPrefab: {fileID: 3974546828225289800, guid: 27583c5a105762c45bbd5269b3e1aef0, type: 3}
 --- !u!95 &987364262
 Animator:
   serializedVersion: 3
@@ -9282,7 +9283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca2f0f080e735764ba2fc575b372bd8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotFarm: {fileID: 987364261}
+  controller: {fileID: 987364261}
 --- !u!1001 &1023645814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9631,7 +9632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adc9d93edfbb2144b7401ffbe4ce3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1139493139}
+  controller: {fileID: 1139493139}
 --- !u!114 &1139493142
 MonoBehaviour:
   m_ObjectHideFlags: 0

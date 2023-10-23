@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: CarrotItem
   m_EditorClassIdentifier: 
   id: 2
-  itemId: 0
+  itemId: 5
   type: 0
-  itemName: 
-  isStackable: 0
+  itemName: Carrot
+  isStackable: 1
   isViewPercent: 0
-  total: 0
-  animType: 0
-  sprite: {fileID: 0}
+  total: 5
+  animType: 1
+  sprite: {fileID: 7605435478572820154, guid: c8f644774c032d54ea1ca29f3f9c5eba, type: 3}
