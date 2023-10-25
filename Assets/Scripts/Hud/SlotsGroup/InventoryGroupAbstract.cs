@@ -11,9 +11,8 @@ public abstract class InventoryGroupAbstract<T> : MonoBehaviour
     [SerializeField]
     protected PlayerInventory playerInventory;  // player inventory controller
 
-    void Awake()
+    public void awakeObject()
     {
-        inventorySlotList = new T[getInventoryGroupSize()];
         inventorySlotList = grid.transform.GetComponentsInChildren<T>();
     }
 

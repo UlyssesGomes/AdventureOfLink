@@ -1,11 +1,14 @@
-﻿public class BackpackInventoryGroup : InventoryGroupAbstract<InventorySlot>
+﻿using UnityEngine;
+
+public class BackpackInventoryGroup : InventoryGroupAbstract<InventorySlot>
 {
     private bool isVisible;     // backpack system visibility flag
 
     private void Start()
     {
-        isVisible = false;
+        isVisible = transform.gameObject.activeSelf;
         gameObject.SetActive(isVisible);
+        setAmountSlotsVisible(getInventoryGroupSize());
     }
 
     /// <summary>
@@ -15,6 +18,16 @@
     {
         isVisible = !isVisible;
         gameObject.SetActive(isVisible);
+    }
+
+
+    /// <summary>
+    /// Tells if BackpackInventoryGroup is active or not.
+    /// </summary>
+    /// <returns>isVisible</returns>
+    public bool getVisibility()
+    {
+        return isVisible;
     }
 
     /// <summary>
