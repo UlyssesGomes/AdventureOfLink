@@ -191,6 +191,7 @@ public class PlayerInventory : MonoBehaviour
     /// <param name="index"></param>
     public void notifyStoredItemsObservers(int index)
     {
+        subjectEvent.id = -1;
         subjectEvent.type = index;
         storedItemsObservable.notify(subjectEvent);
     }

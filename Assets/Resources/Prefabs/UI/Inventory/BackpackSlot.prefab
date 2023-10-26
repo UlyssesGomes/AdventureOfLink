@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548289cefa5c6804ba9bf6c801817574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexId: 0
+  indexId: -1
   itemImage: {fileID: 4173688968350160490}
   filledImage: {fileID: 8473829450058828643}
   quantityLabel: {fileID: 4730338497555898127}
