@@ -9649,6 +9649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
   playerInventory: {fileID: 0}
+  isFishing: 0
 --- !u!95 &1139493140
 Animator:
   serializedVersion: 3
@@ -9933,6 +9934,7 @@ GameObject:
   - component: {fileID: 1278534472}
   - component: {fileID: 1278534471}
   - component: {fileID: 1278534470}
+  - component: {fileID: 1278534473}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -17478,6 +17480,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &1278534473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278534466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a13886b07ab7cda4eba76fdad044afa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1287007070
 PrefabInstance:
   m_ObjectHideFlags: 0
