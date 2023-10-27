@@ -14,22 +14,18 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
     protected Image filledImage;                // image to show item charge amount
     [SerializeField]
     protected Text quantityLabel;               // label to show amount of item per slot
-    //[HideInInspector]
+    [HideInInspector]
     public GameItem gameItem;                   // instance with all atributes of the item.
 
     public Observable<GenericSubject<int, GameItem[]>> observableParent;
 
     // Start is called before the first frame update
     void Start()
-    {
-        itemImage.gameObject.SetActive(false);
-    }
+    { }
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
+    { }
 
     /// <summary>
     /// Update observer with new value of a subject that this observer subscribe.
@@ -45,9 +41,7 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
             {
                 DrawableItem i = gameItem as DrawableItem;
                 itemImage.sprite = i.sprite;
-                transform.gameObject.SetActive(true);
                 itemImage.gameObject.SetActive(true);
-                Debug.Log("Object isactive? " + itemImage.gameObject.activeSelf + " with index: " + indexId);
             }
             else
             {

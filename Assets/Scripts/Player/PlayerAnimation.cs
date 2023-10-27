@@ -26,32 +26,6 @@ public class PlayerAnimation : StateMachineAnimation<Player>
 
     protected override void setAnimationTransition()
     {
-        switch (controller.objectUnitStateId)
-        {
-            case (int) PlayerStatesEnum.IDDLE:
-                animator.SetInteger("transition", 0);
-                break;
-            case (int) PlayerStatesEnum.WALKING:
-                animator.SetInteger("transition", 1);
-                break;
-            case (int) PlayerStatesEnum.RUNNING:
-                animator.SetInteger("transition", 2);
-                break;
-            case (int) PlayerStatesEnum.ROLLING:
-                animator.SetInteger("transition", 3);
-                break;
-            case (int)PlayerStatesEnum.CUTTING:
-                animator.SetInteger("transition", 4);
-                break;
-            case (int)PlayerStatesEnum.DIGGING:
-                animator.SetInteger("transition", 5);
-                break;            
-            case (int)PlayerStatesEnum.WATERING:
-                animator.SetInteger("transition", 6);
-                break;
-            default:
-                animator.SetInteger("transition", 0);
-                break;
-        }
+        animator.SetInteger("transition", controller.objectUnitStateId);
     }
 }

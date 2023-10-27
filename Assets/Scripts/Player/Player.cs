@@ -10,6 +10,8 @@ public class Player : StateMachineController<Player>
 
     public PlayerInventory playerInventory;         // inventory script
 
+    public bool isFishing;                          // if true, player can fishing
+
     protected override void stateMachineAwake()
     { }
 
@@ -19,6 +21,7 @@ public class Player : StateMachineController<Player>
         playerInventory = GetComponent("PlayerInventory") as PlayerInventory;
         movingObject = new MovingObject();
         movingObject.baseSpeed = 4;
+        isFishing = false;
     }
 
     protected override void stateMachineUpdate()
@@ -49,6 +52,11 @@ public class Player : StateMachineController<Player>
         addUnitStateInstance(new PlayerRunning());
         addUnitStateInstance(new PlayerWalking());
         addUnitStateInstance(new PlayerWatering());
+        addUnitStateInstance(new PlayerCastingFishing());
+        addUnitStateInstance(new PlayerCastingFishingOnWater());
+        addUnitStateInstance(new PlayerWaitingFishing());
+        addUnitStateInstance(new PlayerReelingFishing());
+        addUnitStateInstance(new PlayerCatchingFishing());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

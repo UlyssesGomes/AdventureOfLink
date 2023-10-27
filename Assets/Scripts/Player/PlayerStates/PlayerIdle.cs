@@ -28,7 +28,11 @@ public class PlayerIdle : UnitState<Player>
                 } 
                 else if (inventory.getCurrentSwitableItem().type == ItemTypeEnum.WATERING)
                 {
-                    callNextState((int)PlayerStatesEnum.WATERING );
+                    callNextState((int)PlayerStatesEnum.WATERING);
+                }
+                else if (inventory.getCurrentSwitableItem().type == ItemTypeEnum.FISHING)
+                {
+                    callNextState((int)PlayerStatesEnum.CASTING_FISHING);
                 }
             }
         }

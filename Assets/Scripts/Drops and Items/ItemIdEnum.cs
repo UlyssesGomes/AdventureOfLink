@@ -3,5 +3,6 @@
     SIMPLE_AXE, 
     SIMPLE_SHOVEL,
     WATERING_CAN,
-    CARROT
+    CARROT,
+    FISHING_ROD
 };
