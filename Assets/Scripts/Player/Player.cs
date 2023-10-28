@@ -12,6 +12,8 @@ public class Player : StateMachineController<Player>
 
     public bool isFishing;                          // if true, player can fishing
 
+    public bool reachFinalSpriteFrame;              // used to control by animator when the last frame of animation is displayed
+
     protected override void stateMachineAwake()
     { }
 
@@ -57,6 +59,7 @@ public class Player : StateMachineController<Player>
         addUnitStateInstance(new PlayerWaitingFishing());
         addUnitStateInstance(new PlayerReelingFishing());
         addUnitStateInstance(new PlayerCatchingFishing());
+        addUnitStateInstance(new PlayerBackFishing());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

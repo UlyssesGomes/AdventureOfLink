@@ -2,7 +2,8 @@
 
 public class PlayerCastingFishing : UnitState<Player>
 {
-    private float time;
+    private bool reachFinalFrame;
+    private bool reachOnWater;
     public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.CASTING_FISHING;
@@ -11,20 +12,30 @@ public class PlayerCastingFishing : UnitState<Player>
     public override void startState()
     {
         stateMachineObject.movingObject.currentSpeed = 0;
-        time = 0.0f;
-        UnityEngine.Debug.Log("Entrou em Casting.");
+        stateMachineObject.reachFinalSpriteFrame = false;
+        stateMachineObject.isFishing = false;
+        reachFinalFrame = false;
+        reachOnWater = false;
     }
 
     protected override void UpdateUnitState()
     {
-        time += Time.deltaTime;
+        if (stateMachineObject.reachFinalSpriteFrame)
+            reachFinalFrame = true;
+
         if (stateMachineObject.isFishing)
+            reachOnWater = true;
+
+        if (reachFinalFrame && reachOnWater)
         {
+            Debug.Log("Mudando para PlayerStatesEnum.CASTING_FISHING_ON_WATER");
             //callNextState((int)PlayerStatesEnum.CASTING_FISHING_ON_WATER);
         }
-        else if(time >= 1.0f)
+        else if (reachFinalFrame)
         {
-            callNextState((int)PlayerStatesEnum.CATCHING_FISHING);
+            Debug.Log("Mudando para PlayerStatesEnum.BACK_FISHING");
+            //callNextState((int)PlayerStatesEnum.BACK_FISHING);
         }
+
     }
 }

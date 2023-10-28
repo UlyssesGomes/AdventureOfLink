@@ -11,11 +11,9 @@ public class PlayerCastingFishingOnWater : UnitState<Player>
 
     public override void startState()
     {
-        throw new System.NotImplementedException();
     }
 
     protected override void UpdateUnitState()
     {
-        throw new System.NotImplementedException();
     }
 }

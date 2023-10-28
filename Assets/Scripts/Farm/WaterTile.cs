@@ -18,6 +18,7 @@ public class WaterTile : MonoBehaviour
     {
         if (collision.CompareTag("FishingRod"))
         {
+            Debug.Log("Saiu da área de pescar");
             Player p = collision.transform.GetComponentInParent<Player>();
             p.isFishing = false;
         }
