@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 660215a7e35cf3f4dbcb30ba49cbfd23, type: 3}
-  m_Name: FishingRodItem
+  m_Script: {fileID: 11500000, guid: 3eee5897a4b08f34b954c1a1ffc1ac9a, type: 3}
+  m_Name: FishItem
   m_EditorClassIdentifier: 
-  id: 0
-  itemId: 6
-  type: 4
-  itemName: Fishing Rod
-  isStackable: 0
+  id: 3
+  itemId: 3
+  type: 0
+  itemName: Fish
+  isStackable: 1
   isViewPercent: 0
-  total: 1
+  total: 5
   animType: 1
-  sprite: {fileID: -4433424195774034899, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
-  odds: 0.3
+  sprite: {fileID: -3670942632592291045, guid: c8f644774c032d54ea1ca29f3f9c5eba, type: 3}

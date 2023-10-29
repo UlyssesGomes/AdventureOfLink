@@ -11,9 +11,14 @@ public class PlayerCastingFishingOnWater : UnitState<Player>
 
     public override void startState()
     {
+        stateMachineObject.reachFinalSpriteFrame = false;
     }
 
     protected override void UpdateUnitState()
     {
+        if(stateMachineObject.reachFinalSpriteFrame)
+        {
+            callNextState((int)PlayerStatesEnum.WAITING_FISHING);
+        }
     }
 }

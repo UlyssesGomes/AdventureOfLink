@@ -4,18 +4,34 @@ using UnityEngine;
 
 public class Player : StateMachineController<Player>
 {
-    public MovingObject movingObject;               // moving objects commom attributes
+    public MovingObject movingObject;                           // moving objects commom attributes
 
-    public Rigidbody2D rigid;                       // collision component
+    public Rigidbody2D rigid;                                   // collision component
 
-    public PlayerInventory playerInventory;         // inventory script
+    public PlayerInventory playerInventory;                     // inventory script
 
-    public bool isFishing;                          // if true, player can fishing
+    public bool isFishing;                                      // if true, player can fishing
 
-    public bool reachFinalSpriteFrame;              // used to control by animator when the last frame of animation is displayed
+    public bool reachFinalSpriteFrame;                          // used to control by animator when the last frame of animation is displayed
+
+    public DropAssetManager assetManager;                       // Manager of assets available in memory.
+
+    [SerializeField]
+    private PlayerIconsEnum [] playerIconsEnum;                 // array of int respresent icons
+    [SerializeField]
+    private Sprite [] playerIconsSprite;                        // array of sprites represent icons in same order that playerIconsEnum
+    
+    private Dictionary<PlayerIconsEnum, Sprite> icons;          // hash table to get icons quickly
+    [SerializeField]
+    private SpriteRenderer iconSpriteRenderer;                  // sprite renderer to show icons
 
     protected override void stateMachineAwake()
-    { }
+    {
+        for(int u = 0; u < playerIconsEnum.Length; u++)
+        {
+            icons.Add(playerIconsEnum[u], playerIconsSprite[u]);
+        }
+    }
 
     protected override void stateMachineStart()
     {
@@ -68,6 +84,25 @@ public class Player : StateMachineController<Player>
         {
             collision.transform.GetComponent<SlotFarm>().doHarvest();
         }
+    }
+
+
+    /// <summary>
+    /// Select icon to show by its enum.
+    /// </summary>
+    /// <param name="icon">Id that represent its icon desired</param>
+    public void showIconById(PlayerIconsEnum icon)
+    {
+        iconSpriteRenderer.sprite = icons[icon];
+        iconSpriteRenderer.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// Hide player icon.
+    /// </summary>
+    public void hideIcon()
+    {
+        iconSpriteRenderer.gameObject.SetActive(false);
     }
 
     #region Moviment

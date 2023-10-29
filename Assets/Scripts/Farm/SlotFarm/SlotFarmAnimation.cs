@@ -15,21 +15,7 @@ public class SlotFarmAnimation : StateMachineAnimation<SlotFarm>
     #region Moviment
     protected override void setAnimationTransition()
     {
-        switch (controller.objectUnitStateId)
-        {
-            case (int)SlotFarmEnum.START:
-                setAnimator(0);
-                break;
-            case (int)SlotFarmEnum.HOLE:
-                setAnimator(1);
-                break;
-            case (int)SlotFarmEnum.PLANTED:
-                setAnimator(2);
-                break;
-            default:
-                setAnimator(0);
-                break;
-        }
+        setAnimator("transition", controller.objectUnitStateId);
     }
     #endregion
 }

@@ -2,7 +2,6 @@
 
 public class PlayerCatchingFishing : UnitState<Player>
 {
-    private float time;
     public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.CATCHING_FISHING;
@@ -10,14 +9,12 @@ public class PlayerCatchingFishing : UnitState<Player>
 
     public override void startState()
     {
-        Debug.Log("Entrou em catching.");
-        time = 0.0f;
+        stateMachineObject.reachFinalSpriteFrame = false;
     }
 
     protected override void UpdateUnitState()
     {
-        time += Time.deltaTime;
-        if (time >= 1.0f)
+        if (stateMachineObject.reachFinalSpriteFrame)
         {
             callNextState((int)PlayerStatesEnum.IDDLE);
         }

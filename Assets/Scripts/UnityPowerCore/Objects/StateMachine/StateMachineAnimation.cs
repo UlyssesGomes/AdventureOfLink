@@ -27,12 +27,12 @@ public abstract class StateMachineAnimation<T> : MonoBehaviour where T : StateMa
     /// in a new state.
     /// </summary>
     /// <param name="nextAnim">Animation key</param>
-    protected void setAnimator(int nextAnim)
+    protected void setAnimator(string propertyName, int nextAnim)
     {
         if (nextAnim != currentAnim)
         {
             currentAnim = nextAnim;
-            animator.SetInteger("transition", currentAnim);
+            animator.SetInteger(propertyName, currentAnim);
         }
     }
 

@@ -1,5 +1,10 @@
-﻿public class PlayerReelingFishing : UnitState<Player>
+﻿using UnityEngine;
+
+public class PlayerReelingFishing : UnitState<Player>
 {
+    private float time;                              // count elapsed time
+    private readonly float TOTAL_TIME = 5.0f;       // total time to wait before change state
+
     public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.REELING_FISHING;
@@ -7,11 +12,41 @@
 
     public override void startState()
     {
-        throw new System.NotImplementedException();
+        time = 0f;
+        stateMachineObject.showIconById(PlayerIconsEnum.EXCLAMATION);
     }
 
     protected override void UpdateUnitState()
     {
-        throw new System.NotImplementedException();
+        time += Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Peixe adicionado no inventário.");
+            tryAddFish();
+            stateMachineObject.hideIcon();
+            callNextState((int)PlayerStatesEnum.CATCHING_FISHING);
+        }
+        else if(time > TOTAL_TIME)
+        {
+            // TODO - notify lost fish when notify system were implemented.
+            stateMachineObject.hideIcon();
+            callNextState((int)PlayerStatesEnum.CATCHING_FISHING);
+        }
+    }
+
+    private void tryAddFish()
+    {
+        GameItem gameItem = stateMachineObject.assetManager.intanceGameItemByItemId((int)ItemIdEnum.FISH);
+        int startAmount = gameItem.amount = 1;
+        int addedAmount = stateMachineObject.playerInventory.addStoreItem(gameItem);
+
+        if (startAmount == addedAmount)
+        {
+            // TODO - Notify inventory full when notify system were implemented.
+        }
+        else
+        {
+            // TODO - Notify fish added to inventory  when notify system were implemented.
+        }
     }
 }

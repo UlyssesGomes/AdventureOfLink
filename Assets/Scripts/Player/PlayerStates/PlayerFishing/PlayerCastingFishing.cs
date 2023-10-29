@@ -28,13 +28,11 @@ public class PlayerCastingFishing : UnitState<Player>
 
         if (reachFinalFrame && reachOnWater)
         {
-            Debug.Log("Mudando para PlayerStatesEnum.CASTING_FISHING_ON_WATER");
-            //callNextState((int)PlayerStatesEnum.CASTING_FISHING_ON_WATER);
+            callNextState((int)PlayerStatesEnum.CASTING_FISHING_ON_WATER);
         }
         else if (reachFinalFrame)
         {
-            Debug.Log("Mudando para PlayerStatesEnum.BACK_FISHING");
-            //callNextState((int)PlayerStatesEnum.BACK_FISHING);
+            callNextState((int)PlayerStatesEnum.BACK_FISHING);
         }
 
     }
