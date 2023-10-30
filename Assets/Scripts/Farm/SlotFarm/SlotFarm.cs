@@ -6,8 +6,6 @@ public class SlotFarm : StateMachineController<SlotFarm>
 {
     [Header("Components")]
     [SerializeField]
-    private Animator animator;
-    [SerializeField]
     public bool isReadyToHarvest;                   // when the plant is ready to harvest, this attribute must be set to true
     public int digAmount;                           // amount of hits a players need to dig util the hole appears
     [SerializeField]
@@ -31,7 +29,6 @@ public class SlotFarm : StateMachineController<SlotFarm>
 
             if(digAmount <= 0)
             {
-                //spriteRenderer.sprite = hole;
                 currentRespownTime = 0.0f;
             }
             // TODO - implement grow system to harvest fuits and vegetables.

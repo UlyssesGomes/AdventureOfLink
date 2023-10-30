@@ -18,13 +18,11 @@ public class PlayerWaitingFishing : UnitState<Player>
         {
             isFishCatch = true;
             countDownTime = Random.Range(3, 10);
-            Debug.Log("Fish catched.");
         }
         else
         {
             isFishCatch = false;
             countDownTime = Random.Range(7, 10);
-            Debug.Log("Fish dont catched. Sorteado: " + drawnNumber);
         }
         
     }

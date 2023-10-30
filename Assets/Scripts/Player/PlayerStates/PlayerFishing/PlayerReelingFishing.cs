@@ -21,7 +21,6 @@ public class PlayerReelingFishing : UnitState<Player>
         time += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Peixe adicionado no inventário.");
             tryAddFish();
             stateMachineObject.hideIcon();
             callNextState((int)PlayerStatesEnum.CATCHING_FISHING);
