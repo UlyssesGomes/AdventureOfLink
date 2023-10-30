@@ -35,7 +35,7 @@ public class PlayerWaitingFishing : UnitState<Player>
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            callNextState((int)PlayerStatesEnum.CATCHING_FISHING);
+            callNextState((int)PlayerStatesEnum.DONT_CATCH_FISHING);
         }
 
         if(countDownTime <= 0.0f && isFishCatch)
@@ -44,7 +44,7 @@ public class PlayerWaitingFishing : UnitState<Player>
         }
         else if(countDownTime <= 0.0f && !isFishCatch)
         {
-            callNextState((int)PlayerStatesEnum.CATCHING_FISHING);
+            callNextState((int)PlayerStatesEnum.DONT_CATCH_FISHING);
         }
     }
 }

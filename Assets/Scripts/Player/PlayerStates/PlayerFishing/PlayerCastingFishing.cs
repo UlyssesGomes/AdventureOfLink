@@ -2,8 +2,6 @@
 
 public class PlayerCastingFishing : UnitState<Player>
 {
-    private bool reachFinalFrame;
-    private bool reachOnWater;
     public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.CASTING_FISHING;
@@ -14,26 +12,17 @@ public class PlayerCastingFishing : UnitState<Player>
         stateMachineObject.movingObject.currentSpeed = 0;
         stateMachineObject.reachFinalSpriteFrame = false;
         stateMachineObject.isFishing = false;
-        reachFinalFrame = false;
-        reachOnWater = false;
     }
 
     protected override void UpdateUnitState()
     {
-        if (stateMachineObject.reachFinalSpriteFrame)
-            reachFinalFrame = true;
-
-        if (stateMachineObject.isFishing)
-            reachOnWater = true;
-
-        if (reachFinalFrame && reachOnWater)
+        if (stateMachineObject.reachFinalSpriteFrame && stateMachineObject.isFishing)
         {
             callNextState((int)PlayerStatesEnum.CASTING_FISHING_ON_WATER);
         }
-        else if (reachFinalFrame)
+        else if (stateMachineObject.reachFinalSpriteFrame)
         {
             callNextState((int)PlayerStatesEnum.BACK_FISHING);
         }
-
     }
 }

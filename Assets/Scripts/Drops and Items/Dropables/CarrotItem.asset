@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eee5897a4b08f34b954c1a1ffc1ac9a, type: 3}
   m_Name: CarrotItem
   m_EditorClassIdentifier: 
-  id: 2
-  itemId: 5
+  id: 0
+  itemId: 2
   type: 0
   itemName: Carrot
   isStackable: 1

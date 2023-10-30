@@ -30,7 +30,7 @@ public class PlayerReelingFishing : UnitState<Player>
         {
             // TODO - notify lost fish when notify system were implemented.
             stateMachineObject.hideIcon();
-            callNextState((int)PlayerStatesEnum.CATCHING_FISHING);
+            callNextState((int)PlayerStatesEnum.DONT_CATCH_FISHING);
         }
     }
 

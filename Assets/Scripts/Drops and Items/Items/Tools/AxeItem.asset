@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eee5897a4b08f34b954c1a1ffc1ac9a, type: 3}
   m_Name: AxeItem
   m_EditorClassIdentifier: 
-  id: 3
-  itemId: 2
+  id: 4
+  itemId: 4
   type: 2
   itemName: Axe
   isStackable: 0
+  isViewPercent: 0
   total: 1
   animType: 1
   sprite: {fileID: 3479397677024880137, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}

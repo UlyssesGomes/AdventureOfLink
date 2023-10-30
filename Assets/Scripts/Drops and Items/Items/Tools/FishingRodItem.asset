@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660215a7e35cf3f4dbcb30ba49cbfd23, type: 3}
   m_Name: FishingRodItem
   m_EditorClassIdentifier: 
-  id: 0
-  itemId: 6
+  id: 5
+  itemId: 7
   type: 4
   itemName: Fishing Rod
   isStackable: 0
@@ -21,4 +21,4 @@ MonoBehaviour:
   total: 1
   animType: 1
   sprite: {fileID: -4433424195774034899, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
-  odds: 0.3
+  odds: 0.6

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WateringCanItem
   m_EditorClassIdentifier: 
   id: 1
-  itemId: 4
+  itemId: 6
   type: 1
   itemName: Watering Can
   isStackable: 0

@@ -1,8 +1,10 @@
-﻿public class PlayerCastingFishingOnWater : UnitState<Player>
+﻿using UnityEngine;
+
+public class PlayerDontCatchFishing : UnitState<Player>
 {
     public override int getUnitCurrentStateKey()
     {
-        return (int)PlayerStatesEnum.CASTING_FISHING_ON_WATER;
+        return (int)PlayerStatesEnum.DONT_CATCH_FISHING;
     }
 
     public override void startState()
@@ -12,9 +14,9 @@
 
     protected override void UpdateUnitState()
     {
-        if(stateMachineObject.reachFinalSpriteFrame)
+        if (stateMachineObject.reachFinalSpriteFrame)
         {
-            callNextState((int)PlayerStatesEnum.WAITING_FISHING);
+            callNextState((int)PlayerStatesEnum.IDDLE);
         }
     }
 }

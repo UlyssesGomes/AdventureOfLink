@@ -27,7 +27,8 @@ public class Player : StateMachineController<Player>
 
     protected override void stateMachineAwake()
     {
-        for(int u = 0; u < playerIconsEnum.Length; u++)
+        icons = new Dictionary<PlayerIconsEnum, Sprite>();
+        for (int u = 0; u < playerIconsEnum.Length; u++)
         {
             icons.Add(playerIconsEnum[u], playerIconsSprite[u]);
         }
@@ -76,6 +77,7 @@ public class Player : StateMachineController<Player>
         addUnitStateInstance(new PlayerReelingFishing());
         addUnitStateInstance(new PlayerCatchingFishing());
         addUnitStateInstance(new PlayerBackFishing());
+        addUnitStateInstance(new PlayerDontCatchFishing());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
