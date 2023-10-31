@@ -1,35 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerRunning : MasterState
+public class PlayerRunning : UnitState<Player>
 {
     private const int runningSpeed = 3;
 
     public override void startState()
     {
-        player.currentSpeed = player.baseSpeed + runningSpeed;
+        stateMachineObject.movingObject.currentSpeed = stateMachineObject.movingObject.baseSpeed + runningSpeed;
     }
 
-    public override int getUnitCurrentState()
+    public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.RUNNING;
     }
 
     protected override void UpdateUnitState()
     {
-        player.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        stateMachineObject.movingObject.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if (Input.GetKeyUp(KeyCode.LeftShift) || player.direction.sqrMagnitude == 0)
+        if (Input.GetKeyUp(KeyCode.LeftShift) || stateMachineObject.movingObject.direction.sqrMagnitude == 0)
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.WALKING;
+            callNextState((int)PlayerStatesEnum.WALKING);
         }
 
         if (Input.GetKeyDown(KeyCode.Backslash))
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.ROLLING;
+            callNextState((int)PlayerStatesEnum.ROLLING);
         }
     }
 }

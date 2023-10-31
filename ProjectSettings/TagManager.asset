@@ -8,6 +8,8 @@ TagManager:
   - Wood
   - Shovel
   - WaterCan
+  - SlotFarm
+  - FishingRod
   layers:
   - Default
   - TransparentFX

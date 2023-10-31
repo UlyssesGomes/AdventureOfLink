@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -16,6 +14,12 @@ public class InventorySystem : MonoBehaviour
 
     private GenericSubject<int, GameItem[]> genericSubject;
 
+    private void Awake()
+    {
+        backpackInventoryGroup.awakeObject();
+        toolbarHotkeyGroup.awakeObject();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +27,6 @@ public class InventorySystem : MonoBehaviour
 
         hotkeysSlotList = toolbarHotkeyGroup.inventorySlotList;
         backpackSlotList = backpackInventoryGroup.inventorySlotList;
-        backpackInventoryGroup.setAmountSlotsVisible(playerInventory.inventoryCurrentSize - playerInventory.hotkeyInventorySize);
 
         playerInventory.addStoredItemsObservers(handleSlot);
 
@@ -69,5 +72,14 @@ public class InventorySystem : MonoBehaviour
     public void backpackChangeVisibility()
     {
         backpackInventoryGroup.changeVisibility();
+    }
+
+    /// <summary>
+    /// Tells if BackpackInventoryGroup is active or not.
+    /// </summary>
+    /// <returns>backpackInventoryGroup.isVisible</returns>
+    public bool backpackVisibility()
+    {
+        return backpackInventoryGroup.getVisibility();
     }
 }

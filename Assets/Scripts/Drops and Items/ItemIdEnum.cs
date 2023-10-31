@@ -1,6 +1,9 @@
 ﻿public enum ItemIdEnum : int { 
     WOOD = 1, 
-    SIMPLE_AXE, 
-    SIMPLE_SHOVEL,
-    WATERING_CAN
+    CARROT,
+    FISH,
+    AXE, 
+    SHOVEL,
+    WATERING_CAN,
+    FISHING_ROD
 };

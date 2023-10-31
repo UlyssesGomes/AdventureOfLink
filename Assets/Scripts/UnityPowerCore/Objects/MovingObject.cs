@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class MovingObject : MonoBehaviour
+public class MovingObject
 {
     private float _baseSpeed;                       // original speed of the object, this value cant be changed during the game
     public float currentSpeed;                      // current speed of the object

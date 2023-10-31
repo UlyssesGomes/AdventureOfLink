@@ -19,7 +19,7 @@ public class Water : MonoBehaviour
     {
         if(detectingPlayer && Input.GetKeyDown(KeyCode.E))
         {
-            PlayerInventory inventory = player.GetComponent<PlayerInventory>() as PlayerInventory;
+            PlayerInventory inventory = player.playerInventory;
             GameItem item = inventory.getCurrentSwitableItem();
             if (!(item is null) && item.type == ItemTypeEnum.WATERING)
             {
@@ -42,7 +42,7 @@ public class Water : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             detectingPlayer = true;
-            player = collision.GetComponent<Player>() as Player;
+            player = collision.GetComponent<Player>();
         }
     }
 

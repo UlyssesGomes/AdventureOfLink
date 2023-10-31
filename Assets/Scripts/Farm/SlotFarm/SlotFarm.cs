@@ -2,44 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotFarm : MonoBehaviour
+public class SlotFarm : StateMachineController<SlotFarm>
 {
     [Header("Components")]
     [SerializeField]
-    private SpriteRenderer spriteRenderer;      // sprite to show current slote state
+    public bool isReadyToHarvest;                   // when the plant is ready to harvest, this attribute must be set to true
+    public int digAmount;                           // amount of hits a players need to dig util the hole appears
     [SerializeField]
-    private Sprite hole;                        // hole sprite
-    [SerializeField]            
-    private Sprite carrot;                      // carrot sprite 
+    public int maxDigAmount;                        // amount of hit the slot farm have when it is full
+    public bool detectWater;                        // when true, player is watering this hole.
 
-    [Header("Components")]
-    private int digAmount;                      // amount of hits a players need to dig util the hole appears
+    public float currentRespownTime;                // if slotfarm have no digAmount, start timer by add elapsedTime each frame
+    public readonly float RESPOWN_TIME = 10.0f;     // when currentRespownTime reach this amount, the hole must be close
+
+    public float waterAmount;                       // amount of water in hole
+    public float maxWaterAmount;                    // max amount of water in hole, when is max, the hole is watered
+
     [SerializeField]
-    private int maxDigAmount;                   // amount of hit the slot farm have when it is full
-    public bool detectWater;                    // when true, player is watering this hole.
-
-    private float currentRespownTime;           // if slotfarm have no digAmount, start timer by add elapsedTime each frame
-    private const float RESPOWN_TIME = 10.0f;   // when currentRespownTime reach this amount, the hole must be close
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        digAmount = maxDigAmount;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (digAmount <= 0)
-        {
-            currentRespownTime += Time.deltaTime;
-            if (currentRespownTime >= RESPOWN_TIME)
-            {
-                digAmount = maxDigAmount;
-                spriteRenderer.sprite = null;
-            }
-        }
-    }
+    private GameObject carrotPrefab;                // scenety item carrot droped
 
     public void onHit()
     {
@@ -49,10 +29,21 @@ public class SlotFarm : MonoBehaviour
 
             if(digAmount <= 0)
             {
-                spriteRenderer.sprite = hole;
                 currentRespownTime = 0.0f;
             }
             // TODO - implement grow system to harvest fuits and vegetables.
+        }
+    }
+
+    /// <summary>
+    /// call harvest to create a new havest item.
+    /// </summary>
+    public void doHarvest()
+    {
+        if (isReadyToHarvest)
+        {
+            isReadyToHarvest = false;
+            Instantiate(carrotPrefab, transform.position, transform.rotation);
         }
     }
 
@@ -81,5 +72,36 @@ public class SlotFarm : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
             detectWater = false;
+    }
+
+    protected override void stateMachineAwake()
+    { }
+
+    protected override void stateMachineStart()
+    {
+        digAmount = maxDigAmount;
+    }
+
+    protected override void stateMachineUpdate()
+    { }
+
+    protected override void stateMachineFixedUpdate()
+    { }
+
+    protected override UnitState<SlotFarm> getFirstState()
+    {
+        return getNextState((int)SlotFarmEnum.START);
+    }
+
+    protected override SlotFarm getStateMachineObject()
+    {
+        return this;
+    }
+
+    protected override void instantiateAllUnitStates()
+    {
+        addUnitStateInstance(new SlotFarmStartState());
+        addUnitStateInstance(new SlotFarmHoleState());
+        addUnitStateInstance(new SlotFarmPlantedState());
     }
 }

@@ -1,39 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerWalking : MasterState
+public class PlayerWalking : UnitState<Player>
 {
     public override void startState()
     {
-        player.currentSpeed = player.baseSpeed;
+        stateMachineObject.movingObject.currentSpeed = stateMachineObject.movingObject.baseSpeed;
     }
 
-    public override int getUnitCurrentState()
+    public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.WALKING;
     }
 
     protected override void UpdateUnitState()
     {
-        player.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        stateMachineObject.movingObject.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if(player.direction.sqrMagnitude == 0)
+        if(stateMachineObject.movingObject.direction.sqrMagnitude == 0)
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.IDDLE;
+            callNextState((int)PlayerStatesEnum.IDDLE);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && player.direction.sqrMagnitude > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && stateMachineObject.movingObject.direction.sqrMagnitude > 0)
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.RUNNING;
+            callNextState((int)PlayerStatesEnum.RUNNING);
         }
 
         if (Input.GetKeyDown(KeyCode.Backslash))
         {
-            isRunning = false;
-            nextState = (int)PlayerStatesEnum.ROLLING;
+            callNextState((int)PlayerStatesEnum.ROLLING);
         }
     }
 }

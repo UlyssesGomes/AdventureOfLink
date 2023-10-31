@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class HudController : MonoBehaviour//, Observer<InventorySubjectEnum>
+public class HudController : MonoBehaviour
 {
     [SerializeField]
     private Player player;
@@ -21,7 +20,7 @@ public class HudController : MonoBehaviour//, Observer<InventorySubjectEnum>
     {
         slotListObservers = new List<Observer<int>>();
         slotSelectedIndex = 0;
-        isInSelection = false;
+        isInSelection = inventorySystem.backpackVisibility();
     }
 
     // Update is called once per frame
@@ -83,27 +82,22 @@ public class HudController : MonoBehaviour//, Observer<InventorySubjectEnum>
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 inventorySystem.setSwitablePlayerItem(0);
-                //playerInventory.switableItemIndex = hotkeySlots[0].itemStoredIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {
                 inventorySystem.setSwitablePlayerItem(1);
-                //playerInventory.switableItemIndex = hotkeySlots[1].itemStoredIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha3))
             {
                 inventorySystem.setSwitablePlayerItem(2);
-                //playerInventory.switableItemIndex = hotkeySlots[2].itemStoredIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha4))
             {
                 inventorySystem.setSwitablePlayerItem(3);
-                //playerInventory.switableItemIndex = hotkeySlots[3].itemStoredIndex;
             }
             else if (Input.GetKey(KeyCode.Alpha5))
             {
                 inventorySystem.setSwitablePlayerItem(4);
-                //playerInventory.switableItemIndex = hotkeySlots[3].itemStoredIndex;
             }
         }
     }

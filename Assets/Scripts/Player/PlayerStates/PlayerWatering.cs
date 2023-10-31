@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWatering : MasterState
+public class PlayerWatering : UnitState<Player>
 {
     private PlayerInventory inventory;
 
     public override void startState()
     {
-        player.currentSpeed = 0;
-        inventory = player.GetComponent<PlayerInventory>();
+        stateMachineObject.movingObject.currentSpeed = 0;
+        inventory = stateMachineObject.playerInventory;
     }
 
-    public override int getUnitCurrentState()
+    public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.WATERING;
     }
@@ -31,7 +31,7 @@ public class PlayerWatering : MasterState
             if (wateringCan.waterCapacity <= 0.0000f)
             {
                 isRunning = false;
-                nextState = (int)PlayerStatesEnum.IDDLE;
+                nextStateKey = (int)PlayerStatesEnum.IDDLE;
             }
             else
             {
@@ -48,6 +48,6 @@ public class PlayerWatering : MasterState
     private void exitState()
     {
         isRunning = false;
-        nextState = (int)PlayerStatesEnum.IDDLE;
+        nextStateKey = (int)PlayerStatesEnum.IDDLE;
     }
 }

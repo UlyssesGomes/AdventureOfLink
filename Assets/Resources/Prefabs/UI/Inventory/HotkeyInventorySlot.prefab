@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dc0deb71cabd24d8ce002c5fbd601f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexId: 0
+  indexId: -1
   itemImage: {fileID: 6872050123606271917}
   filledImage: {fileID: 1381646107372780196}
   quantityLabel: {fileID: 2814759527410167496}

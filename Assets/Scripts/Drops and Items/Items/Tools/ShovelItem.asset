@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eee5897a4b08f34b954c1a1ffc1ac9a, type: 3}
   m_Name: ShovelItem
   m_EditorClassIdentifier: 
-  id: 2
-  itemId: 3
+  id: 3
+  itemId: 5
   type: 3
   itemName: Shovel
   isStackable: 0
+  isViewPercent: 0
   total: 1
   animType: 1
   sprite: {fileID: -5464394882497330903, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}

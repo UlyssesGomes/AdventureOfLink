@@ -19,22 +19,13 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
 
     public Observable<GenericSubject<int, GameItem[]>> observableParent;
 
-    private void Awake()
-    {
-        indexId = -1;
-    }
-
     // Start is called before the first frame update
     void Start()
-    {
-        itemImage.gameObject.SetActive(false);
-    }
+    { }
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
+    { }
 
     /// <summary>
     /// Update observer with new value of a subject that this observer subscribe.

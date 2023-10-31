@@ -58,7 +58,7 @@ public class Tree : MonoBehaviour
 
             if(treeHealth <= 0)
             {
-                //cria o toco e instancia os drops
+                // create wood and instantiate drop
                 animator.SetTrigger("cut");
                 currentRespownTime = 0.0f;
                 transform.eulerAngles = normalVector;

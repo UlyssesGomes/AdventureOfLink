@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRolling : MasterState
+public class PlayerRolling : UnitState<Player>
 {
     private const float ROLLING_TIME = 2.0f;
 
@@ -11,7 +11,7 @@ public class PlayerRolling : MasterState
 
     private const float rollSpeed = 8;
 
-    public override int getUnitCurrentState()
+    public override int getUnitCurrentStateKey()
     {
         return (int)PlayerStatesEnum.ROLLING;
     }
@@ -25,8 +25,7 @@ public class PlayerRolling : MasterState
             if (rollingTime >= ROLLING_TIME)
             {
                 isRolling = false;
-                isRunning = false;
-                nextState = (int)PlayerStatesEnum.WALKING;
+                callNextState((int)PlayerStatesEnum.WALKING);
             }
         }
 
@@ -42,6 +41,6 @@ public class PlayerRolling : MasterState
         isRolling = true;
         rollingTime = 0.0f;
 
-        player.currentSpeed = player.baseSpeed + rollSpeed;
+        stateMachineObject.movingObject.currentSpeed = stateMachineObject.movingObject.baseSpeed + rollSpeed;
     }
 }
