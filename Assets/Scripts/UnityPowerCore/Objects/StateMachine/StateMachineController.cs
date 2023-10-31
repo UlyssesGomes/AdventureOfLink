@@ -5,7 +5,7 @@ public abstract class StateMachineController<T> : MonoBehaviour
 {
     protected UnitState<T> currentUnitState;                        // current unit state in execution
 
-    protected int _objectUnitStateId;                                   // States that object can assume like idle, walking, attack ...
+    protected int _objectUnitStateId;                               // States that object can assume like idle, walking, attack ...
 
     private IDictionary<int, UnitState<T>> instanceStates;          // UnitStates intances
 

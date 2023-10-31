@@ -9243,7 +9243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54362c7119f1ea458c065adff2b110f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 987364262}
   isReadyToHarvest: 0
   digAmount: 0
   maxDigAmount: 3
