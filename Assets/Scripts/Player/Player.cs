@@ -78,6 +78,7 @@ public class Player : StateMachineController<Player>
         addUnitStateInstance(new PlayerCatchingFishing());
         addUnitStateInstance(new PlayerBackFishing());
         addUnitStateInstance(new PlayerDontCatchFishing());
+        addUnitStateInstance(new PlayerBuilding());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

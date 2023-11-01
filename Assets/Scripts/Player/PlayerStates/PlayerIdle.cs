@@ -34,6 +34,10 @@ public class PlayerIdle : UnitState<Player>
                 {
                     callNextState((int)PlayerStatesEnum.CASTING_FISHING);
                 }
+                else if(inventory.getCurrentSwitableItem().type == ItemTypeEnum.HAMMER_BUILD)
+                {
+                    callNextState((int)PlayerStatesEnum.BUILDING);
+                }
             }
         }
     }
