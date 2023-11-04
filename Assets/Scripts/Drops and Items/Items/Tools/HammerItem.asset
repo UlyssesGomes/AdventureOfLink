@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HammerItem
   m_EditorClassIdentifier: 
   id: 0
-  itemId: 0
-  type: 0
-  itemName: 
+  itemId: 8
+  type: 5
+  itemName: Hammer
   isStackable: 0
   isViewPercent: 0
-  total: 0
-  animType: 0
-  sprite: {fileID: 0}
+  total: 1
+  animType: 1
+  sprite: {fileID: 5674041153592407056, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
