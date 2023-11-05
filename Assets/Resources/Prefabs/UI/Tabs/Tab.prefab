@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 8488908488310526803}
   - component: {fileID: 8488908488310526805}
   - component: {fileID: 8488908488310526804}
+  - component: {fileID: 8469526263982938034}
   m_Layer: 5
   m_Name: Tab
   m_TagString: Untagged
@@ -209,3 +210,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8469526263982938034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8488908488310526802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc78e9d960027a4daf3a46ac0e51db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedSprite: {fileID: 21300000, guid: 7261b18f1568af24c8f510d9b3b20efc, type: 3}
+  unselectedSprite: {fileID: 21300000, guid: cfc8300c81870ff4db987745e08df1a7, type: 3}
+  unselectedColor: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  image: {fileID: 8488908488310526804}
+  text: {fileID: 8488908488049568363}
