@@ -9,6 +9,9 @@ public class HudController : MonoBehaviour
     [SerializeField]
     private InventorySystem inventorySystem;
 
+    [SerializeField]
+    private BuildingMenuController buildingMenuController;
+
     private int slotSelectedIndex;
 
     private List<Observer<int>> slotListObservers;
@@ -37,6 +40,10 @@ public class HudController : MonoBehaviour
             {
                 isInSelection = !isInSelection;
             }
+        }
+        else if (Input.GetKeyUp(KeyCode.M))
+        {
+            buildingMenuController.openClose();
         }
 
         if(isInSelection)

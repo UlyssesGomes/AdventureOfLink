@@ -22,6 +22,11 @@ public class Tab : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         // image.sprite = unselectedSprite;
     }
 
+    /// <summary>
+    /// Turns Tab selected or not by passing a boolean param.
+    /// If true, turn Tab selected and its color become brightest color.
+    /// </summary>
+    /// <param name="doSelect"></param>
     public void select(bool doSelect)
     {
         if (doSelect)
@@ -42,9 +47,4 @@ public class Tab : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     {
         Debug.Log("Entrou no GameObject: " + gameObject.name);
     }
-    //private void OnMouseDown()
-    //{
-    //    // Coloque aqui o código a ser executado quando o GameObject for clicado.
-    //    Debug.Log("Clicou no GameObject: " + gameObject.name);
-    //}
 }
