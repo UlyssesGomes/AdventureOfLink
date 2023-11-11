@@ -89,22 +89,27 @@ public class HudController : MonoBehaviour
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 inventorySystem.setSwitablePlayerItem(0);
+                buildingMenuController.updateBuildingMenuAccess();
             }
             else if (Input.GetKey(KeyCode.Alpha2))
             {
                 inventorySystem.setSwitablePlayerItem(1);
+                buildingMenuController.updateBuildingMenuAccess();
             }
             else if (Input.GetKey(KeyCode.Alpha3))
             {
                 inventorySystem.setSwitablePlayerItem(2);
+                buildingMenuController.updateBuildingMenuAccess();
             }
             else if (Input.GetKey(KeyCode.Alpha4))
             {
                 inventorySystem.setSwitablePlayerItem(3);
+                buildingMenuController.updateBuildingMenuAccess();
             }
             else if (Input.GetKey(KeyCode.Alpha5))
             {
                 inventorySystem.setSwitablePlayerItem(4);
+                buildingMenuController.updateBuildingMenuAccess();
             }
         }
     }
