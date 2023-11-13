@@ -6,5 +6,5 @@ public class Material : ScriptableObject
 {
     public Sprite image;            // material sprite
     public string materialName;     // material name
-    public int amount;              // material amount required to build
+    public int amount;              // required amount material
 }

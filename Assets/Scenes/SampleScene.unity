@@ -102327,7 +102327,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b85a4efa4c7d3458176de881137514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1139493139}
   animator: {fileID: 1851263473}
+  enabledColor: {r: 1, g: 1, b: 1, a: 1}
+  disabledColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0.5882353}
+  backgroundIcon: {fileID: 1683263}
+  icon: {fileID: 2122416266}
   isOpened: 0
 --- !u!95 &1851263473
 Animator:

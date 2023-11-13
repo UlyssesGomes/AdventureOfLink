@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7508d920754d2544e9340322f5ba21b1, type: 3}
   m_Name: WoodMaterial
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
-  materialName: 
+  image: {fileID: 2022862503058108918, guid: c8f644774c032d54ea1ca29f3f9c5eba, type: 3}
+  materialName: Wood
   amount: 0
