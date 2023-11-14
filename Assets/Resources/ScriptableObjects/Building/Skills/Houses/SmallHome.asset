@@ -18,6 +18,7 @@ MonoBehaviour:
     com m\xF3veis e guardar items dentro de ba\xFAs. Para construi a sua casa ser\xE3o
     necess\xE1rios conseguir os materiais listados."
   isEnabled: 0
+  hasAllMaterials: 0
   type: 1
   material:
   - {fileID: 11400000, guid: 3f6a6e1807d006b49b82d217b2120fb4, type: 2}

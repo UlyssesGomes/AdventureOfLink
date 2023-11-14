@@ -9,11 +9,15 @@ public class BuildingSkill : ScriptableObject
     public string skillName;                // skill name
     [TextArea(3, 10)]
     public string description;              // skill description
+    
     public bool isEnabled;                  // flag to control the use of the skill
+    public bool hasAllMaterials;            // control to enable build button when player has all the materials in the inventory     
+   
     public BuildingSkillGroupType type;     // skill type
 
     public Material [] material;            // material required to craft with this skill
     public int[] materialAmount;            // amount of material linked to material array by the index
+
 
     /// <summary>
     /// Fill amount of this material instance. This method must be called
