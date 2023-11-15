@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7426075536361018253}
   - component: {fileID: 8238857985838984904}
   m_Layer: 5
-  m_Name: ItemImage
+  m_Name: ContentImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,8 +86,9 @@ GameObject:
   - component: {fileID: 4716167360137805389}
   - component: {fileID: 4716167360137805391}
   - component: {fileID: 4716167360137805390}
+  - component: {fileID: 2691689976853025173}
   m_Layer: 5
-  m_Name: ItemImage
+  m_Name: SlotImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,3 +152,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2691689976853025173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4716167360137805388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dab6860cb77b214fa9c41550ab88beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotObject: {fileID: 4716167360137805388}
+  contentSprite: {fileID: 8238857985838984904}

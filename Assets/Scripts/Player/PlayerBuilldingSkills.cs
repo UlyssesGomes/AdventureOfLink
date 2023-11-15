@@ -25,6 +25,7 @@ public class PlayerBuilldingSkills : MonoBehaviour
         for (int u = 0; u < objSkills.Length; u++)
         {
             housesSkills[u] = (BuildingSkill)Instantiate(objSkills[u]);
+            housesSkills[u].fillMaterialAmount();
         }
     }
 
@@ -39,6 +40,7 @@ public class PlayerBuilldingSkills : MonoBehaviour
         for (int u = 0; u < objSkills.Length; u++)
         {
             refinedSkills[u] = (BuildingSkill)Instantiate(objSkills[u]);
+            refinedSkills[u].fillMaterialAmount();
         }
     }
 
@@ -53,6 +55,7 @@ public class PlayerBuilldingSkills : MonoBehaviour
         for (int u = 0; u < objSkills.Length; u++)
         {
             toolsSkills[u] = (BuildingSkill)Instantiate(objSkills[u]);
+            toolsSkills[u].fillMaterialAmount();
         }
     }
 }
