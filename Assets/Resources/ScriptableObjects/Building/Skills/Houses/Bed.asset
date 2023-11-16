@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
-  m_Name: SmallHome
+  m_Name: Bed
   m_EditorClassIdentifier: 
-  id: 0
-  skillId: 1
-  image: {fileID: 21300000, guid: 2c99b8a36785b6946b58f3253653c0f8, type: 3}
-  skillName: Casa Pequena
-  description: "Est\xE1 \xE9 uma pequena casa que o jogador pode utilizar para decorar
-    com m\xF3veis e guardar items dentro de ba\xFAs. "
+  id: 12
+  skillId: 7
+  image: {fileID: 21300000, guid: 78e74714f33722c4db7145aee639ecc5, type: 3}
+  skillName: "Ba\xFA"
+  description: "Item decorativo para casas. S\xF3 pode ser construido dentro da casa."
   isEnabled: 0
   hasAllMaterials: 0
   type: 1
   material:
   - {fileID: 11400000, guid: 4fe4711081d0fdb429bd78577a9174e4, type: 2}
   - {fileID: 11400000, guid: 07376efeec54ce146bf840ac5a04f630, type: 2}
-  materialAmount: 1900000019000000
+  - {fileID: 11400000, guid: 803e8f0fbd1920240bad36acccf7b47f, type: 2}
+  materialAmount: 060000000400000005000000

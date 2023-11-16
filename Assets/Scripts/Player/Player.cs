@@ -10,6 +10,8 @@ public class Player : StateMachineController<Player>
 
     public PlayerInventory playerInventory;                     // inventory script
 
+    public PlayerBuildingSkills playerBuildingSkills;           // building skills script
+
     public bool isFishing;                                      // if true, player can fishing
 
     public bool reachFinalSpriteFrame;                          // used to control by animator when the last frame of animation is displayed
@@ -38,6 +40,7 @@ public class Player : StateMachineController<Player>
     {
         rigid = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent("PlayerInventory") as PlayerInventory;
+        playerBuildingSkills = GetComponent("PlayerBuildingSkills") as PlayerBuildingSkills;
         movingObject = new MovingObject();
         movingObject.baseSpeed = 4;
         isFishing = false;

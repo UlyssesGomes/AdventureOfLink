@@ -6,20 +6,38 @@ public class BuildingSkillUiSystem : MonoBehaviour
     [SerializeField]
     private GridLayoutGroup grid;
 
+    private SlotBuilding[] slots;
 
+    private void Awake()
+    {
+        slots = grid.GetComponentsInChildren<SlotBuilding>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        for (int u = 0; u < transform.childCount; u++)
         {
-            grid.transform.GetChild(i).gameObject.SetActive(false);
+            slots[u].setContentSprite(null);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    /// <summary>
+    /// Set building skill sprite to a slot building image.
+    /// </summary>
+    /// <param name="skills"></param>
+    public void setSkills(BuildingSkill[] skills)
     {
-        
+        if(skills != null)
+        {
+            for(int u = 0; u < slots.Length; u++)
+            {
+                if (u < skills.Length)
+                    slots[u].setContentSprite(skills[u].image);
+                else
+                    slots[u].setContentSprite(null);
+            }
+        }
     }
 }

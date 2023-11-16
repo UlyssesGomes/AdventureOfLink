@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerBuilldingSkills : MonoBehaviour
+public class PlayerBuildingSkills : MonoBehaviour
 {
     public BuildingSkill[] housesSkills;
     public BuildingSkill[] refinedSkills;

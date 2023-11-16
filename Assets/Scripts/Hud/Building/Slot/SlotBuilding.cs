@@ -8,6 +8,11 @@ public class SlotBuilding : MonoBehaviour
     [SerializeField]
     private Image contentSprite;
 
+    private void Start()
+    {
+        contentSprite.gameObject.SetActive(true);
+    }
+
     /// <summary>
     /// Show slot only if has a sprite to him, otherwise, SetActive to false.
     /// </summary>

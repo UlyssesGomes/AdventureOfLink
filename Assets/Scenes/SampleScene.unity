@@ -1742,20 +1742,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307347737}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1615850971}
   - {fileID: 1945354177}
   - {fileID: 1736827192}
-  m_Father: {fileID: 1851263469}
-  m_RootOrder: 3
+  m_Father: {fileID: 1591275556}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 146.45, y: 177.31}
-  m_SizeDelta: {x: 259.96545, y: 28.428757}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &307347739
 MonoBehaviour:
@@ -1774,7 +1774,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 80, y: 35}
@@ -12110,7 +12110,7 @@ MonoBehaviour:
     m_Right: 9
     m_Top: 9
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 45, y: 45}
@@ -12389,6 +12389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigid: {fileID: 0}
   playerInventory: {fileID: 0}
+  playerBuildingSkills: {fileID: 0}
   isFishing: 0
   reachFinalSpriteFrame: 0
   assetManager: {fileID: 1963509246}
@@ -24375,6 +24376,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0114f7e1715ad5e41b7694e6dde8d79f, type: 3}
+--- !u!1 &1591275555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1591275556}
+  m_Layer: 5
+  m_Name: Tabs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1591275556
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591275555}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 307347738}
+  m_Father: {fileID: 1851263469}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000040054, y: 172.5}
+  m_SizeDelta: {x: 286.41754, y: 32.540573}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1615850971 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8488908488310526803, guid: 660c11979af5f5c489fa2b9453366519, type: 3}
@@ -102297,7 +102334,7 @@ RectTransform:
   - {fileID: 1683262}
   - {fileID: 479251269}
   - {fileID: 266627920}
-  - {fileID: 307347738}
+  - {fileID: 1591275556}
   - {fileID: 309578270}
   m_Father: {fileID: 1185440278}
   m_RootOrder: 3
@@ -102305,7 +102342,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 148.3, y: 0}
-  m_SizeDelta: {x: 296.5271, y: 450}
+  m_SizeDelta: {x: 296.54346, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1851263470
 MonoBehaviour:
@@ -102364,6 +102401,7 @@ MonoBehaviour:
   backgroundIcon: {fileID: 1683263}
   icon: {fileID: 2122416266}
   isOpened: 0
+  buildingSkillUiSystem: {fileID: 1069536772}
 --- !u!95 &1851263473
 Animator:
   serializedVersion: 3
@@ -103836,14 +103874,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shovel
       objectReference: {fileID: 0}
-    - target: {fileID: 5105557860598945053, guid: b2eab82756c925e4e8335a2c80773eac, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5105557860598945054, guid: b2eab82756c925e4e8335a2c80773eac, type: 3}
-      propertyPath: itemAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 799579949af63ed498649166b36c810e, type: 2}
     - target: {fileID: 5105557860598945121, guid: b2eab82756c925e4e8335a2c80773eac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -32.18
