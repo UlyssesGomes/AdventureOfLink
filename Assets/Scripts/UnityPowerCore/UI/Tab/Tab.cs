@@ -10,6 +10,8 @@ public class Tab : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     private Sprite unselectedSprite;
 
     [SerializeField]
+    private Color selectedColor;
+    [SerializeField]
     private Color unselectedColor;
     
     [SerializeField]
@@ -30,7 +32,10 @@ public class Tab : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     public void select(bool doSelect)
     {
         if (doSelect)
+        {
             image.sprite = selectedSprite;
+            image.color = selectedColor;
+        }
         else
         {
             image.sprite = unselectedSprite;

@@ -224,6 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedSprite: {fileID: 21300000, guid: 7261b18f1568af24c8f510d9b3b20efc, type: 3}
   unselectedSprite: {fileID: 21300000, guid: cfc8300c81870ff4db987745e08df1a7, type: 3}
-  unselectedColor: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+  selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  unselectedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   image: {fileID: 8488908488310526804}
   text: {fileID: 8488908488049568363}

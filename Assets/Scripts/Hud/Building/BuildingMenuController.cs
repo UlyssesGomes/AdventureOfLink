@@ -25,12 +25,45 @@ public class BuildingMenuController : MonoBehaviour
     [SerializeField]
     private BuildingSkillUiSystem buildingSkillUiSystem;    // building skill ui presentention controller
 
+    [SerializeField]
+    private Tabs tabs;                                      // tabs contoller
+
+    private BuildingSkill[][] playerBuildingSkills;
+
     private void Start()
     {
         animator.SetBool("isOpened", isOpened);
         updateBuildingMenuAccess();
 
-        buildingSkillUiSystem.setSkills(player.playerBuildingSkills.housesSkills);
+        playerBuildingSkills = new BuildingSkill[][]
+        {
+            player.playerBuildingSkills.housesSkills,
+            player.playerBuildingSkills.refinedSkills,
+            player.playerBuildingSkills.toolsSkills
+        };
+
+        buildingSkillUiSystem.setSkills(playerBuildingSkills[0]);
+    }
+
+    private void Update()
+    {
+        if (isOpened)
+        {
+            if (Input.GetKeyUp(KeyCode.Q))
+            {
+                if (tabs.changeTab(ChangeTabsOptionsEnum.PREVIOUS))
+                {
+                    buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
+                }            
+            }
+            if(Input.GetKeyUp(KeyCode.E))
+            {
+                if (tabs.changeTab(ChangeTabsOptionsEnum.NEXT))
+                {
+                    buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
+                }
+            }
+        }
     }
 
     /// <summary>
