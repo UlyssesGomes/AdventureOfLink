@@ -8,6 +8,8 @@ public class SlotBuilding : MonoBehaviour
     [SerializeField]
     private Image contentSprite;
 
+    public GameObject selectionObject;
+
     private void Start()
     {
         contentSprite.gameObject.SetActive(true);

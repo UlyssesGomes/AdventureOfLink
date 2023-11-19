@@ -56,12 +56,21 @@ public class BuildingMenuController : MonoBehaviour
                     buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
                 }            
             }
-            if(Input.GetKeyUp(KeyCode.E))
+            else if(Input.GetKeyUp(KeyCode.E))
             {
                 if (tabs.changeTab(ChangeTabsOptionsEnum.NEXT))
                 {
                     buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
                 }
+            }
+
+            if(Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
+            }
+            else if(Input.GetKeyUp(KeyCode.LeftArrow))
+            {
+                buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
             }
         }
     }

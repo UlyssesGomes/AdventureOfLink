@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotObject: {fileID: 4716167360137805388}
   contentSprite: {fileID: 8238857985838984904}
+  selectionObject: {fileID: 6896852386172571999}
 --- !u!1 &6896852386172571999
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3795863927146916229
 RectTransform:
   m_ObjectHideFlags: 0

@@ -22,6 +22,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3795863927146916229, guid: 0114f7e1715ad5e41b7694e6dde8d79f, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4716167360137805388, guid: 0114f7e1715ad5e41b7694e6dde8d79f, type: 3}
       propertyPath: m_Name
       value: MaterialSlotImage
@@ -113,6 +117,10 @@ PrefabInstance:
     - target: {fileID: 4716167360137805389, guid: 0114f7e1715ad5e41b7694e6dde8d79f, type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896852386172571999, guid: 0114f7e1715ad5e41b7694e6dde8d79f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2691689976853025173, guid: 0114f7e1715ad5e41b7694e6dde8d79f, type: 3}
