@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: Bed
   m_EditorClassIdentifier: 
-  id: 12
+  id: 16
   skillId: 7
   image: {fileID: 21300000, guid: 78e74714f33722c4db7145aee639ecc5, type: 3}
-  skillName: "Ba\xFA"
+  skillName: Cama
   description: "Item decorativo para casas. S\xF3 pode ser construido dentro da casa."
   isEnabled: 0
   hasAllMaterials: 0

@@ -28,7 +28,10 @@ public class BuildingMenuController : MonoBehaviour
     [SerializeField]
     private Tabs tabs;                                      // tabs contoller
 
-    private BuildingSkill[][] playerBuildingSkills;
+    [SerializeField]
+    private SkillDescriptionPanel descriptionPanel;         // object description panel controller
+
+    private BuildingSkill[][] playerBuildingSkills;         // matriz with all arrays building skills
 
     private void Start()
     {
@@ -43,6 +46,7 @@ public class BuildingMenuController : MonoBehaviour
         };
 
         buildingSkillUiSystem.setSkills(playerBuildingSkills[0]);
+        descriptionPanel.setDescriptionPanel(playerBuildingSkills[0][0]);
     }
 
     private void Update()
@@ -54,6 +58,7 @@ public class BuildingMenuController : MonoBehaviour
                 if (tabs.changeTab(ChangeTabsOptionsEnum.PREVIOUS))
                 {
                     buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
+                    descriptionPanel.setDescriptionPanel(playerBuildingSkills[tabs.selectedTabIndex][0]);
                 }            
             }
             else if(Input.GetKeyUp(KeyCode.E))
@@ -61,16 +66,21 @@ public class BuildingMenuController : MonoBehaviour
                 if (tabs.changeTab(ChangeTabsOptionsEnum.NEXT))
                 {
                     buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
+                    descriptionPanel.setDescriptionPanel(playerBuildingSkills[tabs.selectedTabIndex][0]);
                 }
             }
 
             if(Input.GetKeyUp(KeyCode.RightArrow))
             {
-                buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
+                BuildingSkill buildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
+                if (buildingSkill != null)
+                    descriptionPanel.setDescriptionPanel(buildingSkill);
             }
             else if(Input.GetKeyUp(KeyCode.LeftArrow))
             {
-                buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
+                BuildingSkill buildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
+                if (buildingSkill != null)
+                    descriptionPanel.setDescriptionPanel(buildingSkill);
             }
         }
     }

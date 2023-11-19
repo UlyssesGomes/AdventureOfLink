@@ -11,6 +11,8 @@ public class BuildingSkillUiSystem : MonoBehaviour
     public int amountSkills;
     public int currentSkillIndex;
 
+    public BuildingSkill[] currentBuildingSkills;
+
     private void Awake()
     {
         slots = grid.GetComponentsInChildren<SlotBuilding>();
@@ -39,6 +41,8 @@ public class BuildingSkillUiSystem : MonoBehaviour
         slots[currentSkillIndex].selectionObject.SetActive(false);
         currentSkillIndex = 0;
         slots[currentSkillIndex].selectionObject.SetActive(true);
+        
+        currentBuildingSkills = skills;
 
         if (skills != null)
         {
@@ -52,7 +56,7 @@ public class BuildingSkillUiSystem : MonoBehaviour
         }
     }
 
-    public bool setSkillSelected(MoveOptionsEnum direction)
+    public BuildingSkill setSkillSelected(MoveOptionsEnum direction)
     {
         int previousIndex = -1;
         if(direction == MoveOptionsEnum.RIGHT)
@@ -75,10 +79,9 @@ public class BuildingSkillUiSystem : MonoBehaviour
             
             slots[previousIndex].selectionObject.SetActive(false);
             slots[currentSkillIndex].selectionObject.SetActive(true);
-
-            return true;
+            return currentBuildingSkills[currentSkillIndex];
         }
 
-        return false;
+        return null;
     }
 }
