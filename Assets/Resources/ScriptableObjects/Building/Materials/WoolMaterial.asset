@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 2ca00c02879ecaf44ad6c23532a9f099, type: 3}
   materialName: "L\xE3"
-  amount: 5
+  amount: 0

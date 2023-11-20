@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 1a9b431758db1f94cbd6708159b5b41a, type: 3}
   materialName: "Paralelep\xEDpedo"
-  amount: 3
+  amount: 0

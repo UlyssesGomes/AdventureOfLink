@@ -41,6 +41,7 @@ public class BuildingSkill : ScriptableObject
 
         for(int u = 0; u < material.Length; u++)
         {
+            material[u] = Instantiate(material[u]);
             material[u].amount = materialAmount[u];
         }
     }

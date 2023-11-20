@@ -8,11 +8,16 @@ public class SlotBuilding : MonoBehaviour
     [SerializeField]
     private Image contentSprite;
 
-    public GameObject selectionObject;
+    [SerializeField]
+    private GameObject selectionObject;
 
-    private void Start()
+    [SerializeField]
+    private Animator animator;
+
+    private void Awake()
     {
         contentSprite.gameObject.SetActive(true);
+        animator.SetBool("isSelected", false);
     }
 
     /// <summary>
@@ -30,5 +35,15 @@ public class SlotBuilding : MonoBehaviour
         {
             slotObject.SetActive(false);
         }
+    }
+
+    /// <summary>
+    /// Activate and deactivate slot selection animation.
+    /// </summary>
+    /// <param name="isSelected">selection value</param>
+    public void setSelection(bool isSelected)
+    {
+        animator.SetBool("isSelected", isSelected);
+        //selectionObject.SetActive(isSelected);
     }
 }

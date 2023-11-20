@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 21300000, guid: 892ae853d7995f24cb06d18df9678e3b, type: 3}
   materialName: Prego
-  amount: 25
+  amount: 0

@@ -28,7 +28,6 @@ public class BuildingSkillUiSystem : MonoBehaviour
         }
 
         currentSkillIndex = 0;
-        slots[currentSkillIndex].selectionObject.SetActive(true);
     }
 
     /// <summary>
@@ -37,16 +36,9 @@ public class BuildingSkillUiSystem : MonoBehaviour
     /// <param name="skills"></param>
     public void setSkills(BuildingSkill[] skills)
     {
-        amountSkills = skills.Length;        
-        slots[currentSkillIndex].selectionObject.SetActive(false);
-        currentSkillIndex = 0;
-        slots[currentSkillIndex].selectionObject.SetActive(true);
-        
-        currentBuildingSkills = skills;
-
         if (skills != null)
         {
-            for(int u = 0; u < slots.Length; u++)
+            for (int u = 0; u < slots.Length; u++)
             {
                 if (u < skills.Length)
                     slots[u].setContentSprite(skills[u].image);
@@ -54,6 +46,16 @@ public class BuildingSkillUiSystem : MonoBehaviour
                     slots[u].setContentSprite(null);
             }
         }
+
+        amountSkills = skills.Length;
+        if(currentSkillIndex != 0)
+        {
+            slots[currentSkillIndex].setSelection(false);
+        }
+        currentSkillIndex = 0;
+        slots[currentSkillIndex].setSelection(true);
+        
+        currentBuildingSkills = skills;
     }
 
     public BuildingSkill setSkillSelected(MoveOptionsEnum direction)
@@ -76,9 +78,8 @@ public class BuildingSkillUiSystem : MonoBehaviour
 
         if(previousIndex != -1)
         {
-            
-            slots[previousIndex].selectionObject.SetActive(false);
-            slots[currentSkillIndex].selectionObject.SetActive(true);
+            slots[previousIndex].setSelection(false);
+            slots[currentSkillIndex].setSelection(true);
             return currentBuildingSkills[currentSkillIndex];
         }
 
