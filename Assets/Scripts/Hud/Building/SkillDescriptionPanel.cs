@@ -4,15 +4,19 @@ using UnityEngine.UI;
 public class SkillDescriptionPanel : MonoBehaviour
 {
     [SerializeField]
-    private Text name;
+    private Text name;                              // name of the selected item
     [SerializeField]
-    private Image skillImage;
+    private Image skillImage;                       // sprite of the selected item
     [SerializeField]
-    private Text description;
+    private Text description;                       // short description of the selected item
 
     [SerializeField]
-    private SlotBuildingMaterial[] materialSlots;
+    private SlotBuildingMaterial[] materialSlots;   // material array of that skill
 
+    /// <summary>
+    /// Display selected building skill to show its datails.
+    /// </summary>
+    /// <param name="skill">Skill to be shown</param>
     public void setDescriptionPanel(BuildingSkill skill)
     {
         name.text = skill.skillName;

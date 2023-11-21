@@ -18,6 +18,7 @@ MonoBehaviour:
   skillName: "Ba\xFA"
   description: "Ba\xFA usado para guardar items. Cada ba\xFA tem 10 espa\xE7os para
     invet\xE1rio."
+  amountGenerated: 1
   isEnabled: 0
   hasAllMaterials: 0
   type: 1

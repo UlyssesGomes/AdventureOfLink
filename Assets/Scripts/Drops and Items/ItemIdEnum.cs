@@ -6,5 +6,7 @@
     SHOVEL,
     WATERING_CAN,
     FISHING_ROD,
-    HAMMER
+    HAMMER,
+    STONE,
+    IRON,
 };

@@ -4,15 +4,16 @@ using UnityEngine.UI;
 public class BuildingSkillUiSystem : MonoBehaviour
 {
     [SerializeField]
-    private GridLayoutGroup grid;
+    private GridLayoutGroup grid;                       // building slot grid
 
-    private SlotBuilding[] slots;
+    private SlotBuilding[] slots;                       // building slot array
 
-    public int amountSkills;
+    public int amountSkills;                            // amount of skills in selected tab
     public int currentSkillIndex;
 
-    public BuildingSkill[] currentBuildingSkills;
+    public BuildingSkill[] currentBuildingSkills;       // building skill array of the current selected tab
 
+    // Awake is called before Start method
     private void Awake()
     {
         slots = grid.GetComponentsInChildren<SlotBuilding>();
@@ -58,6 +59,12 @@ public class BuildingSkillUiSystem : MonoBehaviour
         currentBuildingSkills = skills;
     }
 
+    /// <summary>
+    /// Moves the building slot selection according to the direction 
+    /// passed by parameter.
+    /// </summary>
+    /// <param name="direction"></param>
+    /// <returns>Return skill selected and null if any skill was selected.</returns>
     public BuildingSkill setSkillSelected(MoveOptionsEnum direction)
     {
         int previousIndex = -1;

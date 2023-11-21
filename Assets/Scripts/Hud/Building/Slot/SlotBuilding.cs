@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class SlotBuilding : MonoBehaviour
 {
     [SerializeField]
-    private GameObject slotObject;
+    private GameObject slotObject;              // building slot object
     [SerializeField]
-    private Image contentSprite;
+    private Image contentSprite;                // image to represents building skill
 
     [SerializeField]
-    private GameObject selectionObject;
+    private GameObject selectionObject;         // animate object selection
 
     [SerializeField]
-    private Animator animator;
+    private Animator animator;                  // selection animator
 
     private void Awake()
     {
@@ -44,6 +44,5 @@ public class SlotBuilding : MonoBehaviour
     public void setSelection(bool isSelected)
     {
         animator.SetBool("isSelected", isSelected);
-        //selectionObject.SetActive(isSelected);
     }
 }

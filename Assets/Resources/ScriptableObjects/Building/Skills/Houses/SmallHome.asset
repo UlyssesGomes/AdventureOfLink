@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: SmallHome
   m_EditorClassIdentifier: 
-  id: 20
+  id: 3
   skillId: 1
   image: {fileID: 21300000, guid: 2c99b8a36785b6946b58f3253653c0f8, type: 3}
   skillName: Casa Pequena
   description: "Est\xE1 \xE9 uma pequena casa que o jogador pode utilizar para decorar
     com m\xF3veis. "
+  amountGenerated: 1
   isEnabled: 0
   hasAllMaterials: 0
   type: 1
