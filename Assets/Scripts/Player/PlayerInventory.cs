@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
-using System;
-
-enum InventoryNotifyAction { ALL = int.MaxValue, }
+using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -10,13 +8,15 @@ public class PlayerInventory : MonoBehaviour
     private GameItem [] storedItems;                                            // items stored in backpack
     public int switableItemIndex;                                               // item index selected by hotkey
 
+    private IDictionary<ItemIdEnum, List<GameItem>> storedItemsDictionary;             // a hash table to easly find objects and count them
+
     public Observable<GenericSubject<int, GameItem[]>> storedItemsObservable;   // store items observable to notify changes in storedItems array.
 
-    private GenericSubject<int, GameItem[]> subjectEvent;
+    private GenericSubject<int, GameItem[]> subjectEvent;                       // event to emit array with changes
 
     public readonly int hotkeyInventorySize = 5;                                // total slot size to hotkey inventory (hotkey slot is the first five slots of storedItems
     public int inventoryCurrentSize = 15;                                       // current available inventory size to store itens.
-    public readonly int TOTAL_INVENTORY_SIZE = 15;// next value must be 25 when backpack system is ready to use  
+    public readonly int TOTAL_INVENTORY_SIZE = 10;// next value must be 25 when backpack system is ready to use  
     // total amount available to slots interface including hotkeysSlots
 
     private void Awake()
@@ -24,6 +24,7 @@ public class PlayerInventory : MonoBehaviour
         storedItemsObservable = new Observable<GenericSubject<int, GameItem[]>>();
         subjectEvent = new GenericSubject<int, GameItem[]>();
         storedItems = new GameItem[TOTAL_INVENTORY_SIZE];
+        storedItemsDictionary = new Dictionary<ItemIdEnum, List<GameItem>>();
     }
 
     // Start is called before the first frame update
@@ -31,12 +32,6 @@ public class PlayerInventory : MonoBehaviour
     {
         subjectEvent.subject = storedItems;
         switableItemIndex = -1;
-
-#if DEBUG
-        //GameItem gi = loadItem(ItemsEnum.SIMPLE_AXE);
-        //playerSwitableListItem.Add(gi);
-        //addStoreItem(gi);
-#endif
     }
 
     /// <summary>
@@ -274,6 +269,56 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Add a new 
+    /// </summary>
+    /// <param name="gameItem"></param>
+    private void addStoreItemToDictionary(GameItem gameItem)
+    {
+        if (storedItemsDictionary.ContainsKey(gameItem.itemId))
+        {
+            List<GameItem> list = storedItemsDictionary[gameItem.itemId];
+            
+            
+            list.Add(gameItem);
+
+            List<GameItem> list = storedItemsDictionary[gameItem.itemId];
+            GameItem g = list.Find(item => item.id == gameItem.id);
+        }
+        else
+        {
+            
+        }
+    }
+
+    private void removeStoredItemFromDictionary(GameItem gameItem)
+    {
+
+    }
+
+    /// <summary>
+    /// Receive by param an itemid and count amount of that item in playerInventory.
+    /// </summary>
+    /// <param name="itemId">Item id</param>
+    /// <returns></returns>
+    private int countItemAmountBy(ItemIdEnum itemId)
+    {
+        if (storedItemsDictionary.ContainsKey(itemId))
+        {
+            List<GameItem> storedItemsList = storedItemsDictionary[itemId];
+
+            int count = 0;
+            foreach(GameItem g in storedItemsList)
+            {
+                count += g.amount;
+            }
+
+            return count;
+        }
+
+        return 0;
+    }
+
 #if DEBUG
     /*
      * Method used to load initial weapons for test in develop mode.
@@ -288,31 +333,11 @@ public class PlayerInventory : MonoBehaviour
         switch (item)
         {
             case ItemIdEnum.WATERING_CAN:
-                // TODO NOW - tirar esse comentário.
-                //loadedResource = Resources.Load(pathPrefix + "WateringCan");
-                //if (loadedResource == null)
-                //{
-                    //throw new Exception("...no file found - please check the configuration");
-                //}
-                //prefabGameObject = (GameObject)Instantiate(loadedResource);
-                //WateringCanItem wateringCan = prefabGameObject.GetComponent<WateringCanItem>();
-                //wateringCan.itemName = "WateringCan";
-                //wateringCan.type = (int)ItemsEnum.WATERING_CAN;
-                //gameItem = wateringCan;
+                
                 break;
 
             case ItemIdEnum.AXE:
-                // TODO NOW - tirar esse comentário.
-                //loadedResource = Resources.Load(pathPrefix + "AxeItem");
-                //if (loadedResource == null)
-                //{
-                //    throw new Exception("...no file found - please check the configuration");
-                //}
-                //prefabGameObject = (GameObject)Instantiate(loadedResource);
-                //AxeItem axe = prefabGameObject.GetComponent<AxeItem>();
-                //axe.itemName = "Axe";
-                //axe.type = (int)ItemsEnum.SIMPLE_AXE;
-                //gameItem = axe;
+                
                 break;
         }
 
