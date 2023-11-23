@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7508d920754d2544e9340322f5ba21b1, type: 3}
   m_Name: IronMaterial
   m_EditorClassIdentifier: 
+  itemId: 10
   image: {fileID: 21300000, guid: 09a982af2d6e9e945aa482125bbc740e, type: 3}
   materialName: Iron
   amount: 1

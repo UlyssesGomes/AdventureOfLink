@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7508d920754d2544e9340322f5ba21b1, type: 3}
   m_Name: NailMaterial
   m_EditorClassIdentifier: 
+  itemId: 11
   image: {fileID: 21300000, guid: 892ae853d7995f24cb06d18df9678e3b, type: 3}
   materialName: Prego
   amount: 0
