@@ -70,6 +70,7 @@ public class PlayerInventory : MonoBehaviour
         if(index >= 0 && amountLeft > 0)
         {
             storedItems[index] = item;
+            addStoredItemToDictionary(item);
             item.amount = amountLeft;
             amountLeft = 0;
             notifyStoredItemsObservers(index);
@@ -144,6 +145,7 @@ public class PlayerInventory : MonoBehaviour
             if(storedItems[u].id == id)
             {
                 GameItem gi = storedItems[u];
+                removeStoredItemFromDictionary(gi);
                 storedItems[u] = null;
                 notifyStoredItemsObservers(u);
                 return gi;
@@ -192,9 +194,10 @@ public class PlayerInventory : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Notify ui slot that observer gameitem with id passed by parameter has update to be 
+    /// showed in ui.
     /// </summary>
-    /// <param name="index"></param>
+    /// <param name="index">GameItem id</param>
     public void notifyStoredItemsObserversById(int id)
     {
         subjectEvent.id = id;
@@ -270,30 +273,38 @@ public class PlayerInventory : MonoBehaviour
     }
 
     /// <summary>
-    /// Add a new 
+    /// Add a new GameItem Instance to storedItemsDictionary
     /// </summary>
     /// <param name="gameItem"></param>
-    private void addStoreItemToDictionary(GameItem gameItem)
+    private void addStoredItemToDictionary(GameItem gameItem)
     {
         if (storedItemsDictionary.ContainsKey(gameItem.itemId))
         {
             List<GameItem> list = storedItemsDictionary[gameItem.itemId];
-            
-            
             list.Add(gameItem);
-
-            List<GameItem> list = storedItemsDictionary[gameItem.itemId];
-            GameItem g = list.Find(item => item.id == gameItem.id);
         }
         else
         {
-            
+            List<GameItem> storeItemsList = new List<GameItem>();
+            storeItemsList.Add(gameItem);
+            storedItemsDictionary.Add(gameItem.itemId, storeItemsList);
         }
     }
 
-    private void removeStoredItemFromDictionary(GameItem gameItem)
-    {
 
+    /// <summary>
+    /// Remove an useless GameItem instance from dictionary.
+    /// </summary>
+    /// <param name="gameItem">GameItem to be removed</param>
+    private GameItem removeStoredItemFromDictionary(GameItem gameItem)
+    {
+        if(storedItemsDictionary.ContainsKey(gameItem.itemId))
+        {
+            List<GameItem> list = storedItemsDictionary[gameItem.itemId];
+            return list.Find(item => item.id == gameItem.id);
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -301,7 +312,7 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     /// <param name="itemId">Item id</param>
     /// <returns></returns>
-    private int countItemAmountBy(ItemIdEnum itemId)
+    public int countItemAmountByItemId(ItemIdEnum itemId)
     {
         if (storedItemsDictionary.ContainsKey(itemId))
         {

@@ -9,30 +9,45 @@ public class SkillDescriptionPanel : MonoBehaviour
     private Image skillImage;                       // sprite of the selected item
     [SerializeField]
     private Text description;                       // short description of the selected item
+    [SerializeField]
+    private Button buildButton;                     // button to build selected skill
 
     [SerializeField]
     private SlotBuildingMaterial[] materialSlots;   // material array of that skill
+
+    private BuildingSkill currentBuildingSkill;     // intance of current selected BuildingSkill
 
     /// <summary>
     /// Display selected building skill to show its datails.
     /// </summary>
     /// <param name="skill">Skill to be shown</param>
-    public void setDescriptionPanel(BuildingSkill skill)
+    public void setDescriptionPanel(BuildingSkill skill, int []playerItemAmount)
     {
+        currentBuildingSkill = skill;
         name.text = skill.skillName;
         skillImage.sprite = skill.image;
         description.text = skill.description;
-
+        bool isButtonEnable = true;
         for(int u = 0; u < materialSlots.Length; u++)
         {
             if(u < skill.material.Length)
             {
                 materialSlots[u].setContentSprite(skill.material[u].image);
-                materialSlots[u].setText(skill.material[u].amount, 0);
+                materialSlots[u].setText(skill.material[u].amount, playerItemAmount[u]);
                 materialSlots[u].gameObject.SetActive(true);
+
+                if (skill.material[u].amount > playerItemAmount[u])
+                    isButtonEnable = false;
             }
             else
                 materialSlots[u].gameObject.SetActive(false);
         }
+
+        buildButton.interactable = isButtonEnable;
+    }
+
+    public void buttonEvent()
+    {
+        Debug.Log("Construindo o item: " + currentBuildingSkill.skillName);
     }
 }

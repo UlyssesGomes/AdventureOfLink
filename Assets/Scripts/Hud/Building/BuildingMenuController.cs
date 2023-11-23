@@ -24,6 +24,7 @@ public class BuildingMenuController : MonoBehaviour
 
     [SerializeField]
     private BuildingSkillUiSystem buildingSkillUiSystem;    // building skill ui presentention controller
+    private BuildingSkill currentBuildingSkill;             // current building skill to be displayed
 
     [SerializeField]
     private Tabs tabs;                                      // tabs contoller
@@ -46,7 +47,7 @@ public class BuildingMenuController : MonoBehaviour
         };
 
         buildingSkillUiSystem.setSkills(playerBuildingSkills[0]);
-        descriptionPanel.setDescriptionPanel(playerBuildingSkills[0][0]);
+        currentBuildingSkill = playerBuildingSkills[0][0];
     }
 
     private void Update()
@@ -58,7 +59,8 @@ public class BuildingMenuController : MonoBehaviour
                 if (tabs.changeTab(ChangeTabsOptionsEnum.PREVIOUS))
                 {
                     buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
-                    descriptionPanel.setDescriptionPanel(playerBuildingSkills[tabs.selectedTabIndex][0]);
+                    currentBuildingSkill = playerBuildingSkills[tabs.selectedTabIndex][0];
+                    setDescription(currentBuildingSkill);
                 }            
             }
             else if(Input.GetKeyUp(KeyCode.E))
@@ -66,21 +68,22 @@ public class BuildingMenuController : MonoBehaviour
                 if (tabs.changeTab(ChangeTabsOptionsEnum.NEXT))
                 {
                     buildingSkillUiSystem.setSkills(playerBuildingSkills[tabs.selectedTabIndex]);
-                    descriptionPanel.setDescriptionPanel(playerBuildingSkills[tabs.selectedTabIndex][0]);
+                    currentBuildingSkill = playerBuildingSkills[tabs.selectedTabIndex][0];
+                    setDescription(currentBuildingSkill);
                 }
             }
 
             if(Input.GetKeyUp(KeyCode.RightArrow))
             {
-                BuildingSkill buildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
-                if (buildingSkill != null)
-                    descriptionPanel.setDescriptionPanel(buildingSkill);
+                currentBuildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
+                if (currentBuildingSkill != null)
+                    setDescription(currentBuildingSkill);
             }
             else if(Input.GetKeyUp(KeyCode.LeftArrow))
             {
-                BuildingSkill buildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
-                if (buildingSkill != null)
-                    descriptionPanel.setDescriptionPanel(buildingSkill);
+                currentBuildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
+                if (currentBuildingSkill != null)
+                    setDescription(currentBuildingSkill);
             }
         }
     }
@@ -96,6 +99,9 @@ public class BuildingMenuController : MonoBehaviour
             isOpened = !isOpened;
             animator.SetBool("isOpened", isOpened);
         }
+
+        if(isOpened)
+            setDescription(currentBuildingSkill);
     }
 
     /// <summary>
@@ -117,5 +123,22 @@ public class BuildingMenuController : MonoBehaviour
             backgroundIcon.color = disabledColor;
             icon.color = disabledColor;
         }
+    }
+
+    /// <summary>
+    /// Get all material amount in player inventory and set descriptionPanel with
+    /// buildingSkill and all available material in inventory.
+    /// </summary>
+    /// <param name="buildingSkill">BuildingSkill to be displayed</param>
+    private void setDescription(BuildingSkill buildingSkill)
+    {
+        int [] playerMaterialAmountArray = { 0, 0, 0 };
+
+        for(int u = 0; u < buildingSkill.material.Length; u++)
+        {
+            playerMaterialAmountArray[u] = player.playerInventory.countItemAmountByItemId(buildingSkill.material[u].itemId);
+        }
+
+        descriptionPanel.setDescriptionPanel(buildingSkill, playerMaterialAmountArray);
     }
 }

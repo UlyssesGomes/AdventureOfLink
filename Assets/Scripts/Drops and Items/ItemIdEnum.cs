@@ -9,4 +9,8 @@
     HAMMER,
     STONE,
     IRON,
+    NAIL,
+    PAVING_STONE,
+    PLANK,
+    WOOL
 };

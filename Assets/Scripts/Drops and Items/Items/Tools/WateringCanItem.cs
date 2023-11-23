@@ -32,7 +32,7 @@ public class WateringCanItem : DrawableItem
     }
 
     /// <summary>
-    /// Called to drease water amount in watering can when the player is watering.
+    /// Called to decrease water amount in watering can when the player is watering.
     /// </summary>
     public void toWater()
     {
