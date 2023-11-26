@@ -93,13 +93,13 @@ public class PlayerInventory : MonoBehaviour
     /// <param name="item"></param>
     /// <param name="amount"></param>
     /// <returns></returns>
-    public int removeStoreItemAmount(GameItem item, int amount)
+    public int removeStoreItemAmount(ItemIdEnum itemId, int amount)
     {
         int amountLeft = amount;
         int index;
         do
         {
-            index = getFirstStoredItemIndex(item);
+            index = getFirstStoredItemIndex(itemId);
             if (index >= 0)
             {
                 if (storedItems[index].amount > amountLeft)
@@ -120,7 +120,6 @@ public class PlayerInventory : MonoBehaviour
                     amountLeft -= storedItems[index].amount;
                     storedItems[index].amount = 0;
                     removeStoredItemById(storedItems[index].id);
-                    break;
                 }
             }
         } while (index > -1 && amountLeft > 1);
@@ -229,11 +228,11 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    private int getFirstStoredItemIndex(GameItem item)
+    private int getFirstStoredItemIndex(ItemIdEnum itemId)
     {
         for(int u = 0; u < storedItems.Length; u++)
         {
-            if(item.itemId == storedItems[u].itemId)
+            if(itemId == storedItems[u].itemId)
             {
                 return u;
             }

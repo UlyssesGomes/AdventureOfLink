@@ -15,7 +15,8 @@ public class SkillDescriptionPanel : MonoBehaviour
     [SerializeField]
     private SlotBuildingMaterial[] materialSlots;   // material array of that skill
 
-    private BuildingSkill currentBuildingSkill;     // intance of current selected BuildingSkill
+    private BuildingSkill _currentBuildingSkill;    // intance of current selected BuildingSkill
+    public BuildingSkill currentBuildingSkill { get { return _currentBuildingSkill; } }
 
     /// <summary>
     /// Display selected building skill to show its datails.
@@ -23,7 +24,7 @@ public class SkillDescriptionPanel : MonoBehaviour
     /// <param name="skill">Skill to be shown</param>
     public void setDescriptionPanel(BuildingSkill skill, int []playerItemAmount)
     {
-        currentBuildingSkill = skill;
+        _currentBuildingSkill = skill;
         name.text = skill.skillName;
         skillImage.sprite = skill.image;
         description.text = skill.description;
@@ -44,10 +45,5 @@ public class SkillDescriptionPanel : MonoBehaviour
         }
 
         buildButton.interactable = isButtonEnable;
-    }
-
-    public void buttonEvent()
-    {
-        Debug.Log("Construindo o item: " + currentBuildingSkill.skillName);
     }
 }

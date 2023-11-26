@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System;
+
 public class BuildingMenuController : MonoBehaviour
 {
     [SerializeField]
@@ -140,5 +142,76 @@ public class BuildingMenuController : MonoBehaviour
         }
 
         descriptionPanel.setDescriptionPanel(buildingSkill, playerMaterialAmountArray);
+    }
+
+    /// <summary>
+    /// Generate item from building skill selected.
+    /// </summary>
+    public void generateButtonEvent()
+    {
+        Debug.Log("Generate " + descriptionPanel.currentBuildingSkill.skillName + " from BuildingMenuController");
+
+        if (descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.TOOLS)
+        {
+            bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
+
+            if (isRemovedAll)
+            {
+                GameItem g = player.assetManager.intanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
+                g.amount = descriptionPanel.currentBuildingSkill.amountGenerated;
+                int amountAdded = player.playerInventory.addStoreItem(g);
+
+                if(amountAdded == g.amount)
+                {
+                    // TODO - Notify fish added to inventory  when notify system were implemented. 
+                }
+                else
+                {
+                    // TODO - Notify inventory full when notify system were implemented.
+                    // TODO - Drop the item on the floor 
+                }
+            }
+        } 
+        else if(descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.REFINED)
+        {
+
+        } 
+        else if(descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.HOUSE)
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// Remove all materials from inventory, and if was a success operation will return true,
+    /// otherwise return false and return all items to player inventory.
+    /// </summary>
+    /// <param name="buildingSkill"></param>
+    /// <returns></returns>
+    private bool removeMaterialItems(Material [] materials)
+    {
+        int[] removedAmount = { 0, 0, 0 };
+        for (int u = 0; u < materials.Length; u++)
+        {
+            removedAmount[u] = player.playerInventory.removeStoreItemAmount(materials[u].itemId, materials[u].amount);
+
+            if(removedAmount[u] != materials[u].amount)
+            {
+                restoreRemovedItems(removedAmount, materials);
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Restore all items removed to PlayerInventory.
+    /// </summary>
+    /// <param name="amountRemoved"></param>
+    /// <param name="materials"></param>
+    private void restoreRemovedItems(int []amountRemoved, Material [] materials)
+    {
+        throw new Exception("[BuildingMenuController.restoreRemovedItems()] - method fail to return items to inventory.");
     }
 }

@@ -14,6 +14,6 @@ public class SlotBuildingMaterial : SlotBuilding
     /// <param name="total">total amount required of that item</param>
     public void setText(int amount, int total)
     {
-        text.text = amount + "/" + total;
+        text.text = total + "/" + amount;
     }
 }
