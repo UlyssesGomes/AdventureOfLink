@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: Plank
   m_EditorClassIdentifier: 
-  id: 6
+  id: 3
   skillId: 2
   image: {fileID: 21300000, guid: 96a9902f195897142a320b6d1150cd8e, type: 3}
   skillName: "T\xE1bua de Madeira"
   description: "T\xE1bua de madeira feita a partir de uma madeira. \xC9 utilizado
     para constru\xE7\xE3o."
   amountGenerated: 2
+  itemId: 13
   isEnabled: 0
   hasAllMaterials: 0
   type: 3

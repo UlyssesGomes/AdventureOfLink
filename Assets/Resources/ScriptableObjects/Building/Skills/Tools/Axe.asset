@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: 
-  id: 7
+  id: 1
   skillId: 4
   image: {fileID: 3479397677024880137, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
   skillName: Machado
   description: "Ferramenta que pode ser utilizada para cortar \xE1rvores."
   amountGenerated: 1
+  itemId: 4
   isEnabled: 0
   hasAllMaterials: 0
   type: 2

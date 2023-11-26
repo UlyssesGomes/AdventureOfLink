@@ -5265,9 +5265,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 309578273}
-        m_TargetAssemblyTypeName: SkillDescriptionPanel, Assembly-CSharp
-        m_MethodName: buttonEvent
+      - m_Target: {fileID: 1851263472}
+        m_TargetAssemblyTypeName: BuildingMenuController, Assembly-CSharp
+        m_MethodName: generateButtonEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -103862,6 +103862,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assetsCollections:
   - {fileID: 11400000, guid: 551808efb8be5d14590187c33af9866c, type: 2}
+  - {fileID: 11400000, guid: c2953d503cf9d964895d999292078541, type: 2}
+  - {fileID: 11400000, guid: 799579949af63ed498649166b36c810e, type: 2}
 --- !u!1001 &1977339355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -105218,10 +105220,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Axe
       objectReference: {fileID: 0}
-    - target: {fileID: 5115446465009063073, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5115446465009063076, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.3
@@ -105266,10 +105264,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5115446465009063078, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
-      propertyPath: itemAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: c2953d503cf9d964895d999292078541, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d11e7f7b7c4de6a4ebdae5d3949d249f, type: 3}
 --- !u!1001 &5571424118918167189
