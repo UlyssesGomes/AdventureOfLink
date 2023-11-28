@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using System;
+
 public enum ChangeTabsOptionsEnum : int { PREVIOUS, NEXT };
 
 public class Tabs : MonoBehaviour
 {
     [SerializeField]
-    private GridLayoutGroup tabGrid;
+    private GridLayoutGroup tabGrid;        // grid layout to position tabs
 
-    private Tab[] tabs;
+    private Tab[] tabs;                     // all tabs instance
 
-    private int _selectedTabIndex;
+    private int _selectedTabIndex;          // current selected tab
 
     public int selectedTabIndex
     {
@@ -27,14 +29,17 @@ public class Tabs : MonoBehaviour
         _selectedTabIndex = 0;
 
         tabs[0].select(true);
-        tabs[1].select(false);
-        tabs[2].select(false);
-        
-        tabs[0].text.text = "Casa";
-        tabs[1].text.text = "Refinados";
-        tabs[2].text.text = "Ferramentas";
+        for(int u = 1; u < tabs.Length; u++)
+        {
+            tabs[u].select(false);
+        }
     }
 
+    /// <summary>
+    /// Change tab by direction, moving to nearby tab on left or right side.
+    /// </summary>
+    /// <param name="direction">Direction to the next tab</param>
+    /// <returns>Return true if tab was changed.</returns>
     public bool changeTab(ChangeTabsOptionsEnum direction)
     {
         if (direction == ChangeTabsOptionsEnum.PREVIOUS)
@@ -57,5 +62,22 @@ public class Tabs : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Set all tab labels.
+    /// </summary>
+    /// <param name="labels"></param>
+    public void setLabelsTabs(string [] labels)
+    {
+        if (tabs.Length == labels.Length)
+        {
+            for (int u = 0; u < labels.Length; u++)
+            {
+                tabs[u].text.text = labels[u];
+            }
+        }
+        else
+            throw new Exception("[Tabs.setLabelsTabs] - diferents sizes in labels and tabs arrays.");
     }
 }

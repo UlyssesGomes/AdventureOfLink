@@ -15,7 +15,7 @@ public class PlayerInventory : MonoBehaviour
     private GenericSubject<int, GameItem[]> subjectEvent;                       // event to emit array with changes
 
     public readonly int hotkeyInventorySize = 5;                                // total slot size to hotkey inventory (hotkey slot is the first five slots of storedItems
-    public int inventoryCurrentSize = 15;                                       // current available inventory size to store itens.
+    public int inventoryCurrentSize = 0;                                        // current available inventory size to store itens.
     public readonly int TOTAL_INVENTORY_SIZE = 10;// next value must be 25 when backpack system is ready to use  
     // total amount available to slots interface including hotkeysSlots
 
@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour
         subjectEvent = new GenericSubject<int, GameItem[]>();
         storedItems = new GameItem[TOTAL_INVENTORY_SIZE];
         storedItemsDictionary = new Dictionary<ItemIdEnum, List<GameItem>>();
+        inventoryCurrentSize = TOTAL_INVENTORY_SIZE - hotkeyInventorySize;
     }
 
     // Start is called before the first frame update
@@ -104,7 +105,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if (storedItems[index].amount > amountLeft)
                 {
-                    storedItems[index].amount = -amountLeft;
+                    storedItems[index].amount -= amountLeft;
                     notifyStoredItemsObservers(index);
                     return amount;
                 }
@@ -141,7 +142,7 @@ public class PlayerInventory : MonoBehaviour
     {
         for(int u = 0; u < storedItems.Length; u++)
         {
-            if(storedItems[u].id == id)
+            if(storedItems[u] != null && storedItems[u].id == id)
             {
                 GameItem gi = storedItems[u];
                 removeStoredItemFromDictionary(gi);
@@ -232,7 +233,7 @@ public class PlayerInventory : MonoBehaviour
     {
         for(int u = 0; u < storedItems.Length; u++)
         {
-            if(itemId == storedItems[u].itemId)
+            if(storedItems[u] != null && itemId == storedItems[u].itemId)
             {
                 return u;
             }

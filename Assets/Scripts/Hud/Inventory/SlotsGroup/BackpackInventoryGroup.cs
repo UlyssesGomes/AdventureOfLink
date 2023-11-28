@@ -60,6 +60,6 @@ public class BackpackInventoryGroup : InventoryGroupAbstract<InventorySlot>
     /// <returns></returns>
     protected override int getInventoryGroupSize()
     {
-        return playerInventory.TOTAL_INVENTORY_SIZE - playerInventory.hotkeyInventorySize;
+        return playerInventory.inventoryCurrentSize;
     }
 }

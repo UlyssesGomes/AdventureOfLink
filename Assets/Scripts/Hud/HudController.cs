@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+enum ActiveUiEnum: int { NONE, BUILDING_MENU, BACKPACK };
+
 public class HudController : MonoBehaviour
 {
     [SerializeField]
@@ -17,6 +19,7 @@ public class HudController : MonoBehaviour
     private List<Observer<int>> slotListObservers;
 
     private bool isInSelection;
+    private ActiveUiEnum currentActiveUi;
 
     // Start is called before the first frame update
     void Start()
@@ -24,26 +27,39 @@ public class HudController : MonoBehaviour
         slotListObservers = new List<Observer<int>>();
         slotSelectedIndex = 0;
         isInSelection = inventorySystem.backpackVisibility();
+
+        if (inventorySystem.backpackVisibility())
+            currentActiveUi = ActiveUiEnum.BACKPACK;
+        else if (buildingMenuController.buildingMenuVisibility())
+            currentActiveUi = ActiveUiEnum.BUILDING_MENU;
+        else
+            currentActiveUi = ActiveUiEnum.NONE;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.B) && (currentActiveUi == ActiveUiEnum.BACKPACK || currentActiveUi == ActiveUiEnum.NONE))
         {
             inventorySystem.backpackChangeVisibility();
             if (isInSelection)
             {
                 isInSelection = !isInSelection;
+                currentActiveUi = ActiveUiEnum.NONE;
             }
             else
             {
                 isInSelection = !isInSelection;
+                currentActiveUi = ActiveUiEnum.BACKPACK;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.M))
+        else if (Input.GetKeyUp(KeyCode.M) && (currentActiveUi == ActiveUiEnum.BUILDING_MENU || currentActiveUi == ActiveUiEnum.NONE))
         {
-            buildingMenuController.openClose();
+            buildingMenuController.invertOpenState();
+            if (buildingMenuController.buildingMenuVisibility())
+                currentActiveUi = ActiveUiEnum.BUILDING_MENU;
+            else
+                currentActiveUi = ActiveUiEnum.NONE;
         }
 
         if(isInSelection)
@@ -63,28 +79,9 @@ public class HudController : MonoBehaviour
                     slotSelectedIndex--;
                 }
             }
-            else if (Input.GetKey(KeyCode.Alpha1))
-            {
-                //hotkeySlots[0].setItem(inventorySlots[slotSelectedIndex].getItem());
-                //hotkeySlots[0].itemStoredIndex = slotSelectedIndex;
-            }
-            else if (Input.GetKey(KeyCode.Alpha2))
-            {
-                //hotkeySlots[1].setItem(inventorySlots[slotSelectedIndex].getItem());
-                //hotkeySlots[1].itemStoredIndex = slotSelectedIndex;
-            }
-            else if (Input.GetKey(KeyCode.Alpha3))
-            {
-                //hotkeySlots[2].setItem(inventorySlots[slotSelectedIndex].getItem());
-                //hotkeySlots[2].itemStoredIndex = slotSelectedIndex;
-            }
-            else if (Input.GetKey(KeyCode.Alpha4))
-            {
-                //hotkeySlots[3].setItem(inventorySlots[slotSelectedIndex].getItem());
-                //hotkeySlots[3].itemStoredIndex = slotSelectedIndex;
-            }
+
         }
-        else
+        else if (currentActiveUi == ActiveUiEnum.NONE)
         {
             if (Input.GetKeyUp(KeyCode.Alpha1))
             {

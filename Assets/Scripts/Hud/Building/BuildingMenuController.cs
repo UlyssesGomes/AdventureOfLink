@@ -43,13 +43,16 @@ public class BuildingMenuController : MonoBehaviour
 
         playerBuildingSkills = new BuildingSkill[][]
         {
-            player.playerBuildingSkills.housesSkills,
+            player.playerBuildingSkills.toolsSkills,
             player.playerBuildingSkills.refinedSkills,
-            player.playerBuildingSkills.toolsSkills
+            player.playerBuildingSkills.housesSkills
         };
 
         buildingSkillUiSystem.setSkills(playerBuildingSkills[0]);
         currentBuildingSkill = playerBuildingSkills[0][0];
+
+        string[] labels = { "Ferramentas", "Refinados", "Casa" };
+        tabs.setLabelsTabs(labels);
     }
 
     private void Update()
@@ -94,7 +97,7 @@ public class BuildingMenuController : MonoBehaviour
     /// Change between opened and closed state of BuildingMenu.
     /// If its opened this method will close and open if its closed.
     /// </summary>
-    public void openClose()
+    public void invertOpenState()
     {
         if(isOpened || isEnable)
         {
@@ -104,6 +107,15 @@ public class BuildingMenuController : MonoBehaviour
 
         if(isOpened)
             setDescription(currentBuildingSkill);
+    }
+
+    /// <summary>
+    /// Tells if BuildingMenu is active or not.
+    /// </summary>
+    /// <returns>bool represents BuildingMenu state</returns>
+    public bool buildingMenuVisibility()
+    {
+        return isOpened;
     }
 
     /// <summary>
@@ -149,8 +161,6 @@ public class BuildingMenuController : MonoBehaviour
     /// </summary>
     public void generateButtonEvent()
     {
-        Debug.Log("Generate " + descriptionPanel.currentBuildingSkill.skillName + " from BuildingMenuController");
-
         if (descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.TOOLS)
         {
             bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
@@ -163,7 +173,8 @@ public class BuildingMenuController : MonoBehaviour
 
                 if(amountAdded == g.amount)
                 {
-                    // TODO - Notify fish added to inventory  when notify system were implemented. 
+                    // TODO - Notify item added to inventory  when notify system were implemented.
+                    setDescription(currentBuildingSkill);
                 }
                 else
                 {

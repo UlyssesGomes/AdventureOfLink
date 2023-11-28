@@ -55,7 +55,7 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
     /// </summary>
     public void changeQuantityLabelVisibility()
     {
-        if(gameItem.total > 1)
+        if(gameItem != null && gameItem.total > 1)
         {
             quantityLabel.text = gameItem.amount.ToString();
             quantityLabel.gameObject.SetActive(true);
@@ -72,7 +72,7 @@ public class InventorySlot : MonoBehaviour, Observer<GenericSubject<int, GameIte
     /// </summary>
     public void changeFilledBarAmount()
     {
-        if (gameItem.isViewPercent)
+        if (gameItem != null && gameItem.isViewPercent)
         {
             filledImage.fillAmount = gameItem.getTotalPercent();
             filledImage.transform.parent.gameObject.SetActive(true);
