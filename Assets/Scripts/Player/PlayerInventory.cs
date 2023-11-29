@@ -210,7 +210,7 @@ public class PlayerInventory : MonoBehaviour
     /// If there is no item with same type or free amount, return -1. 
     /// </summary>
     /// <param name="item"></param>
-    /// <returns></returns>
+    /// <returns>index of GameItem with free capacity.</returns>
     private int getStoredItemIndexWithCapacity(GameItem item)
     {
         for (int u = 0; u < storedItems.Length; u++)
@@ -256,6 +256,31 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return -1;
+    }
+
+    /// <summary>
+    /// Counts the available capacity considering the capacity of an already 
+    /// present item of the same type and the empty slots.
+    /// </summary>
+    /// <param name="gameItem">GameItem you want to know if can be added.</param>
+    /// <returns>Free capacity available</returns>
+    public int countFreeCapacityByGameItem(GameItem gameItem)
+    {
+        int countFreeSlot = 0;
+        int countFreeCapacity = 0;
+        for (int u = 0; u < storedItems.Length; u++)
+        {
+            if (storedItems[u] is null)
+            {
+                countFreeSlot++;
+            }
+            else if(storedItems[u].itemId == gameItem.itemId && storedItems[u].total > storedItems[u].amount)
+            {
+                countFreeCapacity += (storedItems[u].total - storedItems[u].amount);
+            }
+        }
+
+        return countFreeSlot * gameItem.total + countFreeCapacity;
     }
 
     /// <summary>

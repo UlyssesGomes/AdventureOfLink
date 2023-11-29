@@ -27,4 +27,14 @@ public class DropAssetManager : MonoBehaviour
     {
         return Instantiate(assetsDictionary[itemId]);
     }
+
+    /// <summary>
+    /// Return and item by its id to check infos only.
+    /// </summary>
+    /// <param name="itemId">int item id</param>
+    /// <returns>GameItem associated with past id</returns>
+    public GameItem checkItemInfo(int itemId)
+    {
+        return assetsDictionary[itemId];
+    }
 }

@@ -161,36 +161,55 @@ public class BuildingMenuController : MonoBehaviour
     /// </summary>
     public void generateButtonEvent()
     {
-        if (descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.TOOLS)
+        
+
+        if (descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.TOOLS || descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.REFINED)
         {
-            bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
-
-            if (isRemovedAll)
+            if (checkSpaceAvailability(descriptionPanel.currentBuildingSkill))
             {
-                GameItem g = player.assetManager.intanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
-                g.amount = descriptionPanel.currentBuildingSkill.amountGenerated;
-                int amountAdded = player.playerInventory.addStoreItem(g);
+                bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
 
-                if(amountAdded == g.amount)
+                if (isRemovedAll)
                 {
-                    // TODO - Notify item added to inventory  when notify system were implemented.
-                    setDescription(currentBuildingSkill);
-                }
-                else
-                {
-                    // TODO - Notify inventory full when notify system were implemented.
-                    // TODO - Drop the item on the floor 
+                    GameItem g = player.assetManager.intanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
+                    g.amount = descriptionPanel.currentBuildingSkill.amountGenerated;
+                    int amountAdded = player.playerInventory.addStoreItem(g);
+
+                    if (amountAdded == g.amount)
+                    {
+                        // TODO - Notify item added to inventory  when notify system were implemented.
+                        setDescription(currentBuildingSkill);
+                    }
                 }
             }
-        } 
-        else if(descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.REFINED)
-        {
-
-        } 
+            else
+            {
+                // TODO - notify insufficient available space to generate the item when notify system were implemented.
+                Debug.LogWarning("Espaço insulficiente na backpack.");
+            }            
+        }
         else if(descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.HOUSE)
         {
 
         }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="itemId"></param>
+    /// <returns></returns>
+    private bool checkSpaceAvailability(BuildingSkill buildingSkill)
+    {
+        GameItem gameItem = player.assetManager.checkItemInfo((int)buildingSkill.itemId);
+        int amount = buildingSkill.amountGenerated;
+
+        if(amount <= player.playerInventory.countFreeCapacityByGameItem(gameItem))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
