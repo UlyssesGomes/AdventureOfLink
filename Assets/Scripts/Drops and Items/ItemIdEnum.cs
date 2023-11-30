@@ -12,5 +12,6 @@
     NAIL,
     PAVING_STONE,
     PLANK,
-    WOOL
+    WOOL,
+    CHESTER
 };

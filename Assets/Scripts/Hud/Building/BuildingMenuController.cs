@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 
 using System;
+using System.Collections.Generic;
 
 public class BuildingMenuController : MonoBehaviour
 {
@@ -195,9 +196,9 @@ public class BuildingMenuController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Verify in player storedItems if have space to hold a generated item.
     /// </summary>
-    /// <param name="itemId"></param>
+    /// <param name="itemId">Generated itemId</param>
     /// <returns></returns>
     private bool checkSpaceAvailability(BuildingSkill buildingSkill)
     {
@@ -209,7 +210,29 @@ public class BuildingMenuController : MonoBehaviour
             return true;
         }
 
+        if(checkSpaceAfterConsumeMaterials(buildingSkill) >= 1)
+            return true;
+
         return false;
+    }
+
+    /// <summary>
+    /// Check if will be future slots after consume all materials to generate the item.
+    /// </summary>
+    /// <param name="buildingSkill"></param>
+    /// <returns>amount of free slots</returns>
+    private int checkSpaceAfterConsumeMaterials(BuildingSkill buildingSkill)
+    {
+        int countFutureFreeSlots = 0;
+        for (int u = 0; u < buildingSkill.material.Length; u++)
+        {
+            int storedMaterialAmount = player.playerInventory.countItemAmountByItemId(buildingSkill.material[u].itemId);
+
+            if(buildingSkill.material[u].amount == storedMaterialAmount)
+                countFutureFreeSlots++;
+        }
+
+        return countFutureFreeSlots;
     }
 
     /// <summary>
