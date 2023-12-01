@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  id: 1
+  id: 0
   skillId: 8
-  image: {fileID: 21300000, guid: 264fd8d09654f024db97004b7469cb97, type: 3}
+  image: {fileID: 21300000, guid: 92f678c56cec25148b2de7e016133520, type: 3}
   skillName: "Ba\xFA"
   description: "Ba\xFA usado para guardar items. Cada ba\xFA tem 10 espa\xE7os para
     invet\xE1rio."
   amountGenerated: 1
+  itemId: 0
   isEnabled: 0
   hasAllMaterials: 0
   type: 1

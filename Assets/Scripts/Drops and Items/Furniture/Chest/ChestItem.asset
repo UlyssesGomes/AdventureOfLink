@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d34bdc6e3506f8d4bbaf2d933bdb687a, type: 3}
-  m_Name: ChesterItem
+  m_Name: ChestItem
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   itemId: 15
   type: 0
   itemName: "Ba\xFA"
@@ -20,9 +20,12 @@ MonoBehaviour:
   isViewPercent: 0
   total: 1
   animType: 1
-  sprite: {fileID: 21300000, guid: 264fd8d09654f024db97004b7469cb97, type: 3}
-  openedChesterSprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 92f678c56cec25148b2de7e016133520, type: 3}
+  openedChesterSprite: {fileID: 21300000, guid: 8b126fe882bae464eb58828a8cad9939, type: 3}
   slots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

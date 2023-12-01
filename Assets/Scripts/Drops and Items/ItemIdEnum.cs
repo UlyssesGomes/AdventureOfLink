@@ -13,5 +13,5 @@
     PAVING_STONE,
     PLANK,
     WOOL,
-    CHESTER
+    CHEST
 };
