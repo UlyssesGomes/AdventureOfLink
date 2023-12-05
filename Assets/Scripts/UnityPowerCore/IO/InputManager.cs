@@ -2,59 +2,51 @@
 
 public class InputManager<T>: Input where T : struct
 {
-    public static T allowedControllingAgent;
+    public static T allowedControllingAgent;        // agent allowed to use input
+    public T currentAgent;                          // current agent using input
 
-    public static float GetAxis(string axisName, T currentAgent)
+    public bool isLocked;                           // only allowed agent can take input control
+
+    public float GetAxis(string axisName)
     {
-        float magniture = Input.GetAxis(axisName);
-        if (magniture != 0.0f && currentAgent.Equals(allowedControllingAgent))
-        {
-            return magniture;
-        }
+        float magnitude = Input.GetAxis(axisName);
+        if ((isLocked && currentAgent.Equals(allowedControllingAgent)) || !isLocked)
+            return magnitude;
 
         return 0.0f;
     }
 
-    public static float GetAxisRaw(string axisName, T currentAgent)
+    public float GetAxisRaw(string axisName)
     {
         float magniture = Input.GetAxisRaw(axisName);
-        if (magniture != 0.0f && currentAgent.Equals(allowedControllingAgent))
-        {
+        if ((isLocked && currentAgent.Equals(allowedControllingAgent)) || !isLocked)
             return magniture;
-        }
 
         return 0.0f;
     }
 
-    public static bool GetButton(string buttonName, T currentAgent)
+    public bool GetButton(string buttonName)
     {
 
-        if(Input.GetButton(buttonName) && currentAgent.Equals(allowedControllingAgent))
-        {
+        if (Input.GetButton(buttonName) && (isLocked && currentAgent.Equals(allowedControllingAgent)) || !isLocked)
             return true;
-        }
 
         return false;
     }
 
-    public static bool GetButtonDown(string buttonName, T currentAgent)
+    public bool GetButtonDown(string buttonName)
     {
-        if (Input.GetButtonDown(buttonName) && currentAgent.Equals(allowedControllingAgent))
-        {
+        if (Input.GetButtonDown(buttonName) && (isLocked && currentAgent.Equals(allowedControllingAgent)) || !isLocked)
             return true;
-        }
 
         return false;
     }
 
-    public static bool GetButtonUp(string buttonName, T currentAgent)
+    public bool GetButtonUp(string buttonName)
     {
-        if (Input.GetButtonUp(buttonName) && currentAgent.Equals(allowedControllingAgent))
-        {
+        if (Input.GetButtonUp(buttonName) && (isLocked && currentAgent.Equals(allowedControllingAgent)) || !isLocked)
             return true;
-        }
 
         return false;
     }
-
 }
