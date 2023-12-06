@@ -31,7 +31,7 @@ public class PlayerWaitingFishing : UnitState<Player>
     {
         countDownTime -= Time.deltaTime;
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(input.GetKeyDown(KeyCode.Escape))
         {
             callNextState((int)PlayerStatesEnum.DONT_CATCH_FISHING);
         }

@@ -14,19 +14,19 @@ public class PlayerWalking : UnitState<Player>
 
     protected override void UpdateUnitState()
     {
-        stateMachineObject.movingObject.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        stateMachineObject.movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
 
         if(stateMachineObject.movingObject.direction.sqrMagnitude == 0)
         {
             callNextState((int)PlayerStatesEnum.IDDLE);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift) && stateMachineObject.movingObject.direction.sqrMagnitude > 0)
+        if (input.GetKey(KeyCode.LeftShift) && stateMachineObject.movingObject.direction.sqrMagnitude > 0)
         {
             callNextState((int)PlayerStatesEnum.RUNNING);
         }
 
-        if (Input.GetKeyDown(KeyCode.Backslash))
+        if (input.GetKeyDown(KeyCode.Backslash))
         {
             callNextState((int)PlayerStatesEnum.ROLLING);
         }

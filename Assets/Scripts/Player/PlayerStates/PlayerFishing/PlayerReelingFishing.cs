@@ -19,7 +19,7 @@ public class PlayerReelingFishing : UnitState<Player>
     protected override void UpdateUnitState()
     {
         time += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.E))
+        if (input.GetKeyDown(KeyCode.E))
         {
             tryAddFish();
             stateMachineObject.hideIcon();

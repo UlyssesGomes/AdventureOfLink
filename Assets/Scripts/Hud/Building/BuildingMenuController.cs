@@ -37,8 +37,11 @@ public class BuildingMenuController : MonoBehaviour
 
     private BuildingSkill[][] playerBuildingSkills;         // matriz with all arrays building skills
 
+    private InputManager<InputAgentsEnum> input;            // input manager instance
+
     private void Start()
     {
+        input = new InputManager<InputAgentsEnum>(InputAgentsEnum.BUILDING_MENU);
         animator.SetBool("isOpened", isOpened);
         updateBuildingMenuAccess();
 
@@ -60,7 +63,7 @@ public class BuildingMenuController : MonoBehaviour
     {
         if (isOpened)
         {
-            if (Input.GetKeyUp(KeyCode.Q))
+            if (input.GetKeyUp(KeyCode.Q))
             {
                 if (tabs.changeTab(ChangeTabsOptionsEnum.PREVIOUS))
                 {
@@ -69,7 +72,7 @@ public class BuildingMenuController : MonoBehaviour
                     setDescription(currentBuildingSkill);
                 }            
             }
-            else if(Input.GetKeyUp(KeyCode.E))
+            else if(input.GetKeyUp(KeyCode.E))
             {
                 if (tabs.changeTab(ChangeTabsOptionsEnum.NEXT))
                 {
@@ -79,13 +82,13 @@ public class BuildingMenuController : MonoBehaviour
                 }
             }
 
-            if(Input.GetKeyUp(KeyCode.RightArrow))
+            if(input.GetKeyUp(KeyCode.RightArrow))
             {
                 currentBuildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
                 if (currentBuildingSkill != null)
                     setDescription(currentBuildingSkill);
             }
-            else if(Input.GetKeyUp(KeyCode.LeftArrow))
+            else if(input.GetKeyUp(KeyCode.LeftArrow))
             {
                 currentBuildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
                 if (currentBuildingSkill != null)

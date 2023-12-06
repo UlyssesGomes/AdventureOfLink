@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerIdle : UnitState<Player>
 {
     protected override void UpdateUnitState()
     {
-        stateMachineObject.movingObject.direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        stateMachineObject.movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
 
         if(stateMachineObject.movingObject.direction.sqrMagnitude != 0)
         {
             callNextState((int)PlayerStatesEnum.WALKING);
         }
 
-        if (stateMachineObject.movingObject.direction.sqrMagnitude == 0 && Input.GetKeyDown(KeyCode.LeftControl))
+        if (stateMachineObject.movingObject.direction.sqrMagnitude == 0 && input.GetKeyDown(KeyCode.LeftControl))
         {
             PlayerInventory inventory = stateMachineObject.playerInventory;
             if(inventory.getCurrentSwitableItem() != null)

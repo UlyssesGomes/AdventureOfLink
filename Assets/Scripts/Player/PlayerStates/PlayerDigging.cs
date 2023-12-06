@@ -14,7 +14,7 @@ public class PlayerDigging : UnitState<Player>
 
     protected override void UpdateUnitState()
     {
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (input.GetKeyUp(KeyCode.LeftControl))
         {
             callNextState((int)PlayerStatesEnum.IDDLE);
         }

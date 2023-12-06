@@ -4,15 +4,20 @@ using UnityEngine;
 
 public abstract class UnitState<T>
 {
-    public bool isRunning;                          // state of UnitState, when false, call NextUnitState()
-    public int nextStateKey;                        // key of the nextState
+    public bool isRunning;                                  // state of UnitState, when false, call NextUnitState()
+    public int nextStateKey;                                // key of the nextState
 
-    public T stateMachineObject;                    // instance of the object to be controlled
+    public T stateMachineObject;                            // instance of the object to be controlled
+
+    protected static InputManager<InputAgentsEnum> input;   // input manager instance
 
     
     // Start is called before the first frame update
     public void Start()
     {
+        if(input == null)
+            input = new InputManager<InputAgentsEnum>(InputAgentsEnum.PLAYER);
+
         isRunning = true;
         startState();
     }

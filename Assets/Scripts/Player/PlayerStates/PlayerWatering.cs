@@ -19,7 +19,7 @@ public class PlayerWatering : UnitState<Player>
     {
         GameItem gameItem = inventory.getCurrentSwitableItem();
 
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (input.GetKeyUp(KeyCode.LeftControl))
         {
             exitState();
         }

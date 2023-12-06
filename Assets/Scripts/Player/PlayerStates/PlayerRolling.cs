@@ -29,7 +29,7 @@ public class PlayerRolling : UnitState<Player>
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Backslash) && !isRolling)
+        if (input.GetKeyDown(KeyCode.Backslash) && !isRolling)
         {
             isRolling = true;
             rollingTime = 0.0f;

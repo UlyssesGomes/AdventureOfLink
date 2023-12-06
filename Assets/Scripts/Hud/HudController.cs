@@ -21,9 +21,13 @@ public class HudController : MonoBehaviour
     private bool isInSelection;
     private ActiveUiEnum currentActiveUi;
 
+    private InputManager<InputAgentsEnum> input;
+
     // Start is called before the first frame update
     void Start()
     {
+        input = new InputManager<InputAgentsEnum>(InputAgentsEnum.HUD_CONTROLLER);
+
         slotListObservers = new List<Observer<int>>();
         slotSelectedIndex = 0;
         isInSelection = inventorySystem.backpackVisibility();
@@ -39,32 +43,42 @@ public class HudController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.B) && (currentActiveUi == ActiveUiEnum.BACKPACK || currentActiveUi == ActiveUiEnum.NONE))
+        if (input.GetKeyUp(KeyCode.B) && (currentActiveUi == ActiveUiEnum.BACKPACK || currentActiveUi == ActiveUiEnum.NONE))
         {
             inventorySystem.backpackChangeVisibility();
             if (isInSelection)
             {
+                //input.isLocked = false;
                 isInSelection = !isInSelection;
                 currentActiveUi = ActiveUiEnum.NONE;
             }
             else
             {
+                //InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.INVENTORY_SYSTEM;
+                //input.isLocked = true;
                 isInSelection = !isInSelection;
                 currentActiveUi = ActiveUiEnum.BACKPACK;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.M) && (currentActiveUi == ActiveUiEnum.BUILDING_MENU || currentActiveUi == ActiveUiEnum.NONE))
+        else if (input.GetKeyUp(KeyCode.M) && (currentActiveUi == ActiveUiEnum.BUILDING_MENU || currentActiveUi == ActiveUiEnum.NONE))
         {
             buildingMenuController.invertOpenState();
             if (buildingMenuController.buildingMenuVisibility())
+            {
+                //InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.BUILDING_MENU;
+                //input.isLocked = true;
                 currentActiveUi = ActiveUiEnum.BUILDING_MENU;
+            }
             else
+            {
+                //input.isLocked = false;
                 currentActiveUi = ActiveUiEnum.NONE;
+            }
         }
 
         if(isInSelection)
         {
-            if(Input.GetKeyUp(KeyCode.RightArrow))
+            if(input.GetKeyUp(KeyCode.RightArrow))
             {
                 //if(slotSelectedIndex < inventorySlots.Length - 1)
                 //{
@@ -72,7 +86,7 @@ public class HudController : MonoBehaviour
                 //    notifyIndex(slotSelectedIndex);
                 //}
             }
-            else if(Input.GetKeyUp(KeyCode.LeftArrow))
+            else if(input.GetKeyUp(KeyCode.LeftArrow))
             {
                 if(slotSelectedIndex > 0)
                 {
@@ -83,27 +97,27 @@ public class HudController : MonoBehaviour
         }
         else if (currentActiveUi == ActiveUiEnum.NONE)
         {
-            if (Input.GetKeyUp(KeyCode.Alpha1))
+            if (input.GetKeyUp(KeyCode.Alpha1))
             {
                 inventorySystem.setSwitablePlayerItem(0);
                 buildingMenuController.updateBuildingMenuAccess();
             }
-            else if (Input.GetKeyUp(KeyCode.Alpha2))
+            else if (input.GetKeyUp(KeyCode.Alpha2))
             {
                 inventorySystem.setSwitablePlayerItem(1);
                 buildingMenuController.updateBuildingMenuAccess();
             }
-            else if (Input.GetKeyUp(KeyCode.Alpha3))
+            else if (input.GetKeyUp(KeyCode.Alpha3))
             {
                 inventorySystem.setSwitablePlayerItem(2);
                 buildingMenuController.updateBuildingMenuAccess();
             }
-            else if (Input.GetKeyUp(KeyCode.Alpha4))
+            else if (input.GetKeyUp(KeyCode.Alpha4))
             {
                 inventorySystem.setSwitablePlayerItem(3);
                 buildingMenuController.updateBuildingMenuAccess();
             }
-            else if (Input.GetKeyUp(KeyCode.Alpha5))
+            else if (input.GetKeyUp(KeyCode.Alpha5))
             {
                 inventorySystem.setSwitablePlayerItem(4);
                 buildingMenuController.updateBuildingMenuAccess();
