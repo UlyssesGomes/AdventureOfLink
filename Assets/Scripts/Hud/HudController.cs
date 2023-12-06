@@ -48,14 +48,14 @@ public class HudController : MonoBehaviour
             inventorySystem.backpackChangeVisibility();
             if (isInSelection)
             {
-                //input.isLocked = false;
+                InputManager<InputAgentsEnum>.isLocked = false;
                 isInSelection = !isInSelection;
                 currentActiveUi = ActiveUiEnum.NONE;
             }
             else
             {
-                //InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.INVENTORY_SYSTEM;
-                //input.isLocked = true;
+                InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.INVENTORY_SYSTEM;
+                InputManager<InputAgentsEnum>.isLocked = true;
                 isInSelection = !isInSelection;
                 currentActiveUi = ActiveUiEnum.BACKPACK;
             }
@@ -65,13 +65,13 @@ public class HudController : MonoBehaviour
             buildingMenuController.invertOpenState();
             if (buildingMenuController.buildingMenuVisibility())
             {
-                //InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.BUILDING_MENU;
-                //input.isLocked = true;
+                InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.BUILDING_MENU;
+                InputManager<InputAgentsEnum>.isLocked = true;
                 currentActiveUi = ActiveUiEnum.BUILDING_MENU;
             }
             else
             {
-                //input.isLocked = false;
+                InputManager<InputAgentsEnum>.isLocked = false;
                 currentActiveUi = ActiveUiEnum.NONE;
             }
         }
