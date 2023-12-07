@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerRunning : UnitState<Player>
+public class PlayerRunning : PlayerUnitState
 {
     private const int runningSpeed = 3;
 

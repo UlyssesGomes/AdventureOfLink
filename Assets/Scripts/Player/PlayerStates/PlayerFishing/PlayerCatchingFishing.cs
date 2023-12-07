@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerCatchingFishing : UnitState<Player>
+public class PlayerCatchingFishing : PlayerUnitState
 {
     public override int getUnitCurrentStateKey()
     {

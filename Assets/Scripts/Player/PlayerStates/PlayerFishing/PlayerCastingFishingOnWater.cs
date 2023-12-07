@@ -1,4 +1,4 @@
-﻿public class PlayerCastingFishingOnWater : UnitState<Player>
+﻿public class PlayerCastingFishingOnWater : PlayerUnitState
 {
     public override int getUnitCurrentStateKey()
     {

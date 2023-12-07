@@ -26,7 +26,7 @@ public class HudController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        input = new InputManager<InputAgentsEnum>(InputAgentsEnum.HUD_CONTROLLER);
+        input = new InputManager<InputAgentsEnum>(InputAgentsEnum.UI_CONTROL);
 
         slotListObservers = new List<Observer<int>>();
         slotSelectedIndex = 0;
@@ -54,7 +54,7 @@ public class HudController : MonoBehaviour
             }
             else
             {
-                InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.INVENTORY_SYSTEM;
+                InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.UI_CONTROL;
                 InputManager<InputAgentsEnum>.isLocked = true;
                 isInSelection = !isInSelection;
                 currentActiveUi = ActiveUiEnum.BACKPACK;
@@ -65,7 +65,7 @@ public class HudController : MonoBehaviour
             buildingMenuController.invertOpenState();
             if (buildingMenuController.buildingMenuVisibility())
             {
-                InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.BUILDING_MENU;
+                InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.UI_CONTROL;
                 InputManager<InputAgentsEnum>.isLocked = true;
                 currentActiveUi = ActiveUiEnum.BUILDING_MENU;
             }

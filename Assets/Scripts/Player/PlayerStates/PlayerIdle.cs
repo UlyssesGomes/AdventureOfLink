@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerIdle : UnitState<Player>
+public class PlayerIdle : PlayerUnitState
 {
     protected override void UpdateUnitState()
     {

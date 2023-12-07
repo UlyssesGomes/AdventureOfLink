@@ -41,7 +41,7 @@ public class BuildingMenuController : MonoBehaviour
 
     private void Start()
     {
-        input = new InputManager<InputAgentsEnum>(InputAgentsEnum.BUILDING_MENU);
+        input = new InputManager<InputAgentsEnum>(InputAgentsEnum.UI_CONTROL);
         animator.SetBool("isOpened", isOpened);
         updateBuildingMenuAccess();
 

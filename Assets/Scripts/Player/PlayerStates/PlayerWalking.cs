@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerWalking : UnitState<Player>
+public class PlayerWalking : PlayerUnitState
 {
     public override void startState()
     {

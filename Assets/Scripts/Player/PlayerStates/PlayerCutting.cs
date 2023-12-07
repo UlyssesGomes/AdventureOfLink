@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerCutting : UnitState<Player>
+public class PlayerCutting : PlayerUnitState
 {
     public override void startState()
     {

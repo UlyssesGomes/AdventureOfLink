@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerDigging : UnitState<Player>
+public class PlayerDigging : PlayerUnitState
 {
     public override void startState()
     {

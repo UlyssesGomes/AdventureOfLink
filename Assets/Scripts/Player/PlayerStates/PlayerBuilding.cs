@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerBuilding : UnitState<Player>
+public class PlayerBuilding : PlayerUnitState
 {
     public override int getUnitCurrentStateKey()
     {

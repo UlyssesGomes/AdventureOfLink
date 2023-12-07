@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerWatering : UnitState<Player>
+public class PlayerWatering : PlayerUnitState
 {
     private PlayerInventory inventory;
 

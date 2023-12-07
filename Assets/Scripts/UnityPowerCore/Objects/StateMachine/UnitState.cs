@@ -9,15 +9,9 @@ public abstract class UnitState<T>
 
     public T stateMachineObject;                            // instance of the object to be controlled
 
-    protected static InputManager<InputAgentsEnum> input;   // input manager instance
-
-    
     // Start is called before the first frame update
     public void Start()
     {
-        if(input == null)
-            input = new InputManager<InputAgentsEnum>(InputAgentsEnum.PLAYER);
-
         isRunning = true;
         startState();
     }

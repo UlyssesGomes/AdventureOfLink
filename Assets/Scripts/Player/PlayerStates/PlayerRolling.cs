@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRolling : UnitState<Player>
+public class PlayerRolling : PlayerUnitState
 {
     private const float ROLLING_TIME = 2.0f;
 

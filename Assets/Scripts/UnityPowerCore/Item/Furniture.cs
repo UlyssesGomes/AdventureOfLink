@@ -12,7 +12,6 @@ public abstract class Furniture<T> : MonoBehaviour where T : DrawableItem
     {
         furnitureAsset = Instantiate(furnitureAsset);
         sprite.sprite = furnitureAsset.sprite;
-        furnitureAsset.itemName = "Baú alterado.";
     }
 
     // Update is called once per frame

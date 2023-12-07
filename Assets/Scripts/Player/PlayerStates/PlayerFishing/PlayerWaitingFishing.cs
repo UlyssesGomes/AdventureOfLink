@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerWaitingFishing : UnitState<Player>
+public class PlayerWaitingFishing : PlayerUnitState
 {
     private float countDownTime;        // time left before change state
     private bool isFishCatch;           // if true, player catch a fish, but not added in inventory yet

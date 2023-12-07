@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerReelingFishing : UnitState<Player>
+public class PlayerReelingFishing : PlayerUnitState
 {
     private float time;                              // count elapsed time
     private readonly float TOTAL_TIME = 5.0f;       // total time to wait before change state
