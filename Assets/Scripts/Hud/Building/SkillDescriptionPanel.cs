@@ -46,4 +46,13 @@ public class SkillDescriptionPanel : MonoBehaviour
 
         buildButton.interactable = isButtonEnable;
     }
+
+    /// <summary>
+    /// Enable and disable building skill creation button.
+    /// </summary>
+    /// <param name="isEnable">Param to passa enable value</param>
+    public void setEnableCreationButton(bool isEnable)
+    {
+        buildButton.interactable = isEnable;
+    }
 }

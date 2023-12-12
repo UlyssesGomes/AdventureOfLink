@@ -165,8 +165,9 @@ public class BuildingMenuController : MonoBehaviour
     /// </summary>
     public void generateButtonEvent()
     {
-        
 
+        descriptionPanel.setEnableCreationButton(false);
+        bool isItemAdded = false;
         if (descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.TOOLS || descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.REFINED)
         {
             if (checkSpaceAvailability(descriptionPanel.currentBuildingSkill))
@@ -175,14 +176,16 @@ public class BuildingMenuController : MonoBehaviour
 
                 if (isRemovedAll)
                 {
-                    GameItem g = player.assetManager.intanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
+                    GameItem g = player.assetManager.instanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
                     g.amount = descriptionPanel.currentBuildingSkill.amountGenerated;
                     int amountAdded = player.playerInventory.addStoreItem(g);
 
                     if (amountAdded == g.amount)
                     {
+                        descriptionPanel.setEnableCreationButton(true);
                         // TODO - Notify item added to inventory  when notify system were implemented.
-                        setDescription(currentBuildingSkill);
+                        //setDescription(currentBuildingSkill);
+                        isItemAdded = true;
                     }
                 }
             }
@@ -190,12 +193,16 @@ public class BuildingMenuController : MonoBehaviour
             {
                 // TODO - notify insufficient available space to generate the item when notify system were implemented.
                 Debug.LogWarning("Espaço insulficiente na backpack.");
+                descriptionPanel.setEnableCreationButton(true);
             }            
         }
         else if(descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.HOUSE)
         {
 
         }
+
+        if (isItemAdded)
+            setDescription(currentBuildingSkill);
     }
 
     /// <summary>
@@ -268,6 +275,7 @@ public class BuildingMenuController : MonoBehaviour
     /// <param name="materials"></param>
     private void restoreRemovedItems(int []amountRemoved, Material [] materials)
     {
+        setDescription(currentBuildingSkill);
         throw new Exception("[BuildingMenuController.restoreRemovedItems()] - method fail to return items to inventory.");
     }
 }

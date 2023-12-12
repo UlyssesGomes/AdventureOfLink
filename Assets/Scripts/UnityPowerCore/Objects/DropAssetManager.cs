@@ -23,7 +23,7 @@ public class DropAssetManager : MonoBehaviour
     /// </summary>
     /// <param name="itemId">id of desired item</param>
     /// <returns>Desired GameItem instance</returns>
-    public GameItem intanceGameItemByItemId(int itemId)
+    public GameItem instanceGameItemByItemId(int itemId)
     {
         return Instantiate(assetsDictionary[itemId]);
     }
