@@ -178,9 +178,10 @@ public class BuildingMenuController : MonoBehaviour
                 {
                     GameItem g = player.assetManager.instanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
                     g.amount = descriptionPanel.currentBuildingSkill.amountGenerated;
+                    int initialAmount = g.amount;
                     int amountAdded = player.playerInventory.addStoreItem(g);
 
-                    if (amountAdded == g.amount)
+                    if (amountAdded == initialAmount)
                     {
                         descriptionPanel.setEnableCreationButton(true);
                         // TODO - Notify item added to inventory  when notify system were implemented.

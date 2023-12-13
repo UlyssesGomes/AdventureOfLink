@@ -348,7 +348,6 @@ public class PlayerInventory : MonoBehaviour
             {
                 count += g.amount;
             }
-
             return count;
         }
 
