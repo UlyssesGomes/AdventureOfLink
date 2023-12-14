@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
 {
@@ -7,21 +8,30 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     [SerializeField]
     protected SpriteRenderer sprite;            // sprite to render on screen
 
+    public Rigidbody2D rigid;
+    public MovingObject movingObject;
+
     protected override void stateMachineAwake()
-    { }
+    {
+        movingObject = new MovingObject();
+    }
 
     protected override void stateMachineStart()
     {
         furnitureAsset = Instantiate(furnitureAsset);
         sprite.sprite = furnitureAsset.sprite;
         furnitureAsset.itemName = "Baú alterado.";
+
+        movingObject.baseSpeed = movingObject.currentSpeed = 3;
     }
 
     protected override void stateMachineUpdate()
     { }
 
     protected override void stateMachineFixedUpdate()
-    { }
+    {
+        onMove();
+    }
 
     protected override UnitState<Chest> getFirstState()
     {
@@ -70,5 +80,10 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     protected void interact()
     {
         sprite.sprite = furnitureAsset.openedChesterSprite;
+    }
+
+    private void onMove()
+    {
+        rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
     }
 }
