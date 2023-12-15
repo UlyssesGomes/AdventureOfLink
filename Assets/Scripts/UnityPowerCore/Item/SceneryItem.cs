@@ -22,6 +22,10 @@ public abstract class SceneryItem<T> : MonoBehaviour where T : GameItem
         {
             createItem(collision);
         }
+        else
+        {
+            UnityEngine.Debug.Log("-Collision: " + collision.gameObject.name);
+        }
     }
 
     /// <summary>

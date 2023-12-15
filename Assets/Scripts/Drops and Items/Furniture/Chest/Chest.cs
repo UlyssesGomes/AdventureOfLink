@@ -86,4 +86,9 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     {
         rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("@Collision: " + collision.gameObject.name);
+    }
 }
