@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 8591843678126636502}
   m_Layer: 0
   m_Name: Chest
-  m_TagString: Untagged
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +184,8 @@ MonoBehaviour:
   furnitureAsset: {fileID: 11400000, guid: 946e0f350915f7b41a053fa8b11e4b8f, type: 2}
   sprite: {fileID: 7112856175993844169}
   rigid: {fileID: 8591843678126636502}
+  canPlace: 0
+  colorTransparent: {r: 1, g: 1, b: 1, a: 0.40392157}
 --- !u!50 &8591843678126636502
 Rigidbody2D:
   serializedVersion: 4
