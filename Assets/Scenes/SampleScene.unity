@@ -105392,6 +105392,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chest
       objectReference: {fileID: 0}
+    - target: {fileID: 7112856175993844171, guid: a300f83ba54e507408b84b2d8a78ff77, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1139493139}
+    - target: {fileID: 8591843678126636502, guid: a300f83ba54e507408b84b2d8a78ff77, type: 3}
+      propertyPath: m_Mass
+      value: 0.6232
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a300f83ba54e507408b84b2d8a78ff77, type: 3}
 --- !u!1001 &7603409874870667165

@@ -30,19 +30,6 @@ public abstract class SceneryItem<T> : MonoBehaviour where T : GameItem
     }
 
     /// <summary>
-    /// Check if this item out of collision with the player.
-    /// </summary>
-    /// <param name="collision"></param>
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Chest"))
-    //    {
-    //        Chest chest = collision.transform.GetComponent<Chest>();
-    //        chest.canPlace = false;
-    //    }
-    //}
-
-    /// <summary>
     /// Try to add this item to storedItem in PlayerInventory. If all items
     /// are added, then remove them from the scenery, otherwise, only decrease
     /// amount.
