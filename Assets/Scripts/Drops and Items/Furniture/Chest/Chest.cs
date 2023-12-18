@@ -20,6 +20,12 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     [SerializeField]
     private Player player;                      // player who create this box
 
+    // TODO - delete after chest adjust position system in placing state were implemented.
+    [SerializeField]
+    private Vector3 direction;
+    [SerializeField]
+    private float distance;
+
     protected override void stateMachineAwake()
     {
         movingObject = new MovingObject();
@@ -105,20 +111,18 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     /// </summary>
     private void onMove()
     {
-        float distance = Vector3.Distance(player.transform.position, rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
+        distance = Vector3.Distance(player.transform.position, rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
+        
+        // direction = destination - source
+        direction = transform.position - player.transform.position;
+        // TODO - a partir do direction, calcular o angulo, em seguida encontrar o X e Y sabendo o angulo e a distância (4.12)
+        // TODO - implementar o movimento em círculo, se tiver a distância de 4.12 a um angulo de 45º, e o player tiver apertando
+        //        para cima, então manter a distância e continuar aumentando o angulo.
         if (distance < 4.12)
         {
             rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
 
         } 
-        else if(distance > 4.12)
-        {
-            float distance2DX = (distance - 4.12f) / (movingObject.direction.x * Time.fixedDeltaTime);
-            float distance2DY = (distance - 4.12f) / (movingObject.direction.y * Time.fixedDeltaTime);
-            movingObject.direction.Set(distance2DX, distance2DY);
-            rigid.MovePosition(rigid.position + movingObject.direction);
-        }
-        Debug.Log("Distance p x c: " + Vector3.Distance(player.transform.position, transform.position));
     }
 
     /// <summary>
