@@ -14,9 +14,9 @@ public class PlayerWalking : PlayerUnitState
 
     protected override void UpdateUnitState()
     {
-        stateMachineObject.movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
+        getInputMovementNormalized();
 
-        if(stateMachineObject.movingObject.direction.sqrMagnitude == 0)
+        if (stateMachineObject.movingObject.direction.sqrMagnitude == 0)
         {
             callNextState((int)PlayerStatesEnum.IDDLE);
         }

@@ -16,7 +16,7 @@ public class PlayerRunning : PlayerUnitState
 
     protected override void UpdateUnitState()
     {
-        stateMachineObject.movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
+        getInputMovementNormalized();
 
         if (input.GetKeyUp(KeyCode.LeftShift) || stateMachineObject.movingObject.direction.sqrMagnitude == 0)
         {

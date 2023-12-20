@@ -5,7 +5,7 @@ public class MovingObject
     private float _baseSpeed;                       // original speed of the object, this value cant be changed during the game
     public float currentSpeed;                      // current speed of the object
 
-    private Vector2 _direction;                     // direction that player is moving
+    public Vector2 direction;                      // direction that player is moving
 
     private bool isFirtsBaseSpeedChange = true;     // allow only one change of _baseSpeed
 
@@ -21,12 +21,6 @@ public class MovingObject
                 isFirtsBaseSpeedChange = false;
             }
         }
-    }
-
-    public Vector2 direction
-    {
-        get { return _direction; }
-        set { _direction = value; }
     }
     #endregion
 }

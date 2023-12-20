@@ -87,7 +87,6 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         {
             getAway();
         }
-        //enablePlace(true);
     }
     
     /// <summary>
@@ -121,7 +120,7 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         if (distance < 4.12)
         {
             rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
-
+            Debug.Log("Angle: " + Vector3.Angle(player.transform.position, transform.position));
         } 
     }
 
