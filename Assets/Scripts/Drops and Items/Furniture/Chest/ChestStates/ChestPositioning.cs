@@ -10,11 +10,11 @@ public class ChestPositioning: ChestUnitState
     public override void startState()
     {
         InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.CHEST;
-        InputManager<InputAgentsEnum>.isLocked = true;
+        //InputManager<InputAgentsEnum>.isLocked = true;
     }
 
     protected override void UpdateUnitState()
     {
-        stateMachineObject.movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
+        //stateMachineObject.movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
     }
 }
