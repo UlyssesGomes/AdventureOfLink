@@ -121,7 +121,11 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         {
             rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
             Debug.Log("Angle: " + Vector3.Angle(player.transform.position, transform.position));
-        } 
+        }
+        else if (distance > 4.12)
+        {
+            //VectorUtils.angleBetweenPoints2(Vector3.zero, Vector3.one);
+        }
     }
 
     /// <summary>
