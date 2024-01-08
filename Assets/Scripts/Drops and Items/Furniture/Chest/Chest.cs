@@ -25,6 +25,8 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     private Vector3 direction;
     [SerializeField]
     private float distance;
+    [SerializeField]
+    private float angle;
 
     protected override void stateMachineAwake()
     {
@@ -120,11 +122,14 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         if (distance < 4.12)
         {
             rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
-            Debug.Log("Angle: " + Vector3.Angle(player.transform.position, transform.position));
         }
         else if (distance > 4.12)
         {
             //VectorUtils.angleBetweenPoints2(Vector3.zero, Vector3.one);
+            angle = VectorUtils.angleInVector3(direction);
+
+            Debug.Log("Angle: " + angle);
+            //rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
         }
     }
 

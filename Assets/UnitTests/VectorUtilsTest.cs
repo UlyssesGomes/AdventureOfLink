@@ -191,6 +191,30 @@ namespace Tests
             Assert.AreEqual(293.198608f, theta);
         }
 
+        // ========================= Vector3 components functions =============================
+
+        [Test]
+        public void TestCreateVector3ByMagnitudeAndAngle()
+        {
+            float angle = 59.03624347f;
+            float magnitude = 5.830951895f;
+
+            Vector3 result = VectorUtils.createVector3(magnitude, angle);
+
+            Assert.AreEqual(3f, result.x);
+            Assert.AreEqual(5f, result.y);
+        }
+
+        [Test]
+        public void TestCalculateMagnitude()
+        {
+            Vector3 vector = new Vector3(3, 5, 0);
+
+            float result = VectorUtils.calculateMagnitude(vector.x, vector.y);
+
+            Assert.AreEqual(5.830951895f, result);
+        }
+
         // ========================= Mathf.Atan =================================
 
         [Test]

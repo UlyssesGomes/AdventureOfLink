@@ -45,6 +45,37 @@ public static class VectorUtils
     }
 
     /// <summary>
+    /// Caculates a vector as Vector3 through magnitude and angle.
+    /// </summary>
+    /// <param name="magnitude">Vector magnitude</param>
+    /// <param name="angle">angle in degrees</param>
+    /// <returns>Vector3 with x and y components</returns>
+    public static Vector3 createVector3(float magnitude, float angle)
+    {
+        Vector3 vector = Vector3.zero;
+
+        float angleRadians = angle * Mathf.Deg2Rad;
+
+        vector.x = Mathf.Cos(angleRadians) * magnitude;
+        vector.y = Mathf.Sin(angleRadians) * magnitude;
+
+        return vector;
+    }
+
+    /// <summary>
+    /// Calculates magnitude through x and y components.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns>magnitudes</returns>
+    public static float calculateMagnitude(float x, float y)
+    {
+        float magnitude = Mathf.Sqrt(((Mathf.Pow(x, 2)) + (Mathf.Pow(y, 2))));
+
+        return magnitude;
+    }
+
+    /// <summary>
     /// Transform angle from radians to degrees
     /// </summary>
     /// <param name="radians">Value in radians</param>
