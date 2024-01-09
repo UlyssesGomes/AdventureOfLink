@@ -2,6 +2,23 @@
 
 public static class VectorUtils 
 {
+    private static Vector2 _up = new Vector2(0, 1);
+    private static Vector2 _up_right = new Vector2(1, 1);
+    private static Vector2 _right = new Vector2(1, 0);
+    private static Vector2 _down_right = new Vector2(1, -1);
+    private static Vector2 _down = new Vector2(0, -1);
+    private static Vector2 _down_left = new Vector2(-1, -1);
+    private static Vector2 _left = new Vector2(-1, 0);
+    private static Vector2 _up_left = new Vector2(-1, 1);
+
+    public static Vector2 UP { get => _up; }
+    public static Vector2 UP_RIGHT { get => _up_right; }
+    public static Vector2 RIGHT { get => _right; }
+    public static Vector2 DOWN_RIGHT { get => _down_right; }
+    public static Vector2 DOWN { get => _down; }
+    public static Vector2 DOWN_LEFT { get => _down_left; }
+    public static Vector2 LEFT { get => _left; }
+    public static Vector2 UP_LEFT { get => _up_left; }
 
     /// <summary>
     /// Calculate angle between two points that represents a Vector.
