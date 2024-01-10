@@ -26,7 +26,12 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     [SerializeField]
     private float distance;
 
-    private bool isAngleMoving = false;
+    private bool isAngleMoving = false;         // flag to check if player is pressing direction after reach max distance
+
+    [SerializeField]
+    private float maxDistance = 4.12f;          // Max distance allowed from the player
+    [SerializeField]
+    private float angleSpeed = 25f;             // angle speed which chest move while in limit distance
 
     protected override void stateMachineAwake()
     {
@@ -119,16 +124,16 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         // TODO - a partir do direction, calcular o angulo, em seguida encontrar o X e Y sabendo o angulo e a distância (4.12)
         // TODO - implementar o movimento em círculo, se tiver a distância de 4.12 a um angulo de 45º, e o player tiver apertando
         //        para cima, então manter a distância e continuar aumentando o angulo.
-        if (distance < 4.12f)
+        if (distance < maxDistance)
         {
             rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
         }
-        else if (distance > 4.12)
+        else if (distance > maxDistance)
         {
             //VectorUtils.angleBetweenPoints2(Vector3.zero, Vector3.one);
             float angle = VectorUtils.angleInVector3(direction);
 
-            Vector3 maxPosition = VectorUtils.createVector3(4.12f, angle);
+            Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
             rigid.MovePosition(player.transform.position + maxPosition);
 
             if(isActiveAndEnabled)
@@ -139,7 +144,7 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
             if (movingObject.direction != Vector2.zero)
                 isAngleMoving = true;
         }
-        else if (distance == 4.12f || movingObject.direction == Vector2.zero)
+        else if (distance == maxDistance || movingObject.direction == Vector2.zero)
         {
             isAngleMoving = false;
         }
@@ -149,25 +154,93 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     {
         if (isAngleMoving)
         {
-            if (movingObject.direction == VectorUtils.UP)
+            float angle = VectorUtils.angleInVector3(direction);
+            if (movingObject.direction == VectorUtils.UP && angle != 90f)
             {
-                float angle = VectorUtils.angleInVector3(direction);
-                angle += angle * 1 * Time.fixedDeltaTime;
+                if(angle < 90f)
+                {
+                    angle += angleSpeed * Time.fixedDeltaTime;
 
-                Vector3 maxPosition = VectorUtils.createVector3(4.12f, angle);
+                    if (angle >= 90f)
+                        angle = 90f;
+                }
+                else if(angle > 90f)
+                {
+                    angle -= angleSpeed * Time.fixedDeltaTime;
+
+                    if (angle <= 90f)
+                        angle = 90f;
+                }
+
+                Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
                 rigid.MovePosition(player.transform.position + maxPosition);
             }
-            else if (movingObject.direction == VectorUtils.UP_RIGHT)
+            else if (movingObject.direction == VectorUtils.UP_RIGHT && angle != 45f)
             {
+                if(angle < 45f)
+                {
+                    angle += angleSpeed * Time.fixedDeltaTime;
 
+                    if (angle >= 45f)
+                        angle = 45f;
+                }
+                else if (angle > 45f)
+                {
+                    angle -= angleSpeed * Time.fixedDeltaTime;
+
+                    if (angle <= 45f)
+                        angle = 45f;
+                }
+
+                Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
+                rigid.MovePosition(player.transform.position + maxPosition);
             }
-            else if (movingObject.direction == VectorUtils.RIGHT)
+            else if (movingObject.direction == VectorUtils.RIGHT && angle != 0f)
             {
+                if (angle < 90f)
+                {
+                    angle -= angleSpeed * Time.fixedDeltaTime;
 
+                    if (angle <= 0f)
+                        angle = 0f;
+                }
+                else if (angle > 270f)
+                {
+                    angle += angleSpeed * Time.fixedDeltaTime;
+
+                    if (angle >= 360f)
+                        angle = 0f;
+                }
+
+                Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
+                rigid.MovePosition(player.transform.position + maxPosition);
             }
-            else if (movingObject.direction == VectorUtils.DOWN_RIGHT)
+            else if (movingObject.direction == VectorUtils.DOWN_RIGHT && angle != 315f)
             {
+                if((angle > 315f && angle <= 360f) || (angle < 90f && angle >= -1f))
+                {
+                    angle -= angleSpeed * Time.fixedDeltaTime;
 
+                    //Debug.Log("angle: " + angle );
+
+                    if (angle <= 315f && angle > 270f)
+                        angle = 315f;
+                    else if (angle <= 0.0f)
+                    {
+                        angle = 360f;
+                        Debug.Log("Entrou aqui.........");
+                    }
+                }
+                else if (angle >= 270f && angle <= 315f)
+                {
+                    angle += angleSpeed * Time.fixedDeltaTime;
+
+                    if (angle >= 315f)
+                        angle = 315f;
+                }
+
+                Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
+                rigid.MovePosition(player.transform.position + maxPosition);
             }
             else if (movingObject.direction == VectorUtils.DOWN)
             {
