@@ -155,9 +155,10 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         if (isAngleMoving)
         {
             float angle = VectorUtils.angleInVector3(direction);
+
             if (movingObject.direction == VectorUtils.UP && angle != 90f)
             {
-                if(angle < 90f)
+                if (angle < 90f)
                 {
                     angle += angleSpeed * Time.fixedDeltaTime;
 
@@ -177,12 +178,14 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
             }
             else if (movingObject.direction == VectorUtils.UP_RIGHT && angle != 45f)
             {
-                if(angle < 45f)
+                if ((angle < 45f && angle >= 0f) || (angle > 270f && angle < 360f))
                 {
                     angle += angleSpeed * Time.fixedDeltaTime;
 
-                    if (angle >= 45f)
+                    if (angle >= 45f && angle  <= 90f)
                         angle = 45f;
+                    else if (angle >= 360f)
+                        angle = 0f;
                 }
                 else if (angle > 45f)
                 {
@@ -217,18 +220,17 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
             }
             else if (movingObject.direction == VectorUtils.DOWN_RIGHT && angle != 315f)
             {
-                if((angle > 315f && angle <= 360f) || (angle < 90f && angle >= -1f))
+                if ((angle > 315f && angle <= 360f) || (angle < 90f && angle >= -1f))
                 {
                     angle -= angleSpeed * Time.fixedDeltaTime;
 
-                    //Debug.Log("angle: " + angle );
-
                     if (angle <= 315f && angle > 270f)
+                    {
                         angle = 315f;
+                    }
                     else if (angle <= 0.0f)
                     {
-                        angle = 360f;
-                        Debug.Log("Entrou aqui.........");
+                        angle = 359.9f;
                     }
                 }
                 else if (angle >= 270f && angle <= 315f)
@@ -242,9 +244,27 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
                 Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
                 rigid.MovePosition(player.transform.position + maxPosition);
             }
-            else if (movingObject.direction == VectorUtils.DOWN)
+            else if (movingObject.direction == VectorUtils.DOWN && angle != 270f)
             {
+                if (angle > 270f && angle <= 360f)
+                {
+                    angle -= angleSpeed * Time.fixedDeltaTime;
 
+                    if (angle <= 270f && angle >= 180f)
+                    {
+                        angle = 270f;
+                    }
+                }
+                else if (angle >= 180f && angle < 270f)
+                {
+                    angle += angleSpeed * Time.fixedDeltaTime;
+
+                    if (angle >= 270f)
+                        angle = 270f;
+                }
+
+                Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
+                rigid.MovePosition(player.transform.position + maxPosition);
             }
             else if (movingObject.direction == VectorUtils.DOWN_LEFT)
             {
