@@ -15,6 +15,6 @@ public class ChestPositioning: ChestUnitState
 
     protected override void UpdateUnitState()
     {
-        stateMachineObject.movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
+        getInputMovementNormalized();
     }
 }
