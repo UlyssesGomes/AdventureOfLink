@@ -11,6 +11,8 @@ public class ChestPositioning: ChestUnitState
     {
         InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.CHEST;
         InputManager<InputAgentsEnum>.isLocked = true;
+
+        stateMachineObject.gizmosGuide.gameObject.SetActive(true);
     }
 
     protected override void UpdateUnitState()

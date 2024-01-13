@@ -20,20 +20,17 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     [SerializeField]
     private Player player;                      // player who create this box
 
-    // TODO - delete after chest adjust position system in placing state were implemented.
-    [SerializeField]
-    private Vector3 direction;
-    [SerializeField]
-    private float distance;
-    [SerializeField]
-    private Vector2 dir;
-
     private bool isAngleMoving = false;         // flag to check if player is pressing direction after reach max distance
 
+    [SerializeField]
+    private float distance;                     // Distance from player
     [SerializeField]
     private float maxDistance;                  // Max distance allowed from the player
     [SerializeField]
     private float angleSpeed;                   // angle speed which chest move while in limit distance
+
+    [SerializeField]
+    public PlayerGizmosGuide gizmosGuide;       // Gizmos to show chest position placement
 
     protected override void stateMachineAwake()
     {
@@ -122,17 +119,15 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         distance = Vector3.Distance(player.transform.position, rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
         
         // direction = destination - source
-        direction = transform.position - player.transform.position;
-        // TODO - a partir do direction, calcular o angulo, em seguida encontrar o X e Y sabendo o angulo e a distância (4.12)
-        // TODO - implementar o movimento em círculo, se tiver a distância de 4.12 a um angulo de 45º, e o player tiver apertando
-        //        para cima, então manter a distância e continuar aumentando o angulo.
+        Vector2 direction = transform.position - player.transform.position;
         if (distance < maxDistance)
         {
             rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
+
+            gizmosGuide.changeToWhite();
         }
         else if (distance > maxDistance)
         {
-            //VectorUtils.angleBetweenPoints2(Vector3.zero, Vector3.one);
             float angle = VectorUtils.angleInVector3(direction);
 
             Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
@@ -140,29 +135,32 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
 
             if(isActiveAndEnabled)
             {
-                positionCircularMoviment();
+                positionCircularMoviment(direction);
             }
 
             if (movingObject.direction != Vector2.zero)
                 isAngleMoving = true;
+
         }
         else if (distance == maxDistance || movingObject.direction == Vector2.zero)
         {
             isAngleMoving = false;
         }
+
+        if(distance == maxDistance)
+            gizmosGuide.changeToRed();
     }
 
     /// <summary>
     /// Calculate chest position and if its over distance limits, the chest starts circulating 
     /// around the player, respecting the maximum distance.
     /// </summary>
-    private void positionCircularMoviment()
+    private void positionCircularMoviment(Vector2 direction)
     {
         if (isAngleMoving)
         {
             float angle = VectorUtils.angleInVector3(direction);
 
-            dir = movingObject.direction;
             if (movingObject.direction == VectorUtils.UP.normalized && angle != 90f)
             {
                 if (angle >= 0f && angle < 90f)
