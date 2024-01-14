@@ -23,9 +23,13 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     private bool isAngleMoving = false;         // flag to check if player is pressing direction after reach max distance
 
     [SerializeField]
+    private float angle;                        // current angle between player and chest
+    [SerializeField]
     private float distance;                     // Distance from player
     [SerializeField]
     private float maxDistance;                  // Max distance allowed from the player
+    [SerializeField]
+    private float distanceTolerance = 0.01f;    // tolerance to round value
     [SerializeField]
     private float angleSpeed;                   // angle speed which chest move while in limit distance
 
@@ -46,6 +50,12 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         movingObject.baseSpeed = movingObject.currentSpeed = 3;
 
         colorDefault = sprite.color;
+
+        distance = Vector3.Distance(player.transform.position, rigid.position);
+        if(distance >= maxDistance)
+            gizmosGuide.changeToRed();
+        else
+            gizmosGuide.changeToWhite();
     }
 
     protected override void stateMachineUpdate()
@@ -117,38 +127,40 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     private void onMove()
     {
         distance = Vector3.Distance(player.transform.position, rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
-        
-        // direction = destination - source
-        Vector2 direction = transform.position - player.transform.position;
-        if (distance < maxDistance)
+        if (movingObject.direction != Vector2.zero || distance > maxDistance)
         {
-            rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
-
-            gizmosGuide.changeToWhite();
-        }
-        else if (distance > maxDistance)
-        {
-            float angle = VectorUtils.angleInVector3(direction);
-
-            Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
-            rigid.MovePosition(player.transform.position + maxPosition);
-
-            if(isActiveAndEnabled)
+            // direction = destination - source
+            Vector2 direction = transform.position - player.transform.position;
+            if (distance <= maxDistance)
             {
-                positionCircularMoviment(direction);
+                rigid.MovePosition(rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
+
+                gizmosGuide.changeToWhite();
+            }
+            else if (distance > maxDistance)
+            {
+                float angle = VectorUtils.angleInVector3(direction);
+
+                Vector3 maxPosition = VectorUtils.createVector3(maxDistance, angle);
+                rigid.MovePosition(player.transform.position + maxPosition);
+
+                if(isActiveAndEnabled)
+                {
+                    positionCircularMoviment(direction);
+                }
+
+                if (movingObject.direction != Vector2.zero)
+                    isAngleMoving = true;
+
+            }
+            else if (distance == maxDistance || movingObject.direction == Vector2.zero)
+            {
+                isAngleMoving = false;
             }
 
-            if (movingObject.direction != Vector2.zero)
-                isAngleMoving = true;
-
+            if(distance + distanceTolerance >= maxDistance)
+                gizmosGuide.changeToRed();
         }
-        else if (distance == maxDistance || movingObject.direction == Vector2.zero)
-        {
-            isAngleMoving = false;
-        }
-
-        if(distance == maxDistance)
-            gizmosGuide.changeToRed();
     }
 
     /// <summary>
@@ -159,7 +171,7 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     {
         if (isAngleMoving)
         {
-            float angle = VectorUtils.angleInVector3(direction);
+            angle = VectorUtils.angleInVector3(direction);
 
             if (movingObject.direction == VectorUtils.UP.normalized && angle != 90f)
             {
@@ -239,6 +251,9 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
             }
             else if (movingObject.direction == VectorUtils.DOWN.normalized && angle != 270f)
             {
+                if (angle == 0f)
+                    angle = 360f;
+
                 if (angle > 270f && angle <= 360f)
                 {
                     angle -= angleSpeed * Time.fixedDeltaTime;

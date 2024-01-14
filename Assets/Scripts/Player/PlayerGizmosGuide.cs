@@ -9,13 +9,6 @@ public class PlayerGizmosGuide : MonoBehaviour
     [SerializeField]
     private Color redColor;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        whiteColor = new Color(1, 1, 1, 0.8f);
-        redColor = new Color(0.741f, 0.031f, 0.031f, 1.0f);
-    }
-
     /// <summary>
     /// Set enable to show and hide player gizmos guide.
     /// </summary>
@@ -30,8 +23,10 @@ public class PlayerGizmosGuide : MonoBehaviour
     /// </summary>
     public void changeToWhite()
     {
-        gizmoSprite.color = whiteColor;
-        Debug.Log("Mudou para branco.");
+        if(gizmoSprite.color != whiteColor)
+            gizmoSprite.color = whiteColor;
+
+        Debug.Log("white called.");
     }
 
     /// <summary>
@@ -39,7 +34,9 @@ public class PlayerGizmosGuide : MonoBehaviour
     /// </summary>
     public void changeToRed()
     {
-        gizmoSprite.color = redColor;
-        Debug.Log("Mudou para vermelho.");
+        if(gizmoSprite.color != redColor)
+            gizmoSprite.color = redColor;
+
+        Debug.Log("red called.");
     }
 }
