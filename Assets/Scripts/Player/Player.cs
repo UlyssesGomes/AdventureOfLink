@@ -33,11 +33,11 @@ public class Player : StateMachineController<Player>
         {
             icons.Add(playerIconsEnum[u], playerIconsSprite[u]);
         }
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     protected override void stateMachineStart()
     {
-        rigid = GetComponent<Rigidbody2D>();
         playerInventory = GetComponent("PlayerInventory") as PlayerInventory;
         playerBuildingSkills = GetComponent("PlayerBuildingSkills") as PlayerBuildingSkills;
         movingObject = new MovingObject();
@@ -108,6 +108,24 @@ public class Player : StateMachineController<Player>
     public void hideIcon()
     {
         iconSpriteRenderer.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Lock player to be moved or not by collision. If isLocked true then
+    /// the player will be set to rigid body type to static, dynamic will
+    /// be set otherwise.
+    /// </summary>
+    /// <param name="isLocked"></param>
+    public void setLockPlayer(bool isLocked)
+    {
+        if (isLocked)
+        {
+            rigid.bodyType = RigidbodyType2D.Static;
+        }
+        else
+        {
+            rigid.bodyType = RigidbodyType2D.Dynamic;
+        }
     }
 
     #region Moviment

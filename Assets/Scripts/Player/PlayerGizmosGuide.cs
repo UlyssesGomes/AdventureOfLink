@@ -25,8 +25,6 @@ public class PlayerGizmosGuide : MonoBehaviour
     {
         if(gizmoSprite.color != whiteColor)
             gizmoSprite.color = whiteColor;
-
-        Debug.Log("white called.");
     }
 
     /// <summary>
@@ -36,7 +34,5 @@ public class PlayerGizmosGuide : MonoBehaviour
     {
         if(gizmoSprite.color != redColor)
             gizmoSprite.color = redColor;
-
-        Debug.Log("red called.");
     }
 }

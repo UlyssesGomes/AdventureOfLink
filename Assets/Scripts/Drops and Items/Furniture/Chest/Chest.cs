@@ -3,7 +3,7 @@
 public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
 {
     [SerializeField]
-    protected ChestItem furnitureAsset;         // item that this class intance will generate after collistion
+    protected ChestItem furnitureAsset;         // scritable object to get its properties, DONT CHANGE ITS VALUES
     [SerializeField]
     protected SpriteRenderer sprite;            // sprite to render on screen
 
@@ -12,6 +12,7 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
 
     [HideInInspector]
     public bool canPlace;                       // enable when chest must be placed in the ground (its not in collision)
+    private bool isPlaced;                      // flag to control if chest is placed or not on the ground.
 
     [SerializeField]
     private Color colorTransparent;             // color used to make the chest transparent when placing is blocked
@@ -43,9 +44,9 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
 
     protected override void stateMachineStart()
     {
-        furnitureAsset = Instantiate(furnitureAsset);
+        setPlacedChest(false);
+
         sprite.sprite = furnitureAsset.sprite;
-        furnitureAsset.itemName = "Baú alterado.";
 
         movingObject.baseSpeed = movingObject.currentSpeed = 3;
 
@@ -53,9 +54,15 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
 
         distance = Vector3.Distance(player.transform.position, rigid.position);
         if(distance >= maxDistance)
+        {
+            canPlace = false;
             gizmosGuide.changeToRed();
+        }
         else
+        {
+            canPlace = true;
             gizmosGuide.changeToWhite();
+        }
     }
 
     protected override void stateMachineUpdate()
@@ -79,6 +86,7 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     protected override void instantiateAllUnitStates()
     {
         addUnitStateInstance(new ChestPositioning());
+        addUnitStateInstance(new ChestPlaced());
     }
 
     /// <summary>
@@ -342,8 +350,29 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     {
         if (isEnable)
             sprite.color = colorDefault;
-        else
+        else if(!isEnable && !isPlaced)
             sprite.color = colorTransparent;
         canPlace = isEnable;
+    }
+
+    /// <summary>
+    /// Change the body type of the chest depending on whether it is fixed to the 
+    /// ground or not. When fixed, change from dynamic to static.
+    /// </summary>
+    /// <param name="isPlaced"></param>
+    public void setPlacedChest(bool isPlaced)
+    {
+        if(isPlaced)
+        {
+            rigid.bodyType = RigidbodyType2D.Static;
+            player.setLockPlayer(false);
+        }
+        else
+        {
+            rigid.bodyType = RigidbodyType2D.Dynamic;
+            player.setLockPlayer(true);
+        }
+
+        this.isPlaced = isPlaced;
     }
 }
