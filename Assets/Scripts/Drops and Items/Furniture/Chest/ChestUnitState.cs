@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class ChestUnitState : UnitState<Chest>
+public abstract class ChestUnitState : UnitState<FurniturePlacement>
 {
     protected InputManager<InputAgentsEnum> input = new InputManager<InputAgentsEnum>(InputAgentsEnum.CHEST);
 

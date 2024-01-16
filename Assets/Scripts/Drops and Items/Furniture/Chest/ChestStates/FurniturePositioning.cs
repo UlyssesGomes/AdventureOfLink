@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class ChestPositioning: ChestUnitState
+public class FurniturePositioning: ChestUnitState
 {
     public override int getUnitCurrentStateKey()
     {
-        return (int) ChestStateEnum.CHEST_POSITIONING;
+        return (int) ChestStateEnum.FURNITURE_POSITIONING;
     }
 
     public override void startState()
@@ -22,7 +22,7 @@ public class ChestPositioning: ChestUnitState
 
         if(input.GetKey(KeyCode.F) && stateMachineObject.canPlace)
         {
-            callNextState((int) ChestStateEnum.CHEST_PLACED);
+            callNextState((int) ChestStateEnum.FURNITURE_PLACED);
             InputManager<InputAgentsEnum>.isLocked = false;
             stateMachineObject.gizmosGuide.setEnable(false);
         }

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class ChestPlaced : ChestUnitState
+public class FurniturePlaced : ChestUnitState
 {
     public override int getUnitCurrentStateKey()
     {
-        return (int) ChestStateEnum.CHEST_PLACED;
+        return (int) ChestStateEnum.FURNITURE_PLACED;
     }
 
     public override void startState()

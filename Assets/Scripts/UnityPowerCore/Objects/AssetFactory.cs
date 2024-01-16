@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 
-public class DropAssetManager : MonoBehaviour
+public class AssetFactory : MonoBehaviour
 {
     [SerializeField]
     private GameItem[] assetsCollections;                   // items availables in memory
@@ -29,7 +29,7 @@ public class DropAssetManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Return and item by its id to check infos only.
+    /// Return and item by its id to check infos only. Dont modify this values.
     /// </summary>
     /// <param name="itemId">int item id</param>
     /// <returns>GameItem associated with past id</returns>

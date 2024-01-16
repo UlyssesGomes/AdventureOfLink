@@ -11,11 +11,14 @@ public class Player : StateMachineController<Player>
 
     public PlayerBuildingSkills playerBuildingSkills;           // building skills script
 
+    public FurniturePlacement furniturePlacement;               // component with placemente furniture implementation to guide player to place furniture
+    public PlayerGizmosGuide gizmosGuide;                       // gizmos to help player to place furniture on the map
+
     public bool isFishing;                                      // if true, player can fishing
 
     public bool reachFinalSpriteFrame;                          // used to control by animator when the last frame of animation is displayed
 
-    public DropAssetManager assetManager;                       // Manager of assets available in memory.
+    public AssetFactory assetfactory;                           // Manager of assets available in memory.
 
     [SerializeField]
     private PlayerIconsEnum [] playerIconsEnum;                 // array of int respresent icons
@@ -43,14 +46,24 @@ public class Player : StateMachineController<Player>
         movingObject = new MovingObject();
         movingObject.baseSpeed = 4;
         isFishing = false;
+
+        furniturePlacement.enablePlacement(false);
     }
 
     protected override void stateMachineUpdate()
-    { }
+    {
+        // TODO - initial test to furniture placemente, remove after works correctly
+        if(Input.GetKey(KeyCode.P))
+        {
+            furniturePlacement.setDataPlacement(this, assetfactory.checkItemInfo((int) ItemIdEnum.CHEST) as DrawableItem);
+            furniturePlacement.enablePlacement(true);
+        }
+    }
 
     protected override void stateMachineFixedUpdate()
     {
-        OnMove();
+        if(rigid.bodyType != RigidbodyType2D.Static)
+            OnMove();
     }
 
     protected override UnitState<Player> getFirstState()

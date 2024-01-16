@@ -176,7 +176,7 @@ public class BuildingMenuController : MonoBehaviour
 
                 if (isRemovedAll)
                 {
-                    GameItem g = player.assetManager.instanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
+                    GameItem g = player.assetfactory.instanceGameItemByItemId((int)descriptionPanel.currentBuildingSkill.itemId);
                     g.amount = descriptionPanel.currentBuildingSkill.amountGenerated;
                     int initialAmount = g.amount;
                     int amountAdded = player.playerInventory.addStoreItem(g);
@@ -213,7 +213,7 @@ public class BuildingMenuController : MonoBehaviour
     /// <returns></returns>
     private bool checkSpaceAvailability(BuildingSkill buildingSkill)
     {
-        GameItem gameItem = player.assetManager.checkItemInfo((int)buildingSkill.itemId);
+        GameItem gameItem = player.assetfactory.checkItemInfo((int)buildingSkill.itemId);
         int amount = buildingSkill.amountGenerated;
 
         if(amount <= player.playerInventory.countFreeCapacityByGameItem(gameItem))

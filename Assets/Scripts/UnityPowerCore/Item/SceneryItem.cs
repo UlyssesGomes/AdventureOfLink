@@ -24,7 +24,7 @@ public abstract class SceneryItem<T> : MonoBehaviour where T : GameItem
         }
         else if(collision.CompareTag("Chest"))
         {
-            Chest chest = collision.transform.GetComponent<Chest>();
+            FurniturePlacement chest = collision.transform.GetComponent<FurniturePlacement>();
             chest.canPlace = false;
         }
     }

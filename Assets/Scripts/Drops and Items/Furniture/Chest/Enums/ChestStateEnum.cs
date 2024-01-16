@@ -1,5 +1,5 @@
 ﻿public enum ChestStateEnum : int
 {
-    CHEST_POSITIONING,
-    CHEST_PLACED
+    FURNITURE_POSITIONING,
+    FURNITURE_PLACED
 }

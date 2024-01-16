@@ -1,25 +1,29 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
-public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
+public class FurniturePlacement : StateMachineController<FurniturePlacement>
 {
-    [SerializeField]
-    protected ChestItem furnitureAsset;         // scritable object to get its properties, DONT CHANGE ITS VALUES
+    //[SerializeField]
+    protected DrawableItem furnitureAsset;      // scritable object to get its properties, DONT CHANGE ITS VALUES
     [SerializeField]
     protected SpriteRenderer sprite;            // sprite to render on screen
 
+    //[SerializeField]
+    private Player player;                      // player who create this box
+    public PlayerGizmosGuide gizmosGuide;       // Gizmos to show chest position placement
+
     public Rigidbody2D rigid;                   // collision component
+    public PolygonCollider2D collider;          // collider of object to be placed
     public MovingObject movingObject;           // object speed controller
 
     [HideInInspector]
     public bool canPlace;                       // enable when chest must be placed in the ground (its not in collision)
+    [SerializeField]
     private bool isPlaced;                      // flag to control if chest is placed or not on the ground.
 
     [SerializeField]
     private Color colorTransparent;             // color used to make the chest transparent when placing is blocked
     private Color colorDefault;                 // default color to be used on the chest when placing is allowed
-
-    [SerializeField]
-    private Player player;                      // player who create this box
 
     private bool isAngleMoving = false;         // flag to check if player is pressing direction after reach max distance
 
@@ -34,9 +38,6 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     [SerializeField]
     private float angleSpeed;                   // angle speed which chest move while in limit distance
 
-    [SerializeField]
-    public PlayerGizmosGuide gizmosGuide;       // Gizmos to show chest position placement
-
     protected override void stateMachineAwake()
     {
         movingObject = new MovingObject();
@@ -44,13 +45,10 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
 
     protected override void stateMachineStart()
     {
+        Debug.Log("FurniturePlacement -> start()");
         setPlacedChest(false);
 
-        sprite.sprite = furnitureAsset.sprite;
-
         movingObject.baseSpeed = movingObject.currentSpeed = 3;
-
-        colorDefault = sprite.color;
 
         distance = Vector3.Distance(player.transform.position, rigid.position);
         if(distance >= maxDistance)
@@ -73,61 +71,61 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         onMove();
     }
 
-    protected override UnitState<Chest> getFirstState()
+    protected override UnitState<FurniturePlacement> getFirstState()
     {
-        return getNextState((int)ChestStateEnum.CHEST_POSITIONING);
+        return getNextState((int)ChestStateEnum.FURNITURE_POSITIONING);
     }
 
-    protected override Chest getStateMachineObject()
+    protected override FurniturePlacement getStateMachineObject()
     {
         return this;
     }
 
     protected override void instantiateAllUnitStates()
     {
-        addUnitStateInstance(new ChestPositioning());
-        addUnitStateInstance(new ChestPlaced());
+        addUnitStateInstance(new FurniturePositioning());
+        addUnitStateInstance(new FurniturePlaced());
     }
 
     /// <summary>
     /// Method to call interact() when player in collision with this object's interaction area.
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            interact();
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player"))
+    //    {
+    //        interact();
+    //    }
+    //}
 
     /// <summary>
     /// Method to call getAway() when player is no more in collision with this object's interaction area.
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            getAway();
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("Player"))
+    //    {
+    //        getAway();
+    //    }
+    //}
     
     /// <summary>
     /// Close chest to interaction.
     /// </summary>
-    protected void getAway()
-    {
-        sprite.sprite = furnitureAsset.sprite;
-    }
+    //protected void getAway()
+    //{
+    //    sprite.sprite = furnitureAsset.sprite;
+    //}
 
     /// <summary>
     /// Open chest to interact.
     /// </summary>
-    protected void interact()
-    {
-        sprite.sprite = furnitureAsset.openedChesterSprite;
-    }
+    //protected void interact()
+    //{
+    //    sprite.sprite = furnitureAsset.openedChesterSprite;
+    //}
 
     /// <summary>
     /// Chest move method to place chest on the ground.
@@ -348,6 +346,7 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     /// <param name="isEnable">Enable param</param>
     public void enablePlace(bool isEnable)
     {
+        Debug.Log("FurniturePlacement -> enablePlace()");
         if (isEnable)
             sprite.color = colorDefault;
         else if(!isEnable && !isPlaced)
@@ -362,7 +361,8 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
     /// <param name="isPlaced"></param>
     public void setPlacedChest(bool isPlaced)
     {
-        if(isPlaced)
+        Debug.Log("FurniturePlacement -> setPlacedChest()");
+        if (isPlaced)
         {
             rigid.bodyType = RigidbodyType2D.Static;
             player.setLockPlayer(false);
@@ -374,5 +374,37 @@ public class Chest : StateMachineController<Chest> //Furniture<ChestItem>
         }
 
         this.isPlaced = isPlaced;
+    }
+
+    public void setDataPlacement(Player player, DrawableItem furnitureAsset)
+    {
+        this.player = player;
+        this.furnitureAsset = furnitureAsset;
+
+        gizmosGuide = player.gizmosGuide;
+
+        sprite.sprite = furnitureAsset.sprite;
+        updateSpritePhysicsShape();
+
+        colorDefault = sprite.color;
+    }
+
+    public void enablePlacement(bool isEnable)
+    {
+        gameObject.SetActive(isEnable);
+    }
+
+    private void updateSpritePhysicsShape()
+    {
+        collider.pathCount = sprite.sprite.GetPhysicsShapeCount();
+
+        List<Vector2> path = new List<Vector2>();
+
+        for (int i = 0; i < collider.pathCount; i++)
+        {
+            path.Clear();
+            sprite.sprite.GetPhysicsShape(i, path);
+            collider.SetPath(i, path.ToArray());
+        }
     }
 }
