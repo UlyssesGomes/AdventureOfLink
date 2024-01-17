@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class FurniturePlacement : StateMachineController<FurniturePlacement>
+public class FurniturePlacement : MonoBehaviour
 {
     //[SerializeField]
     protected DrawableItem furnitureAsset;      // scritable object to get its properties, DONT CHANGE ITS VALUES
@@ -18,8 +18,6 @@ public class FurniturePlacement : StateMachineController<FurniturePlacement>
 
     [HideInInspector]
     public bool canPlace;                       // enable when chest must be placed in the ground (its not in collision)
-    [SerializeField]
-    private bool isPlaced;                      // flag to control if chest is placed or not on the ground.
 
     [SerializeField]
     private Color colorTransparent;             // color used to make the chest transparent when placing is blocked
@@ -38,20 +36,19 @@ public class FurniturePlacement : StateMachineController<FurniturePlacement>
     [SerializeField]
     private float angleSpeed;                   // angle speed which chest move while in limit distance
 
-    protected override void stateMachineAwake()
+    protected InputManager<InputAgentsEnum> input = new InputManager<InputAgentsEnum>(InputAgentsEnum.CHEST);
+
+    private void Awake()
     {
         movingObject = new MovingObject();
     }
 
-    protected override void stateMachineStart()
+    private void Start()
     {
-        Debug.Log("FurniturePlacement -> start()");
-        setPlacedChest(false);
-
         movingObject.baseSpeed = movingObject.currentSpeed = 3;
 
         distance = Vector3.Distance(player.transform.position, rigid.position);
-        if(distance >= maxDistance)
+        if (distance >= maxDistance)
         {
             canPlace = false;
             gizmosGuide.changeToRed();
@@ -63,28 +60,26 @@ public class FurniturePlacement : StateMachineController<FurniturePlacement>
         }
     }
 
-    protected override void stateMachineUpdate()
-    { }
+    private void Update()
+    {
+        getInputMovementNormalized();
 
-    protected override void stateMachineFixedUpdate()
+        if (input.GetKey(KeyCode.F) && canPlace)
+        {
+            InputManager<InputAgentsEnum>.isLocked = false;
+            enablePlacement(false);
+            //callNextState((int) ChestStateEnum.FURNITURE_PLACED);
+        }
+        else if (input.GetKey(KeyCode.F) && !canPlace)
+        {
+            // TODO - emit "tandan" sound, because chest cant be placed.
+            Debug.LogWarning("TANDAN - the chest cant be placed here.");
+        }
+    }
+
+    private void FixedUpdate()
     {
         onMove();
-    }
-
-    protected override UnitState<FurniturePlacement> getFirstState()
-    {
-        return getNextState((int)ChestStateEnum.FURNITURE_POSITIONING);
-    }
-
-    protected override FurniturePlacement getStateMachineObject()
-    {
-        return this;
-    }
-
-    protected override void instantiateAllUnitStates()
-    {
-        addUnitStateInstance(new FurniturePositioning());
-        addUnitStateInstance(new FurniturePlaced());
     }
 
     /// <summary>
@@ -346,36 +341,18 @@ public class FurniturePlacement : StateMachineController<FurniturePlacement>
     /// <param name="isEnable">Enable param</param>
     public void enablePlace(bool isEnable)
     {
-        Debug.Log("FurniturePlacement -> enablePlace()");
         if (isEnable)
             sprite.color = colorDefault;
-        else if(!isEnable && !isPlaced)
+        else
             sprite.color = colorTransparent;
         canPlace = isEnable;
     }
 
     /// <summary>
-    /// Change the body type of the chest depending on whether it is fixed to the 
-    /// ground or not. When fixed, change from dynamic to static.
+    /// Update guizmo UI with a player and new furniture to be shown.
     /// </summary>
-    /// <param name="isPlaced"></param>
-    public void setPlacedChest(bool isPlaced)
-    {
-        Debug.Log("FurniturePlacement -> setPlacedChest()");
-        if (isPlaced)
-        {
-            rigid.bodyType = RigidbodyType2D.Static;
-            player.setLockPlayer(false);
-        }
-        else
-        {
-            rigid.bodyType = RigidbodyType2D.Dynamic;
-            player.setLockPlayer(true);
-        }
-
-        this.isPlaced = isPlaced;
-    }
-
+    /// <param name="player">player that will shown the guizmo ui</param>
+    /// <param name="furnitureAsset">furniture to get sprite of the object to be placed</param>
     public void setDataPlacement(Player player, DrawableItem furnitureAsset)
     {
         this.player = player;
@@ -389,11 +366,34 @@ public class FurniturePlacement : StateMachineController<FurniturePlacement>
         colorDefault = sprite.color;
     }
 
+    /// <summary>
+    /// Enable guizmo UI on screen.
+    /// </summary>
+    /// <param name="isEnable"></param>
     public void enablePlacement(bool isEnable)
     {
         gameObject.SetActive(isEnable);
+        if(gizmosGuide)
+            gizmosGuide.setEnable(isEnable);
+
+        if(player)
+        {
+            Debug.Log("Atualizando player.");
+            if (isEnable)
+                player.setLockPlayer(true);
+            else
+                player.setLockPlayer(false);
+        }
+
+        if(isEnable)
+            InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.CHEST;
+        InputManager<InputAgentsEnum>.isLocked = isEnable;
+
     }
 
+    /// <summary>
+    /// Update PolygonCollider2D with custom shape of the sprite in use.
+    /// </summary>
     private void updateSpritePhysicsShape()
     {
         collider.pathCount = sprite.sprite.GetPhysicsShapeCount();
@@ -406,5 +406,12 @@ public class FurniturePlacement : StateMachineController<FurniturePlacement>
             sprite.sprite.GetPhysicsShape(i, path);
             collider.SetPath(i, path.ToArray());
         }
+    }
+
+    private void getInputMovementNormalized()
+    {
+        movingObject.direction = new Vector2(input.GetAxisRaw("Horizontal"), input.GetAxisRaw("Vertical"));
+        if (movingObject.direction.x != 0.0f && movingObject.direction.y != 0.0f)
+            movingObject.direction.Normalize();
     }
 }

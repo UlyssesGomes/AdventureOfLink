@@ -133,6 +133,7 @@ public class Player : StateMachineController<Player>
     {
         if (isLocked)
         {
+            Debug.Log("Player Locked.");
             rigid.bodyType = RigidbodyType2D.Static;
         }
         else

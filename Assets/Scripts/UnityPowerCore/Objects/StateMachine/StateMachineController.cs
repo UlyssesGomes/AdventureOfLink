@@ -36,6 +36,10 @@ public abstract class StateMachineController<T> : MonoBehaviour
     {
         stateMachineUpdate();
         currentUnitState.Update();
+        if(currentUnitState == null)
+        {
+            Debug.Log("state machine child (update)" + this.name);
+        }
 
         if (!currentUnitState.isRunning)
         {
