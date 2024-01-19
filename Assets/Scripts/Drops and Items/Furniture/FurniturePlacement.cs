@@ -66,9 +66,13 @@ public class FurniturePlacement : MonoBehaviour
 
         if (input.GetKey(KeyCode.F) && canPlace)
         {
-            InputManager<InputAgentsEnum>.isLocked = false;
-            enablePlacement(false);
+            disableFurniturePlacement();
             //callNextState((int) ChestStateEnum.FURNITURE_PLACED);
+        }
+        else if(input.GetKey(KeyCode.Escape))
+        {
+            disableFurniturePlacement();
+
         }
         else if (input.GetKey(KeyCode.F) && !canPlace)
         {
@@ -83,48 +87,14 @@ public class FurniturePlacement : MonoBehaviour
     }
 
     /// <summary>
-    /// Method to call interact() when player in collision with this object's interaction area.
+    /// Unlock player.
     /// </summary>
-    /// <param name="collision"></param>
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player"))
-    //    {
-    //        interact();
-    //    }
-    //}
+    private void disableFurniturePlacement()
+    {
+        InputManager<InputAgentsEnum>.isLocked = false;
+        enablePlacement(false);
+    }
 
-    /// <summary>
-    /// Method to call getAway() when player is no more in collision with this object's interaction area.
-    /// </summary>
-    /// <param name="collision"></param>
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player"))
-    //    {
-    //        getAway();
-    //    }
-    //}
-    
-    /// <summary>
-    /// Close chest to interaction.
-    /// </summary>
-    //protected void getAway()
-    //{
-    //    sprite.sprite = furnitureAsset.sprite;
-    //}
-
-    /// <summary>
-    /// Open chest to interact.
-    /// </summary>
-    //protected void interact()
-    //{
-    //    sprite.sprite = furnitureAsset.openedChesterSprite;
-    //}
-
-    /// <summary>
-    /// Chest move method to place chest on the ground.
-    /// </summary>
     private void onMove()
     {
         distance = Vector3.Distance(player.transform.position, rigid.position + movingObject.direction * movingObject.currentSpeed * Time.fixedDeltaTime);
@@ -361,9 +331,12 @@ public class FurniturePlacement : MonoBehaviour
         gizmosGuide = player.gizmosGuide;
 
         sprite.sprite = furnitureAsset.sprite;
+        colorDefault = sprite.color;
         updateSpritePhysicsShape();
 
-        colorDefault = sprite.color;
+
+        Vector3 v = new Vector3(1.5f, 0f);
+        transform.position = player.transform.position + v;
     }
 
     /// <summary>
@@ -378,7 +351,6 @@ public class FurniturePlacement : MonoBehaviour
 
         if(player)
         {
-            Debug.Log("Atualizando player.");
             if (isEnable)
                 player.setLockPlayer(true);
             else
