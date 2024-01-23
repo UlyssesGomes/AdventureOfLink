@@ -8,6 +8,10 @@ public class AssetFactory : MonoBehaviour
     private GameItem[] assetsCollections;                   // items availables in memory
     private Dictionary<int, GameItem> assetsDictionary;     // dictionary to find these items quickly
 
+    [SerializeField]
+    private GameObject[] furniturePrefabs;
+    private Dictionary<int, GameObject> furnitureDictionary;
+
     private void Start()
     {
         assetsDictionary = new Dictionary<int, GameItem>();
@@ -15,6 +19,15 @@ public class AssetFactory : MonoBehaviour
         foreach(GameItem g in assetsCollections)
         {
             assetsDictionary.Add((int)g.itemId, g);
+        }
+
+
+        furnitureDictionary = new Dictionary<int, GameObject>();
+        foreach (GameObject gameObject in furniturePrefabs)
+        {
+            Furniture furniture = gameObject.GetComponent<Furniture>();
+            int itemId = furniture.getItemId();
+            furnitureDictionary.Add(itemId, gameObject);
         }
     }
 
