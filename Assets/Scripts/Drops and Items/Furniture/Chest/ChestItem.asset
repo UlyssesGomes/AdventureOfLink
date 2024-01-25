@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34bdc6e3506f8d4bbaf2d933bdb687a, type: 3}
   m_Name: ChestItem
   m_EditorClassIdentifier: 
-  id: 12
+  id: 6
   itemId: 15
-  type: 0
+  type: 6
   itemName: "Ba\xFA"
   isStackable: 0
   isViewPercent: 0

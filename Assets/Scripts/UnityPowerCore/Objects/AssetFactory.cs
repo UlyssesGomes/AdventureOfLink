@@ -21,7 +21,6 @@ public class AssetFactory : MonoBehaviour
             assetsDictionary.Add((int)g.itemId, g);
         }
 
-
         furnitureDictionary = new Dictionary<int, GameObject>();
         foreach (GameObject gameObject in furniturePrefabs)
         {
@@ -32,7 +31,7 @@ public class AssetFactory : MonoBehaviour
     }
 
     /// <summary>
-    /// Intantiate a SerializableObject by its itemId value.
+    /// Instantiate a SerializableObject by its itemId value.
     /// </summary>
     /// <param name="itemId">id of desired item</param>
     /// <returns>Desired GameItem instance</returns>
@@ -42,12 +41,22 @@ public class AssetFactory : MonoBehaviour
     }
 
     /// <summary>
-    /// Return and item by its id to check infos only. Dont modify this values.
+    /// Return an item by its id to check infos only. Dont modify this values.
     /// </summary>
     /// <param name="itemId">int item id</param>
     /// <returns>GameItem associated with past id</returns>
     public GameItem checkItemInfo(int itemId)
     {
         return assetsDictionary[itemId];
+    }
+
+    /// <summary>
+    /// Instantiate a GameObject by its itemId value.
+    /// </summary>
+    /// <param name="itemId">id of disired item</param>
+    /// <returns>Desired GameObject</returns>
+    public GameObject instanceGameObjectByItemId(int itemId)
+    {
+        return Instantiate(furnitureDictionary[itemId]);
     }
 }
