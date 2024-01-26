@@ -8,4 +8,5 @@
     NAIL = ItemIdEnum.NAIL,
     PAVING_STONE = ItemIdEnum.PAVING_STONE,
     PLANK = ItemIdEnum.PLANK,
+    CHEST = ItemIdEnum.CHEST
 }

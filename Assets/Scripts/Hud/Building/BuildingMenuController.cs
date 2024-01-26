@@ -200,6 +200,13 @@ public class BuildingMenuController : MonoBehaviour
         else if(descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.HOUSE)
         {
 
+            bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
+
+            if (isRemovedAll)
+            {
+                invertOpenState();
+                player.enablePlacementUi((int)descriptionPanel.currentBuildingSkill.itemId);
+            }
         }
 
         if (isItemAdded)

@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 public class FurniturePlacement : MonoBehaviour
 {
-    //[SerializeField]
     protected DrawableItem furnitureAsset;      // scritable object to get its properties, DONT CHANGE ITS VALUES
     [SerializeField]
     protected SpriteRenderer sprite;            // sprite to render on screen
 
-    //[SerializeField]
     private Player player;                      // player who create this box
     public PlayerGizmosGuide gizmosGuide;       // Gizmos to show chest position placement
 
@@ -20,8 +18,9 @@ public class FurniturePlacement : MonoBehaviour
     public bool canPlace;                       // enable when chest must be placed in the ground (its not in collision)
 
     [SerializeField]
-    private Color colorTransparent;             // color used to make the chest transparent when placing is blocked
-    private Color colorDefault;                 // default color to be used on the chest when placing is allowed
+    private Color chestColorBlocked;            // color used in the chest to indicate that this chest cant be placed in its current possition
+    [SerializeField]
+    private Color chestColorDefault;            // default color to be used on the chest when placing is allowed
 
     private bool isAngleMoving = false;         // flag to check if player is pressing direction after reach max distance
 
@@ -190,7 +189,7 @@ public class FurniturePlacement : MonoBehaviour
                     if (angle <= 0f)
                         angle = 0f;
                 }
-                else if (angle > 270f && angle < 360)
+                else if (angle >= 270f && angle < 360)
                 {
                     angle += angleSpeed * Time.fixedDeltaTime;
 
@@ -313,9 +312,9 @@ public class FurniturePlacement : MonoBehaviour
     public void enablePlace(bool isEnable)
     {
         if (isEnable)
-            sprite.color = colorDefault;
+            sprite.color = chestColorDefault;
         else
-            sprite.color = colorTransparent;
+            sprite.color = chestColorBlocked;
         canPlace = isEnable;
     }
 
@@ -332,7 +331,7 @@ public class FurniturePlacement : MonoBehaviour
         gizmosGuide = player.gizmosGuide;
 
         sprite.sprite = furnitureAsset.sprite;
-        colorDefault = sprite.color;
+        sprite.color = chestColorDefault;
         updateSpritePhysicsShape();
 
 

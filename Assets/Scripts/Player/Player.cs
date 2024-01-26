@@ -51,14 +51,7 @@ public class Player : StateMachineController<Player>
     }
 
     protected override void stateMachineUpdate()
-    {
-        // TODO - initial test to furniture placemente, remove after works correctly
-        if(Input.GetKey(KeyCode.P))
-        {
-            furniturePlacement.setDataPlacement(this, assetfactory.checkItemInfo((int) ItemIdEnum.CHEST) as DrawableItem);
-            furniturePlacement.enablePlacement(true);
-        }
-    }
+    { }
 
     protected override void stateMachineFixedUpdate()
     {
@@ -139,6 +132,16 @@ public class Player : StateMachineController<Player>
         {
             rigid.bodyType = RigidbodyType2D.Dynamic;
         }
+    }
+
+    /// <summary>
+    /// Enable placement ui and show placement limits and item.
+    /// </summary>
+    /// <param name="itemId">id of the item that will be positioned</param>
+    public void enablePlacementUi(int itemId)
+    {
+        furniturePlacement.setDataPlacement(this, assetfactory.checkItemInfo((int)ItemIdEnum.CHEST) as DrawableItem);
+        furniturePlacement.enablePlacement(true);
     }
 
     #region Moviment

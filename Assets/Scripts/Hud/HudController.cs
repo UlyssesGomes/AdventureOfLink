@@ -19,6 +19,7 @@ public class HudController : MonoBehaviour
     private List<Observer<int>> slotListObservers;
 
     private bool isInSelection;
+    [SerializeField]
     private ActiveUiEnum currentActiveUi;
 
     private InputManager<InputAgentsEnum> input;
@@ -43,21 +44,21 @@ public class HudController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        updateInterfacesState();
+
         if (input.GetKeyUp(KeyCode.B) && (currentActiveUi == ActiveUiEnum.BACKPACK || currentActiveUi == ActiveUiEnum.NONE))
         {
             inventorySystem.backpackChangeVisibility();
-            if (isInSelection)
-            {
-                InputManager<InputAgentsEnum>.isLocked = false;
-                isInSelection = !isInSelection;
-                currentActiveUi = ActiveUiEnum.NONE;
-            }
-            else
+            if (inventorySystem.backpackVisibility())
             {
                 InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.UI_CONTROL;
                 InputManager<InputAgentsEnum>.isLocked = true;
-                isInSelection = !isInSelection;
                 currentActiveUi = ActiveUiEnum.BACKPACK;
+            }
+            else
+            {
+                InputManager<InputAgentsEnum>.isLocked = false;
+                currentActiveUi = ActiveUiEnum.NONE;
             }
         }
         else if (input.GetKeyUp(KeyCode.M) && (currentActiveUi == ActiveUiEnum.BUILDING_MENU || currentActiveUi == ActiveUiEnum.NONE))
@@ -75,8 +76,19 @@ public class HudController : MonoBehaviour
                 currentActiveUi = ActiveUiEnum.NONE;
             }
         }
+        else if(input.GetKeyUp(KeyCode.Escape))
+        {
+            if(currentActiveUi == ActiveUiEnum.BACKPACK)
+                inventorySystem.backpackChangeVisibility();
+            else if(currentActiveUi == ActiveUiEnum.BUILDING_MENU)
+                buildingMenuController.invertOpenState();
 
-        if(isInSelection)
+
+            InputManager<InputAgentsEnum>.isLocked = false;
+            currentActiveUi = ActiveUiEnum.NONE;
+        }
+
+        if(inventorySystem.backpackVisibility())
         {
             if(input.GetKeyUp(KeyCode.RightArrow))
             {
@@ -123,6 +135,17 @@ public class HudController : MonoBehaviour
                 buildingMenuController.updateBuildingMenuAccess();
             }
         }
+    }
+
+    /// <summary>
+    /// Update current active UI to NONE if current UI is no more active.
+    /// </summary>
+    private void updateInterfacesState()
+    {
+        if (currentActiveUi == ActiveUiEnum.BACKPACK && !inventorySystem.backpackVisibility())
+            currentActiveUi = ActiveUiEnum.NONE;
+        else if (currentActiveUi == ActiveUiEnum.BUILDING_MENU && !buildingMenuController.buildingMenuVisibility())
+            currentActiveUi = ActiveUiEnum.NONE;
     }
 
 }
