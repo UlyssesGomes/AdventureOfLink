@@ -38,6 +38,10 @@ public class PlayerIdle : PlayerUnitState
                 }
             }
         }
+        else if(stateMachineObject.doingTimer > 0.0f)
+        {
+            callNextState((int)PlayerStatesEnum.DOING);
+        }
     }
 
     public override int getUnitCurrentStateKey()

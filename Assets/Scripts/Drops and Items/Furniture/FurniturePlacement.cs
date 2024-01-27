@@ -72,7 +72,6 @@ public class FurniturePlacement : MonoBehaviour
         else if(input.GetKey(KeyCode.Escape))
         {
             disableFurniturePlacement();
-
         }
         else if (input.GetKey(KeyCode.F) && !canPlace)
         {

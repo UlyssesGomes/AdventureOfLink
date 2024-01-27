@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : StateMachineController<Player>
 {
@@ -29,6 +30,10 @@ public class Player : StateMachineController<Player>
     [SerializeField]
     private SpriteRenderer iconSpriteRenderer;                  // sprite renderer to show icons
 
+    public GameObject doingBar;                                 // game obeject of the bar to show doing progress
+    public Image doingFilledBar;                                // bar to control doing filled amount
+    public float doingTimer;                                    // amount of time to run player doing state. If > 0.0f doing state will run or is runing, otherwise doing state its not running.
+
     protected override void stateMachineAwake()
     {
         icons = new Dictionary<PlayerIconsEnum, Sprite>();
@@ -48,6 +53,8 @@ public class Player : StateMachineController<Player>
         isFishing = false;
 
         furniturePlacement.enablePlacement(false);
+
+        doingBar.SetActive(false);
     }
 
     protected override void stateMachineUpdate()
@@ -87,6 +94,7 @@ public class Player : StateMachineController<Player>
         addUnitStateInstance(new PlayerBackFishing());
         addUnitStateInstance(new PlayerDontCatchFishing());
         addUnitStateInstance(new PlayerBuilding());
+        addUnitStateInstance(new PlayerDoing());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

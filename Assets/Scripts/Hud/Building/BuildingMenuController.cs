@@ -187,6 +187,7 @@ public class BuildingMenuController : MonoBehaviour
                         // TODO - Notify item added to inventory  when notify system were implemented.
                         //setDescription(currentBuildingSkill);
                         isItemAdded = true;
+                        player.doingTimer = 7.0f;
                     }
                 }
             }
