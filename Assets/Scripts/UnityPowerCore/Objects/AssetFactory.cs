@@ -24,8 +24,8 @@ public class AssetFactory : MonoBehaviour
         furnitureDictionary = new Dictionary<int, GameObject>();
         foreach (GameObject gameObject in furniturePrefabs)
         {
-            Furniture furniture = gameObject.GetComponent<Furniture>();
-            int itemId = furniture.getItemId();
+            Furniture furniture = gameObject.GetComponentInChildren<Furniture>();
+            int itemId = (int)furniture.itemId;
             furnitureDictionary.Add(itemId, gameObject);
         }
     }

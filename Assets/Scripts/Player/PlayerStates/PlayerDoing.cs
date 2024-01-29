@@ -2,8 +2,7 @@
 
 public class PlayerDoing : PlayerUnitState
 {
-    private float doingTimer;               // max doing timer to be set at the start method
-    private float currentDoingTimer;        // current doing timer that will be decreased at update mathod
+    private float maxDoingTimer;            // max doing timer to be set at the start method
 
     public override int getUnitCurrentStateKey()
     {
@@ -14,19 +13,26 @@ public class PlayerDoing : PlayerUnitState
     {
         stateMachineObject.movingObject.currentSpeed = 0;
 
-        currentDoingTimer = doingTimer = stateMachineObject.doingTimer;
-        stateMachineObject.doingTimer = 0.0f;
+        maxDoingTimer = stateMachineObject.maxDoingTimer;
 
         stateMachineObject.doingBar.SetActive(true);
     }
 
     protected override void UpdateUnitState()
     {
-        currentDoingTimer -= Time.deltaTime;
+        if(maxDoingTimer != stateMachineObject.maxDoingTimer)
+        {
+            maxDoingTimer = stateMachineObject.maxDoingTimer;
+            updateFilledBar();
+        }
+
+        stateMachineObject.doingTimer -= Time.deltaTime;
         updateFilledBar();
 
-        if(currentDoingTimer <= 0.0000f)
+        if(stateMachineObject.doingTimer <= 0.0000f)
         {
+            stateMachineObject.doingTimer = 0.0f;
+            stateMachineObject.maxDoingTimer = 0.0f;
             stateMachineObject.doingBar.SetActive(false);
             callNextState((int)PlayerStatesEnum.IDDLE);
         }
@@ -35,7 +41,7 @@ public class PlayerDoing : PlayerUnitState
 
     private void updateFilledBar()
     {
-        float total = currentDoingTimer / doingTimer;
+        float total = stateMachineObject.doingTimer / maxDoingTimer;
         stateMachineObject.doingFilledBar.fillAmount = total;
     }
 }

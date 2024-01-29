@@ -1,24 +1,44 @@
 ﻿using UnityEngine;
 
-public abstract class Furniture<T> : MonoBehaviour where T : DrawableItem
+public abstract class Furniture : MonoBehaviour
 {
     [SerializeField]
-    protected T furnitureAsset;                 // item that this class intance will generate after collistion
-    [SerializeField]
     protected SpriteRenderer sprite;            // sprite to render on screen
+    public ItemIdEnum itemId;                   // item id that represents this item
+
+    private void Awake()
+    {
+        sprite = GetComponentInParent<SpriteRenderer>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        furnitureAsset = Instantiate(furnitureAsset);
-        sprite.sprite = furnitureAsset.sprite;
+        sprite.sprite = getFurnitureData().sprite;
+        furnitureStart();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        furnitureUpdate();
     }
+
+    /// <summary>
+    /// Chest start implemented in child to be called in this Start().
+    /// </summary>
+    public abstract void furnitureStart();
+
+    /// <summary>
+    /// Chest start implemented in child to be called in this Start().
+    /// </summary>
+    public abstract void furnitureUpdate();
+
+    /// <summary>
+    /// Return chest instance for this object.
+    /// </summary>
+    /// <returns></returns>
+    public abstract DrawableItem getFurnitureData();
 
     /// <summary>
     /// Method to call interact() when player in collision with this object's interaction area.

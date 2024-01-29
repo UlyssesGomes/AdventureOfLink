@@ -1,19 +1,13 @@
 ﻿using UnityEngine;
 
-public abstract class AbstractChest : MonoBehaviour
+public abstract class AbstractChest : Furniture
 {
     [SerializeField]
-    private SpriteRenderer sprite;              // chest sprite renderer to be shown in scenery
+    protected ChestItem chest;        // chest defined data
 
-    private void Awake()
+    public override DrawableItem getFurnitureData()
     {
-        sprite = GetComponentInParent<SpriteRenderer>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        sprite.sprite = getChestData().sprite;
+        return chest;
     }
 
     /// <summary>
@@ -23,33 +17,18 @@ public abstract class AbstractChest : MonoBehaviour
     public void openChest(bool open)
     {
         if (open)
-            sprite.sprite = getChestData().openedChesterSprite;
+            sprite.sprite = chest.openedChesterSprite;
         else
-            sprite.sprite = getChestData().sprite;
+            sprite.sprite = chest.sprite;
     }
 
-    /// <summary>
-    /// Chest start implemented in child to be called in this Start().
-    /// </summary>
-    public abstract void chestStart();
-
-    /// <summary>
-    /// Return chest instance for this object.
-    /// </summary>
-    /// <returns></returns>
-    public abstract ChestItem getChestData();
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void interact()
     {
-        if (collision.CompareTag("Player"))
-            openChest(true);
-        else
-            Debug.Log("Outro objeto detectado.");
+        openChest(true);
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    protected override void getAway()
     {
-        if (collision.CompareTag("Player"))
-            openChest(false);
+        openChest(false);
     }
 }

@@ -39,6 +39,8 @@ public class BuildingMenuController : MonoBehaviour
 
     private InputManager<InputAgentsEnum> input;            // input manager instance
 
+    private const float GENERATE_TIME = 0.5f;
+
     private void Start()
     {
         input = new InputManager<InputAgentsEnum>(InputAgentsEnum.UI_CONTROL);
@@ -187,7 +189,8 @@ public class BuildingMenuController : MonoBehaviour
                         // TODO - Notify item added to inventory  when notify system were implemented.
                         //setDescription(currentBuildingSkill);
                         isItemAdded = true;
-                        player.doingTimer = 7.0f;
+                        player.doingTimer += GENERATE_TIME;
+                        player.maxDoingTimer += GENERATE_TIME;
                     }
                 }
             }

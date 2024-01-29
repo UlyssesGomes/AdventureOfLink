@@ -2,16 +2,11 @@
 
 public class Chest : AbstractChest
 {
-    [SerializeField]
-    private ChestItem chest;        // chest defined data
-
-    public override void chestStart()
+    public override void furnitureStart()
     {
         chest = Instantiate(chest);
     }
 
-    public override ChestItem getChestData()
-    {
-        return chest;
-    }
+    public override void furnitureUpdate()
+    { }
 }
