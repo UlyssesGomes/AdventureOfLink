@@ -11,6 +11,7 @@ TagManager:
   - SlotFarm
   - FishingRod
   - Chest
+  - BuilderHammer
   layers:
   - Default
   - TransparentFX

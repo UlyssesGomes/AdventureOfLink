@@ -16,7 +16,7 @@ public abstract class AbstractChest : Furniture
     /// <param name="open">flag to control chest opening</param>
     public void openChest(bool open)
     {
-        if (open)
+        if (open && buildingAmount >= 100f)
             sprite.sprite = chest.openedChesterSprite;
         else
             sprite.sprite = chest.sprite;

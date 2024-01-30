@@ -6,6 +6,8 @@ public abstract class Furniture : MonoBehaviour
     protected SpriteRenderer sprite;            // sprite to render on screen
     public ItemIdEnum itemId;                   // item id that represents this item
 
+    protected float buildingAmount;             // how much percent this furniture is complete
+
     private void Awake()
     {
         sprite = GetComponentInParent<SpriteRenderer>();
@@ -50,6 +52,11 @@ public abstract class Furniture : MonoBehaviour
         {
             interact();
         }
+        else if(collision.CompareTag("BuilderHammer"))
+        {
+            if(buildingAmount < 100f)
+                buildingImpact(10f);
+        }
     }
 
     /// <summary>
@@ -73,4 +80,10 @@ public abstract class Furniture : MonoBehaviour
     /// Do something when player is no more in interaction.
     /// </summary>
     protected abstract void getAway();
+
+    /// <summary>
+    /// Update building progress of this furniture to add amount of progress.
+    /// </summary>
+    /// <param name="value">amount of progress to advance</param>
+    protected abstract void buildingImpact(float value);
 }
