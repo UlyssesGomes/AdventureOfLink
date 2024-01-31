@@ -11,6 +11,8 @@ public class Chest : AbstractChest
     [SerializeField]
     private Image filledBar;
 
+    private AgentExecutor executor;
+
     public override void furnitureStart()
     {
         chest = Instantiate(chest);
@@ -21,17 +23,22 @@ public class Chest : AbstractChest
 
         if(buildingAmount < 100f)
         {
-            buildingBar.SetActive(true);
+            //buildingBar.SetActive(true);
             filledBar.fillAmount = buildingAmount / 100f;
             sprite.color = buildingColor;
-        }    
+        }
+
+        executor = new AgentExecutor();
     }
 
     public override void furnitureUpdate()
-    { }
+    {
+        executor.update();
+    }
 
     protected override void buildingImpact(float value)
     {
+        executor.addAgent(new ChestBarAgent(this));
         buildingAmount += value;
 
         if (buildingAmount < 100f)
@@ -46,4 +53,12 @@ public class Chest : AbstractChest
         }
     }
 
+    /// <summary>
+    /// Enable or disable building bar by param isShow.
+    /// </summary>
+    /// <param name="isShow">boolean to show or hide building bar.</param>
+    public void showBuildingBar(bool isShow)
+    {
+        buildingBar.SetActive(isShow);
+    }
 }

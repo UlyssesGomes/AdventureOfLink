@@ -326,7 +326,9 @@ public class PlayerInventory : MonoBehaviour
         if(storedItemsDictionary.ContainsKey(gameItem.itemId))
         {
             List<GameItem> list = storedItemsDictionary[gameItem.itemId];
-            return list.Find(item => item.id == gameItem.id);
+            GameItem removedItem = list.Find(item => item.id == gameItem.id);
+            list.Remove(removedItem);
+            return removedItem;
         }
 
         return null;
@@ -353,30 +355,4 @@ public class PlayerInventory : MonoBehaviour
 
         return 0;
     }
-
-#if DEBUG
-    /*
-     * Method used to load initial weapons for test in develop mode.
-     */
-    private GameItem loadItem(ItemIdEnum item)
-    {
-        UnityEngine.Object loadedResource;
-
-        string pathPrefix = "Prefabs/Items/";
-        GameItem gameItem = null;
-        
-        switch (item)
-        {
-            case ItemIdEnum.WATERING_CAN:
-                
-                break;
-
-            case ItemIdEnum.AXE:
-                
-                break;
-        }
-
-        return gameItem;
-    }
-#endif
 }

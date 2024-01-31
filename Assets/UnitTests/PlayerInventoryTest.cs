@@ -6,6 +6,18 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
+    public class Item
+    {
+        public int id;
+        public string name;
+
+        public Item(int id, string name)
+        {
+            this.id = id;
+            this.name = name;
+        }
+    }
+
     public class PlayerInventoryTest
     {
         // A Test behaves as an ordinary method
@@ -18,6 +30,72 @@ namespace Tests
             // dont look at the second slot. Its fixed now.
             //PlayerInventory playerInventory;
             Assert.AreEqual(90f, 90f);
+        }
+
+        [Test]
+        public void TestListRemoveFirst()
+        {
+            List<Item> items = new List<Item>();
+            Item item1 = new Item(1, "first");
+            Item item2 = new Item(2, "second");
+            Item item3 = new Item(3, "third");
+
+            items.Add(item1);
+            items.Add(item2);
+            items.Add(item3);
+
+            Item seconsItem = items.Find(item => item.id == 1);
+
+            items.Remove(seconsItem);
+
+            foreach (Item i in items)
+            {
+                Assert.AreNotEqual(i.name, "first");
+            }
+        }
+
+        [Test]
+        public void TestListRemoveSecond()
+        {
+            List<Item> items = new List<Item>();
+            Item item1 = new Item(1, "first");
+            Item item2 = new Item(2, "second");
+            Item item3 = new Item(3, "third");
+
+            items.Add(item1);
+            items.Add(item2);
+            items.Add(item3);
+
+            Item seconsItem = items.Find(item => item.id == 2);
+
+            items.Remove(seconsItem);
+
+            foreach(Item i in items)
+            {
+                Assert.AreNotEqual(i.name, "second");
+            }
+        }
+
+        [Test]
+        public void TestListRemoveThird()
+        {
+            List<Item> items = new List<Item>();
+            Item item1 = new Item(1, "first");
+            Item item2 = new Item(2, "second");
+            Item item3 = new Item(3, "third");
+
+            items.Add(item1);
+            items.Add(item2);
+            items.Add(item3);
+
+            Item seconsItem = items.Find(item => item.id == 3);
+
+            items.Remove(seconsItem);
+
+            foreach (Item i in items)
+            {
+                Assert.AreNotEqual(i.name, "third");
+            }
         }
     }
 }
