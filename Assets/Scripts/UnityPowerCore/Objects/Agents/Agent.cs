@@ -2,8 +2,6 @@
 
 public abstract class Agent
 {
-    private static int nextId;                  // stores the next valid id to be used in child Agent
-    protected int id;                           // id to be used in each child agent
     private AgentExecutor executor;             // Executor of this agent
     public bool isRunning;                      // tell if this agent is ative
 
@@ -18,6 +16,14 @@ public abstract class Agent
     public abstract void start();
 
     /// <summary>
+    /// This method will be called when agent is already in
+    /// executor's list and must be tried to add again. Its not
+    /// possible add to executor's list 2 agents of the same
+    /// type.
+    /// </summary>
+    public abstract void restart();
+
+    /// <summary>
     /// Update object atributes. 
     /// </summary>
     public abstract void update();
@@ -26,7 +32,7 @@ public abstract class Agent
     /// Return the id of this agent implementation.
     /// </summary>
     /// <returns>Id of this agent implementation.</returns>
-    public abstract int agentId();
+    public abstract int agentType();
 
     /// <summary>
     /// Set AgentExecutor instance
@@ -44,10 +50,5 @@ public abstract class Agent
     protected void stop()
     {
         isRunning = false;
-    }
-
-    protected int getNextId()
-    {
-        return nextId++;
     }
 }

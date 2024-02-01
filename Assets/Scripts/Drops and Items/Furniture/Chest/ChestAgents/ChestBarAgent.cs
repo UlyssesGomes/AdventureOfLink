@@ -11,7 +11,6 @@ public class ChestBarAgent : Agent
     public ChestBarAgent(Chest chest)
     {
         this.chest = chest;
-        id = getNextId();
     }
 
     public override void start()
@@ -20,9 +19,14 @@ public class ChestBarAgent : Agent
         chest.showBuildingBar(true);
     }
 
-    public override int agentId()
+    public override void restart()
     {
-        return id;
+        currentTime = 0f;
+    }
+
+    public override int agentType()
+    {
+        return (int) AgentsEnum.CHEST_BAR_AGENT;
     }
 
     public override void update()
@@ -33,7 +37,6 @@ public class ChestBarAgent : Agent
         }
         else
         {
-            Debug.Log("Finalizou o agente.");
             chest.showBuildingBar(false);
             stop();
         }

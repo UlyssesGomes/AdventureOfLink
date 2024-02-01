@@ -33,7 +33,7 @@ public class AgentExecutor
             foreach(Agent agent in removeAgentList)
             {
                 agents.Remove(agent);
-                agentDictionary.Remove(agent.agentId());
+                agentDictionary.Remove(agent.agentType());
             }
 
             removeAgentList.Clear();
@@ -57,17 +57,17 @@ public class AgentExecutor
     /// <param name="agent">Agent to runing</param>
     public void addAgent(Agent agent)
     {
-        if(!agentDictionary.ContainsKey(agent.agentId()))
+        if(!agentDictionary.ContainsKey(agent.agentType()))
         {
             agent.setExecutor(this);
             agents.Add(agent);
-            agentDictionary.Add(agent.agentId(), agent);
+            agentDictionary.Add(agent.agentType(), agent);
             agent.awake();
             agent.start();
         }
         else
         {
-            Debug.Log("Não adicionou o agente.");
+            agentDictionary[agent.agentType()].restart();
         }
     }
 }
