@@ -3,15 +3,17 @@ using UnityEngine.UI;
 
 public class Chest : AbstractChest
 {
-    private Color defaultColor;
-    private Color buildingColor;
+    private Color defaultColor;             // chest default color to be desplayed when chest was set on the grond
+    private Color buildingColor;            // color to be shown when chest is under building
 
     [SerializeField]
-    private GameObject buildingBar;
+    private GameObject buildingBar;         // building progress bar to show to player how much left work is needed
     [SerializeField]
-    private Image filledBar;
+    private Image filledBar;                // amoung of work done in progress bar
 
-    private AgentExecutor executor;
+    private AgentExecutor executor;         // executor to run chest bar agent
+
+    public AssetFactory assetfactory;       // Manager of assets available in memory.
 
     public override void furnitureStart()
     {
@@ -23,7 +25,6 @@ public class Chest : AbstractChest
 
         if(buildingAmount < 100f)
         {
-            //buildingBar.SetActive(true);
             filledBar.fillAmount = buildingAmount / 100f;
             sprite.color = buildingColor;
         }
@@ -50,6 +51,8 @@ public class Chest : AbstractChest
             buildingAmount = 100f;
             buildingBar.SetActive(false);
             sprite.color = defaultColor;
+            GameObject puff = assetfactory.instanceFxGameObjectByType((int)FxEnum.PUFF_SMOKE);
+            puff.transform.position = transform.parent.position;
         }
     }
 

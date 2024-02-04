@@ -55,7 +55,7 @@ public abstract class Furniture : MonoBehaviour
         else if(collision.CompareTag("BuilderHammer"))
         {
             if(buildingAmount < 100f)
-                buildingImpact(10f);
+                buildingImpact(30f);
         }
     }
 

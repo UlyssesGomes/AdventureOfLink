@@ -66,7 +66,7 @@ public class FurniturePlacement : MonoBehaviour
         if (input.GetKey(KeyCode.F) && canPlace)
         {
             disableFurniturePlacement();
-            GameObject gameObject = player.assetfactory.instanceGameObjectByItemId((int)furnitureAsset.itemId);
+            GameObject gameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)furnitureAsset.itemId);
             gameObject.transform.position = rigid.position;
         }
         else if(input.GetKey(KeyCode.Escape))

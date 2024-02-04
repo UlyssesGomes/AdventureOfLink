@@ -5,12 +5,16 @@ using System.Collections.Generic;
 public class AssetFactory : MonoBehaviour
 {
     [SerializeField]
-    private GameItem[] assetsCollections;                   // items availables in memory
-    private Dictionary<int, GameItem> assetsDictionary;     // dictionary to find these items quickly
+    private GameItem[] assetsCollections;                       // items availables in memory
+    private Dictionary<int, GameItem> assetsDictionary;         // dictionary to find these items quickly
 
     [SerializeField]
-    private GameObject[] furniturePrefabs;
-    private Dictionary<int, GameObject> furnitureDictionary;
+    private GameObject[] furniturePrefabs;                      // furniture available in memory
+    private Dictionary<int, GameObject> furnitureDictionary;    // dictionary to find these furnitures quickly
+
+    [SerializeField]
+    private GameObject[] fxPrefabs;                             // fx available in memory
+    private Dictionary<int, GameObject> fxDictionary;           // dictionary to find these fx quickly
 
     private void Start()
     {
@@ -27,6 +31,14 @@ public class AssetFactory : MonoBehaviour
             Furniture furniture = gameObject.GetComponentInChildren<Furniture>();
             int itemId = (int)furniture.itemId;
             furnitureDictionary.Add(itemId, gameObject);
+        }
+
+        fxDictionary = new Dictionary<int, GameObject>();
+        foreach (GameObject gameObject in fxPrefabs)
+        {
+            Fx fx = gameObject.GetComponentInChildren<Fx>();
+            int fxType = (int)fx.getFxType();
+            fxDictionary.Add(fxType, gameObject);
         }
     }
 
@@ -55,8 +67,18 @@ public class AssetFactory : MonoBehaviour
     /// </summary>
     /// <param name="itemId">id of disired item</param>
     /// <returns>Desired GameObject</returns>
-    public GameObject instanceGameObjectByItemId(int itemId)
+    public GameObject instanceFurnitureGameObjectByItemId(int itemId)
     {
         return Instantiate(furnitureDictionary[itemId]);
+    }
+
+    /// <summary>
+    /// Instantiate a GameObject by its type value
+    /// </summary>
+    /// <param name="type">type of desired fx</param>
+    /// <returns>desired GameObject</returns>
+    public GameObject instanceFxGameObjectByType(int type)
+    {
+        return Instantiate(fxDictionary[type]);
     }
 }
