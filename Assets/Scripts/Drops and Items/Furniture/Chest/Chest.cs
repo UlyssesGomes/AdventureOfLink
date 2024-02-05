@@ -13,10 +13,11 @@ public class Chest : AbstractChest
 
     private AgentExecutor executor;         // executor to run chest bar agent
 
-    public AssetFactory assetfactory;       // Manager of assets available in memory.
+    private AssetFactory assetfactory;      // Manager of assets available in memory.
 
     public override void furnitureStart()
     {
+        assetfactory = GameObject.Find("DropAssetManager").GetComponent<AssetFactory>(); ;
         chest = Instantiate(chest);
         buildingColor = new Color(1f, 1f, 1f, 0.2549f);
         defaultColor = sprite.color;
