@@ -206,6 +206,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   itemId: 15
   chest: {fileID: 11400000, guid: 946e0f350915f7b41a053fa8b11e4b8f, type: 2}
+  boxCollider: {fileID: 0}
   buildingBar: {fileID: 6561646158109780828}
   filledBar: {fileID: 1199060445172346998}
 --- !u!1 &1255687466914010179

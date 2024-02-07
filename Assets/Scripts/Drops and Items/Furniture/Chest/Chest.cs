@@ -15,8 +15,14 @@ public class Chest : AbstractChest
 
     private AssetFactory assetfactory;      // Manager of assets available in memory.
 
+    private Vector3 underConstructionPos;
+    private Vector3 afterConstructionPos;
+
     public override void furnitureStart()
     {
+        afterConstructionPos = transform.position;
+        underConstructionPos = new Vector3(0f, -0.65f, 0f);
+
         assetfactory = GameObject.Find("DropAssetManager").GetComponent<AssetFactory>(); ;
         chest = Instantiate(chest);
         buildingColor = new Color(1f, 1f, 1f, 0.2549f);
@@ -28,6 +34,7 @@ public class Chest : AbstractChest
         {
             filledBar.fillAmount = buildingAmount / 100f;
             sprite.color = buildingColor;
+            gameObject.transform.position -= underConstructionPos;
         }
 
         executor = new AgentExecutor();
@@ -54,6 +61,7 @@ public class Chest : AbstractChest
             sprite.color = defaultColor;
             GameObject puff = assetfactory.instanceFxGameObjectByType((int)FxEnum.PUFF_SMOKE);
             puff.transform.position = transform.parent.position;
+            transform.position = afterConstructionPos;
         }
     }
 
