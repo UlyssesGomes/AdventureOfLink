@@ -19,6 +19,9 @@ public class Player : StateMachineController<Player>
 
     public bool reachFinalSpriteFrame;                          // used to control by animator when the last frame of animation is displayed
 
+    private bool canOpenDoor;                                   // control flag to allow user to open or close the door
+    private Door door;                                          // the door under interaction
+
     public AssetFactory assetfactory;                           // Manager of assets available in memory.
 
     [SerializeField]
@@ -34,6 +37,8 @@ public class Player : StateMachineController<Player>
     public Image doingFilledBar;                                // bar to control doing filled amount
     public float doingTimer;                                    // amount of time to run player doing state. If > 0.0f doing state will run or is runing, otherwise doing state its not running.
     public float maxDoingTimer;                                 // initial amount of time
+
+    protected static InputManager<InputAgentsEnum> input = new InputManager<InputAgentsEnum>(InputAgentsEnum.PLAYER);   // input manager instance
 
     protected override void stateMachineAwake()
     {
@@ -56,10 +61,20 @@ public class Player : StateMachineController<Player>
         furniturePlacement.enablePlacement(false);
 
         doingBar.SetActive(false);
+
+        canOpenDoor = false;
     }
 
     protected override void stateMachineUpdate()
-    { }
+    {
+        if(canOpenDoor)
+        {
+            if(input.GetKeyDown(KeyCode.F))
+            {
+                door.openDoor(this);
+            }
+        }
+    }
 
     protected override void stateMachineFixedUpdate()
     {
@@ -104,8 +119,22 @@ public class Player : StateMachineController<Player>
         {
             collision.transform.GetComponent<SlotFarm>().doHarvest();
         }
+        else if (collision.CompareTag("Door"))
+        {
+            door = collision.GetComponentInParent<Door>();
+            canOpenDoor = true;
+        }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Door"))
+        {
+            canOpenDoor = true;
+            door = null;
+            Debug.Log("Não pode mais abrir a porta");
+        }
+    }
 
     /// <summary>
     /// Select icon to show by its enum.
