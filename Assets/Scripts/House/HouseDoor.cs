@@ -3,11 +3,9 @@
 public class HouseDoor : MonoBehaviour, Door
 {
     [SerializeField]
-    private SpriteRenderer sprite;
+    private SpriteRenderer spriteComponentOpened;
     [SerializeField]
-    private Sprite openedDoorSprite;
-    [SerializeField]
-    private Sprite closedDoorSprite;
+    private GameObject openedDoor;
     [SerializeField]
     private bool isOpened;
 
@@ -31,12 +29,14 @@ public class HouseDoor : MonoBehaviour, Door
         isOpened = hasOpen;
         if (isOpened)
         {
-            sprite.sprite = openedDoorSprite;
+            spriteComponentOpened.enabled = false;
+            openedDoor.SetActive(true);
             collider.isTrigger = true;
         }
         else
         {
-            sprite.sprite = closedDoorSprite;
+            spriteComponentOpened.enabled = true;
+            openedDoor.SetActive(false);
             collider.isTrigger = false;
         }
     }

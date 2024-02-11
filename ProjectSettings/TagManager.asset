@@ -12,6 +12,7 @@ TagManager:
   - FishingRod
   - Chest
   - BuilderHammer
+  - Door
   layers:
   - Default
   - TransparentFX

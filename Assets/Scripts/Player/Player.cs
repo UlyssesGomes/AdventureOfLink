@@ -19,7 +19,7 @@ public class Player : StateMachineController<Player>
 
     public bool reachFinalSpriteFrame;                          // used to control by animator when the last frame of animation is displayed
 
-    private bool canOpenDoor;                                   // control flag to allow user to open or close the door
+    private int isInDoorIntractArea;                            // control in how many door interact area player is
     private Door door;                                          // the door under interaction
 
     public AssetFactory assetfactory;                           // Manager of assets available in memory.
@@ -62,12 +62,12 @@ public class Player : StateMachineController<Player>
 
         doingBar.SetActive(false);
 
-        canOpenDoor = false;
+        isInDoorIntractArea = 0;
     }
 
     protected override void stateMachineUpdate()
     {
-        if(canOpenDoor)
+        if(isInDoorIntractArea > 0)
         {
             if(input.GetKeyDown(KeyCode.F))
             {
@@ -122,7 +122,7 @@ public class Player : StateMachineController<Player>
         else if (collision.CompareTag("Door"))
         {
             door = collision.GetComponentInParent<Door>();
-            canOpenDoor = true;
+            isInDoorIntractArea++;
         }
     }
 
@@ -130,9 +130,12 @@ public class Player : StateMachineController<Player>
     {
         if(collision.CompareTag("Door"))
         {
-            canOpenDoor = true;
-            door = null;
-            Debug.Log("Não pode mais abrir a porta");
+            isInDoorIntractArea--;
+            if(isInDoorIntractArea <= 0)
+            {
+                isInDoorIntractArea = 0;
+                door = null;
+            }
         }
     }
 
