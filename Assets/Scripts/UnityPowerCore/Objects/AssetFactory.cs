@@ -16,6 +16,13 @@ public class AssetFactory : MonoBehaviour
     private GameObject[] fxPrefabs;                             // fx available in memory
     private Dictionary<int, GameObject> fxDictionary;           // dictionary to find these fx quickly
 
+    private static AssetFactory assetFactory;                   // singleton instance
+
+    private void Awake()
+    {
+        assetFactory = this;
+    }
+
     private void Start()
     {
         assetsDictionary = new Dictionary<int, GameItem>();
@@ -40,6 +47,16 @@ public class AssetFactory : MonoBehaviour
             int fxType = (int)fx.getFxType();
             fxDictionary.Add(fxType, gameObject);
         }
+    }
+
+    /// <summary>
+    /// Return instance of this object. Remember to add this
+    /// script/class in only one GameObject.
+    /// </summary>
+    /// <returns>Instance of this class</returns>
+    public static AssetFactory getInstance()
+    {
+        return assetFactory;
     }
 
     /// <summary>

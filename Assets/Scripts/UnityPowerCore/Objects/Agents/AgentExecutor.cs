@@ -41,7 +41,7 @@ public class AgentExecutor
     }
 
     /// <summary>
-    /// Add agent o removeAgentList and this agent will be removed at the end of
+    /// Add agent to removeAgentList and this agent will be removed at the end of
     /// next update() execution, to prevend agent.update() concurrently its removing.
     /// </summary>
     /// <param name="agent">Agent to be removed.</param>
