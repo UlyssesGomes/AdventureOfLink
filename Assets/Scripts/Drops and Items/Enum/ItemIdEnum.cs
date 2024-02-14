@@ -13,5 +13,6 @@
     PAVING_STONE,
     PLANK,
     WOOL,
-    CHEST
+    CHEST,
+    SMALL_HOUSE_A
 };

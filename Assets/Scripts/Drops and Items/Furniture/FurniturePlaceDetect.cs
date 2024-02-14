@@ -9,16 +9,22 @@ public class FurniturePlaceDetect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        count++;
-        if(count > 0)
-            furniture.enablePlace(false);
+        if(!collision.CompareTag("HouseRoof"))
+        {
+            count++;
+            if(count > 0)
+                furniture.enablePlace(false);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        count--;
-        if(count == 0)
-            furniture.enablePlace(true);
+        if (!collision.CompareTag("HouseRoof"))
+        {
+            count--;
+            if(count == 0)
+                furniture.enablePlace(true);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

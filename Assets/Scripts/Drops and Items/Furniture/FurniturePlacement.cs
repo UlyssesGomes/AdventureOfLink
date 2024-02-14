@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class FurniturePlacement : MonoBehaviour
 {
-    protected DrawableItem furnitureAsset;      // scritable object to get its properties, DONT CHANGE ITS VALUES
+    protected DrawableItem objectAsset;         // scritable object to get its properties, DONT CHANGE ITS VALUES
     [SerializeField]
     protected SpriteRenderer sprite;            // sprite to render on screen
 
@@ -66,7 +67,14 @@ public class FurniturePlacement : MonoBehaviour
         if (input.GetKey(KeyCode.F) && canPlace)
         {
             disableFurniturePlacement();
-            GameObject gameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)furnitureAsset.itemId);
+            GameObject gameObject;
+            if (objectAsset.type == ItemTypeEnum.FURNITURE)
+                gameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)objectAsset.itemId);
+            else if (objectAsset.type == ItemTypeEnum.HOUSE)
+                gameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
+            else
+                throw new Exception("[FurniturePlacement.Update()] - objectAsset type invalid.");
+
             gameObject.transform.position = rigid.position;
         }
         else if(input.GetKey(KeyCode.Escape))
@@ -325,7 +333,7 @@ public class FurniturePlacement : MonoBehaviour
     public void setDataPlacement(Player player, DrawableItem furnitureAsset)
     {
         this.player = player;
-        this.furnitureAsset = furnitureAsset;
+        this.objectAsset = furnitureAsset;
 
         gizmosGuide = player.gizmosGuide;
 

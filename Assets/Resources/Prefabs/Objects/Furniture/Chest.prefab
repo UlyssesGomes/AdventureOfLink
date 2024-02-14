@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 92f678c56cec25148b2de7e016133520, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -206,7 +206,6 @@ MonoBehaviour:
   sprite: {fileID: 0}
   itemId: 15
   chest: {fileID: 11400000, guid: 946e0f350915f7b41a053fa8b11e4b8f, type: 2}
-  boxCollider: {fileID: 0}
   buildingBar: {fileID: 6561646158109780828}
   filledBar: {fileID: 1199060445172346998}
 --- !u!1 &1255687466914010179
@@ -361,7 +360,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f32bc0a28a545f9468b48f8979d61016, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

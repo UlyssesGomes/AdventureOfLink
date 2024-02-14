@@ -13,6 +13,10 @@ public class AssetFactory : MonoBehaviour
     private Dictionary<int, GameObject> furnitureDictionary;    // dictionary to find these furnitures quickly
 
     [SerializeField]
+    private GameObject[] housesPrefabs;                         // houses available in memory
+    private Dictionary<int, GameObject> housesDictionary;       // dictionary to find these houses quickly
+
+    [SerializeField]
     private GameObject[] fxPrefabs;                             // fx available in memory
     private Dictionary<int, GameObject> fxDictionary;           // dictionary to find these fx quickly
 
@@ -38,6 +42,14 @@ public class AssetFactory : MonoBehaviour
             Furniture furniture = gameObject.GetComponentInChildren<Furniture>();
             int itemId = (int)furniture.itemId;
             furnitureDictionary.Add(itemId, gameObject);
+        }
+
+        housesDictionary = new Dictionary<int, GameObject>();
+        foreach (GameObject gameObject in housesPrefabs)
+        {
+            House<BuildingItemIdEnum> house = gameObject.GetComponentInChildren<House<BuildingItemIdEnum>>();
+            int itemId = (int)house.itemId;
+            housesDictionary.Add(itemId, gameObject);
         }
 
         fxDictionary = new Dictionary<int, GameObject>();
@@ -87,6 +99,16 @@ public class AssetFactory : MonoBehaviour
     public GameObject instanceFurnitureGameObjectByItemId(int itemId)
     {
         return Instantiate(furnitureDictionary[itemId]);
+    }
+
+    /// <summary>
+    /// Instantiate a House by its itemId value.
+    /// </summary>
+    /// <param name="itemId">id of disired house</param>
+    /// <returns>Desired GameObject</returns>
+    public GameObject instanceHouseGameObjectByItemId(int itemId)
+    {
+        return Instantiate(housesDictionary[itemId]);
     }
 
     /// <summary>

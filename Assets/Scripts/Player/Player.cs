@@ -181,7 +181,7 @@ public class Player : StateMachineController<Player>
     /// <param name="itemId">id of the item that will be positioned</param>
     public void enablePlacementUi(int itemId)
     {
-        furniturePlacement.setDataPlacement(this, assetfactory.checkItemInfo((int)ItemIdEnum.CHEST) as DrawableItem);
+        furniturePlacement.setDataPlacement(this, assetfactory.checkItemInfo(itemId) as DrawableItem);
         furniturePlacement.enablePlacement(true);
     }
 

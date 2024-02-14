@@ -13,6 +13,8 @@ TagManager:
   - Chest
   - BuilderHammer
   - Door
+  - HouseRoof
+  - PlacementUi
   layers:
   - Default
   - TransparentFX

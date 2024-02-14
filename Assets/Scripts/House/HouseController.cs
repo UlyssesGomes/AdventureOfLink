@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class HouseController : MonoBehaviour
+public class HouseController : House<BuildingItemIdEnum>
 {
+    [Header("House Initial State")]
     [SerializeField]
     private bool isBuilt;                               // flag that represents whether the house is already built or not
 
+    [Header("House Building Component")]
     [SerializeField]
     private BuildingBlockedArea buildingBlockedArea;    // instance to control when house is in building mode
 
@@ -28,12 +28,6 @@ public class HouseController : MonoBehaviour
         construictionMode();
         if(!isBuilt)
             buildingBlockedArea.addListener(builtHouse);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     /// <summary>

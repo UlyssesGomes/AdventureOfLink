@@ -6,5 +6,6 @@ public enum ItemTypeEnum : int
     DIGGING,
     FISHING,
     HAMMER_BUILD,
-    FURNITURE
+    FURNITURE,
+    HOUSE
 };

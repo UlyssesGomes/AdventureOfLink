@@ -32,7 +32,9 @@ public class RoofTransparence : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            executor.addAgent(new RoofOpaqueAgent(sprite));
+            Player p = collision.GetComponent<Player>();
+            if(!p.furniturePlacement.isActiveAndEnabled)
+                executor.addAgent(new RoofOpaqueAgent(sprite));
         }
     }
 }

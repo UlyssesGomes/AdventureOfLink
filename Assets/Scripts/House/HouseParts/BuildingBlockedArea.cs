@@ -40,7 +40,7 @@ public class BuildingBlockedArea : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("BuilderHammer"))
         {
-            updateFillBar(2f);
+            updateFillBar(1f);
             executor.addAgent(new HouseBuildBarAgent(blueBarObject));
         }
     }
