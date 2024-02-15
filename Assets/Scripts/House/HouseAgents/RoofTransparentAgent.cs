@@ -28,7 +28,7 @@ public class RoofTransparentAgent : Agent
     public override void start()
     {
         currentColor = defaultColor = sprite.color;
-        currentAlpha = 1f;
+        currentAlpha = sprite.color.a;
     }
 
     public override void update()

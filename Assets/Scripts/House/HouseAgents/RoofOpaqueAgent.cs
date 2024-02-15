@@ -21,12 +21,14 @@ public class RoofOpaqueAgent : Agent
     public override void restart()
     {
         currentAlpha = 0f;
+        executor.deativatingAgentByType((int)HouseAgentEnum.ROOF_TRANSPARENT_AGENT);
     }
 
     public override void start()
     {
         currentColor = sprite.color;
         currentAlpha = currentColor.a;
+        executor.deativatingAgentByType((int)HouseAgentEnum.ROOF_TRANSPARENT_AGENT);
     }
 
     public override void update()

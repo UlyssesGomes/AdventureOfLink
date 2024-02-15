@@ -86,15 +86,21 @@ public class BuildingMenuController : MonoBehaviour
 
             if(input.GetKeyUp(KeyCode.RightArrow))
             {
-                currentBuildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
-                if (currentBuildingSkill != null)
+                BuildingSkill skillSelected = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.RIGHT);
+                if (skillSelected != null)
+                {
+                    currentBuildingSkill = skillSelected;
                     setDescription(currentBuildingSkill);
+                }
             }
             else if(input.GetKeyUp(KeyCode.LeftArrow))
             {
-                currentBuildingSkill = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
-                if (currentBuildingSkill != null)
+                BuildingSkill skillSelected = buildingSkillUiSystem.setSkillSelected(MoveOptionsEnum.LEFT);
+                if (skillSelected != null)
+                {
+                    currentBuildingSkill = skillSelected;
                     setDescription(currentBuildingSkill);
+                }
             }
         }
     }
@@ -152,6 +158,8 @@ public class BuildingMenuController : MonoBehaviour
     /// <param name="buildingSkill">BuildingSkill to be displayed</param>
     private void setDescription(BuildingSkill buildingSkill)
     {
+        if(descriptionPanel.currentBuildingSkill)
+            Debug.Log("skill selecionado: " + descriptionPanel.currentBuildingSkill.skillName);
         int [] playerMaterialAmountArray = { 0, 0, 0 };
 
         for(int u = 0; u < buildingSkill.material.Length; u++)
@@ -187,7 +195,6 @@ public class BuildingMenuController : MonoBehaviour
                     {
                         descriptionPanel.setEnableCreationButton(true);
                         // TODO - Notify item added to inventory  when notify system were implemented.
-                        //setDescription(currentBuildingSkill);
                         isItemAdded = true;
                         player.doingTimer += GENERATE_TIME;
                         player.maxDoingTimer += GENERATE_TIME;

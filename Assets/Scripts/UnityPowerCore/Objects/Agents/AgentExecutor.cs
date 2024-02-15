@@ -51,6 +51,17 @@ public class AgentExecutor
     }
 
     /// <summary>
+    /// If you are running excluding agent in same executor (agent that when running in the 
+    /// executor, does not allow the opposite to run).
+    /// </summary>
+    /// <param name="type">type of the opposite agent to deativate</param>
+    public void deativatingAgentByType(int type)
+    {
+        if(agentDictionary.ContainsKey(type))
+            agentDictionary[type].isRunning = false;
+    }
+
+    /// <summary>
     /// Add agent to agents list to be runing in update and tells to him
     /// that this class is your executor.
     /// </summary>

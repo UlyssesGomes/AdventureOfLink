@@ -2,7 +2,7 @@
 
 public abstract class Agent
 {
-    private AgentExecutor executor;             // Executor of this agent
+    protected AgentExecutor executor;           // Executor of this agent
     public bool isRunning;                      // tell if this agent is ative
 
     public void awake()
