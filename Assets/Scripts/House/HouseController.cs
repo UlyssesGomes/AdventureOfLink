@@ -2,9 +2,11 @@
 
 public class HouseController : House<BuildingItemIdEnum>
 {
-    [Header("House Initial State")]
+    [Header("House Settings")]
     [SerializeField]
     private bool isBuilt;                               // flag that represents whether the house is already built or not
+    [SerializeField]
+    private bool isPositionedCorrecty;                  // flag to tell if this house is placed correctly
 
     [Header("House Building Component")]
     [SerializeField]
