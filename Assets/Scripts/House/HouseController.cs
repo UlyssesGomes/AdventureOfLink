@@ -6,7 +6,7 @@ public class HouseController : House<BuildingItemIdEnum>
     [SerializeField]
     private bool isBuilt;                               // flag that represents whether the house is already built or not
     [SerializeField]
-    private bool isPositionedCorrecty;                  // flag to tell if this house is placed correctly
+    public bool isPositionedCorrecty;                   // flag to tell if this house is placed correctly
 
     [Header("House Building Component")]
     [SerializeField]
@@ -30,6 +30,9 @@ public class HouseController : House<BuildingItemIdEnum>
         construictionMode();
         if(!isBuilt)
             buildingBlockedArea.addListener(builtHouse);
+
+        if (!isPositionedCorrecty)
+            buildingBlockedArea.ativateInvalidPlace();
     }
 
     /// <summary>

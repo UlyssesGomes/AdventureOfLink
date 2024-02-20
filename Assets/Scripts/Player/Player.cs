@@ -12,7 +12,7 @@ public class Player : StateMachineController<Player>
 
     public PlayerBuildingSkills playerBuildingSkills;           // building skills script
 
-    public FurniturePlacement furniturePlacement;               // component with placemente furniture implementation to guide player to place furniture
+    public ObjectPlacement furniturePlacement;               // component with placemente furniture implementation to guide player to place furniture
     public PlayerGizmosGuide gizmosGuide;                       // gizmos to help player to place furniture on the map
 
     public bool isFishing;                                      // if true, player can fishing

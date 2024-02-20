@@ -86,6 +86,26 @@ PrefabInstance:
       propertyPath: maxConstructionAmount
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 781019532953340106, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: areaBlockColor.r
+      value: 0.8784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 781019532953340106, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: areaBlockColor.g
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 781019532953340106, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: areaBlockColor.b
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 781019532953340106, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: areaBlockColor.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 781019532953340106, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: baseHouseSprite
+      value: 
+      objectReference: {fileID: 2720277780602640694}
     - target: {fileID: 1350607370380093722, guid: 983910bc276f282458b53fa28d50106c, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -304,5 +324,10 @@ PrefabInstance:
 --- !u!1 &5835237564963112026 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8450595291049131262, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+  m_PrefabInstance: {fileID: 2719160437025683620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &2720277780602640694 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 34964711674175890, guid: 983910bc276f282458b53fa28d50106c, type: 3}
   m_PrefabInstance: {fileID: 2719160437025683620}
   m_PrefabAsset: {fileID: 0}

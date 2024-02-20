@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class FurniturePlaceDetect : MonoBehaviour
+public class ObjectPlaceDetect : MonoBehaviour
 {
     [SerializeField]
-    private FurniturePlacement furniture;
+    private ObjectPlacement furniture;
 
     private int count = 0;
 

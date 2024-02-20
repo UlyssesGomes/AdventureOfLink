@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class BuildingBlockedArea : MonoBehaviour
 {
     [SerializeField]
+    private Color areaBlockColor;               // color to be shown when house is placed in a forbidden place (its in collision with something)
+    [SerializeField]
     private float maxConstructionAmount;        // maximum value of hits that the area will receive for the house to be built
     private float constructionAmount;           // current hit value that this house received
 
@@ -14,14 +16,20 @@ public class BuildingBlockedArea : MonoBehaviour
     [SerializeField]
     private GameObject blueBarObject;           // blue bar game object instance 
 
+    [SerializeField]
+    private SpriteRenderer baseHouseSprite;     // base house sprite renderer of this house
+
     private UnityEvent buildEvent;              // subject that emit event when house become ready after construction
 
     private AgentExecutor executor;             // agent executor to run agents
+
+    private bool isBlocked;                     // flag to control when house construction is blocked (house is in collision with something)
 
     private void Awake()
     {
         buildEvent = new UnityEvent();
         executor = new AgentExecutor();
+        isBlocked = false;
     }
 
     private void Start()
@@ -38,10 +46,15 @@ public class BuildingBlockedArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("BuilderHammer"))
+        if (collision.gameObject.CompareTag("BuilderHammer") && !isBlocked)
         {
             updateFillBar(1f);
             executor.addAgent(new HouseBuildBarAgent(blueBarObject));
+        }
+        else if(isBlocked)
+        {
+            // TODO - when toast system were implemented, use here to notify the player.
+            Debug.LogWarning("This house need to be moved before continue with construction.");
         }
     }
 
@@ -65,5 +78,14 @@ public class BuildingBlockedArea : MonoBehaviour
 
         if (constructionAmount >= maxConstructionAmount)
             buildEvent.Invoke();
+    }
+
+    /// <summary>
+    /// Disable house construction and show house base in red color.
+    /// </summary>
+    public void ativateInvalidPlace()
+    {
+        isBlocked = true;
+        baseHouseSprite.color = areaBlockColor;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-public class FurniturePlacement : MonoBehaviour
+public class ObjectPlacement : MonoBehaviour
 {
     protected DrawableItem objectAsset;         // scritable object to get its properties, DONT CHANGE ITS VALUES
     [SerializeField]
@@ -71,7 +71,10 @@ public class FurniturePlacement : MonoBehaviour
             if (objectAsset.type == ItemTypeEnum.FURNITURE)
                 gameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)objectAsset.itemId);
             else if (objectAsset.type == ItemTypeEnum.HOUSE)
+            {
                 gameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
+                gameObject.GetComponent<HouseController>().isPositionedCorrecty = true;
+            }
             else
                 throw new Exception("[FurniturePlacement.Update()] - objectAsset type invalid.");
 
@@ -81,11 +84,20 @@ public class FurniturePlacement : MonoBehaviour
         {
             disableFurniturePlacement();
         }
+        else if ((input.GetKey(KeyCode.F) && !canPlace) && (objectAsset.type == ItemTypeEnum.HOUSE))
+        {
+            disableFurniturePlacement();
+            GameObject gameObject;
+            gameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
+            gameObject.GetComponent<HouseController>().isPositionedCorrecty = false;
+            gameObject.transform.position = rigid.position;
+        }
         else if (input.GetKey(KeyCode.F) && !canPlace)
         {
             // TODO - emit "tandan" sound, because chest cant be placed.
             Debug.LogWarning("TANDAN - the chest cant be placed here.");
         }
+        
     }
 
     private void FixedUpdate()
