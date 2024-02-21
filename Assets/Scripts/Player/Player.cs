@@ -12,7 +12,7 @@ public class Player : StateMachineController<Player>
 
     public PlayerBuildingSkills playerBuildingSkills;           // building skills script
 
-    public ObjectPlacement furniturePlacement;               // component with placemente furniture implementation to guide player to place furniture
+    public ObjectPlacement furniturePlacement;                  // component with placemente furniture implementation to guide player to place furniture
     public PlayerGizmosGuide gizmosGuide;                       // gizmos to help player to place furniture on the map
 
     public bool isFishing;                                      // if true, player can fishing
@@ -124,6 +124,17 @@ public class Player : StateMachineController<Player>
             door = collision.GetComponentInParent<Door>();
             isInDoorIntractArea++;
         }
+        else if(collision.CompareTag("HouseBuildingArea"))
+        {
+            Debug.Log("Em colisão com a área de construção da casa.");
+            if(collision.GetComponent<BuildingBlockedArea>().isBlocked && input.GetKey(KeyCode.F))
+            {
+                HouseController house = collision.GetComponentInParent<HouseController>();
+
+                enablePlacementUi((int)house.itemId);
+                Destroy(house.gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -176,7 +187,7 @@ public class Player : StateMachineController<Player>
     }
 
     /// <summary>
-    /// Enable placement ui and show placement limits and item.
+    /// Enable to show placement ui, limits and object.
     /// </summary>
     /// <param name="itemId">id of the item that will be positioned</param>
     public void enablePlacementUi(int itemId)

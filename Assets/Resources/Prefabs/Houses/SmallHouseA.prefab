@@ -35,6 +35,32 @@ PolygonCollider2D:
       - {x: 1.2927465, y: -1.5009956}
       - {x: 1.4856796, y: -1.438324}
       - {x: 1.5014448, y: 1.238307}
+--- !u!61 &78476061945209756
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3384327199156215731}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.5, y: 3.6875}
+    newSize: {x: 4.5, y: 3.6875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.2, y: 5.34}
+  m_EdgeRadius: 0
 --- !u!1001 &2719160437025683620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +132,18 @@ PrefabInstance:
       propertyPath: baseHouseSprite
       value: 
       objectReference: {fileID: 2720277780602640694}
+    - target: {fileID: 781019532953340106, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: interactArea
+      value: 
+      objectReference: {fileID: 78476061945209756}
+    - target: {fileID: 814005475783747351, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: m_TagString
+      value: HouseBuildingArea
+      objectReference: {fileID: 0}
+    - target: {fileID: 814005475783747351, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1350607370380093722, guid: 983910bc276f282458b53fa28d50106c, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -324,6 +362,11 @@ PrefabInstance:
 --- !u!1 &5835237564963112026 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8450595291049131262, guid: 983910bc276f282458b53fa28d50106c, type: 3}
+  m_PrefabInstance: {fileID: 2719160437025683620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3384327199156215731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 814005475783747351, guid: 983910bc276f282458b53fa28d50106c, type: 3}
   m_PrefabInstance: {fileID: 2719160437025683620}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &2720277780602640694 stripped

@@ -19,17 +19,27 @@ public class BuildingBlockedArea : MonoBehaviour
     [SerializeField]
     private SpriteRenderer baseHouseSprite;     // base house sprite renderer of this house
 
+    [SerializeField]
+    private BoxCollider2D interactArea;         // area to interact when house is in blocked construction mode
+
     private UnityEvent buildEvent;              // subject that emit event when house become ready after construction
 
     private AgentExecutor executor;             // agent executor to run agents
 
-    private bool isBlocked;                     // flag to control when house construction is blocked (house is in collision with something)
+    private bool _isBlocked;                    // flag to control when house construction is blocked (house is in collision with something)
+
+    public bool isBlocked
+    {
+        get { return _isBlocked; }
+    }
 
     private void Awake()
     {
         buildEvent = new UnityEvent();
         executor = new AgentExecutor();
-        isBlocked = false;
+        
+        _isBlocked = false;
+        interactArea.enabled = false;
     }
 
     private void Start()
@@ -46,16 +56,17 @@ public class BuildingBlockedArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("BuilderHammer") && !isBlocked)
+        if (collision.gameObject.CompareTag("BuilderHammer") && !_isBlocked)
         {
             updateFillBar(1f);
             executor.addAgent(new HouseBuildBarAgent(blueBarObject));
         }
-        else if(isBlocked)
+        else if(collision.gameObject.CompareTag("BuilderHammer") && _isBlocked)
         {
             // TODO - when toast system were implemented, use here to notify the player.
             Debug.LogWarning("This house need to be moved before continue with construction.");
         }
+        
     }
 
     /// <summary>
@@ -85,7 +96,8 @@ public class BuildingBlockedArea : MonoBehaviour
     /// </summary>
     public void ativateInvalidPlace()
     {
-        isBlocked = true;
+        _isBlocked = true;
         baseHouseSprite.color = areaBlockColor;
+        interactArea.enabled = true;
     }
 }

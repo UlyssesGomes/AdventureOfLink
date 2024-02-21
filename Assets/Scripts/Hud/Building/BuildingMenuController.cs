@@ -158,8 +158,6 @@ public class BuildingMenuController : MonoBehaviour
     /// <param name="buildingSkill">BuildingSkill to be displayed</param>
     private void setDescription(BuildingSkill buildingSkill)
     {
-        if(descriptionPanel.currentBuildingSkill)
-            Debug.Log("skill selecionado: " + descriptionPanel.currentBuildingSkill.skillName);
         int [] playerMaterialAmountArray = { 0, 0, 0 };
 
         for(int u = 0; u < buildingSkill.material.Length; u++)
