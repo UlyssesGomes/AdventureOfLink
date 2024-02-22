@@ -38,6 +38,8 @@ public class ObjectPlacement : MonoBehaviour
 
     protected InputManager<InputAgentsEnum> input = new InputManager<InputAgentsEnum>(InputAgentsEnum.CHEST);
 
+    private bool isFinished;
+
     private void Awake()
     {
         movingObject = new MovingObject();
@@ -58,27 +60,32 @@ public class ObjectPlacement : MonoBehaviour
             canPlace = true;
             gizmosGuide.changeToWhite();
         }
+
+        isFinished = false;
     }
 
     private void Update()
     {
+        if (isFinished)
+            Debug.Log("Terminou e ainda assim executou?");
         getInputMovementNormalized();
 
         if (input.GetKey(KeyCode.F) && canPlace)
         {
             disableFurniturePlacement();
-            GameObject gameObject;
+            GameObject newGameObject;
             if (objectAsset.type == ItemTypeEnum.FURNITURE)
-                gameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)objectAsset.itemId);
+                newGameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)objectAsset.itemId);
             else if (objectAsset.type == ItemTypeEnum.HOUSE)
             {
-                gameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
-                gameObject.GetComponent<HouseController>().isPositionedCorrecty = true;
+                newGameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
+                newGameObject.GetComponent<HouseController>().isPositionedCorrecty = true;
+                Debug.Log("can place pass here??" + newGameObject.GetInstanceID());
             }
             else
                 throw new Exception("[FurniturePlacement.Update()] - objectAsset type invalid.");
 
-            gameObject.transform.position = rigid.position;
+            newGameObject.transform.position = rigid.position;
         }
         else if(input.GetKey(KeyCode.Escape))
         {
@@ -87,10 +94,13 @@ public class ObjectPlacement : MonoBehaviour
         else if ((input.GetKey(KeyCode.F) && !canPlace) && (objectAsset.type == ItemTypeEnum.HOUSE))
         {
             disableFurniturePlacement();
-            GameObject gameObject;
-            gameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
-            gameObject.GetComponent<HouseController>().isPositionedCorrecty = false;
-            gameObject.transform.position = rigid.position;
+            Debug.Log("can plcae?" + canPlace);
+            GameObject newGameObject;
+            newGameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
+            newGameObject.GetComponent<HouseController>().isPositionedCorrecty = false;
+            newGameObject.transform.position = rigid.position;
+            isFinished = true;
+            Debug.Log("Executou tudo?" + newGameObject.GetInstanceID());
         }
         else if (input.GetKey(KeyCode.F) && !canPlace)
         {
@@ -335,6 +345,8 @@ public class ObjectPlacement : MonoBehaviour
         else
             sprite.color = chestColorBlocked;
         canPlace = isEnable;
+
+        Debug.Log("enableplace() " + isEnable);
     }
 
     /// <summary>

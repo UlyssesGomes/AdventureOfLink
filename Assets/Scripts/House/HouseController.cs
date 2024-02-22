@@ -60,4 +60,11 @@ public class HouseController : House<BuildingItemIdEnum>
         puff.transform.position = transform.position;
         puff.transform.localScale = new Vector3(4f, 4f, 4f);
     }
+
+    // TODO - This method can be removed later.
+    void OnDestroy()
+    {
+        // Este código será executado quando o MonoBehaviour for destruído
+        Debug.Log("O MonoBehaviour de id " + gameObject.GetInstanceID() + "está sendo destruído!");
+    }
 }

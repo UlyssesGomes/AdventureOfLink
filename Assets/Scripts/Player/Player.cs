@@ -126,8 +126,22 @@ public class Player : StateMachineController<Player>
         }
         else if(collision.CompareTag("HouseBuildingArea"))
         {
-            Debug.Log("Em colisão com a área de construção da casa.");
             if(collision.GetComponent<BuildingBlockedArea>().isBlocked && input.GetKey(KeyCode.F))
+            {
+                HouseController house = collision.GetComponentInParent<HouseController>();
+
+                enablePlacementUi((int)house.itemId);
+                Destroy(house.gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("HouseBuildingArea"))
+        {
+            Debug.Log("Em colisão com a área de construção da casa.");
+            if (collision.GetComponent<BuildingBlockedArea>().isBlocked && input.GetKey(KeyCode.F))
             {
                 HouseController house = collision.GetComponentInParent<HouseController>();
 
