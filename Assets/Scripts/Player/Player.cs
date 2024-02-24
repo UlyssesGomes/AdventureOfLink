@@ -208,6 +208,7 @@ public class Player : StateMachineController<Player>
     {
         furniturePlacement.setDataPlacement(this, assetfactory.checkItemInfo(itemId) as DrawableItem);
         furniturePlacement.enablePlacement(true);
+        Debug.Log("Habilitando placement.");
     }
 
     #region Moviment

@@ -65,6 +65,6 @@ public class HouseController : House<BuildingItemIdEnum>
     void OnDestroy()
     {
         // Este código será executado quando o MonoBehaviour for destruído
-        Debug.Log("O MonoBehaviour de id " + gameObject.GetInstanceID() + "está sendo destruído!");
+        Debug.Log("O MonoBehaviour de id " + gameObject.GetInstanceID() + " está sendo destruído!");
     }
 }
