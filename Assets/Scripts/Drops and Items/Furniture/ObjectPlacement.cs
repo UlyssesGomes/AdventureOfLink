@@ -15,9 +15,6 @@ public class ObjectPlacement : MonoBehaviour
     public PolygonCollider2D collider;          // collider of object to be placed
     public MovingObject movingObject;           // object speed controller
 
-    [SerializeField]
-    private ObjectPlaceDetect objectDetect;     // component responsible for detect collision
-
     [HideInInspector]
     public bool canPlace;                       // enable when chest must be placed in the ground (its not in collision)
 
@@ -41,9 +38,6 @@ public class ObjectPlacement : MonoBehaviour
 
     protected InputManager<InputAgentsEnum> input = new InputManager<InputAgentsEnum>(InputAgentsEnum.CHEST);
 
-    [SerializeField]
-    private bool isFinished;
-
     private void Awake()
     {
         movingObject = new MovingObject();
@@ -64,56 +58,37 @@ public class ObjectPlacement : MonoBehaviour
             canPlace = true;
             gizmosGuide.changeToWhite();
         }
-
-        isFinished = false;
     }
 
     private void Update()
     {
-        if (!isFinished)
+        getInputMovementNormalized();
+
+        if (input.GetKey(KeyCode.F) && canPlace)
         {
-            
-            getInputMovementNormalized();
-
-            if (input.GetKey(KeyCode.F) && canPlace)
+            disableFurniturePlacement();
+            GameObject newGameObject;
+            if (objectAsset.type == ItemTypeEnum.FURNITURE)
+                newGameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)objectAsset.itemId);
+            else if (objectAsset.type == ItemTypeEnum.HOUSE)
             {
-                disableFurniturePlacement();
-                GameObject newGameObject;
-                if (objectAsset.type == ItemTypeEnum.FURNITURE)
-                    newGameObject = player.assetfactory.instanceFurnitureGameObjectByItemId((int)objectAsset.itemId);
-                else if (objectAsset.type == ItemTypeEnum.HOUSE)
-                {
-                    newGameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
-                    newGameObject.GetComponent<HouseController>().isPositionedCorrecty = true;
-                    Debug.Log("can place pass here??" + newGameObject.GetInstanceID());
-                }
-                else
-                    throw new Exception("[FurniturePlacement.Update()] - objectAsset type invalid.");
-
-                newGameObject.transform.position = rigid.position;
-            }
-            else if (input.GetKey(KeyCode.Escape))
-            {
-                disableFurniturePlacement();
-            }
-            else if ((input.GetKey(KeyCode.F) && !canPlace) && (objectAsset.type == ItemTypeEnum.HOUSE))
-            {
-                objectDetect.enabled = false;
-
-                Debug.Log("can plcae?" + canPlace);
-                GameObject newGameObject;
                 newGameObject = player.assetfactory.instanceHouseGameObjectByItemId((int)objectAsset.itemId);
-                newGameObject.GetComponent<HouseController>().isPositionedCorrecty = false;
-                newGameObject.transform.position = rigid.position;
-                isFinished = true;
-                Debug.Log("Criou o objecto?" + newGameObject.GetInstanceID());
-                disableFurniturePlacement();
+                newGameObject.GetComponent<HouseController>().isPositionedCorrecty = true;
             }
-            else if (input.GetKey(KeyCode.F) && !canPlace)
-            {
-                // TODO - emit "tandan" sound, because chest cant be placed.
-                Debug.LogWarning("TANDAN - the chest cant be placed here.");
-            }
+            else
+                throw new Exception("[FurniturePlacement.Update()] - objectAsset type invalid.");
+
+            newGameObject.transform.position = rigid.position;
+        }
+        else if (input.GetKey(KeyCode.Escape))
+        {
+            disableFurniturePlacement();
+            player.giveUpObjectPlacement(objectAsset);
+        }
+        else if (input.GetKey(KeyCode.F) && !canPlace)
+        {
+            // TODO - emit "tandan" sound, because chest cant be placed.
+            Debug.LogWarning("TANDAN - the chest cant be placed here.");
         }
     }
 
@@ -352,8 +327,6 @@ public class ObjectPlacement : MonoBehaviour
         else
             sprite.color = chestColorBlocked;
         canPlace = isEnable;
-
-        Debug.Log("enableplace() " + isEnable);
     }
 
     /// <summary>
