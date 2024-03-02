@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestBarAgent : Agent
+public class FurnitureBarAgent : Agent
 {
-    private Chest chest;                    // object to be controlled by this agent
+    private Furniture furniture;            // object to be controlled by this agent
     private float currentTime;              // current time in seconds
     private float MAX_TIME = 5f;            // max time in seconds
 
-    public ChestBarAgent(Chest chest)
+    public FurnitureBarAgent(Chest chest)
     {
-        this.chest = chest;
+        this.furniture = chest;
     }
 
     public override void start()
     {
         currentTime = 0f;
-        chest.showBuildingBar(true);
+        furniture.showBuildingBar(true);
     }
 
     public override void restart()
@@ -37,7 +37,7 @@ public class ChestBarAgent : Agent
         }
         else
         {
-            chest.showBuildingBar(false);
+            furniture.showBuildingBar(false);
             stop();
         }
     }

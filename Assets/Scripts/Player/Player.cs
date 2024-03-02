@@ -192,7 +192,10 @@ public class Player : StateMachineController<Player>
     /// <param name="objectAsset">Object that player is giving up.</param>
     public void giveUpObjectPlacement(DrawableItem objectAsset)
     {
-        Debug.Log("Returning all object material to player inventory.");
+        List<GameItem> allItems = playerBuildingSkills.getAllMaterialToGenerateAnItem((int)objectAsset.itemId);
+
+        foreach(GameItem item in allItems)
+            playerInventory.addStoreItem(item);
     }
 
     #region Moviment

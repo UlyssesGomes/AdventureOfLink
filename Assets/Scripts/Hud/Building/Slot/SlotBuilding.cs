@@ -29,6 +29,7 @@ public class SlotBuilding : MonoBehaviour
         if(sprite != null)
         {
             contentSprite.sprite = sprite;
+            contentSprite.preserveAspect = true;
             slotObject.SetActive(true);
         }
         else

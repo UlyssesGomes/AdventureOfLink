@@ -10,4 +10,5 @@
     PLANK = ItemIdEnum.PLANK,
     CHEST = ItemIdEnum.CHEST,
     SMALL_HOUSE_A = ItemIdEnum.SMALL_HOUSE_A,
+    CHIMNEY,
 }

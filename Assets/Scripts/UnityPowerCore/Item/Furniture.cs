@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Furniture : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public abstract class Furniture : MonoBehaviour
     public ItemIdEnum itemId;                   // item id that represents this item
 
     protected float buildingAmount;             // how much percent this furniture is complete
+
+    public GameObject buildingBar;              // building progress bar to show to player how much left work is needed
+    public Image filledBar;                     // amoung of work done in progress bar
 
     private void Awake()
     {
@@ -24,6 +28,15 @@ public abstract class Furniture : MonoBehaviour
     void Update()
     {
         furnitureUpdate();
+    }
+
+    /// <summary>
+    /// Enable or disable building bar by param isShow.
+    /// </summary>
+    /// <param name="isShow">boolean to show or hide building bar.</param>
+    public void showBuildingBar(bool isShow)
+    {
+        buildingBar.SetActive(isShow);
     }
 
     /// <summary>

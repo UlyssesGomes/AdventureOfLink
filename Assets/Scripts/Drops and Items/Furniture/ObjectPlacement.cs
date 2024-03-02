@@ -372,6 +372,11 @@ public class ObjectPlacement : MonoBehaviour
             InputManager<InputAgentsEnum>.allowedControllingAgent = InputAgentsEnum.CHEST;
         InputManager<InputAgentsEnum>.isLocked = isEnable;
 
+        if (transform.rotation.eulerAngles.y != 0f)
+        {
+            Quaternion quaternion = Quaternion.Euler(transform.rotation.eulerAngles.x, 0f, transform.rotation.eulerAngles.z);
+            transform.rotation = quaternion;
+        }
     }
 
     /// <summary>

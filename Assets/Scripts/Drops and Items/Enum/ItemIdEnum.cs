@@ -14,5 +14,6 @@
     PLANK,
     WOOL,
     CHEST,
-    SMALL_HOUSE_A
+    SMALL_HOUSE_A,
+    BED
 };

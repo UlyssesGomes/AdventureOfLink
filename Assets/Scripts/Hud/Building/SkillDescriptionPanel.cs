@@ -27,6 +27,7 @@ public class SkillDescriptionPanel : MonoBehaviour
         _currentBuildingSkill = skill;
         name.text = skill.skillName;
         skillImage.sprite = skill.image;
+        skillImage.preserveAspect = true;
         description.text = skill.description;
         bool isButtonEnable = true;
         for(int u = 0; u < materialSlots.Length; u++)
