@@ -12,6 +12,9 @@ public abstract class Furniture : MonoBehaviour
     public GameObject buildingBar;              // building progress bar to show to player how much left work is needed
     public Image filledBar;                     // amoung of work done in progress bar
 
+    protected Color defaultColor;               // chest default color to be desplayed when chest was set on the ground
+    protected Color buildingColor;              // color to be shown when chest is under building
+
     private void Awake()
     {
         sprite = GetComponentInParent<SpriteRenderer>();

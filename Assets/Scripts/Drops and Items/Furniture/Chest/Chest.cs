@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class Chest : AbstractChest
 {
-    private Color defaultColor;             // chest default color to be desplayed when chest was set on the ground
-    private Color buildingColor;            // color to be shown when chest is under building
-
     private AgentExecutor executor;         // executor to run chest bar agent
 
     private AssetFactory assetfactory;      // Manager of assets available in memory.

@@ -6,10 +6,7 @@ public abstract class AbstractBed : Furniture
     [SerializeField]
     protected DrawableItem bed;             // bed defined data
 
-    private Color defaultColor;             // chest default color to be desplayed when chest was set on the ground
-    private Color buildingColor;            // color to be shown when chest is under building
-
-    private AgentExecutor executor;         // executor to run chest bar agent
+    protected AgentExecutor executor;       // executor to run chest bar agent
 
     private AssetFactory assetfactory;      // Manager of assets available in memory.
 
@@ -19,6 +16,14 @@ public abstract class AbstractBed : Furniture
         bed = Instantiate(bed);
         buildingColor = new Color(1f, 1f, 1f, 0.2549f);
         defaultColor = sprite.color;
+
+        if (buildingAmount < 100f)
+        {
+            filledBar.fillAmount = buildingAmount / 100f;
+            sprite.color = buildingColor;
+        }
+
+        executor = new AgentExecutor();
     }
 
     public override DrawableItem getFurnitureData()
@@ -28,7 +33,7 @@ public abstract class AbstractBed : Furniture
 
     protected override void buildingImpact(float value)
     {
-        //executor.addAgent(new BedBarAgent(this));
+        executor.addAgent(new FurnitureBarAgent(this));
         buildingAmount += value;
 
         if (buildingAmount < 100f)
@@ -41,7 +46,7 @@ public abstract class AbstractBed : Furniture
             buildingBar.SetActive(false);
             sprite.color = defaultColor;
             GameObject puff = assetfactory.instanceFxGameObjectByType((int)FxEnum.PUFF_SMOKE);
-            puff.transform.position = transform.parent.position;
+            puff.transform.position = transform.position;
         }
     }
 

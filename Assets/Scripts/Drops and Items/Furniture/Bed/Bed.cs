@@ -1,9 +1,11 @@
-﻿public class Bed : AbstractBed
-{
+﻿using UnityEngine;
 
+public class Bed : AbstractBed
+{
+    private AssetFactory assetfactory;      // Manager of assets available in memory.
 
     public override void furnitureUpdate()
     {
-        throw new System.NotImplementedException();
+        executor.update();
     }
 }

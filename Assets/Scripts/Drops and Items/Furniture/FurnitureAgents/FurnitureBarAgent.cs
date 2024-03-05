@@ -8,9 +8,9 @@ public class FurnitureBarAgent : Agent
     private float currentTime;              // current time in seconds
     private float MAX_TIME = 5f;            // max time in seconds
 
-    public FurnitureBarAgent(Chest chest)
+    public FurnitureBarAgent(Furniture furniture)
     {
-        this.furniture = chest;
+        this.furniture = furniture;
     }
 
     public override void start()

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: BedItem
   m_EditorClassIdentifier: 
   id: 0
-  itemId: 0
-  type: 0
-  itemName: 
+  itemId: 17
+  type: 6
+  itemName: Cama
   isStackable: 0
   isViewPercent: 0
-  total: 0
-  animType: 0
-  sprite: {fileID: 0}
+  total: 1
+  animType: 1
+  sprite: {fileID: 7483058792947002049, guid: a02d16d32f138aa43ad68276e21c4ecf, type: 3}

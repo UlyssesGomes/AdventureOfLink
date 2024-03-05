@@ -19,6 +19,7 @@ MonoBehaviour:
   description: "Item decorativo para parte externa de uma casa. Esse item s\xF3 pode
     ser constru\xEDdo dentro de uma casa."
   amountGenerated: 1
+  itemId: 17
   isEnabled: 0
   hasAllMaterials: 0
   type: 1
