@@ -2,7 +2,6 @@
 using UnityEngine.UI;
 
 using System;
-using System.Collections.Generic;
 
 public class BuildingMenuController : MonoBehaviour
 {
@@ -208,13 +207,25 @@ public class BuildingMenuController : MonoBehaviour
         }
         else if(descriptionPanel.currentBuildingSkill.type == BuildingSkillGroupType.HOUSE)
         {
-
-            bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
-
-            if (isRemovedAll)
+            if(descriptionPanel.currentBuildingSkill.skillId == BuildingSkillEnum.CHIMNEY)
             {
-                invertOpenState();
-                player.enablePlacementUi((int)descriptionPanel.currentBuildingSkill.itemId);
+                if (player.createChimney())
+                {
+                    bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
+                    descriptionPanel.setEnableCreationButton(true);
+                    //if (isRemovedAll)
+                    //    invertOpenState();
+                }
+            }
+            else
+            {
+                bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
+
+                if (isRemovedAll)
+                {
+                    invertOpenState();
+                    player.enablePlacementUi((int)descriptionPanel.currentBuildingSkill.itemId);
+                }
             }
         }
 

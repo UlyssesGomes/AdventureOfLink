@@ -5,7 +5,7 @@ public abstract class Furniture : MonoBehaviour
 {
     [SerializeField]
     protected SpriteRenderer sprite;            // sprite to render on screen
-    public ItemIdEnum itemId;                   // item id that represents this item
+    public ObjectIdEnum itemId;                   // item id that represents this item
 
     protected float buildingAmount;             // how much percent this furniture is complete
 

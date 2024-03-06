@@ -60,4 +60,9 @@ public class HouseController : House<BuildingItemIdEnum>
         puff.transform.position = transform.position;
         puff.transform.localScale = new Vector3(4f, 4f, 4f);
     }
+
+    public void enableChimney()
+    {
+        Debug.Log("Chaminé habilitada.");
+    }
 }

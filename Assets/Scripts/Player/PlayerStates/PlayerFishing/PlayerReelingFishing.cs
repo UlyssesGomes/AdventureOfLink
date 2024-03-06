@@ -35,7 +35,7 @@ public class PlayerReelingFishing : PlayerUnitState
 
     private void tryAddFish()
     {
-        GameItem gameItem = stateMachineObject.assetfactory.instanceGameItemByItemId((int)ItemIdEnum.FISH);
+        GameItem gameItem = stateMachineObject.assetfactory.instanceGameItemByItemId((int)ObjectIdEnum.FISH);
         int startAmount = gameItem.amount = 1;
         int addedAmount = stateMachineObject.playerInventory.addStoreItem(gameItem);
 

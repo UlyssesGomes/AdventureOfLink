@@ -22,6 +22,9 @@ public class Player : StateMachineController<Player>
     private int isInDoorIntractArea;                            // control in how many door interact area player is
     private Door door;                                          // the door under interaction
 
+    private bool inHouse;                                       // flag control if player is inside a house, used to know if a player can set a chimney
+    private HouseController house;                              // house that can set a chimney
+
     public AssetFactory assetfactory;                           // Manager of assets available in memory.
 
     [SerializeField]
@@ -63,6 +66,7 @@ public class Player : StateMachineController<Player>
         doingBar.SetActive(false);
 
         isInDoorIntractArea = 0;
+        inHouse = false;
     }
 
     protected override void stateMachineUpdate()
@@ -124,6 +128,11 @@ public class Player : StateMachineController<Player>
             door = collision.GetComponentInParent<Door>();
             isInDoorIntractArea++;
         }
+        else if(collision.CompareTag("House"))
+        {
+            inHouse = true;
+            house = collision.GetComponentInParent<HouseController>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -136,6 +145,11 @@ public class Player : StateMachineController<Player>
                 isInDoorIntractArea = 0;
                 door = null;
             }
+        }
+        else if (collision.CompareTag("House"))
+        {
+            inHouse = false;
+            house = null;
         }
     }
 
@@ -196,6 +210,21 @@ public class Player : StateMachineController<Player>
 
         foreach(GameItem item in allItems)
             playerInventory.addStoreItem(item);
+    }
+
+    public bool createChimney()
+    {
+        if (inHouse)
+        {
+            house.enableChimney();
+            return true;
+        }
+        else
+        {
+            // TODO - adding notify when notify system is implemented.
+            Debug.LogWarning("To set chimney in a house, the player must be inside a house.");
+        }
+        return false;
     }
 
     #region Moviment

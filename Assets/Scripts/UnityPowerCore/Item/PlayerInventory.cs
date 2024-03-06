@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
     private GameItem [] storedItems;                                            // items stored in backpack
     public int switableItemIndex;                                               // item index selected by hotkey
 
-    private IDictionary<ItemIdEnum, List<GameItem>> storedItemsDictionary;             // a hash table to easly find objects and count them
+    private IDictionary<ObjectIdEnum, List<GameItem>> storedItemsDictionary;             // a hash table to easly find objects and count them
 
     public Observable<GenericSubject<int, GameItem[]>> storedItemsObservable;   // store items observable to notify changes in storedItems array.
 
@@ -24,7 +24,7 @@ public class PlayerInventory : MonoBehaviour
         storedItemsObservable = new Observable<GenericSubject<int, GameItem[]>>();
         subjectEvent = new GenericSubject<int, GameItem[]>();
         storedItems = new GameItem[TOTAL_INVENTORY_SIZE];
-        storedItemsDictionary = new Dictionary<ItemIdEnum, List<GameItem>>();
+        storedItemsDictionary = new Dictionary<ObjectIdEnum, List<GameItem>>();
         inventoryCurrentSize = TOTAL_INVENTORY_SIZE - hotkeyInventorySize;
     }
 
@@ -94,7 +94,7 @@ public class PlayerInventory : MonoBehaviour
     /// <param name="item"></param>
     /// <param name="amount"></param>
     /// <returns></returns>
-    public int removeStoreItemAmount(ItemIdEnum itemId, int amount)
+    public int removeStoreItemAmount(ObjectIdEnum itemId, int amount)
     {
         int amountLeft = amount;
         int index;
@@ -229,7 +229,7 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
-    private int getFirstStoredItemIndex(ItemIdEnum itemId)
+    private int getFirstStoredItemIndex(ObjectIdEnum itemId)
     {
         for(int u = 0; u < storedItems.Length; u++)
         {
@@ -339,7 +339,7 @@ public class PlayerInventory : MonoBehaviour
     /// </summary>
     /// <param name="itemId">Item id</param>
     /// <returns></returns>
-    public int countItemAmountByItemId(ItemIdEnum itemId)
+    public int countItemAmountByItemId(ObjectIdEnum itemId)
     {
         if (storedItemsDictionary.ContainsKey(itemId))
         {
