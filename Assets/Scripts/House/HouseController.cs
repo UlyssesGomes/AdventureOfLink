@@ -7,12 +7,14 @@ public class HouseController : House<BuildingItemIdEnum>
     private bool isBuilt;                               // flag that represents whether the house is already built or not
     [SerializeField]
     public bool isPositionedCorrecty;                   // flag to tell if this house is placed correctly
+    [SerializeField]
+    private bool isChimneyBuilt;                        // flag to tell if chimney is built in this house
 
     [Header("House Building Component")]
     [SerializeField]
     private BuildingBlockedArea buildingBlockedArea;    // instance to control when house is in building mode
 
-    [Header("House Objectes")]
+    [Header("House Objects")]
     [SerializeField]
     private GameObject roof;                            // roof object of this house
     [SerializeField]
@@ -21,6 +23,8 @@ public class HouseController : House<BuildingItemIdEnum>
     private GameObject ground;                          // ground object of this house
     [SerializeField]
     private GameObject door;                            // door object of this house
+    [SerializeField]
+    private GameObject chimney;                         // chimeny object of this house
     [SerializeField]
     private GameObject constructionFance;               // construction object collection of this house
 
@@ -33,6 +37,9 @@ public class HouseController : House<BuildingItemIdEnum>
 
         if (!isPositionedCorrecty)
             buildingBlockedArea.ativateInvalidPlace();
+
+        if (isChimneyBuilt)
+            chimney.SetActive(true);
     }
 
     /// <summary>
@@ -61,8 +68,13 @@ public class HouseController : House<BuildingItemIdEnum>
         puff.transform.localScale = new Vector3(4f, 4f, 4f);
     }
 
+    /// <summary>
+    /// Enable chimney in this house. It's start deactivated until player 
+    /// build it inside a house.
+    /// </summary>
     public void enableChimney()
     {
-        Debug.Log("Chaminé habilitada.");
+        isChimneyBuilt = true;
+        chimney.SetActive(true);
     }
 }

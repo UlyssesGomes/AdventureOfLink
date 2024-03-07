@@ -22,6 +22,7 @@ public class Player : StateMachineController<Player>
     private int isInDoorIntractArea;                            // control in how many door interact area player is
     private Door door;                                          // the door under interaction
 
+    [SerializeField]
     private bool inHouse;                                       // flag control if player is inside a house, used to know if a player can set a chimney
     private HouseController house;                              // house that can set a chimney
 
@@ -128,7 +129,7 @@ public class Player : StateMachineController<Player>
             door = collision.GetComponentInParent<Door>();
             isInDoorIntractArea++;
         }
-        else if(collision.CompareTag("House"))
+        else if(collision.CompareTag("HouseGround"))
         {
             inHouse = true;
             house = collision.GetComponentInParent<HouseController>();
@@ -146,7 +147,7 @@ public class Player : StateMachineController<Player>
                 door = null;
             }
         }
-        else if (collision.CompareTag("House"))
+        else if (collision.CompareTag("HouseGround"))
         {
             inHouse = false;
             house = null;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3809202678064565187}
   - component: {fileID: 3514140905022689311}
   - component: {fileID: 1333312125229231760}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BuildingBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 7131841671507454521}
   - component: {fileID: 4875742290645320770}
   - component: {fileID: 8913348138027792837}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Furniture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 7026363186423544921}
   - component: {fileID: 6530447554735151342}
   - component: {fileID: 8140355697197906642}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FilledBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

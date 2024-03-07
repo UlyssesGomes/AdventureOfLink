@@ -3,14 +3,18 @@
 public class RoofOpaqueAgent : Agent
 {
     private SpriteRenderer sprite;                  // roof house sprite to transform color
+    private SpriteRenderer chimneySprite;           // chimney sprite to transform color
+    private SpriteRenderer smokeSprite;             // smoke chimney sprite to transform color
     private Color currentColor;                     // sprite current color
 
     private float speedTransparentEffect = 2f;      // transformation speed for opaque color
     private float currentAlpha;                     // current alpha component color
 
-    public RoofOpaqueAgent(SpriteRenderer sprite)
+    public RoofOpaqueAgent(SpriteRenderer sprite, SpriteRenderer chimneySprite, SpriteRenderer smokeSprite)
     {
         this.sprite = sprite;
+        this.chimneySprite = chimneySprite;
+        this.smokeSprite = smokeSprite;
     }
 
     public override int agentType()
@@ -38,6 +42,8 @@ public class RoofOpaqueAgent : Agent
             currentAlpha += speedTransparentEffect * Time.deltaTime;
             currentColor.a = currentAlpha;
             sprite.color = currentColor;
+            chimneySprite.color = currentColor;
+            smokeSprite.color = currentColor;
         }
         else
         {

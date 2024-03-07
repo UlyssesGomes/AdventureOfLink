@@ -9,7 +9,7 @@ public class ObjectPlaceDetect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.CompareTag("HouseRoof"))
+        if(!collision.CompareTag("HouseRoof") && !collision.CompareTag("HouseGround"))
         {
             count++;
             if(count > 0)
@@ -19,7 +19,7 @@ public class ObjectPlaceDetect : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (!collision.CompareTag("HouseRoof"))
+        if (!collision.CompareTag("HouseRoof") && !collision.CompareTag("HouseGround"))
         {
             count--;
             if(count == 0)

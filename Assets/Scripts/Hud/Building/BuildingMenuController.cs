@@ -213,8 +213,9 @@ public class BuildingMenuController : MonoBehaviour
                 {
                     bool isRemovedAll = removeMaterialItems(descriptionPanel.currentBuildingSkill.material);
                     descriptionPanel.setEnableCreationButton(true);
-                    //if (isRemovedAll)
-                    //    invertOpenState();
+                    isItemAdded = true;
+                    player.doingTimer += GENERATE_TIME;
+                    player.maxDoingTimer += GENERATE_TIME;
                 }
             }
             else

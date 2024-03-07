@@ -6,6 +6,12 @@ public class RoofTransparence : MonoBehaviour
     private SpriteRenderer sprite;          // roof sprite
     private AgentExecutor executor;         // executor to run chest bar agent
 
+    [Header("Chimney Sprites")]
+    [SerializeField]
+    private SpriteRenderer chimneySprite;   // chimney sprite
+    [SerializeField]
+    private SpriteRenderer smokeSprite;     // chimney smoke sprite
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +28,7 @@ public class RoofTransparence : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            executor.addAgent(new RoofTransparentAgent(sprite));
+            executor.addAgent(new RoofTransparentAgent(sprite, chimneySprite, smokeSprite));
         }
     }
 
@@ -32,7 +38,7 @@ public class RoofTransparence : MonoBehaviour
         {
             Player p = collision.GetComponent<Player>();
             if(!p.furniturePlacement.isActiveAndEnabled)
-                executor.addAgent(new RoofOpaqueAgent(sprite));
+                executor.addAgent(new RoofOpaqueAgent(sprite, chimneySprite, smokeSprite));
         }
     }
 }
