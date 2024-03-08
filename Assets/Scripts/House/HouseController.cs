@@ -9,6 +9,9 @@ public class HouseController : House<BuildingItemIdEnum>
     public bool isPositionedCorrecty;                   // flag to tell if this house is placed correctly
     [SerializeField]
     private bool isChimneyBuilt;                        // flag to tell if chimney is built in this house
+    [SerializeField]
+    private int houseMaxHitPoints;                      // max number of hit points this house can taken before turned into trash
+    private int houseHitPoints;                         // current amount of hitpoints left this house has
 
     [Header("House Building Component")]
     [SerializeField]
@@ -21,6 +24,7 @@ public class HouseController : House<BuildingItemIdEnum>
     private GameObject walls;                           // walls object of this house
     [SerializeField]
     private GameObject ground;                          // ground object of this house
+    private HouseGround groundComponent;                // ground component that receives hit
     [SerializeField]
     private GameObject door;                            // door object of this house
     [SerializeField]
@@ -40,6 +44,11 @@ public class HouseController : House<BuildingItemIdEnum>
 
         if (isChimneyBuilt)
             chimney.SetActive(true);
+
+        houseHitPoints = houseMaxHitPoints;
+
+        groundComponent = ground.GetComponent<HouseGround>();
+        groundComponent.addListeners(takeDamage);
     }
 
     /// <summary>
@@ -63,9 +72,22 @@ public class HouseController : House<BuildingItemIdEnum>
     {
         isBuilt = true;
         construictionMode();
-        GameObject puff = AssetFactory.getInstance().instanceFxGameObjectByType((int)FxEnum.PUFF_SMOKE);
-        puff.transform.position = transform.position;
-        puff.transform.localScale = new Vector3(4f, 4f, 4f);
+        doPuffFx();
+    }
+
+    /// <summary>
+    /// Callback called when house taken a damage drom an axe.
+    /// </summary>
+    /// <param name="amountHitPoints">Amount of damage taken.</param>
+    public void takeDamage(int amountHitPoints)
+    {
+        Debug.Log("A casa recebeu " + amountHitPoints + " de dano.");
+        houseHitPoints -= amountHitPoints;
+        if (houseHitPoints <= 0)
+        {
+            doPuffFx();
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -76,5 +98,15 @@ public class HouseController : House<BuildingItemIdEnum>
     {
         isChimneyBuilt = true;
         chimney.SetActive(true);
+    }
+
+    /// <summary>
+    /// Show puff effect.
+    /// </summary>
+    private void doPuffFx()
+    {
+        GameObject puff = AssetFactory.getInstance().instanceFxGameObjectByType((int)FxEnum.PUFF_SMOKE);
+        puff.transform.position = transform.position;
+        puff.transform.localScale = new Vector3(4f, 4f, 4f);
     }
 }
