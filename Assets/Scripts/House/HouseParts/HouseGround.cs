@@ -3,12 +3,13 @@ using UnityEngine.Events;
 
 public class HouseGround : MonoBehaviour
 {
-    private UnityEvent<int> unityEvents;
-
+    private UnityEvent<int> unityEvents;        // subject to send to observer when ground is hited by axe
+    
     private void Awake()
     {
-        unityEvents = new UnityEvent<int>();    
+        unityEvents = new UnityEvent<int>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Axe"))

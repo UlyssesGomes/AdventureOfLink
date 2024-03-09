@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class HouseController : House<BuildingItemIdEnum>
 {
@@ -10,8 +11,8 @@ public class HouseController : House<BuildingItemIdEnum>
     [SerializeField]
     private bool isChimneyBuilt;                        // flag to tell if chimney is built in this house
     [SerializeField]
-    private int houseMaxHitPoints;                      // max number of hit points this house can taken before turned into trash
-    private int houseHitPoints;                         // current amount of hitpoints left this house has
+    private float houseMaxHitPoints;                    // max number of hit points this house can taken before turned into trash
+    private float houseHitPoints;                       // current amount of hitpoints left this house has
 
     [Header("House Building Component")]
     [SerializeField]
@@ -32,6 +33,14 @@ public class HouseController : House<BuildingItemIdEnum>
     [SerializeField]
     private GameObject constructionFance;               // construction object collection of this house
 
+    [Header("Hitpoint Bar")]
+    [SerializeField]
+    private Image blueBar;                              // bar to represent current amount of hit points this house has left
+    [SerializeField]
+    private GameObject blueBarObject;                   // blue bar game object instance 
+
+    private AgentExecutor executor;             // agent executor to run agents
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +58,13 @@ public class HouseController : House<BuildingItemIdEnum>
 
         groundComponent = ground.GetComponent<HouseGround>();
         groundComponent.addListeners(takeDamage);
+
+        executor = new AgentExecutor();
+    }
+
+    private void Update()
+    {
+        executor.update();
     }
 
     /// <summary>
@@ -71,6 +87,7 @@ public class HouseController : House<BuildingItemIdEnum>
     public void builtHouse()
     {
         isBuilt = true;
+        blueBarObject.SetActive(false);
         construictionMode();
         doPuffFx();
     }
@@ -83,11 +100,21 @@ public class HouseController : House<BuildingItemIdEnum>
     {
         Debug.Log("A casa recebeu " + amountHitPoints + " de dano.");
         houseHitPoints -= amountHitPoints;
+        updateFillBar();
+        executor.addAgent(new HouseBuildBarAgent(blueBarObject));
         if (houseHitPoints <= 0)
         {
             doPuffFx();
             Destroy(gameObject);
         }
+    }
+
+    /// <summary>
+    /// Update house hitpoints and blueBar with new value.
+    /// </summary>
+    private void updateFillBar()
+    {
+        blueBar.fillAmount = houseHitPoints / houseMaxHitPoints;
     }
 
     /// <summary>

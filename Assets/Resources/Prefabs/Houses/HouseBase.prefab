@@ -253,9 +253,8 @@ RectTransform:
   m_Children:
   - {fileID: 2937141777763519578}
   - {fileID: 2618279231174545012}
-  - {fileID: 8200936413056108426}
   m_Father: {fileID: 6110340755441998468}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -518,6 +517,7 @@ Transform:
   - {fileID: 4955106181680512042}
   - {fileID: 666223648608860436}
   - {fileID: 2120290365238346047}
+  - {fileID: 8200936413056108426}
   - {fileID: 1186627926065907875}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -538,12 +538,17 @@ MonoBehaviour:
   itemId: 0
   isBuilt: 0
   isPositionedCorrecty: 0
+  isChimneyBuilt: 0
+  houseMaxHitPoints: 0
   buildingBlockedArea: {fileID: 781019532953340106}
   roof: {fileID: 8450595291049131262}
   walls: {fileID: 5825888915882218437}
   ground: {fileID: 6618780574361438215}
   door: {fileID: 5146607813977374313}
+  chimney: {fileID: 0}
   constructionFance: {fileID: 814005475783747351}
+  blueBar: {fileID: 8200936413444489711}
+  blueBarObject: {fileID: 8200936413056108425}
 --- !u!1 &5825877777386595290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,12 +1212,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 1350607370380093722}
+  chimneySprite: {fileID: 0}
+  smokeSprite: {fileID: 0}
 --- !u!1001 &6422877456038513047
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1186627926065907875}
+    m_TransformParent: {fileID: 6110340755441998468}
     m_Modifications:
     - target: {fileID: 2949067428390668408, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_FillAmount
@@ -1220,7 +1227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293699, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293724, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_SortingOrder
@@ -1240,15 +1247,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1256,7 +1263,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1276,7 +1283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.04
+      value: 0.06999973
       objectReference: {fileID: 0}
     - target: {fileID: 2949067429043293725, guid: 8bb0794255c7c284cbd64b8d5ada6f35, type: 3}
       propertyPath: m_SizeDelta.x
