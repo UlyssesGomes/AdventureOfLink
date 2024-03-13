@@ -13,6 +13,8 @@ public class HouseController : House<BuildingItemIdEnum>
     [SerializeField]
     private float houseMaxHitPoints;                    // max number of hit points this house can taken before turned into trash
     private float houseHitPoints;                       // current amount of hitpoints left this house has
+    [SerializeField]
+    private int houseType;                              // type that represent this house.
 
     [Header("House Building Component")]
     [SerializeField]
@@ -39,7 +41,7 @@ public class HouseController : House<BuildingItemIdEnum>
     [SerializeField]
     private GameObject blueBarObject;                   // blue bar game object instance 
 
-    private AgentExecutor executor;             // agent executor to run agents
+    private AgentExecutor executor;                     // agent executor to run agents
 
     // Start is called before the first frame update
     void Start()
@@ -98,7 +100,6 @@ public class HouseController : House<BuildingItemIdEnum>
     /// <param name="amountHitPoints">Amount of damage taken.</param>
     public void takeDamage(int amountHitPoints)
     {
-        Debug.Log("A casa recebeu " + amountHitPoints + " de dano.");
         houseHitPoints -= amountHitPoints;
         updateFillBar();
         executor.addAgent(new HouseBuildBarAgent(blueBarObject));

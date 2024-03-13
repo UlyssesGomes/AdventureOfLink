@@ -83,7 +83,7 @@ public class ObjectPlacement : MonoBehaviour
         else if (input.GetKey(KeyCode.Escape))
         {
             disableFurniturePlacement();
-            player.giveUpObjectPlacement(objectAsset);
+            player.returnSkillMaterial(objectAsset);
         }
         else if (input.GetKey(KeyCode.F) && !canPlace)
         {

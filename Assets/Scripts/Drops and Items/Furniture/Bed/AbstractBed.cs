@@ -8,7 +8,7 @@ public abstract class AbstractBed : Furniture
 
     protected AgentExecutor executor;       // executor to run chest bar agent
 
-    private AssetFactory assetfactory;      // Manager of assets available in memory.
+    protected AssetFactory assetfactory;    // Manager of assets available in memory.
 
     public override void furnitureStart()
     {

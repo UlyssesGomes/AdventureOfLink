@@ -205,12 +205,24 @@ public class Player : StateMachineController<Player>
     /// in placement state, he can get back all material into your backpack.
     /// </summary>
     /// <param name="objectAsset">Object that player is giving up.</param>
-    public void giveUpObjectPlacement(DrawableItem objectAsset)
+    public void returnSkillMaterial(DrawableItem objectAsset)
     {
-        List<GameItem> allItems = playerBuildingSkills.getAllMaterialToGenerateAnItem((int)objectAsset.itemId);
+        List<GameItem> allItems = playerBuildingSkills.getItemAndGenerateMaterials((int)objectAsset.itemId, 1f);
 
         foreach(GameItem item in allItems)
             playerInventory.addStoreItem(item);
+    }
+
+    /// <summary>
+    /// When player destroy a house, some wrekage are generated to be reused.
+    /// </summary>
+    /// <param name="houseType">House type</param>
+    /// <returns>A list of material after house destroyed.</returns>
+    public List<GameItem> destroyHouse(int houseType)
+    {
+        List<GameItem> wreckages = playerBuildingSkills.getItemAndGenerateMaterials(houseType, 2f);
+
+        return wreckages;
     }
 
     public bool createChimney()
