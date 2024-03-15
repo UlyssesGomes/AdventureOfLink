@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3974546828225289803}
-  - component: {fileID: 3974546828225289802}
   - component: {fileID: 3974546828225289801}
   - component: {fileID: 1294360700}
+  - component: {fileID: 8273448008382748308}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3974546828225289802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3974546828225289800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fa39fd04f9baec439d91cfda871d2cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemAsset: {fileID: 11400000, guid: 197c54f3ae8bdb04d8755c5b95e37016, type: 2}
 --- !u!212 &3974546828225289801
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,3 +100,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4375
+--- !u!114 &8273448008382748308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974546828225289800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a5cdf572474f4da960d59c8037100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemAsset: {fileID: 11400000, guid: 197c54f3ae8bdb04d8755c5b95e37016, type: 2}

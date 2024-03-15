@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wood : SceneryItem<GameItem>
+public class Wood : AbstractSceneryItem<GameItem>
 {
     [SerializeField]
     private float speed;

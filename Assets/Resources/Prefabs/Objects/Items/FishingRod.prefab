@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4534319179423477185}
-  - component: {fileID: 3688304100576231175}
   - component: {fileID: -1249513636414500299}
   - component: {fileID: 9152547385296649962}
+  - component: {fileID: 7591616381081679310}
   m_Layer: 0
   m_Name: FishingRod
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3688304100576231175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213161458023869631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aea0b891e8c2d041baa69772e62feed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemAsset: {fileID: 11400000, guid: 4b4539ab44fdb1c49a3673cac9c9776a, type: 2}
 --- !u!212 &-1249513636414500299
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,3 +100,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &7591616381081679310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213161458023869631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a5cdf572474f4da960d59c8037100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemAsset: {fileID: 11400000, guid: 4b4539ab44fdb1c49a3673cac9c9776a, type: 2}

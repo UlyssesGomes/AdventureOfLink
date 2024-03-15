@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5107733846552067292}
-  - component: {fileID: 2835446307389474110}
   - component: {fileID: 2239503141003071583}
   - component: {fileID: 8532996887580699625}
+  - component: {fileID: 1529853457278909491}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2835446307389474110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2644516514294150966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed733de4ab27ce6459099e7de4a3acf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemAsset: {fileID: 11400000, guid: 8d639ebd9c0c4e244a18b78931139fc5, type: 2}
 --- !u!212 &2239503141003071583
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -113,3 +100,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.40625
+--- !u!114 &1529853457278909491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2644516514294150966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a5cdf572474f4da960d59c8037100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemAsset: {fileID: 11400000, guid: 8d639ebd9c0c4e244a18b78931139fc5, type: 2}

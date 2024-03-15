@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class DroppedSceneryItem : SceneryItem<GameItem>
+public class DroppedSceneryItem : AbstractSceneryItem<GameItem>
 {
     [SerializeField]
     private float speed;
@@ -19,11 +19,13 @@ public class DroppedSceneryItem : SceneryItem<GameItem>
         direction = VectorUtils.createVector3(1, angle);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         timeCount += Time.deltaTime;
+    }
 
+    private void FixedUpdate()
+    {
         if (timeCount < timeMove)
         {
             transform.Translate(direction * speed * Time.deltaTime);

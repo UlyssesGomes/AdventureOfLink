@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5105557860598945121}
   - component: {fileID: 5105557860598945120}
   - component: {fileID: 5105557860598945055}
-  - component: {fileID: 5105557860598945054}
+  - component: {fileID: 4831822011989528077}
   m_Layer: 0
   m_Name: Shovel
   m_TagString: Shovel
@@ -100,7 +100,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5105557860598945054
+--- !u!114 &4831822011989528077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5105557860598945053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9f1b68515ac4a34cbfe7756fdf1d866, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a2a5cdf572474f4da960d59c8037100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemAsset: {fileID: 11400000, guid: 799579949af63ed498649166b36c810e, type: 2}
