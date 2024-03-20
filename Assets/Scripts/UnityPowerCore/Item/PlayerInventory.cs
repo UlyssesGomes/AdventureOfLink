@@ -8,7 +8,7 @@ public class PlayerInventory : MonoBehaviour
     private GameItem [] storedItems;                                            // items stored in backpack
     public int switableItemIndex;                                               // item index selected by hotkey
 
-    private IDictionary<ObjectIdEnum, List<GameItem>> storedItemsDictionary;             // a hash table to easly find objects and count them
+    private IDictionary<ObjectIdEnum, List<GameItem>> storedItemsDictionary;    // a hash table to easly find objects and count them
 
     public Observable<GenericSubject<int, GameItem[]>> storedItemsObservable;   // store items observable to notify changes in storedItems array.
 

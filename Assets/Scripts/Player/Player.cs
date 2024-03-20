@@ -207,22 +207,10 @@ public class Player : StateMachineController<Player>
     /// <param name="objectAsset">Object that player is giving up.</param>
     public void returnSkillMaterial(DrawableItem objectAsset)
     {
-        List<GameItem> allItems = playerBuildingSkills.getItemAndGenerateMaterials((int)objectAsset.itemId, 1f);
+        List<DrawableItem> allItems = playerBuildingSkills.getItemAndGenerateMaterials((int)objectAsset.itemId, 1f);
 
-        foreach(GameItem item in allItems)
+        foreach(DrawableItem item in allItems)
             playerInventory.addStoreItem(item);
-    }
-
-    /// <summary>
-    /// When player destroy a house, some wrekage are generated to be reused.
-    /// </summary>
-    /// <param name="houseType">House type</param>
-    /// <returns>A list of material after house destroyed.</returns>
-    public List<GameItem> destroyHouse(int houseType)
-    {
-        List<GameItem> wreckages = playerBuildingSkills.getItemAndGenerateMaterials(houseType, 2f);
-
-        return wreckages;
     }
 
     public bool createChimney()

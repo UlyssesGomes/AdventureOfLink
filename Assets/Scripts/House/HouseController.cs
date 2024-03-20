@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class HouseController : House<BuildingItemIdEnum>
 {
@@ -14,7 +15,7 @@ public class HouseController : House<BuildingItemIdEnum>
     private float houseMaxHitPoints;                    // max number of hit points this house can taken before turned into trash
     private float houseHitPoints;                       // current amount of hitpoints left this house has
     [SerializeField]
-    private int houseType;                              // type that represent this house.
+    private BuildingItemIdEnum houseType;               // type that represent this house.
 
     [Header("House Building Component")]
     [SerializeField]
@@ -106,7 +107,29 @@ public class HouseController : House<BuildingItemIdEnum>
         if (houseHitPoints <= 0)
         {
             doPuffFx();
+            dropItems();
             Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Generate items to be dropped.
+    /// </summary>
+    private void dropItems()
+    {
+        PlayerBuildingSkills buildingSkills = PlayerBuildingSkills.getInstance();
+
+        List<DrawableItem> gameItems = buildingSkills.getItemAndGenerateMaterials((int)houseType, 2.0f);
+
+        if (gameItems == null)
+            Debug.Log("não conseguiu carregar a lista de items.");
+
+        foreach(DrawableItem gameItem in gameItems)
+        {
+            GameObject droppedItem = AssetFactory.getInstance().instanceDroppedSceneryItem();
+
+            droppedItem.GetComponent<DroppedSceneryItem>().setItem(gameItem);
+            droppedItem.transform.position = transform.position;
         }
     }
 

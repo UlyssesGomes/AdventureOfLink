@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class AssetFactory : MonoBehaviour
 {
     [SerializeField]
+    private GameObject droppedSceneryItemPrefab;                // prefab of dropped scenery item
+
+    [SerializeField]
     private GameItem[] assetsCollections;                       // items availables in memory
     private Dictionary<int, GameItem> assetsDictionary;         // dictionary to find these items quickly
 
@@ -119,5 +122,10 @@ public class AssetFactory : MonoBehaviour
     public GameObject instanceFxGameObjectByType(int type)
     {
         return Instantiate(fxDictionary[type]);
+    }
+
+    public GameObject instanceDroppedSceneryItem()
+    {
+        return Instantiate(droppedSceneryItemPrefab);
     }
 }
