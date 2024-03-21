@@ -7,6 +7,7 @@ public class DroppedSceneryItem : AbstractSceneryItem<DrawableItem>
 
     [SerializeField]
     private float speed;                        // speed that item will move when dropped
+    private float currentSpeed;
     [SerializeField]
     private float timeMove;                     // time in which the object will move
     [SerializeField]
@@ -22,10 +23,11 @@ public class DroppedSceneryItem : AbstractSceneryItem<DrawableItem>
         createAmount = 1;
         float angle = Random.Range(0f, 359f);
         direction = VectorUtils.createVector3(1, angle);
-        isStarted = false;
+        speed -= Random.Range(0, 3);
+        currentSpeed = speed;
     }
 
-    private void Update()
+    void Update()
     {
         if(isStarted)
             timeCount += Time.deltaTime;
@@ -35,7 +37,12 @@ public class DroppedSceneryItem : AbstractSceneryItem<DrawableItem>
     {
         if (timeCount < timeMove)
         {
-            transform.Translate(direction * speed * Time.deltaTime);
+            currentSpeed = speed * ((timeMove - timeCount) / timeMove);
+            transform.Translate(direction * currentSpeed * Time.deltaTime);
+        }
+        else
+        {
+            isStarted = false;
         }
     }
 

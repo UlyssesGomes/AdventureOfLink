@@ -96,20 +96,43 @@ public class HouseController : House<BuildingItemIdEnum>
     }
 
     /// <summary>
-    /// Callback called when house taken a damage drom an axe.
+    /// Callback called when house taken a damage from an axe.
     /// </summary>
     /// <param name="amountHitPoints">Amount of damage taken.</param>
-    public void takeDamage(int amountHitPoints)
+    public void takeDamage(int amountHitPoints, PlayerInventory playerInventory)
     {
-        houseHitPoints -= amountHitPoints;
-        updateFillBar();
-        executor.addAgent(new HouseBuildBarAgent(blueBarObject));
-        if (houseHitPoints <= 0)
+        if (amountHitPoints >= 0 || (amountHitPoints < 0 && houseHitPoints < houseMaxHitPoints))
         {
-            doPuffFx();
-            dropItems();
-            Destroy(gameObject);
+            houseHitPoints -= amountHitPoints;
+            if(amountHitPoints < 0)
+                playerInventory.removeStoreItemAmount(ObjectIdEnum.PLANK, 1);
+
+            updateFillBar();
+            executor.addAgent(new HouseBuildBarAgent(blueBarObject));
+            if (houseHitPoints <= 0)
+            {
+                doPuffFx();
+                dropItems();
+                Destroy(gameObject);
+            }
         }
+        //else if(amountHitPoints < 0)
+        //{
+        //    if(houseHitPoints < houseMaxHitPoints)
+        //    {
+        //        houseHitPoints -= amountHitPoints;
+        //        playerInventory.removeStoreItemAmount(ObjectIdEnum.PLANK, 1);
+        //    }
+        //}
+
+        //updateFillBar();
+        //executor.addAgent(new HouseBuildBarAgent(blueBarObject));
+        //if (houseHitPoints <= 0)
+        //{
+        //    doPuffFx();
+        //    dropItems();
+        //    Destroy(gameObject);
+        //}
     }
 
     /// <summary>
@@ -121,15 +144,13 @@ public class HouseController : House<BuildingItemIdEnum>
 
         List<DrawableItem> gameItems = buildingSkills.getItemAndGenerateMaterials((int)houseType, 2.0f);
 
-        if (gameItems == null)
-            Debug.Log("não conseguiu carregar a lista de items.");
-
         foreach(DrawableItem gameItem in gameItems)
         {
             GameObject droppedItem = AssetFactory.getInstance().instanceDroppedSceneryItem();
 
             droppedItem.GetComponent<DroppedSceneryItem>().setItem(gameItem);
             droppedItem.transform.position = transform.position;
+            droppedItem.name = gameItem.itemName;
         }
     }
 

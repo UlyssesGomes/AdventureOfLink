@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemAsset: {fileID: 0}
   sprite: {fileID: 5985553255062880154}
-  speed: 0
-  timeMove: 0
+  speed: 6
+  timeMove: 0.55
   direction: {x: 0, y: 0}
 --- !u!1001 &8566023762476747546
 PrefabInstance:
