@@ -38,7 +38,7 @@ public class SkillDescriptionPanel : MonoBehaviour
                 materialSlots[u].setText(skill.material[u].amount, playerItemAmount[u]);
                 materialSlots[u].gameObject.SetActive(true);
 
-                if (skill.material[u].amount > playerItemAmount[u])
+                if (skill.material[u].amount > playerItemAmount[u] || !skill.isEnabled)
                     isButtonEnable = false;
             }
             else

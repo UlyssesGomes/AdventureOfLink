@@ -21,12 +21,33 @@ public class SlotBuilding : MonoBehaviour
     }
 
     /// <summary>
+    /// Show slot only if has a BuildingSkill with sprite, otherwise, SetActive to false.
+    /// </summary>
+    /// <param name="buildingSkill"></param>
+    public void setContentBuildSkill(BuildingSkill buildingSkill)
+    {
+        if(buildingSkill != null)
+        {
+            setContentSprite(buildingSkill.image);
+
+            if (!buildingSkill.isEnabled)
+                contentSprite.color = Color.black;
+            else
+                contentSprite.color = Color.white;
+        }
+        else
+        {
+            slotObject.SetActive(false);
+        }
+    }
+
+    /// <summary>
     /// Show slot only if has a sprite to him, otherwise, SetActive to false.
     /// </summary>
     /// <param name="sprite"></param>
     public void setContentSprite(Sprite sprite)
     {
-        if(sprite != null)
+        if (sprite != null)
         {
             contentSprite.sprite = sprite;
             contentSprite.preserveAspect = true;

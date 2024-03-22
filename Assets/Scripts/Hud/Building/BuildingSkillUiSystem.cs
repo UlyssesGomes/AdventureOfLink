@@ -25,7 +25,7 @@ public class BuildingSkillUiSystem : MonoBehaviour
         amountSkills = 0;
         for (int u = 0; u < transform.childCount; u++)
         {
-            slots[u].setContentSprite(null);
+            slots[u].setContentBuildSkill(null);
         }
 
         currentSkillIndex = 0;
@@ -42,9 +42,9 @@ public class BuildingSkillUiSystem : MonoBehaviour
             for (int u = 0; u < slots.Length; u++)
             {
                 if (u < skills.Length)
-                    slots[u].setContentSprite(skills[u].image);
+                    slots[u].setContentBuildSkill(skills[u]);
                 else
-                    slots[u].setContentSprite(null);
+                    slots[u].setContentBuildSkill(null);
             }
         }
 

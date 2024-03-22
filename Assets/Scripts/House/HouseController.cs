@@ -116,23 +116,6 @@ public class HouseController : House<BuildingItemIdEnum>
                 Destroy(gameObject);
             }
         }
-        //else if(amountHitPoints < 0)
-        //{
-        //    if(houseHitPoints < houseMaxHitPoints)
-        //    {
-        //        houseHitPoints -= amountHitPoints;
-        //        playerInventory.removeStoreItemAmount(ObjectIdEnum.PLANK, 1);
-        //    }
-        //}
-
-        //updateFillBar();
-        //executor.addAgent(new HouseBuildBarAgent(blueBarObject));
-        //if (houseHitPoints <= 0)
-        //{
-        //    doPuffFx();
-        //    dropItems();
-        //    Destroy(gameObject);
-        //}
     }
 
     /// <summary>
