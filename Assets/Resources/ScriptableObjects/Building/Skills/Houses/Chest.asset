@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: Chest
   m_EditorClassIdentifier: 
-  id: 18
+  id: 3
   skillId: 8
   image: {fileID: 21300000, guid: 92f678c56cec25148b2de7e016133520, type: 3}
   skillName: "Ba\xFA"
@@ -20,7 +20,7 @@ MonoBehaviour:
     invet\xE1rio."
   amountGenerated: 1
   itemId: 15
-  isEnabled: 0
+  isEnabled: 1
   hasAllMaterials: 0
   type: 1
   material:
