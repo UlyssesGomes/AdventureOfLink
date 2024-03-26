@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SkillDescriptionPanel : MonoBehaviour
 {
     [SerializeField]
-    private Text name;                              // name of the selected item
+    private Text selectedItemName;                  // name of the selected item
     [SerializeField]
     private Image skillImage;                       // sprite of the selected item
     [SerializeField]
@@ -25,7 +25,7 @@ public class SkillDescriptionPanel : MonoBehaviour
     public void setDescriptionPanel(BuildingSkill skill, int []playerItemAmount)
     {
         _currentBuildingSkill = skill;
-        name.text = skill.skillName;
+        selectedItemName.text = skill.skillName;
         skillImage.sprite = skill.image;
         skillImage.preserveAspect = true;
         description.text = skill.description;

@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: Shovel
   m_EditorClassIdentifier: 
-  id: 0
+  id: 8
   skillId: 5
   image: {fileID: -5464394882497330903, guid: 69bfa40be3c1a7b4a908cb6803c18d49, type: 3}
   skillName: "P\xE1"
   description: Ferramenta utilizada para cavar.
   amountGenerated: 1
   itemId: 5
-  isEnabled: 0
+  isEnabled: 1
   hasAllMaterials: 0
   type: 2
   material:

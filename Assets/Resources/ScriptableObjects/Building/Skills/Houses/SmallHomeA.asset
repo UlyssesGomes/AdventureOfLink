@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25dfde9566fdb884dbb83285a938fc22, type: 3}
   m_Name: SmallHomeA
   m_EditorClassIdentifier: 
-  id: 0
+  id: 3
   skillId: 1
   image: {fileID: -1838914477522394420, guid: a2e5be5b42ddc4444b9e403e315d3422, type: 3}
   skillName: Casa Pequena A
@@ -20,7 +20,7 @@ MonoBehaviour:
     para decorar com m\xF3veis. "
   amountGenerated: 1
   itemId: 16
-  isEnabled: 0
+  isEnabled: 1
   hasAllMaterials: 0
   type: 1
   material:

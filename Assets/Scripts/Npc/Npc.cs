@@ -1,16 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Npc : MonoBehaviour
 {
+    private static int nextId = 0;
 
-    public float speed;
+    protected int id;                                           // id that represents this npc
 
-    private Animator animator;
-    private int index;
+    public float speed;                                         // npc movement speed
 
-    public List<Transform> paths = new List<Transform>();
+    protected Animator animator;                                // Animator controller
+    protected int index;                                        // index of current point in paths list
+
+    public List<Transform> paths = new List<Transform>();       // path points that npc follow while walking
+
+    private void Awake()
+    {
+        id = getNextUniqueId();
+    }
 
     private void Start()
     {
@@ -56,5 +63,19 @@ public class Npc : MonoBehaviour
         {
             transform.eulerAngles = new Vector2(0, 180);
         }
+    }
+
+    /// <summary>
+    /// Get id of this npc
+    /// </summary>
+    /// <returns>npc id</returns>
+    public int getId()
+    {
+        return id;
+    }
+
+    private int getNextUniqueId()
+    {
+        return nextId++;
     }
 }

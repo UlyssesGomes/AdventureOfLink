@@ -8,7 +8,7 @@ public class GameItem : ScriptableObject
 {
     [HideInInspector]
     public int id;                  // unique id that identifies this instance
-    public ObjectIdEnum itemId;       // id that identifies that type of item
+    public ObjectIdEnum itemId;     // id that identifies that type of item
     public ItemTypeEnum type;       // item type, must be cutting, watering, battle...
     public string itemName;         // name of the item
     public bool isStackable;        // if true, this object can have amount > 1
